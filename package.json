@@ -1,0 +1,26 @@
+{
+  "name": "vue-bootstrap",
+  "version": "1.0.0",
+  "description": "Bootstrap components in Vue JS",
+  "main": "index.js",
+  "dependencies": {
+    "vue": "^2.0.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tectonic/vue-bootstrap.git"
+  },
+  "keywords": [
+    "vue",
+    "bootstrap"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tectonic/vue-bootstrap/issues"
+  },
+  "homepage": "https://github.com/tectonic/vue-bootstrap#readme"
+}

@@ -1,7 +1,7 @@
 <template>
   <div :class="[{ open: isOpen }, 'dropdown']">
     <input type="text"
-      v-model="value"
+      v-model="query"
       :id="id"
       :placeholder="placeholder"
       class="form-control"
@@ -19,9 +19,7 @@
 export default {
   props: {
     value: {
-      twoWay : true,
-      type: String,
-      default: ''
+      type: String
     },
     items: {
       type: Array
@@ -37,14 +35,12 @@ export default {
   },
   data () {
     return {
+      query: '',
       isOpen: false
     }
   },
-  created() {
-    console.log('created');
-  },
   mounted() {
-    console.log('mounted');
+    this.query = this.value;
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="dropdown open">
+  <div :class="[{ open: isOpen }, 'dropdown']">
     <input type="text" :id="id" :placeholder="placeholder" class="form-control" autocomplete="off" />
     <ul class="dropdown-menu">
       <li v-for="item in items">
@@ -22,6 +22,11 @@ export default {
     placeholder: {
       type: String,
       default: ''
+    }
+  },
+  data () {
+    return {
+      isOpen: false
     }
   },
   created() {

@@ -4,10 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Vue-bootstrap - bootstrap components in Vue JS</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" type="text/css" rel="stylesheet">
 </head>
 <body>
   <div id="app">
-    <typeahead></typeahead>
+    <div class="container">
+      <div class="form-group">
+        <label for="typeahead-input">Text input with autocomplete</label>
+        <typeahead id="typeahead-input" placeholder="Type a name" :items="typeaheadItems"></typeahead>
+      </div>
+    </div>
   </div>
   <script src="js/docs.bundle.js" type="text/javascript"></script>
 </body>

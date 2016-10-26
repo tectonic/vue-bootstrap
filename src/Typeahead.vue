@@ -5,12 +5,13 @@
       :id="id"
       :placeholder="placeholder"
       @input="onInput"
+      @blur="isDropdownOpen = false"
       class="form-control"
       autocomplete="off"
     />
     <ul class="dropdown-menu">
       <li v-for="item in filteredItems">
-        <a>{{ item }}</a>
+        <a href="#" v-on:mousedown.prevent="onItemClick">{{ item }}</a>
       </li>
     </ul>
   </div>
@@ -49,6 +50,10 @@ export default {
     onInput() {
       this.isDropdownOpen = this.filteredItems.length > 0
     },
+    onItemClick(event) {
+      this.query = event.target.innerText;
+      this.isDropdownOpen = false;
+    }
   },
   data () {
     return {

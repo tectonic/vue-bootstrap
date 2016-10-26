@@ -17,6 +17,8 @@
     "webpack": "^1.13.2"
   },
   "scripts": {
+    "builddocs": "./node_modules/webpack/bin/webpack.js --progress --config webpack.docs.js",
+    "watchdocs": "./node_modules/webpack/bin/webpack.js --progress --watch --config webpack.docs.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

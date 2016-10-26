@@ -1,6 +1,12 @@
 <template>
   <div :class="[{ open: isOpen }, 'dropdown']">
-    <input type="text" :id="id" :placeholder="placeholder" class="form-control" autocomplete="off" />
+    <input type="text"
+      v-model="value"
+      :id="id"
+      :placeholder="placeholder"
+      class="form-control"
+      autocomplete="off"
+    />
     <ul class="dropdown-menu">
       <li v-for="item in items">
         <a>{{ item }}</a>
@@ -12,6 +18,11 @@
 <script>
 export default {
   props: {
+    value: {
+      twoWay : true,
+      type: String,
+      default: ''
+    },
     items: {
       type: Array
     },

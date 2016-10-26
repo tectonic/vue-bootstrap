@@ -24,5 +24,8 @@ module.exports = {
     path: path.join(__dirname, 'docs/js'),
     filename: '[name].bundle.js',
     sourceMapFilename: '[file].map',
+  },
+  resolve: {
+    alias: { vue: 'vue/dist/vue.js' }
   }
 }

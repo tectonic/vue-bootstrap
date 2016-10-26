@@ -1,5 +1,5 @@
 <template>
-  <div :class="[{ open: isOpen }, 'dropdown']">
+  <div :class="[{ open: isDropdownOpen }, 'dropdown']">
     <input type="text"
       v-model="query"
       :id="id"
@@ -47,13 +47,13 @@ export default {
   },
   methods: {
     onInput() {
-      this.isOpen = this.filteredItems.length > 0
+      this.isDropdownOpen = this.filteredItems.length > 0
     },
   },
   data () {
     return {
       query: '',
-      isOpen: false
+      isDropdownOpen: false
     }
   },
   mounted() {

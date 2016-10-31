@@ -2,7 +2,7 @@ import Vue from 'vue';
 import {expect} from 'chai';
 import Typeahead from '../src/Typeahead.vue';
 
-describe('Typeahead', function() {
+describe('Typeahead', () => {
   it('has a mounted hook', () => {
     expect(typeof Typeahead.mounted).to.equal('function');
   });

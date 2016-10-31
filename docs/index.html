@@ -3,16 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Vue-bootstrap - bootstrap components in Vue JS</title>
+  <title>vue-bootstrap - bootstrap components in Vue.js</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" type="text/css" rel="stylesheet">
 </head>
 <body>
   <div id="app">
     <div class="container">
-      <div class="form-group">
-        <label for="typeahead-input">Text input with autocomplete</label>
-        <typeahead id="typeahead-input" placeholder="Type a name" :items="typeaheadItems"></typeahead>
+      <div class="row">
+        <div class="col-xs-12">
+          <h1>vue-bootstrap</h1>
+          <p>Bootstrap components in Vue.js</p>
+        </div>
       </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Typeahead</h2>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="form-group">
+                <label for="typeahead-input">Text input with autocomplete</label>
+                <typeahead id="typeahead-input" placeholder="Type a name" :items="typeaheadItems"></typeahead>
+              </div>
+<pre>
+&lt;typeahead id="typeahead-input" placeholder="Type a name" :items="typeaheadItems"&gt;&lt;/typeahead&gt;
+</pre>
+            </div>
+          </div>
+          <h3>Props:</h3>
+          <table class="table">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>value</td><td>String</td><td>Initial value of the input field.</td></tr>
+              <tr><td>items</td><td>Array</td><td>An array of items that will be used to display autocomplete suggestions.</td></tr>
+              <tr><td>id</td><td>String</td><td>The <code>id</code> attribute of the input element.</td></tr>
+              <tr><td>placeholder</td><td>String</td><td>The <code>placeholder</code> attribute of the input element.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Custom templates</h2>
+          <p>You can use inline templates to customise the default template of any of the components.</p>
+<pre>
+&lt;component inline-template&gt;
+  &lt;div&gt;...your custom template goes here...&lt;/div&gt;
+&lt;/component&gt;
+</pre>
+        </div>
+      </div>
+      <p>&nbsp;</p>
     </div>
   </div>
   <script src="js/docs.bundle.js" type="text/javascript"></script>

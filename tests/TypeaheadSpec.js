@@ -28,7 +28,7 @@ describe('Typeahead', function() {
     expect(vm.query).to.equal('abc');
   });
 
-  it('opens drop-down menu when query is entered', () => {
+  it('opens drop-down menu when query is entered', (done) => {
     const VM = Vue.extend(Typeahead);
 
     const vm = new VM({
@@ -38,9 +38,11 @@ describe('Typeahead', function() {
     }).$mount();
 
     vm.query = 'hello';
+    vm.onInput();
 
     Vue.nextTick(() => {
       expect(vm.isDropdownOpen).to.be.true;
+      done();
     });
   });
 

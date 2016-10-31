@@ -1,0 +1,64 @@
+import Vue from 'vue';
+import {expect} from 'chai';
+import Typeahead from '../src/Typeahead.vue';
+
+describe('Typeahead', function() {
+  it('has a mounted hook', () => {
+    expect(typeof Typeahead.mounted).to.equal('function');
+  });
+
+  it('initialises with default data', () => {
+    expect(typeof Typeahead.data).to.equal('function');
+
+    const data = Typeahead.data();
+
+    expect(data.query).to.equal('');
+    expect(data.isDropdownOpen).to.be.false;
+  });
+
+  it('sets query on mount', () => {
+    const VM = Vue.extend(Typeahead);
+
+    const vm = new VM({
+      propsData: {
+        value: 'abc'
+      }
+    }).$mount();
+
+    expect(vm.query).to.equal('abc');
+  });
+
+  it('opens drop-down menu when query is entered', () => {
+    const VM = Vue.extend(Typeahead);
+
+    const vm = new VM({
+      propsData: {
+        items: ['hello', 'world']
+      }
+    }).$mount();
+
+    vm.query = 'hello';
+
+    Vue.nextTick(() => {
+      expect(vm.isDropdownOpen).to.be.true;
+    });
+  });
+
+  it('filters items', () => {
+    const VM = Vue.extend(Typeahead);
+
+    const vm = new VM({
+      propsData: {
+        items: ['John', 'Jane', 'Jack']
+      }
+    }).$mount();
+
+    vm.query = 'Ja';
+
+    expect(vm.items).that.is.an('array')
+      .to.deep.equal(['John', 'Jane', 'Jack']);
+
+    expect(vm.filteredItems).that.is.an('array')
+      .to.deep.equal(['Jane', 'Jack']);
+  });
+});

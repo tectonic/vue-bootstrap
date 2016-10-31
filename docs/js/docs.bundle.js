@@ -7670,7 +7670,7 @@
 	
 	
 	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"Typeahead.vue","sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"Typeahead.vue","sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -7985,10 +7985,14 @@
 	exports.default = {
 	  props: {
 	    value: {
-	      type: String
+	      type: String,
+	      default: ''
 	    },
 	    items: {
-	      type: Array
+	      type: Array,
+	      default: function _default() {
+	        return [];
+	      }
 	    },
 	    id: {
 	      type: String,
@@ -8003,7 +8007,7 @@
 	    filteredItems: function filteredItems() {
 	      var _this = this;
 	
-	      if (!this.items || !this.query) {
+	      if (!this.query) {
 	        return [];
 	      }
 	

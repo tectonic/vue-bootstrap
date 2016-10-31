@@ -26,7 +26,8 @@
   "scripts": {
     "builddocs": "./node_modules/webpack/bin/webpack.js --progress --config webpack.docs.js",
     "watchdocs": "./node_modules/webpack/bin/webpack.js --progress --watch --config webpack.docs.js",
-    "test": "./node_modules/karma/bin/karma start"
+    "tests": "./node_modules/karma/bin/karma start",
+    "watchtests": "./node_modules/karma/bin/karma start --auto-watch"
   },
   "repository": {
     "type": "git",

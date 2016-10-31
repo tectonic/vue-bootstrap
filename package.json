@@ -13,13 +13,17 @@
     "babel-preset-es2015": "^6.0.0",
     "babel-preset-stage-2": "^6.0.0",
     "css-loader": "^0.25.0",
+    "karma": "^1.3.0",
+    "karma-mocha": "^1.2.0",
+    "karma-phantomjs-launcher": "^1.0.2",
+    "mocha": "^3.1.2",
     "vue-loader": "^9.4.0",
     "webpack": "^1.13.2"
   },
   "scripts": {
     "builddocs": "./node_modules/webpack/bin/webpack.js --progress --config webpack.docs.js",
     "watchdocs": "./node_modules/webpack/bin/webpack.js --progress --watch --config webpack.docs.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/karma/bin/karma start"
   },
   "repository": {
     "type": "git",

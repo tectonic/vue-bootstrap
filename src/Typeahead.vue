@@ -21,10 +21,14 @@
 export default {
   props: {
     value: {
-      type: String
+      type: String,
+      default: ''
     },
     items: {
-      type: Array
+      type: Array,
+      default: () => {
+        return [];
+      }
     },
     id: {
       type: String,
@@ -37,7 +41,7 @@ export default {
   },
   computed: {
     filteredItems() {
-      if (!this.items || !this.query) {
+      if (!this.query) {
         return [];
       }
 

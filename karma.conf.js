@@ -27,6 +27,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'tests/**/*.js': ['webpack', 'sourcemap']
     },
 
 
@@ -34,6 +35,37 @@ module.exports = function(config) {
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['progress'],
+
+
+    // webpack configuration
+    webpack: {
+      module: {
+        loaders: [
+          {
+            test: /\.vue$/,
+            loader: 'vue',
+            exclude: /node_modules/
+          },
+          {
+            test: /\.js$/,
+            loader: 'babel',
+            exclude: /node_modules/
+          },
+        ]
+      },
+      devtool: 'inline-source-map',
+      debug: true,
+      resolve: {
+        alias: { vue: 'vue/dist/vue.js' }
+      }
+    },
+
+
+    // webpack middleware configuration
+    webpackMiddleware: {
+      stats: 'errors-only',
+      noInfo: true
+    },
 
 
     // web server port

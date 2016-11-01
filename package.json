@@ -31,7 +31,7 @@
     "docs:watch": "./node_modules/webpack/bin/webpack.js --progress --watch --config webpack.docs.js",
     "test": "./node_modules/karma/bin/karma start",
     "test:watch": "./node_modules/karma/bin/karma start --auto-watch --no-single-run",
-    "lint": "./node_modules/.bin/eslint src/*.vue tests/*.js docs/js/docs.js; exit 0"
+    "lint": "./node_modules/.bin/eslint src/**/*.vue tests/**/*.js docs/js/docs.js; exit 0"
   },
   "repository": {
     "type": "git",

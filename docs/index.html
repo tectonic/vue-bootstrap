@@ -22,10 +22,10 @@
             <div class="panel-body">
               <div class="form-group">
                 <label for="typeahead-input">Text input with autocomplete</label>
-                <typeahead id="typeahead-input" placeholder="Type a name" :items="typeaheadItems"></typeahead>
+                <typeahead id="typeahead-input" placeholder="Type a name" :limit="3" :items="typeaheadItems"></typeahead>
               </div>
 <pre>
-&lt;typeahead id="typeahead-input" placeholder="Type a name" :items="typeaheadItems"&gt;&lt;/typeahead&gt;
+&lt;typeahead id="typeahead-input" placeholder="Type a name" :limit="3" :items="typeaheadItems"&gt;&lt;/typeahead&gt;
 </pre>
             </div>
           </div>
@@ -35,6 +35,7 @@
               <tr>
                 <th>Name</th>
                 <th>Type</th>
+                <th>Default</th>
                 <th>Description</th>
               </tr>
             </thead>
@@ -42,21 +43,31 @@
               <tr>
                 <td>value</td>
                 <td>String</td>
+                <td></td>
                 <td>Initial value of the input field.</td></tr>
               <tr>
                 <td>items</td>
                 <td>Array</td>
+                <td></td>
                 <td>An array of items that will be used to display autocomplete suggestions.</td>
               </tr>
               <tr>
                 <td>id</td>
                 <td>String</td>
+                <td></td>
                 <td>The <code>id</code> attribute of the input element.</td>
               </tr>
               <tr>
                 <td>placeholder</td>
                 <td>String</td>
+                <td></td>
                 <td>The <code>placeholder</code> attribute of the input element.</td>
+              </tr>
+              <tr>
+                <td>limit</td>
+                <td>Number</td>
+                <td>10</td>
+                <td>Limit the number of autocomplete suggestions.</td>
               </tr>
             </tbody>
           </table>

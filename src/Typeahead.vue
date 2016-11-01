@@ -10,8 +10,8 @@
       autocomplete="off"
     />
     <ul class="dropdown-menu">
-      <li v-for="item in filteredItems">
-        <a href="#" v-on:mousedown.prevent="onItemClick(item)">{{ item }}</a>
+      <li v-for="(item, index) in filteredItems">
+        <a href="#" v-on:mousedown.prevent="selectItem(index)">{{ item }}</a>
       </li>
     </ul>
   </div>
@@ -60,8 +60,8 @@ export default {
     onInput () {
       this.isDropdownOpen = this.filteredItems.length > 0;
     },
-    onItemClick (item) {
-      this.query = item;
+    selectItem (index) {
+      this.query = this.filteredItems[index];
       this.isDropdownOpen = false;
     }
   },

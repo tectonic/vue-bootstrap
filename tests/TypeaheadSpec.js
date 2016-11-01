@@ -65,4 +65,33 @@ describe('Typeahead', () => {
     expect(vm.filteredItems).that.is.an('array')
       .to.deep.equal(['above', 'above all', 'above the fold']);
   });
+
+  it('marks next item', () => {
+    const vm = initVM(Typeahead, { items: ['Aaaa', 'Aaa', 'Aa'] });
+
+    vm.query = 'A';
+    vm.currentItem = 1;
+    vm.markNextItem();
+
+    expect(vm.currentItem).to.equal(2);
+  });
+
+  it('marks previous item', () => {
+    const vm = initVM(Typeahead, { items: ['Aaaa', 'Aaa', 'Aa'] });
+
+    vm.query = 'A';
+    vm.currentItem = 1;
+    vm.markPreviousItem();
+
+    expect(vm.currentItem).to.equal(0);
+  });
+
+  it('knows current item', () => {
+    const vm = initVM(Typeahead, { items: ['Aaaa', 'Aaa', 'Aa'] });
+
+    vm.query = 'A';
+    vm.currentItem = 1;
+
+    expect(vm.isMarked(1)).to.be.true;
+  });
 });

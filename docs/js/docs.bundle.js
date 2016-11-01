@@ -56,7 +56,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var vm = new _vue2.default({
+	new _vue2.default({
 	  el: '#app',
 	  components: {
 	    Typeahead: _Typeahead2.default

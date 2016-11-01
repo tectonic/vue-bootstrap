@@ -40,21 +40,21 @@ export default {
     }
   },
   computed: {
-    filteredItems() {
+    filteredItems () {
       if (!this.query) {
         return [];
       }
 
       return this.items.filter(item => {
-        return item.toLowerCase().indexOf(this.query.toLowerCase()) !== -1
+        return item.toLowerCase().indexOf(this.query.toLowerCase()) !== -1;
       });
     }
   },
   methods: {
-    onInput() {
-      this.isDropdownOpen = this.filteredItems.length > 0
+    onInput () {
+      this.isDropdownOpen = this.filteredItems.length > 0;
     },
-    onItemClick(event) {
+    onItemClick (event) {
       this.query = event.target.innerText;
       this.isDropdownOpen = false;
     }
@@ -63,12 +63,12 @@ export default {
     return {
       query: '',
       isDropdownOpen: false
-    }
+    };
   },
-  mounted() {
+  mounted () {
     this.query = this.value;
   }
-}
+};
 </script>
 
 <style>

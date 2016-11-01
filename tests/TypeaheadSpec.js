@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {expect} from 'chai';
+import { expect } from 'chai';
 import Typeahead from '../src/Typeahead.vue';
 
 describe('Typeahead', () => {

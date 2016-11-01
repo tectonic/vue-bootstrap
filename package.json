@@ -24,10 +24,10 @@
     "webpack": "^1.13.2"
   },
   "scripts": {
-    "builddocs": "./node_modules/webpack/bin/webpack.js --progress --config webpack.docs.js",
-    "watchdocs": "./node_modules/webpack/bin/webpack.js --progress --watch --config webpack.docs.js",
-    "tests": "./node_modules/karma/bin/karma start",
-    "watchtests": "./node_modules/karma/bin/karma start --auto-watch"
+    "docs:build": "./node_modules/webpack/bin/webpack.js --progress --config webpack.docs.js",
+    "docs:watch": "./node_modules/webpack/bin/webpack.js --progress --watch --config webpack.docs.js",
+    "test": "./node_modules/karma/bin/karma start",
+    "test:watch": "./node_modules/karma/bin/karma start --auto-watch"
   },
   "repository": {
     "type": "git",

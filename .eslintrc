@@ -1,0 +1,6 @@
+{
+  "extends": "vue",
+  "rules": {
+    "semi": [2, "always"]
+  }
+}

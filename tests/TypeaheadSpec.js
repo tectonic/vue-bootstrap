@@ -14,6 +14,7 @@ describe('Typeahead', () => {
 
     expect(data.query).to.equal('');
     expect(data.isDropdownOpen).to.be.false;
+    expect(data.currentItem).to.equal(0);
   });
 
   it('sets query on mount', () => {

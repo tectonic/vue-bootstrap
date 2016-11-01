@@ -1,17 +1,20 @@
 <template>
-  <div :class="[{ open: isDropdownOpen }, 'dropdown']">
+  <div :class="[{ 'open': isDropdownOpen }, 'dropdown']">
     <input type="text"
       v-model="query"
       :id="id"
       :placeholder="placeholder"
       @input="onInput"
       @blur="isDropdownOpen = false"
+      @keydown.up="markPreviousItem"
+      @keydown.down="markNextItem"
+      @keydown.enter= "selectItem"
       class="form-control"
       autocomplete="off"
     />
     <ul class="dropdown-menu">
-      <li v-for="(item, index) in filteredItems">
-        <a href="#" v-on:mousedown.prevent="selectItem(index)">{{ item }}</a>
+      <li v-for="(item, index) in filteredItems" v-bind:class="{ 'active': isMarked(index) }">
+        <a href="#" v-on:mousedown.prevent="selectItem" v-on:mousemove="markItem(index)">{{ item }}</a>
       </li>
     </ul>
   </div>
@@ -60,15 +63,37 @@ export default {
     onInput () {
       this.isDropdownOpen = this.filteredItems.length > 0;
     },
-    selectItem (index) {
-      this.query = this.filteredItems[index];
+    isMarked(index) {
+      return this.currentItem === index;
+    },
+    markPreviousItem () {
+      if (this.currentItem == 0) {
+        this.currentItem = this.filteredItems.length - 1;
+      } else {
+        this.currentItem--;
+      }
+    },
+    markNextItem () {
+      if (this.currentItem < this.filteredItems.length - 1) {
+        this.currentItem++;
+      } else {
+        this.currentItem = 0;
+      }
+    },
+    markItem (index) {
+      this.currentItem = index;
+    },
+    selectItem () {
+      this.query = this.filteredItems[this.currentItem];
       this.isDropdownOpen = false;
+      this.currentItem = 0;
     }
   },
   data () {
     return {
       query: '',
-      isDropdownOpen: false
+      isDropdownOpen: false,
+      currentItem: 0
     };
   },
   mounted () {

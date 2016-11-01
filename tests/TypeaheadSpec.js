@@ -63,4 +63,20 @@ describe('Typeahead', () => {
     expect(vm.filteredItems).that.is.an('array')
       .to.deep.equal(['Jane', 'Jack']);
   });
+
+  it('filters items with limit', () => {
+    const VM = Vue.extend(Typeahead);
+
+    const vm = new VM({
+      propsData: {
+        items: ['above', 'above all', 'above the fold', 'above the law', 'above-the-line']
+      }
+    }).$mount();
+
+    vm.query = 'above';
+    vm.limit = 3;
+
+    expect(vm.filteredItems).that.is.an('array')
+      .to.deep.equal(['above', 'above all', 'above the fold']);
+  });
 });

@@ -45,7 +45,7 @@ export default {
     limit: {
       type: Number,
       default: 10
-    },
+    }
   },
   computed: {
     filteredItems () {
@@ -53,7 +53,7 @@ export default {
         return [];
       }
 
-      let filteredItems = this.items.filter(item => {
+      const filteredItems = this.items.filter(item => {
         return item.toLowerCase().indexOf(this.query.toLowerCase()) !== -1;
       });
 
@@ -64,11 +64,11 @@ export default {
     onInput () {
       this.isDropdownOpen = this.filteredItems.length > 0;
     },
-    isMarked(index) {
+    isMarked (index) {
       return this.currentItem === index;
     },
     markPreviousItem () {
-      if (this.currentItem == 0) {
+      if (this.currentItem === 0) {
         this.currentItem = this.filteredItems.length - 1;
       } else {
         this.currentItem--;

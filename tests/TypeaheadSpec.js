@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import { expect } from 'chai';
+import { initVM } from './utils/utils.js';
 import Typeahead from '../src/Typeahead.vue';
 
 describe('Typeahead', () => {
@@ -18,25 +19,17 @@ describe('Typeahead', () => {
   });
 
   it('sets query on mount', () => {
-    const VM = Vue.extend(Typeahead);
-
-    const vm = new VM({
-      propsData: {
-        value: 'abc'
-      }
-    }).$mount();
+    const vm = initVM(Typeahead, {
+      value: 'abc'
+    });
 
     expect(vm.query).to.equal('abc');
   });
 
   it('opens drop-down menu when query is entered', (done) => {
-    const VM = Vue.extend(Typeahead);
-
-    const vm = new VM({
-      propsData: {
-        items: ['hello', 'world']
-      }
-    }).$mount();
+    const vm = initVM(Typeahead, {
+      items: ['hello', 'world']
+    });
 
     vm.query = 'hello';
     vm.onInput();
@@ -48,13 +41,9 @@ describe('Typeahead', () => {
   });
 
   it('filters items', () => {
-    const VM = Vue.extend(Typeahead);
-
-    const vm = new VM({
-      propsData: {
-        items: ['John', 'Jane', 'Jack']
-      }
-    }).$mount();
+    const vm = initVM(Typeahead, {
+      items: ['John', 'Jane', 'Jack']
+    });
 
     vm.query = 'Ja';
 
@@ -66,13 +55,9 @@ describe('Typeahead', () => {
   });
 
   it('filters items with limit', () => {
-    const VM = Vue.extend(Typeahead);
-
-    const vm = new VM({
-      propsData: {
-        items: ['above', 'above all', 'above the fold', 'above the law', 'above-the-line']
-      }
-    }).$mount();
+    const vm = initVM(Typeahead, {
+      items: ['above', 'above all', 'above the fold', 'above the law', 'above-the-line']
+    });
 
     vm.query = 'above';
     vm.limit = 3;

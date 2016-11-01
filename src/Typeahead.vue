@@ -9,6 +9,7 @@
       @keydown.up="markPreviousItem"
       @keydown.down="markNextItem"
       @keydown.enter= "selectItem"
+      @keydown.esc="resetDropdown"
       class="form-control"
       autocomplete="off"
     />
@@ -85,6 +86,9 @@ export default {
     },
     selectItem () {
       this.query = this.filteredItems[this.currentItem];
+      this.resetDropdown();
+    },
+    resetDropdown () {
       this.isDropdownOpen = false;
       this.currentItem = 0;
     }

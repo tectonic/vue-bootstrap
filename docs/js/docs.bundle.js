@@ -7670,7 +7670,7 @@
 	
 	
 	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"Typeahead.vue","sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"Typeahead.vue","sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -7981,6 +7981,10 @@
 	//
 	//
 	//
+	//
+	//
+	//
+	//
 	
 	exports.default = {
 	  props: {
@@ -8001,6 +8005,10 @@
 	    placeholder: {
 	      type: String,
 	      default: ''
+	    },
+	    limit: {
+	      type: Number,
+	      default: 10
 	    }
 	  },
 	  computed: {
@@ -8011,24 +8019,51 @@
 	        return [];
 	      }
 	
-	      return this.items.filter(function (item) {
+	      var filteredItems = this.items.filter(function (item) {
 	        return item.toLowerCase().indexOf(_this.query.toLowerCase()) !== -1;
 	      });
+	
+	      return filteredItems.slice(0, this.limit);
 	    }
 	  },
 	  methods: {
 	    onInput: function onInput() {
 	      this.isDropdownOpen = this.filteredItems.length > 0;
 	    },
-	    onItemClick: function onItemClick(event) {
-	      this.query = event.target.innerText;
+	    isMarked: function isMarked(index) {
+	      return this.currentItem === index;
+	    },
+	    markPreviousItem: function markPreviousItem() {
+	      if (this.currentItem === 0) {
+	        this.currentItem = this.filteredItems.length - 1;
+	      } else {
+	        this.currentItem--;
+	      }
+	    },
+	    markNextItem: function markNextItem() {
+	      if (this.currentItem < this.filteredItems.length - 1) {
+	        this.currentItem++;
+	      } else {
+	        this.currentItem = 0;
+	      }
+	    },
+	    markItem: function markItem(index) {
+	      this.currentItem = index;
+	    },
+	    selectItem: function selectItem() {
+	      this.query = this.filteredItems[this.currentItem];
+	      this.resetDropdown();
+	    },
+	    resetDropdown: function resetDropdown() {
 	      this.isDropdownOpen = false;
+	      this.currentItem = 0;
 	    }
 	  },
 	  data: function data() {
 	    return {
 	      query: '',
-	      isDropdownOpen: false
+	      isDropdownOpen: false,
+	      currentItem: 0
 	    };
 	  },
 	  mounted: function mounted() {
@@ -8043,7 +8078,7 @@
 	module.exports={render:function (){with(this) {
 	  return _h('div', {
 	    class: [{
-	      open: isDropdownOpen
+	      'open': isDropdownOpen
 	    }, 'dropdown']
 	  }, [_h('input', {
 	    directives: [{
@@ -8069,19 +8104,39 @@
 	      }, onInput],
 	      "blur": function($event) {
 	        isDropdownOpen = false
-	      }
+	      },
+	      "keydown": [function($event) {
+	        if ($event.keyCode !== 38) return;
+	        markPreviousItem($event)
+	      }, function($event) {
+	        if ($event.keyCode !== 40) return;
+	        markNextItem($event)
+	      }, function($event) {
+	        if ($event.keyCode !== 13) return;
+	        selectItem($event)
+	      }, function($event) {
+	        if ($event.keyCode !== 27) return;
+	        resetDropdown($event)
+	      }]
 	    }
 	  }), " ", _h('ul', {
 	    staticClass: "dropdown-menu"
-	  }, [_l((filteredItems), function(item) {
-	    return _h('li', [_h('a', {
+	  }, [_l((filteredItems), function(item, index) {
+	    return _h('li', {
+	      class: {
+	        'active': isMarked(index)
+	      }
+	    }, [_h('a', {
 	      attrs: {
 	        "href": "#"
 	      },
 	      on: {
 	        "mousedown": function($event) {
 	          $event.preventDefault();
-	          onItemClick($event)
+	          selectItem($event)
+	        },
+	        "mousemove": function($event) {
+	          markItem(index)
 	        }
 	      }
 	    }, [_s(item)])])

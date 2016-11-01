@@ -11,7 +11,7 @@
     />
     <ul class="dropdown-menu">
       <li v-for="item in filteredItems">
-        <a href="#" v-on:mousedown.prevent="onItemClick">{{ item }}</a>
+        <a href="#" v-on:mousedown.prevent="onItemClick(item)">{{ item }}</a>
       </li>
     </ul>
   </div>
@@ -60,8 +60,8 @@ export default {
     onInput () {
       this.isDropdownOpen = this.filteredItems.length > 0;
     },
-    onItemClick (event) {
-      this.query = event.target.innerText;
+    onItemClick (item) {
+      this.query = item;
       this.isDropdownOpen = false;
     }
   },

@@ -37,7 +37,11 @@ export default {
     placeholder: {
       type: String,
       default: ''
-    }
+    },
+    limit: {
+      type: Number,
+      default: 10
+    },
   },
   computed: {
     filteredItems () {
@@ -45,9 +49,11 @@ export default {
         return [];
       }
 
-      return this.items.filter(item => {
+      let filteredItems = this.items.filter(item => {
         return item.toLowerCase().indexOf(this.query.toLowerCase()) !== -1;
       });
+
+      return filteredItems.slice(0, this.limit);
     }
   },
   methods: {

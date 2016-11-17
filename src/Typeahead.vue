@@ -118,6 +118,7 @@ export default {
     return {
       query: '',
       isDropdownOpen: false,
+      items: [],
       currentItem: 0
     };
   },

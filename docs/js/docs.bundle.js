@@ -65,6 +65,13 @@
 	    return {
 	      typeaheadItems: [{ id: 1, value: 'Ann' }, { id: 2, value: 'Annemarie' }, { id: 3, value: 'Bill' }, { id: 4, value: 'Jack' }, { id: 5, value: 'Joan' }, { id: 6, value: 'John' }, { id: 7, value: 'Mark' }, { id: 8, value: 'Robert' }, { id: 9, value: 'Susan' }]
 	    };
+	  },
+	
+	  methods: {
+	    onSelect: function onSelect(item) {
+	      console.log('Selected item\'s id: ' + item.id);
+	      console.log('Selected item\'s value: ' + item.value);
+	    }
 	  }
 	});
 
@@ -7670,7 +7677,7 @@
 	
 	
 	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"Typeahead.vue","sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"Typeahead.vue","sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -8028,6 +8035,10 @@
 	    limit: {
 	      type: Number,
 	      default: 10
+	    },
+	    onSelect: {
+	      type: Function,
+	      default: function _default() {}
 	    }
 	  },
 	  computed: {
@@ -8083,8 +8094,12 @@
 	      this.currentItem = index;
 	    },
 	    selectItem: function selectItem() {
-	      this.query = this.filteredItems[this.currentItem].value;
+	      var selectedItem = this.filteredItems[this.currentItem];
+	
+	      this.query = selectedItem.value;
 	      this.resetDropdown();
+	
+	      this.onSelect(selectedItem);
 	    },
 	    resetDropdown: function resetDropdown() {
 	      this.isDropdownOpen = false;

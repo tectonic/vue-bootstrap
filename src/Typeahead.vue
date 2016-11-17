@@ -15,7 +15,7 @@
     />
     <ul class="dropdown-menu">
       <li v-for="(item, index) in filteredItems" v-bind:class="{ 'active': isMarked(index) }">
-        <a href="#" v-on:mousedown.prevent="selectItem" v-on:mousemove="markItem(index)">{{ item }}</a>
+        <a href="#" v-on:mousedown.prevent="selectItem" v-on:mousemove="markItem(index)">{{ item.value }}</a>
       </li>
     </ul>
   </div>
@@ -54,7 +54,7 @@ export default {
       }
 
       const filteredItems = this.items.filter(item => {
-        return item.toLowerCase().indexOf(this.query.toLowerCase()) !== -1;
+        return item.value.toLowerCase().indexOf(this.query.toLowerCase()) !== -1;
       });
 
       return filteredItems.slice(0, this.limit);
@@ -85,7 +85,7 @@ export default {
       this.currentItem = index;
     },
     selectItem () {
-      this.query = this.filteredItems[this.currentItem];
+      this.query = this.filteredItems[this.currentItem].value;
       this.resetDropdown();
     },
     resetDropdown () {

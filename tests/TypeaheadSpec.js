@@ -28,7 +28,7 @@ describe('Typeahead', () => {
 
   it('opens drop-down menu when query is entered', (done) => {
     const vm = initVM(Typeahead, {
-      items: ['hello', 'world']
+      items: [{ id: 1, value: 'hello'}, { id: 2, value: 'world' }]
     });
 
     vm.query = 'hello';
@@ -42,32 +42,42 @@ describe('Typeahead', () => {
 
   it('filters items', () => {
     const vm = initVM(Typeahead, {
-      items: ['John', 'Jane', 'Jack']
+      items: [{ id: 1, value: 'Jane' }, { id: 2, value: 'Jack' }]
     });
 
-    vm.query = 'Ja';
+    vm.query = 'Jac';
 
     expect(vm.items).that.is.an('array')
-      .to.deep.equal(['John', 'Jane', 'Jack']);
+      .to.deep.equal([{ id: 1, value: 'Jane' }, { id: 2, value: 'Jack' }]);
 
     expect(vm.filteredItems).that.is.an('array')
-      .to.deep.equal(['Jane', 'Jack']);
+      .to.deep.equal([{ id: 2, value: 'Jack' }]);
   });
 
   it('filters items with limit', () => {
     const vm = initVM(Typeahead, {
-      items: ['above', 'above all', 'above the fold', 'above the law', 'above-the-line']
+      items: [
+        { id: 1, value: 'above' },
+        { id: 2, value: 'above all' },
+        { id: 3, value: 'above the fold' }
+      ]
     });
 
     vm.query = 'above';
-    vm.limit = 3;
+    vm.limit = 1;
 
     expect(vm.filteredItems).that.is.an('array')
-      .to.deep.equal(['above', 'above all', 'above the fold']);
+      .to.deep.equal([{ id: 1, value: 'above' }]);
   });
 
   it('marks next item', () => {
-    const vm = initVM(Typeahead, { items: ['Aaaa', 'Aaa', 'Aa'] });
+    const vm = initVM(Typeahead, {
+      items: [
+        { id: 1, value: 'Aaaa' },
+        { id: 2, value: 'Aaa' },
+        { id: 3, value: 'Aa' }
+      ]
+    });
 
     vm.query = 'A';
     vm.currentItem = 1;
@@ -77,7 +87,13 @@ describe('Typeahead', () => {
   });
 
   it('marks previous item', () => {
-    const vm = initVM(Typeahead, { items: ['Aaaa', 'Aaa', 'Aa'] });
+    const vm = initVM(Typeahead, {
+      items: [
+        { id: 1, value: 'Aaaa' },
+        { id: 2, value: 'Aaa' },
+        { id: 3, value: 'Aa' }
+      ]
+    });
 
     vm.query = 'A';
     vm.currentItem = 1;
@@ -87,7 +103,13 @@ describe('Typeahead', () => {
   });
 
   it('knows current item', () => {
-    const vm = initVM(Typeahead, { items: ['Aaaa', 'Aaa', 'Aa'] });
+    const vm = initVM(Typeahead, {
+      items: [
+        { id: 1, value: 'Aaaa' },
+        { id: 2, value: 'Aaa' },
+        { id: 3, value: 'Aa' }
+      ]
+    });
 
     vm.query = 'A';
     vm.currentItem = 1;

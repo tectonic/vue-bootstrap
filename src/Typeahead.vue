@@ -55,6 +55,10 @@ export default {
     limit: {
       type: Number,
       default: 10
+    },
+    onSelect: {
+      type: Function,
+      default: () => {}
     }
   },
   computed: {
@@ -106,8 +110,12 @@ export default {
       this.currentItem = index;
     },
     selectItem () {
-      this.query = this.filteredItems[this.currentItem].value;
+      const selectedItem = this.filteredItems[this.currentItem];
+
+      this.query = selectedItem.value;
       this.resetDropdown();
+
+      this.onSelect(selectedItem);
     },
     resetDropdown () {
       this.isDropdownOpen = false;

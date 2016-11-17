@@ -22,7 +22,7 @@
             <div class="panel-body">
               <div class="form-group">
                 <label for="typeahead-input">Text input with autocomplete</label>
-                <typeahead id="typeahead-input" placeholder="Type a name" :limit="3" :initial-items="typeaheadItems"></typeahead>
+                <typeahead id="typeahead-input" placeholder="Type a name" :limit="3" :initial-items="typeaheadItems" :on-select="onSelect"></typeahead>
               </div>
 <pre>
 &lt;typeahead id="typeahead-input" placeholder="Type a name" :limit="3" :initial-items="typeaheadItems"&gt;&lt;/typeahead&gt;
@@ -76,6 +76,12 @@
                 <td>Number</td>
                 <td>10</td>
                 <td>Limit the number of autocomplete suggestions.</td>
+              </tr>
+              <tr>
+                <td>on-select</td>
+                <td>Function</td>
+                <td></td>
+                <td>Callback.</td>
               </tr>
             </tbody>
           </table>

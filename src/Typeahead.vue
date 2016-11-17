@@ -22,17 +22,26 @@
 </template>
 
 <script>
+import Vue from 'vue';
+import VueResource from 'vue-resource';
+
+Vue.use(VueResource);
+
 export default {
   props: {
     value: {
       type: String,
       default: ''
     },
-    items: {
+    initialItems: {
       type: Array,
       default: () => {
         return [];
       }
+    },
+    src: {
+      type: String,
+      default: ''
     },
     id: {
       type: String,
@@ -62,7 +71,18 @@ export default {
   },
   methods: {
     onInput () {
+      if (this.src) {
+        this.fetchSuggestions();
+      }
+
       this.isDropdownOpen = this.filteredItems.length > 0;
+    },
+    fetchSuggestions() {
+      Vue.http.get(this.src + this.query).then((response) => {
+        this.items = response.data;
+      }, (response) => {
+        console.log('Typeahead: connection error');
+      });
     },
     isMarked (index) {
       return this.currentItem === index;
@@ -102,6 +122,7 @@ export default {
   },
   mounted () {
     this.query = this.value;
+    this.items = this.initialItems;
   }
 };
 </script>

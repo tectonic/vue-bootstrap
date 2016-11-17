@@ -8,7 +8,7 @@
       @blur="isDropdownOpen = false"
       @keydown.up="markPreviousItem"
       @keydown.down="markNextItem"
-      @keydown.enter= "selectItem"
+      @keydown.enter.prevent="selectItem"
       @keydown.esc="resetDropdown"
       class="form-control"
       autocomplete="off"

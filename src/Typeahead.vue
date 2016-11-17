@@ -72,13 +72,13 @@ export default {
   },
   methods: {
     onInput () {
-      if (this.src) {
-        this.fetchSuggestions();
+      if (this.src && this.query) {
+        this.fetchItems();
       }
 
       this.isDropdownOpen = this.filteredItems.length > 0;
     },
-    fetchSuggestions() {
+    fetchItems() {
       Vue.http.get(this.src + this.query).then((response) => {
         this.items = response.data;
       }, (response) => {
@@ -125,7 +125,7 @@ export default {
     this.query = this.value;
     this.items = this.initialItems;
 
-    this.fetchSuggestions = debounce(this.fetchSuggestions, 300);
+    this.fetchItems = debounce(this.fetchItems, 300);
   }
 };
 </script>

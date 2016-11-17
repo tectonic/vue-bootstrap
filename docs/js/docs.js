@@ -20,5 +20,11 @@ new Vue({
         { id: 9, value: 'Susan' }
       ]
     };
+  },
+  methods: {
+    onSelect (item) {
+      console.log('Selected item\'s id: ' + item.id);
+      console.log('Selected item\'s value: ' + item.value);
+    }
   }
 });

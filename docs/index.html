@@ -22,10 +22,10 @@
             <div class="panel-body">
               <div class="form-group">
                 <label for="typeahead-input">Text input with autocomplete</label>
-                <typeahead id="typeahead-input" placeholder="Type a name" :limit="3" :initialItems="typeaheadItems"></typeahead>
+                <typeahead id="typeahead-input" placeholder="Type a name" :limit="3" :initial-items="typeaheadItems"></typeahead>
               </div>
 <pre>
-&lt;typeahead id="typeahead-input" placeholder="Type a name" :limit="3" :initialItems="typeaheadItems"&gt;&lt;/typeahead&gt;
+&lt;typeahead id="typeahead-input" placeholder="Type a name" :limit="3" :initial-items="typeaheadItems"&gt;&lt;/typeahead&gt;
 </pre>
             </div>
           </div>
@@ -46,7 +46,7 @@
                 <td></td>
                 <td>Initial value of the input field.</td></tr>
               <tr>
-                <td>initialItems</td>
+                <td>initial-items</td>
                 <td>Array</td>
                 <td></td>
                 <td>An array of items that will be used to display autocomplete suggestions.</td>
@@ -57,7 +57,7 @@
                 <td></td>
                 <td>An URL that will be used to fetch autocomplete suggestions (such as: /user/search?q=).<br>
                   A query will be appended to this URL.<br>
-                  There is no need to define <code>initialItems</code> when a remote source is defined.</td>
+                  There is no need to define <code>initial-items</code> when a remote source is defined.</td>
               </tr>
               <tr>
                 <td>id</td>

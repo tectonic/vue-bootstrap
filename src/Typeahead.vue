@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import debounce from 'debounce';
 import Vue from 'vue';
 import VueResource from 'vue-resource';
 
@@ -123,6 +124,8 @@ export default {
   mounted () {
     this.query = this.value;
     this.items = this.initialItems;
+
+    this.fetchSuggestions = debounce(this.fetchSuggestions, 300);
   }
 };
 </script>

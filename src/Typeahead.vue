@@ -75,16 +75,20 @@ export default {
     }
   },
   methods: {
+    openDropdown () {
+      this.isDropdownOpen = this.filteredItems.length > 0;
+    },
     onInput () {
+      this.openDropdown();
+
       if (this.src && this.query) {
         this.fetchItems();
-      }
-
-      this.isDropdownOpen = this.filteredItems.length > 0;
+      }      
     },
     fetchItems() {
       Vue.http.get(this.src + this.query).then((response) => {
         this.items = response.data;
+        this.openDropdown();
       }, (response) => {
         console.log('Typeahead: connection error');
       });

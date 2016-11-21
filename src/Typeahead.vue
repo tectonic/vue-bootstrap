@@ -138,7 +138,7 @@ export default {
     this.query = this.value;
     this.items = this.initialItems;
 
-    this.fetchItems = debounce(this.fetchItems, 300);
+    this.fetchItems = debounce(this.fetchItems, 200);
   }
 };
 </script>

@@ -25,7 +25,7 @@
                 <typeahead id="typeahead-input" placeholder="Type a name" :limit="3" :initial-items="typeaheadItems" :on-select="onSelect"></typeahead>
               </div>
 <pre>
-&lt;typeahead id="typeahead-input" placeholder="Type a name" :limit="3" :initial-items="typeaheadItems"&gt;&lt;/typeahead&gt;
+&lt;typeahead id="typeahead-input" placeholder="Type a name" :limit="3" :initial-items="typeaheadItems" :on-select="onSelect"&gt;&lt;/typeahead&gt;
 </pre>
             </div>
           </div>
@@ -41,15 +41,22 @@
             </thead>
             <tbody>
               <tr>
-                <td>value</td>
-                <td>String</td>
-                <td></td>
-                <td>Initial value of the input field.</td></tr>
-              <tr>
                 <td>initial-items</td>
                 <td>Array</td>
                 <td></td>
-                <td>An array of items that will be used to display autocomplete suggestions.</td>
+                <td>An array of items that will be used to display autocomplete suggestions (<code>[{ id: 1, value: 'hey' }]</code>).</td>
+              </tr>
+              <tr>
+                <td>initial-value</td>
+                <td>String</td>
+                <td></td>
+                <td>Initial value of the autocomplete suggestion.</td>
+              </tr>
+              <tr>
+                <td>initial-id</td>
+                <td>String</td>
+                <td></td>
+                <td>Initial id of the autocomplete suggestion.</td>
               </tr>
               <tr>
                 <td>src</td>
@@ -76,6 +83,12 @@
                 <td>Number</td>
                 <td>10</td>
                 <td>Limit the number of autocomplete suggestions.</td>
+              </tr>
+              <tr>
+                <td>populate</td>
+                <td>String</td>
+                <td></td>
+                <td>A name of a hidden field that will be populated with autocomplete suggestion's id.</td>
               </tr>
               <tr>
                 <td>on-select</td>

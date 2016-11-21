@@ -7609,7 +7609,7 @@
 	__vue_exports__ = __webpack_require__(7)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(11)
+	var __vue_template__ = __webpack_require__(16)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -7677,7 +7677,7 @@
 	
 	
 	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"Typeahead.vue","sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"Typeahead.vue","sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -8007,18 +8007,24 @@
 	//
 	//
 	//
+	//
+	//
 	
 	exports.default = {
 	  props: {
-	    value: {
-	      type: String,
-	      default: ''
-	    },
 	    initialItems: {
 	      type: Array,
 	      default: function _default() {
 	        return [];
 	      }
+	    },
+	    initialValue: {
+	      type: String,
+	      default: ''
+	    },
+	    initialId: {
+	      type: String,
+	      default: ''
 	    },
 	    src: {
 	      type: String,
@@ -8036,6 +8042,10 @@
 	      type: Number,
 	      default: 10
 	    },
+	    populate: {
+	      type: String,
+	      default: ''
+	    },
 	    onSelect: {
 	      type: Function,
 	      default: function _default() {}
@@ -8049,6 +8059,7 @@
 	        return [];
 	      }
 	
+	      // Filter items by query
 	      var filteredItems = this.items.filter(function (item) {
 	        return item.value.toLowerCase().indexOf(_this.query.toLowerCase()) !== -1;
 	      });
@@ -8057,18 +8068,24 @@
 	    }
 	  },
 	  methods: {
+	    openDropdown: function openDropdown() {
+	      this.isDropdownOpen = this.filteredItems.length > 0;
+	    },
 	    onInput: function onInput() {
+	      this.openDropdown();
+	
 	      if (this.src && this.query) {
 	        this.fetchItems();
 	      }
-	
-	      this.isDropdownOpen = this.filteredItems.length > 0;
 	    },
 	    fetchItems: function fetchItems() {
 	      var _this2 = this;
 	
 	      _vue2.default.http.get(this.src + this.query).then(function (response) {
 	        _this2.items = response.data;
+	
+	        // New items arrived - open drop-down menu
+	        _this2.openDropdown();
 	      }, function (response) {
 	        console.log('Typeahead: connection error');
 	      });
@@ -8094,16 +8111,38 @@
 	      this.currentItem = index;
 	    },
 	    selectItem: function selectItem() {
-	      var selectedItem = this.filteredItems[this.currentItem];
+	      this.selectedItem = this.filteredItems[this.currentItem];
+	      this.query = this.selectedItem.value;
 	
-	      this.query = selectedItem.value;
 	      this.resetDropdown();
 	
-	      this.onSelect(selectedItem);
+	      // Fire the callback
+	      this.onSelect(this.selectedItem);
 	    },
 	    resetDropdown: function resetDropdown() {
 	      this.isDropdownOpen = false;
 	      this.currentItem = 0;
+	    },
+	    onBlur: function onBlur() {
+	      var _this3 = this;
+	
+	      this.resetDropdown();
+	
+	      // Make sure input field contains a valid value. The 'selectedItem'
+	      // needs to hold the correct data for the hidden field to be
+	      // populated correctly on blur.
+	      var validItem = this.items.find(function (item) {
+	        return _this3.$refs.input.value.toLowerCase() === item.value.toLowerCase();
+	      });
+	
+	      if (validItem) {
+	        this.selectedItem = validItem;
+	      } else {
+	        this.selectedItem = {
+	          id: '',
+	          value: ''
+	        };
+	      }
 	    }
 	  },
 	  data: function data() {
@@ -8111,14 +8150,23 @@
 	      query: '',
 	      isDropdownOpen: false,
 	      items: [],
-	      currentItem: 0
+	      currentItem: 0,
+	      selectedItem: {
+	        id: '',
+	        value: ''
+	      }
 	    };
 	  },
 	  mounted: function mounted() {
-	    this.query = this.value;
+	    this.query = this.initialValue;
 	    this.items = this.initialItems;
 	
-	    this.fetchItems = (0, _debounce2.default)(this.fetchItems, 300);
+	    this.selectedItem = {
+	      id: this.initialId,
+	      value: this.initialValue
+	    };
+	
+	    this.fetchItems = (0, _debounce2.default)(this.fetchItems, 200);
 	  }
 	};
 
@@ -9716,7 +9764,12 @@
 	module.exports = plugin;
 
 /***/ },
-/* 11 */
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){with(this) {
@@ -9731,6 +9784,7 @@
 	      value: (query),
 	      expression: "query"
 	    }],
+	    ref: "input",
 	    staticClass: "form-control",
 	    attrs: {
 	      "type": "text",
@@ -9746,9 +9800,7 @@
 	        if ($event.target.composing) return;
 	        query = $event.target.value
 	      }, onInput],
-	      "blur": function($event) {
-	        isDropdownOpen = false
-	      },
+	      "blur": onBlur,
 	      "keydown": [function($event) {
 	        if ($event.keyCode !== 38) return;
 	        markPreviousItem($event)
@@ -9785,7 +9837,21 @@
 	        }
 	      }
 	    }, [_s(item.value)])])
-	  })])])
+	  })]), " ", _h('input', {
+	    directives: [{
+	      name: "show",
+	      rawName: "v-show",
+	      value: (populate),
+	      expression: "populate"
+	    }],
+	    attrs: {
+	      "type": "hidden",
+	      "name": populate
+	    },
+	    domProps: {
+	      "value": selectedItem.id
+	    }
+	  })])
 	}},staticRenderFns: []}
 	if (false) {
 	  module.hot.accept()

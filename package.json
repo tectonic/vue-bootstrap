@@ -2,9 +2,11 @@
   "name": "vue-bootstrap",
   "version": "1.0.0",
   "description": "Bootstrap components in Vue.js",
-  "main": "index.js",
+  "main": "src/index.js",
   "dependencies": {
-    "vue": "^2.0.3"
+    "debounce": "^1.0.0",
+    "vue": "^2.0.3",
+    "vue-resource": "^1.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.18.0",
@@ -14,7 +16,6 @@
     "babel-preset-stage-2": "^6.0.0",
     "chai": "^3.5.0",
     "css-loader": "^0.25.0",
-    "debounce": "^1.0.0",
     "eslint": "^3.9.1",
     "eslint-config-vue": "^2.0.0",
     "eslint-plugin-vue": "^1.0.0",
@@ -25,7 +26,6 @@
     "karma-webpack": "^1.8.0",
     "mocha": "^3.1.2",
     "vue-loader": "^9.4.0",
-    "vue-resource": "^1.0.3",
     "webpack": "^1.13.2"
   },
   "scripts": {
@@ -43,6 +43,26 @@
     "vue",
     "bootstrap"
   ],
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015",
+            "stage-2"
+          ]
+        }
+      ],
+      [
+        "vueify"
+      ]
+    ]
+  },
   "author": "",
   "license": "ISC",
   "bugs": {

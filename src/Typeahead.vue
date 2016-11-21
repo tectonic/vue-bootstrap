@@ -5,19 +5,21 @@
       :id="id"
       :placeholder="placeholder"
       @input="onInput"
-      @blur="isDropdownOpen = false"
+      @blur="onBlur"
       @keydown.up="markPreviousItem"
       @keydown.down="markNextItem"
       @keydown.enter.prevent="selectItem"
       @keydown.esc="resetDropdown"
       class="form-control"
       autocomplete="off"
+      ref="input"
     />
     <ul class="dropdown-menu">
       <li v-for="(item, index) in filteredItems" v-bind:class="{ 'active': isMarked(index) }">
         <a href="#" v-on:mousedown.prevent="selectItem" v-on:mousemove="markItem(index)">{{ item.value }}</a>
       </li>
     </ul>
+    <input type="hidden" :value="selectedItem.id" v-show="populate" :name="populate"></input>
   </div>
 </template>
 
@@ -30,15 +32,19 @@ Vue.use(VueResource);
 
 export default {
   props: {
-    value: {
-      type: String,
-      default: ''
-    },
     initialItems: {
       type: Array,
       default: () => {
         return [];
       }
+    },
+    initialValue: {
+      type: String,
+      default: ''
+    },
+    initialId: {
+      type: String,
+      default: ''
     },
     src: {
       type: String,
@@ -56,6 +62,10 @@ export default {
       type: Number,
       default: 10
     },
+    populate: {
+      type: String,
+      default: ''
+    },
     onSelect: {
       type: Function,
       default: () => {}
@@ -67,6 +77,7 @@ export default {
         return [];
       }
 
+      // Filter items by query
       const filteredItems = this.items.filter(item => {
         return item.value.toLowerCase().indexOf(this.query.toLowerCase()) !== -1;
       });
@@ -88,6 +99,8 @@ export default {
     fetchItems() {
       Vue.http.get(this.src + this.query).then((response) => {
         this.items = response.data;
+
+        // New items arrived - open drop-down menu
         this.openDropdown();
       }, (response) => {
         console.log('Typeahead: connection error');
@@ -114,16 +127,36 @@ export default {
       this.currentItem = index;
     },
     selectItem () {
-      const selectedItem = this.filteredItems[this.currentItem];
+      this.selectedItem = this.filteredItems[this.currentItem];
+      this.query = this.selectedItem.value;
 
-      this.query = selectedItem.value;
       this.resetDropdown();
 
-      this.onSelect(selectedItem);
+      // Fire the callback
+      this.onSelect(this.selectedItem);
     },
     resetDropdown () {
       this.isDropdownOpen = false;
       this.currentItem = 0;
+    },
+    onBlur () {
+      this.resetDropdown();
+
+      // Make sure input field contains a valid value. The 'selectedItem'
+      // needs to hold the correct data for the hidden field to be
+      // populated correctly on blur.
+      const validItem = this.items.find(item => {
+        return this.$refs.input.value.toLowerCase() === item.value.toLowerCase();
+      });
+
+      if (validItem) {
+        this.selectedItem = validItem;
+      } else {
+        this.selectedItem = {
+          id: '',
+          value: ''
+        };
+      }
     }
   },
   data () {
@@ -131,12 +164,21 @@ export default {
       query: '',
       isDropdownOpen: false,
       items: [],
-      currentItem: 0
+      currentItem: 0,
+      selectedItem: {
+        id: '',
+        value: ''
+      }
     };
   },
   mounted () {
-    this.query = this.value;
+    this.query = this.initialValue;
     this.items = this.initialItems;
+
+    this.selectedItem = {
+      id: this.initialId,
+      value: this.initialValue
+    };
 
     this.fetchItems = debounce(this.fetchItems, 200);
   }

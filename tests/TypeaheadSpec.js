@@ -15,6 +15,7 @@ describe('Typeahead', () => {
 
     expect(data.query).to.equal('');
     expect(data.isDropdownOpen).to.be.false;
+    expect(data.items).to.to.deep.equal([]);
     expect(data.currentItem).to.equal(0);
   });
 

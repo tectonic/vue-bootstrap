@@ -126,4 +126,21 @@ describe('Typeahead', () => {
 
     expect(vm.isMarked(1)).to.be.true;
   });
+
+  it('populates the hidden field', (done) => {
+    const vm = initVM(Typeahead, {
+      initialValue: 'Jane',
+      initialId: '1',
+      populate: 'hidden-field'
+    });
+
+    Vue.nextTick(() => {
+      const hiddenField = vm.$el.getElementsByTagName('input')[1];
+
+      expect(hiddenField.name).to.equal('hidden-field');
+      expect(hiddenField.value).to.equal('1');
+
+      done();
+    });
+  });
 });

@@ -27,6 +27,15 @@ describe('Typeahead', () => {
     expect(vm.query).to.equal('abc');
   });
 
+  it('sets selectedItem on mount', () => {
+    const vm = initVM(Typeahead, {
+      initialValue: 'abc',
+      initialId: '1'
+    });
+
+    expect(vm.selectedItem).to.deep.equal({ id: '1', value: 'abc' });
+  });
+
   it('opens drop-down menu when query is entered', (done) => {
     const vm = initVM(Typeahead, {
       initialItems: [{ id: 1, value: 'hello'}, { id: 2, value: 'world' }]

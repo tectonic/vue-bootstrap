@@ -135,8 +135,12 @@ describe('Typeahead', () => {
     });
 
     Vue.nextTick(() => {
-      const hiddenField = vm.$el.getElementsByTagName('input')[1];
+      let inputFields, hiddenField;
 
+      inputFields = vm.$el.getElementsByTagName('input');
+      hiddenField = inputFields[1];
+
+      expect(inputFields.length).to.equal(2);
       expect(hiddenField.name).to.equal('hidden-field');
       expect(hiddenField.value).to.equal('1');
 

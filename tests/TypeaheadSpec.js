@@ -21,7 +21,7 @@ describe('Typeahead', () => {
 
   it('sets query on mount', () => {
     const vm = initVM(Typeahead, {
-      value: 'abc'
+      initialValue: 'abc'
     });
 
     expect(vm.query).to.equal('abc');

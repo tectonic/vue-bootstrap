@@ -19,7 +19,7 @@
         <a href="#" v-on:mousedown.prevent="selectItem" v-on:mousemove="markItem(index)">{{ item.value }}</a>
       </li>
     </ul>
-    <input type="hidden" :value="selectedItem.id" v-show="populate" :name="populate"></input>
+    <input type="hidden" :value="selectedItem.id" v-show="name" :name="name"></input>
   </div>
 </template>
 
@@ -62,7 +62,7 @@ export default {
       type: Number,
       default: 10
     },
-    populate: {
+    name: {
       type: String,
       default: ''
     },

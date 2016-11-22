@@ -7609,7 +7609,7 @@
 	__vue_exports__ = __webpack_require__(7)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(16)
+	var __vue_template__ = __webpack_require__(11)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -8042,7 +8042,7 @@
 	      type: Number,
 	      default: 10
 	    },
-	    populate: {
+	    name: {
 	      type: String,
 	      default: ''
 	    },
@@ -8068,9 +8068,6 @@
 	    }
 	  },
 	  methods: {
-	    openDropdown: function openDropdown() {
-	      this.isDropdownOpen = this.filteredItems.length > 0;
-	    },
 	    onInput: function onInput() {
 	      this.openDropdown();
 	
@@ -8089,6 +8086,13 @@
 	      }, function (response) {
 	        console.log('Typeahead: connection error');
 	      });
+	    },
+	    openDropdown: function openDropdown() {
+	      this.isDropdownOpen = this.filteredItems.length > 0;
+	    },
+	    resetDropdown: function resetDropdown() {
+	      this.isDropdownOpen = false;
+	      this.currentItem = 0;
 	    },
 	    isMarked: function isMarked(index) {
 	      return this.currentItem === index;
@@ -8118,10 +8122,6 @@
 	
 	      // Fire the callback
 	      this.onSelect(this.selectedItem);
-	    },
-	    resetDropdown: function resetDropdown() {
-	      this.isDropdownOpen = false;
-	      this.currentItem = 0;
 	    },
 	    onBlur: function onBlur() {
 	      var _this3 = this;
@@ -9764,12 +9764,7 @@
 	module.exports = plugin;
 
 /***/ },
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){with(this) {
@@ -9837,21 +9832,15 @@
 	        }
 	      }
 	    }, [_s(item.value)])])
-	  })]), " ", _h('input', {
-	    directives: [{
-	      name: "show",
-	      rawName: "v-show",
-	      value: (populate),
-	      expression: "populate"
-	    }],
+	  })]), " ", (name) ? _h('input', {
 	    attrs: {
 	      "type": "hidden",
-	      "name": populate
+	      "name": name
 	    },
 	    domProps: {
 	      "value": selectedItem.id
 	    }
-	  })])
+	  }) : _e()])
 	}},staticRenderFns: []}
 	if (false) {
 	  module.hot.accept()

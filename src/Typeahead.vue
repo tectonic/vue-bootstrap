@@ -91,9 +91,9 @@ export default {
 
       if (this.src && this.query) {
         this.fetchItems();
-      }      
+      }
     },
-    fetchItems() {
+    fetchItems () {
       Vue.http.get(this.src + this.query).then((response) => {
         this.items = response.data;
 

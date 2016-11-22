@@ -19,7 +19,7 @@
         <a href="#" v-on:mousedown.prevent="selectItem" v-on:mousemove="markItem(index)">{{ item.value }}</a>
       </li>
     </ul>
-    <input type="hidden" :value="selectedItem.id" v-show="name" :name="name"></input>
+    <input type="hidden" :value="selectedItem.id" v-if="name" :name="name"></input>
   </div>
 </template>
 

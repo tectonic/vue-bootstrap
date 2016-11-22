@@ -86,9 +86,6 @@ export default {
     }
   },
   methods: {
-    openDropdown () {
-      this.isDropdownOpen = this.filteredItems.length > 0;
-    },
     onInput () {
       this.openDropdown();
 
@@ -105,6 +102,13 @@ export default {
       }, (response) => {
         console.log('Typeahead: connection error');
       });
+    },
+    openDropdown () {
+      this.isDropdownOpen = this.filteredItems.length > 0;
+    },
+    resetDropdown () {
+      this.isDropdownOpen = false;
+      this.currentItem = 0;
     },
     isMarked (index) {
       return this.currentItem === index;
@@ -134,10 +138,6 @@ export default {
 
       // Fire the callback
       this.onSelect(this.selectedItem);
-    },
-    resetDropdown () {
-      this.isDropdownOpen = false;
-      this.currentItem = 0;
     },
     onBlur () {
       this.resetDropdown();

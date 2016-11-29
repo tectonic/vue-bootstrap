@@ -53,6 +53,7 @@ export default {
   },
   data () {
     return {
+      closeTimeout: 200,
       isOpen: false,
     };
   },
@@ -60,9 +61,10 @@ export default {
     const button = this.$refs.button;
 
     button.addEventListener('blur', e => {
+      // Wait in case any of the links were clicked, prevent the dropdown from closing too soon.
       setTimeout(() => {
         this.close();
-      }, 200);
+      }, this.closeTimeout);
     });
   }
 };

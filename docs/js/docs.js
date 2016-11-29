@@ -1,9 +1,11 @@
 import Vue from 'vue';
+import Dropdown from '../../src/Dropdown.vue';
 import Typeahead from '../../src/Typeahead.vue';
 
 new Vue({
   el: '#app',
   components: {
+    Dropdown,
     Typeahead
   },
   data () {

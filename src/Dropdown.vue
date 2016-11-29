@@ -8,7 +8,8 @@
       aria-haspopup="true"
       aria-expanded="true"
       @click="toggle"
-      @keyup.esc="isOpen = false">
+      @keyup.esc="isOpen = false"
+      ref="button">
       Dropdown <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" :aria-labelledby="id">
@@ -32,6 +33,9 @@ export default {
   methods: {
     toggle () {
       this.isOpen = (this.isOpen) ? false : true;
+    },
+    close () {
+      this.isOpen = false;
     }
   },
   data () {
@@ -40,7 +44,13 @@ export default {
     };
   },
   mounted () {
-    //
+    const button = this.$refs.button;
+
+    button.addEventListener('blur', e => {
+      setTimeout(() => {
+        this.close();
+      }, 200);
+    });
   }
 };
 </script>

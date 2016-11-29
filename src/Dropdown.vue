@@ -1,11 +1,9 @@
 <template>
-  <div :class="[{ 'open': isOpen }, 'dropdown']">
+  <div :class="[{ 'open': isOpen }, 'dropdown', containerClass]">
     <slot name="button">
       <a href=""
-        class="btn btn-default dropdown-toggle"
-        type="button"
+        :class="buttonClass"
         :id="id"
-        data-toggle="dropdown"
         aria-haspopup="true"
         :aria-expanded="isOpen"
         @click.prevent="toggle"
@@ -28,6 +26,14 @@ export default {
       default: ''
     },
     label: {
+      type: String,
+      default: ''
+    },
+    buttonClass: {
+      type: String,
+      default: 'btn btn-default'
+    },
+    containerClass: {
       type: String,
       default: ''
     }

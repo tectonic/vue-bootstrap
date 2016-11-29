@@ -9,7 +9,7 @@
         aria-haspopup="true"
         :aria-expanded="isOpen"
         @click.prevent="toggle"
-        @keyup.esc="isOpen = false"
+        @keyup.esc="close"
         ref="button">
         Dropdown <span class="caret"></span>
       </a>

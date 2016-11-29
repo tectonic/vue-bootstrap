@@ -8,13 +8,18 @@
         :aria-expanded="isOpen"
         @click.prevent="toggle"
         @keyup.esc="close"
+        role="button"
         ref="button">
-        {{ label }} <span class="caret"></span>
+        <slot name="label">
+          {{ label }} <span class="caret"></span>
+        </slot>
       </a>
     </slot>
-    <ul class="dropdown-menu" :aria-labelledby="id">
-      <slot></slot>
-    </ul>
+    <slot name="items">
+      <ul class="dropdown-menu" :aria-labelledby="id">
+        <slot></slot>
+      </ul>
+    </slot>
   </div>
 </template>
 

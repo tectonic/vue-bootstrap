@@ -1,23 +1,21 @@
 <template>
   <div :class="[{ 'open': isOpen }, 'dropdown']">
-    <button
-      class="btn btn-default dropdown-toggle"
-      type="button"
-      :id="id"
-      data-toggle="dropdown"
-      aria-haspopup="true"
-      aria-expanded="true"
-      @click="toggle"
-      @keyup.esc="isOpen = false"
-      ref="button">
-      Dropdown <span class="caret"></span>
-    </button>
+    <slot name="button">
+      <a href=""
+        class="btn btn-default dropdown-toggle"
+        type="button"
+        :id="id"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="true"
+        @click.prevent="toggle"
+        @keyup.esc="isOpen = false"
+        ref="button">
+        Dropdown <span class="caret"></span>
+      </a>
+    </slot>
     <ul class="dropdown-menu" :aria-labelledby="id">
-      <li><a href="#">Action</a></li>
-      <li><a href="#">Another action</a></li>
-      <li><a href="#">Something else here</a></li>
-      <li role="separator" class="divider"></li>
-      <li><a href="#">Separated link</a></li>
+      <slot></slot>
     </ul>
   </div>
 </template>

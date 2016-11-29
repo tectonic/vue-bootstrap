@@ -50,6 +50,10 @@
 	
 	var _vue2 = _interopRequireDefault(_vue);
 	
+	var _Dropdown = __webpack_require__(12);
+	
+	var _Dropdown2 = _interopRequireDefault(_Dropdown);
+	
 	var _Typeahead = __webpack_require__(2);
 	
 	var _Typeahead2 = _interopRequireDefault(_Typeahead);
@@ -59,6 +63,7 @@
 	new _vue2.default({
 	  el: '#app',
 	  components: {
+	    Dropdown: _Dropdown2.default,
 	    Typeahead: _Typeahead2.default
 	  },
 	  data: function data() {
@@ -9846,6 +9851,221 @@
 	  module.hot.accept()
 	  if (module.hot.data) {
 	     require("vue-hot-reload-api").rerender("data-v-4803ab6c", module.exports)
+	  }
+	}
+
+/***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	
+	/* styles */
+	__webpack_require__(13)
+	
+	/* script */
+	__vue_exports__ = __webpack_require__(15)
+	
+	/* template */
+	var __vue_template__ = __webpack_require__(16)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "/Users/kazik/Sites/awardforce.com/vue-bootstrap/src/Dropdown.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+	
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-d6369744", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-d6369744", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] Dropdown.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+	
+	module.exports = __vue_exports__
+
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(14);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(6)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-d6369744!./../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Dropdown.vue", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-d6369744!./../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Dropdown.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(5)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"Dropdown.vue","sourceRoot":"webpack://"}]);
+	
+	// exports
+
+
+/***/ },
+/* 15 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	
+	exports.default = {
+	  props: {
+	    id: {
+	      type: String,
+	      default: ''
+	    },
+	    label: {
+	      type: String,
+	      default: ''
+	    },
+	    buttonClass: {
+	      type: String,
+	      default: 'btn btn-default'
+	    },
+	    containerClass: {
+	      type: String,
+	      default: ''
+	    }
+	  },
+	  methods: {
+	    toggle: function toggle() {
+	      this.isOpen = this.isOpen ? false : true;
+	    },
+	    close: function close() {
+	      this.isOpen = false;
+	    }
+	  },
+	  data: function data() {
+	    return {
+	      closeTimeout: 200,
+	      isOpen: false
+	    };
+	  },
+	  mounted: function mounted() {
+	    var _this = this;
+	
+	    var button = this.$refs.button;
+	
+	    button.addEventListener('blur', function (e) {
+	      // Wait in case any of the links were clicked, prevent the dropdown from closing too soon.
+	      setTimeout(function () {
+	        _this.close();
+	      }, _this.closeTimeout);
+	    });
+	  }
+	};
+
+/***/ },
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){with(this) {
+	  return _h('div', {
+	    class: [{
+	      'open': isOpen
+	    }, 'dropdown', containerClass]
+	  }, [_t("button", [_h('a', {
+	    ref: "button",
+	    class: buttonClass,
+	    attrs: {
+	      "href": "",
+	      "id": id,
+	      "aria-haspopup": "true",
+	      "aria-expanded": isOpen,
+	      "role": "button"
+	    },
+	    on: {
+	      "click": function($event) {
+	        $event.preventDefault();
+	        toggle($event)
+	      },
+	      "keyup": function($event) {
+	        if ($event.keyCode !== 27) return;
+	        close($event)
+	      }
+	    }
+	  }, [_t("label", ["\n        " + _s(label) + " ", _m(0)])])]), " ", _t("items", [_h('ul', {
+	    staticClass: "dropdown-menu",
+	    attrs: {
+	      "aria-labelledby": id
+	    }
+	  }, [_t("default")])])])
+	}},staticRenderFns: [function (){with(this) {
+	  return _h('span', {
+	    staticClass: "caret"
+	  })
+	}}]}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-d6369744", module.exports)
 	  }
 	}
 

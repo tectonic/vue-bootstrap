@@ -11,7 +11,7 @@
         @click.prevent="toggle"
         @keyup.esc="close"
         ref="button">
-        Dropdown <span class="caret"></span>
+        {{ label }} <span class="caret"></span>
       </a>
     </slot>
     <ul class="dropdown-menu" :aria-labelledby="id">
@@ -24,6 +24,10 @@
 export default {
   props: {
     id: {
+      type: String,
+      default: ''
+    },
+    label: {
       type: String,
       default: ''
     }

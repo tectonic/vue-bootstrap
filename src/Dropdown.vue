@@ -7,7 +7,7 @@
         :id="id"
         data-toggle="dropdown"
         aria-haspopup="true"
-        aria-expanded="true"
+        :aria-expanded="isOpen"
         @click.prevent="toggle"
         @keyup.esc="isOpen = false"
         ref="button">

@@ -2,6 +2,7 @@
   <div :class="[{ 'open': isDropdownOpen }, 'dropdown']">
     <input type="text"
       v-model="query"
+      :name="name"
       :id="id"
       :placeholder="placeholder"
       @input="onInput"
@@ -19,7 +20,7 @@
         <a href="#" v-on:mousedown.prevent="selectItem" v-on:mousemove="markItem(index)">{{ item.value }}</a>
       </li>
     </ul>
-    <input type="hidden" :value="selectedItem.id" v-if="name" :name="name">
+    <input type="hidden" :value="selectedItem.id" v-if="hiddenInputName" :name="hiddenInputName">
   </div>
 </template>
 
@@ -63,6 +64,10 @@ export default {
       default: 10
     },
     name: {
+      type: String,
+      default: ''
+    },
+    hiddenInputName: {
       type: String,
       default: ''
     },
@@ -142,9 +147,17 @@ export default {
     onBlur () {
       this.resetDropdown();
 
-      // Make sure input field contains a valid value. The 'selectedItem'
-      // needs to hold the correct data for the hidden field to be
-      // populated correctly on blur.
+      // If the input field contains initial value, reset selected
+      // item to initial state.
+      if (this.$refs.input.value === this.initialValue) {
+        this.resetSelectedItem(this.initialId, this.initialValue);
+
+        return;
+      }
+
+      // Otherwise, check whether input field contains a valid value.
+      // The 'selectedItem' needs to hold the correct data for
+      // the hidden field to be populated correctly on blur.
       const validItem = this.items.find(item => {
         return this.$refs.input.value.toLowerCase() === item.value.toLowerCase();
       });
@@ -152,11 +165,16 @@ export default {
       if (validItem) {
         this.selectedItem = validItem;
       } else {
-        this.selectedItem = {
-          id: '',
-          value: ''
-        };
+        this.resetSelectedItem('', '');
       }
+    },
+    resetSelectedItem(id, value) {
+      this.selectedItem = {
+        id: id,
+        value: value
+      };
+
+      this.query = value;
     }
   },
   data () {

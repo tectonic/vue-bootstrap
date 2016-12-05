@@ -131,7 +131,8 @@ describe('Typeahead', () => {
     const vm = initVM(Typeahead, {
       initialValue: 'Jane',
       initialId: '1',
-      name: 'hidden-field'
+      name: 'suggestion',
+      hiddenInputName: 'hidden-field'
     });
 
     Vue.nextTick(() => {

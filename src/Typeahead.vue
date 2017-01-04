@@ -83,7 +83,7 @@ export default {
       }
 
       // Filter items by query
-      const filteredItems = this.items.filter(item => {
+      const filteredItems = this.src ? this.items : this.items.filter(item => {
         return item.value.toLowerCase().indexOf(this.query.toLowerCase()) !== -1;
       });
 
@@ -168,7 +168,7 @@ export default {
         this.resetSelectedItem('', '');
       }
     },
-    resetSelectedItem(id, value) {
+    resetSelectedItem (id, value) {
       this.selectedItem = {
         id: id,
         value: value

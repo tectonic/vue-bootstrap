@@ -61,7 +61,7 @@ export default {
     },
     limit: {
       type: Number,
-      default: 10
+      default: 0
     },
     name: {
       type: String,
@@ -83,11 +83,15 @@ export default {
       }
 
       // Filter items by query
-      const filteredItems = this.src ? this.items : this.items.filter(item => {
+      let filteredItems = this.src ? this.items : this.items.filter(item => {
         return item.value.toLowerCase().indexOf(this.query.toLowerCase()) !== -1;
       });
 
-      return filteredItems.slice(0, this.limit);
+      if (this.limit !== 0) {
+        filteredItems = filteredItems.slice(0, this.limit);
+      }
+
+      return filteredItems;
     }
   },
   methods: {

@@ -204,9 +204,34 @@ export default {
 </script>
 
 <style>
-.dropdown-menu-typeahead {
-  max-height: 300px;
-  overflow: hidden;
-  overflow-y: auto;
-}
+  .dropdown-menu-typeahead {
+    max-height: 300px;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+
+  .dropdown-menu-typeahead::-webkit-scrollbar {
+    width: 14px;
+  }
+
+  .dropdown-menu-typeahead::-webkit-scrollbar-thumb {
+    border: 4px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    background-color: rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 7px;
+  }
+
+  .dropdown-menu-typeahead::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .dropdown-menu-typeahead::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+
+  .dropdown-menu-typeahead::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
 </style>

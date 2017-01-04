@@ -15,7 +15,7 @@
       autocomplete="off"
       ref="input"
     />
-    <ul class="dropdown-menu">
+    <ul class="dropdown-menu dropdown-menu-typeahead">
       <li v-for="(item, index) in filteredItems" v-bind:class="{ 'active': isMarked(index) }">
         <a href="#" v-on:mousedown.prevent="selectItem" v-on:mousemove="markItem(index)">{{ item.value }}</a>
       </li>
@@ -204,4 +204,9 @@ export default {
 </script>
 
 <style>
+.dropdown-menu-typeahead {
+  max-height: 300px;
+  overflow: hidden;
+  overflow-y: auto;
+}
 </style>

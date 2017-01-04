@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     toggle () {
-      this.isOpen = (this.isOpen) ? false : true;
+      this.isOpen = !this.isOpen;
     },
     close () {
       this.isOpen = false;
@@ -54,7 +54,7 @@ export default {
   data () {
     return {
       closeTimeout: 200,
-      isOpen: false,
+      isOpen: false
     };
   },
   mounted () {

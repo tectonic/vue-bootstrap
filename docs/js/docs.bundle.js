@@ -50,11 +50,11 @@
 	
 	var _vue2 = _interopRequireDefault(_vue);
 	
-	var _Dropdown = __webpack_require__(12);
+	var _Dropdown = __webpack_require__(2);
 	
 	var _Dropdown2 = _interopRequireDefault(_Dropdown);
 	
-	var _Typeahead = __webpack_require__(2);
+	var _Typeahead = __webpack_require__(9);
 	
 	var _Typeahead2 = _interopRequireDefault(_Typeahead);
 	
@@ -68,7 +68,7 @@
 	  },
 	  data: function data() {
 	    return {
-	      typeaheadItems: [{ id: 1, value: 'Ann' }, { id: 2, value: 'Annemarie' }, { id: 3, value: 'Bill' }, { id: 4, value: 'Jack' }, { id: 5, value: 'Joan' }, { id: 6, value: 'John' }, { id: 7, value: 'Mark' }, { id: 8, value: 'Robert' }, { id: 9, value: 'Susan' }]
+	      typeaheadItems: [{ id: 1, value: 'Anne Sullivan' }, { id: 2, value: 'Anne Hathaway' }, { id: 3, value: 'Joan Allen' }, { id: 4, value: 'Joan Collins' }, { id: 5, value: 'Joan Baez' }, { id: 6, value: 'Mark Twain' }, { id: 7, value: 'Robert Redford' }, { id: 8, value: 'Susan Sontag' }, { id: 9, value: 'John Lee Hooker' }, { id: 10, value: 'John Tyler' }, { id: 11, value: 'John Terry' }, { id: 12, value: 'John Cleese' }, { id: 13, value: 'John Malkovich' }, { id: 14, value: 'John Stockton' }, { id: 15, value: 'John Ritter' }, { id: 16, value: 'John McCain' }, { id: 17, value: 'John Goodman' }, { id: 18, value: 'John C. Reilly' }, { id: 19, value: 'John Stamos' }, { id: 20, value: 'John Mayer' }, { id: 21, value: 'John Elway' }, { id: 22, value: 'John Wayne Gacy' }, { id: 23, value: 'John Denver' }, { id: 24, value: 'John Travolta' }, { id: 25, value: 'John Wayne' }, { id: 26, value: 'John Lennon' }, { id: 27, value: 'John F. Kennedy' }]
 	    };
 	  },
 	
@@ -7614,7 +7614,7 @@
 	__vue_exports__ = __webpack_require__(7)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(11)
+	var __vue_template__ = __webpack_require__(8)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -7626,7 +7626,7 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/kazik/Sites/awardforce.com/vue-bootstrap/src/Typeahead.vue"
+	__vue_options__.__file = "/Users/kazik/Sites/awardforce.com/vue-bootstrap/src/Dropdown.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 	
@@ -7637,12 +7637,12 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-4803ab6c", __vue_options__)
+	    hotAPI.createRecord("data-v-d6369744", __vue_options__)
 	  } else {
-	    hotAPI.reload("data-v-4803ab6c", __vue_options__)
+	    hotAPI.reload("data-v-d6369744", __vue_options__)
 	  }
 	})()}
-	if (__vue_options__.functional) {console.error("[vue-loader] Typeahead.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+	if (__vue_options__.functional) {console.error("[vue-loader] Dropdown.vue: functional components are not supported and should be defined in plain js files using render functions.")}
 	
 	module.exports = __vue_exports__
 
@@ -7663,8 +7663,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-4803ab6c!./../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Typeahead.vue", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-4803ab6c!./../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Typeahead.vue");
+			module.hot.accept("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-d6369744!./../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Dropdown.vue", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-d6369744!./../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Dropdown.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -7682,7 +7682,7 @@
 	
 	
 	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"Typeahead.vue","sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"Dropdown.vue","sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -7967,6 +7967,221 @@
 
 /***/ },
 /* 7 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	
+	exports.default = {
+	  props: {
+	    id: {
+	      type: String,
+	      default: ''
+	    },
+	    label: {
+	      type: String,
+	      default: ''
+	    },
+	    buttonClass: {
+	      type: String,
+	      default: 'btn btn-default'
+	    },
+	    containerClass: {
+	      type: String,
+	      default: ''
+	    }
+	  },
+	  methods: {
+	    toggle: function toggle() {
+	      this.isOpen = this.isOpen ? false : true;
+	    },
+	    close: function close() {
+	      this.isOpen = false;
+	    }
+	  },
+	  data: function data() {
+	    return {
+	      closeTimeout: 200,
+	      isOpen: false
+	    };
+	  },
+	  mounted: function mounted() {
+	    var _this = this;
+	
+	    var button = this.$refs.button;
+	
+	    button.addEventListener('blur', function (e) {
+	      // Wait in case any of the links were clicked, prevent the dropdown from closing too soon.
+	      setTimeout(function () {
+	        _this.close();
+	      }, _this.closeTimeout);
+	    });
+	  }
+	};
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){with(this) {
+	  return _h('div', {
+	    class: [{
+	      'open': isOpen
+	    }, 'dropdown', containerClass]
+	  }, [_t("button", [_h('a', {
+	    ref: "button",
+	    class: buttonClass,
+	    attrs: {
+	      "href": "",
+	      "id": id,
+	      "aria-haspopup": "true",
+	      "aria-expanded": isOpen,
+	      "role": "button"
+	    },
+	    on: {
+	      "click": function($event) {
+	        $event.preventDefault();
+	        toggle($event)
+	      },
+	      "keyup": function($event) {
+	        if ($event.keyCode !== 27) return;
+	        close($event)
+	      }
+	    }
+	  }, [_t("label", ["\n        " + _s(label) + " ", _m(0)])])]), " ", _t("items", [_h('ul', {
+	    staticClass: "dropdown-menu",
+	    attrs: {
+	      "aria-labelledby": id
+	    }
+	  }, [_t("default")])])])
+	}},staticRenderFns: [function (){with(this) {
+	  return _h('span', {
+	    staticClass: "caret"
+	  })
+	}}]}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-d6369744", module.exports)
+	  }
+	}
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	
+	/* styles */
+	__webpack_require__(10)
+	
+	/* script */
+	__vue_exports__ = __webpack_require__(12)
+	
+	/* template */
+	var __vue_template__ = __webpack_require__(16)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "/Users/kazik/Sites/awardforce.com/vue-bootstrap/src/Typeahead.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+	
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-4803ab6c", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-4803ab6c", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] Typeahead.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+	
+	module.exports = __vue_exports__
+
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(11);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(6)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-4803ab6c!./../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Typeahead.vue", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-4803ab6c!./../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Typeahead.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(5)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "\n.dropdown-menu-typeahead {\n  max-height: 300px;\n  overflow: hidden;\n  overflow-y: auto;\n}\n", "", {"version":3,"sources":["/./src/Typeahead.vue?6f6d396d"],"names":[],"mappings":";AA8MA;EACA,kBAAA;EACA,iBAAA;EACA,iBAAA;CACA","file":"Typeahead.vue","sourcesContent":["<template>\n  <div :class=\"[{ 'open': isDropdownOpen }, 'dropdown']\">\n    <input type=\"text\"\n      v-model=\"query\"\n      :name=\"name\"\n      :id=\"id\"\n      :placeholder=\"placeholder\"\n      @input=\"onInput\"\n      @blur=\"onBlur\"\n      @keydown.up=\"markPreviousItem\"\n      @keydown.down=\"markNextItem\"\n      @keydown.enter.prevent=\"selectItem\"\n      @keydown.esc=\"resetDropdown\"\n      class=\"form-control\"\n      autocomplete=\"off\"\n      ref=\"input\"\n    />\n    <ul class=\"dropdown-menu dropdown-menu-typeahead\">\n      <li v-for=\"(item, index) in filteredItems\" v-bind:class=\"{ 'active': isMarked(index) }\">\n        <a href=\"#\" v-on:mousedown.prevent=\"selectItem\" v-on:mousemove=\"markItem(index)\">{{ item.value }}</a>\n      </li>\n    </ul>\n    <input type=\"hidden\" :value=\"selectedItem.id\" v-if=\"hiddenInputName\" :name=\"hiddenInputName\">\n  </div>\n</template>\n\n<script>\nimport debounce from 'debounce';\nimport Vue from 'vue';\nimport VueResource from 'vue-resource';\n\nVue.use(VueResource);\n\nexport default {\n  props: {\n    initialItems: {\n      type: Array,\n      default: () => {\n        return [];\n      }\n    },\n    initialValue: {\n      type: String,\n      default: ''\n    },\n    initialId: {\n      type: String,\n      default: ''\n    },\n    src: {\n      type: String,\n      default: ''\n    },\n    id: {\n      type: String,\n      default: ''\n    },\n    placeholder: {\n      type: String,\n      default: ''\n    },\n    limit: {\n      type: Number,\n      default: 10\n    },\n    name: {\n      type: String,\n      default: ''\n    },\n    hiddenInputName: {\n      type: String,\n      default: ''\n    },\n    onSelect: {\n      type: Function,\n      default: () => {}\n    }\n  },\n  computed: {\n    filteredItems () {\n      if (!this.query) {\n        return [];\n      }\n\n      // Filter items by query\n      const filteredItems = this.items.filter(item => {\n        return item.value.toLowerCase().indexOf(this.query.toLowerCase()) !== -1;\n      });\n\n      return filteredItems.slice(0, this.limit);\n    }\n  },\n  methods: {\n    onInput () {\n      this.openDropdown();\n\n      if (this.src && this.query) {\n        this.fetchItems();\n      }\n    },\n    fetchItems () {\n      Vue.http.get(this.src + this.query).then((response) => {\n        this.items = response.data;\n\n        // New items arrived - open drop-down menu\n        this.openDropdown();\n      }, (response) => {\n        console.log('Typeahead: connection error');\n      });\n    },\n    openDropdown () {\n      this.isDropdownOpen = this.filteredItems.length > 0;\n    },\n    resetDropdown () {\n      this.isDropdownOpen = false;\n      this.currentItem = 0;\n    },\n    isMarked (index) {\n      return this.currentItem === index;\n    },\n    markPreviousItem () {\n      if (this.currentItem === 0) {\n        this.currentItem = this.filteredItems.length - 1;\n      } else {\n        this.currentItem--;\n      }\n    },\n    markNextItem () {\n      if (this.currentItem < this.filteredItems.length - 1) {\n        this.currentItem++;\n      } else {\n        this.currentItem = 0;\n      }\n    },\n    markItem (index) {\n      this.currentItem = index;\n    },\n    selectItem () {\n      this.selectedItem = this.filteredItems[this.currentItem];\n      this.query = this.selectedItem.value;\n\n      this.resetDropdown();\n\n      // Fire the callback\n      this.onSelect(this.selectedItem);\n    },\n    onBlur () {\n      this.resetDropdown();\n\n      // If the input field contains initial value, reset selected\n      // item to initial state.\n      if (this.$refs.input.value === this.initialValue) {\n        this.resetSelectedItem(this.initialId, this.initialValue);\n\n        return;\n      }\n\n      // Otherwise, check whether input field contains a valid value.\n      // The 'selectedItem' needs to hold the correct data for\n      // the hidden field to be populated correctly on blur.\n      const validItem = this.items.find(item => {\n        return this.$refs.input.value.toLowerCase() === item.value.toLowerCase();\n      });\n\n      if (validItem) {\n        this.selectedItem = validItem;\n      } else {\n        this.resetSelectedItem('', '');\n      }\n    },\n    resetSelectedItem(id, value) {\n      this.selectedItem = {\n        id: id,\n        value: value\n      };\n\n      this.query = value;\n    }\n  },\n  data () {\n    return {\n      query: '',\n      isDropdownOpen: false,\n      items: [],\n      currentItem: 0,\n      selectedItem: {\n        id: '',\n        value: ''\n      }\n    };\n  },\n  mounted () {\n    this.query = this.initialValue;\n    this.items = this.initialItems;\n\n    this.selectedItem = {\n      id: this.initialId,\n      value: this.initialValue\n    };\n\n    this.fetchItems = debounce(this.fetchItems, 200);\n  }\n};\n</script>\n\n<style>\n.dropdown-menu-typeahead {\n  max-height: 300px;\n  overflow: hidden;\n  overflow-y: auto;\n}\n</style>\n"],"sourceRoot":"webpack://"}]);
+	
+	// exports
+
+
+/***/ },
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7975,7 +8190,7 @@
 	  value: true
 	});
 	
-	var _debounce = __webpack_require__(8);
+	var _debounce = __webpack_require__(13);
 	
 	var _debounce2 = _interopRequireDefault(_debounce);
 	
@@ -7983,13 +8198,14 @@
 	
 	var _vue2 = _interopRequireDefault(_vue);
 	
-	var _vueResource = __webpack_require__(10);
+	var _vueResource = __webpack_require__(15);
 	
 	var _vueResource2 = _interopRequireDefault(_vueResource);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	_vue2.default.use(_vueResource2.default); //
+	//
 	//
 	//
 	//
@@ -8048,6 +8264,10 @@
 	      default: 10
 	    },
 	    name: {
+	      type: String,
+	      default: ''
+	    },
+	    hiddenInputName: {
 	      type: String,
 	      default: ''
 	    },
@@ -8133,9 +8353,17 @@
 	
 	      this.resetDropdown();
 	
-	      // Make sure input field contains a valid value. The 'selectedItem'
-	      // needs to hold the correct data for the hidden field to be
-	      // populated correctly on blur.
+	      // If the input field contains initial value, reset selected
+	      // item to initial state.
+	      if (this.$refs.input.value === this.initialValue) {
+	        this.resetSelectedItem(this.initialId, this.initialValue);
+	
+	        return;
+	      }
+	
+	      // Otherwise, check whether input field contains a valid value.
+	      // The 'selectedItem' needs to hold the correct data for
+	      // the hidden field to be populated correctly on blur.
 	      var validItem = this.items.find(function (item) {
 	        return _this3.$refs.input.value.toLowerCase() === item.value.toLowerCase();
 	      });
@@ -8143,11 +8371,16 @@
 	      if (validItem) {
 	        this.selectedItem = validItem;
 	      } else {
-	        this.selectedItem = {
-	          id: '',
-	          value: ''
-	        };
+	        this.resetSelectedItem('', '');
 	      }
+	    },
+	    resetSelectedItem: function resetSelectedItem(id, value) {
+	      this.selectedItem = {
+	        id: id,
+	        value: value
+	      };
+	
+	      this.query = value;
 	    }
 	  },
 	  data: function data() {
@@ -8176,7 +8409,7 @@
 	};
 
 /***/ },
-/* 8 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -8184,7 +8417,7 @@
 	 * Module dependencies.
 	 */
 	
-	var now = __webpack_require__(9);
+	var now = __webpack_require__(14);
 	
 	/**
 	 * Returns a function, that, as long as it continues to be invoked, will not
@@ -8235,7 +8468,7 @@
 
 
 /***/ },
-/* 9 */
+/* 14 */
 /***/ function(module, exports) {
 
 	module.exports = Date.now || now
@@ -8246,7 +8479,7 @@
 
 
 /***/ },
-/* 10 */
+/* 15 */
 /***/ function(module, exports) {
 
 	/*!
@@ -9769,7 +10002,7 @@
 	module.exports = plugin;
 
 /***/ },
-/* 11 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){with(this) {
@@ -9788,6 +10021,7 @@
 	    staticClass: "form-control",
 	    attrs: {
 	      "type": "text",
+	      "name": name,
 	      "id": id,
 	      "placeholder": placeholder,
 	      "autocomplete": "off"
@@ -9817,7 +10051,7 @@
 	      }]
 	    }
 	  }), " ", _h('ul', {
-	    staticClass: "dropdown-menu"
+	    staticClass: "dropdown-menu dropdown-menu-typeahead"
 	  }, [_l((filteredItems), function(item, index) {
 	    return _h('li', {
 	      class: {
@@ -9837,10 +10071,10 @@
 	        }
 	      }
 	    }, [_s(item.value)])])
-	  })]), " ", (name) ? _h('input', {
+	  })]), " ", (hiddenInputName) ? _h('input', {
 	    attrs: {
 	      "type": "hidden",
-	      "name": name
+	      "name": hiddenInputName
 	    },
 	    domProps: {
 	      "value": selectedItem.id
@@ -9851,221 +10085,6 @@
 	  module.hot.accept()
 	  if (module.hot.data) {
 	     require("vue-hot-reload-api").rerender("data-v-4803ab6c", module.exports)
-	  }
-	}
-
-/***/ },
-/* 12 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_exports__, __vue_options__
-	
-	/* styles */
-	__webpack_require__(13)
-	
-	/* script */
-	__vue_exports__ = __webpack_require__(15)
-	
-	/* template */
-	var __vue_template__ = __webpack_require__(16)
-	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-	if (
-	  typeof __vue_exports__.default === "object" ||
-	  typeof __vue_exports__.default === "function"
-	) {
-	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-	__vue_options__ = __vue_exports__ = __vue_exports__.default
-	}
-	if (typeof __vue_options__ === "function") {
-	  __vue_options__ = __vue_options__.options
-	}
-	__vue_options__.__file = "/Users/kazik/Sites/awardforce.com/vue-bootstrap/src/Dropdown.vue"
-	__vue_options__.render = __vue_template__.render
-	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	
-	/* hot reload */
-	if (false) {(function () {
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  module.hot.accept()
-	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-d6369744", __vue_options__)
-	  } else {
-	    hotAPI.reload("data-v-d6369744", __vue_options__)
-	  }
-	})()}
-	if (__vue_options__.functional) {console.error("[vue-loader] Dropdown.vue: functional components are not supported and should be defined in plain js files using render functions.")}
-	
-	module.exports = __vue_exports__
-
-
-/***/ },
-/* 13 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(14);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(6)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-d6369744!./../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Dropdown.vue", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-d6369744!./../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Dropdown.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 14 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(5)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"Dropdown.vue","sourceRoot":"webpack://"}]);
-	
-	// exports
-
-
-/***/ },
-/* 15 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	
-	exports.default = {
-	  props: {
-	    id: {
-	      type: String,
-	      default: ''
-	    },
-	    label: {
-	      type: String,
-	      default: ''
-	    },
-	    buttonClass: {
-	      type: String,
-	      default: 'btn btn-default'
-	    },
-	    containerClass: {
-	      type: String,
-	      default: ''
-	    }
-	  },
-	  methods: {
-	    toggle: function toggle() {
-	      this.isOpen = this.isOpen ? false : true;
-	    },
-	    close: function close() {
-	      this.isOpen = false;
-	    }
-	  },
-	  data: function data() {
-	    return {
-	      closeTimeout: 200,
-	      isOpen: false
-	    };
-	  },
-	  mounted: function mounted() {
-	    var _this = this;
-	
-	    var button = this.$refs.button;
-	
-	    button.addEventListener('blur', function (e) {
-	      // Wait in case any of the links were clicked, prevent the dropdown from closing too soon.
-	      setTimeout(function () {
-	        _this.close();
-	      }, _this.closeTimeout);
-	    });
-	  }
-	};
-
-/***/ },
-/* 16 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports={render:function (){with(this) {
-	  return _h('div', {
-	    class: [{
-	      'open': isOpen
-	    }, 'dropdown', containerClass]
-	  }, [_t("button", [_h('a', {
-	    ref: "button",
-	    class: buttonClass,
-	    attrs: {
-	      "href": "",
-	      "id": id,
-	      "aria-haspopup": "true",
-	      "aria-expanded": isOpen,
-	      "role": "button"
-	    },
-	    on: {
-	      "click": function($event) {
-	        $event.preventDefault();
-	        toggle($event)
-	      },
-	      "keyup": function($event) {
-	        if ($event.keyCode !== 27) return;
-	        close($event)
-	      }
-	    }
-	  }, [_t("label", ["\n        " + _s(label) + " ", _m(0)])])]), " ", _t("items", [_h('ul', {
-	    staticClass: "dropdown-menu",
-	    attrs: {
-	      "aria-labelledby": id
-	    }
-	  }, [_t("default")])])])
-	}},staticRenderFns: [function (){with(this) {
-	  return _h('span', {
-	    staticClass: "caret"
-	  })
-	}}]}
-	if (false) {
-	  module.hot.accept()
-	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-d6369744", module.exports)
 	  }
 	}
 

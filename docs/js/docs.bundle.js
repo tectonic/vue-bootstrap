@@ -50,11 +50,15 @@
 	
 	var _vue2 = _interopRequireDefault(_vue);
 	
-	var _Dropdown = __webpack_require__(2);
+	var _Datepicker = __webpack_require__(2);
+	
+	var _Datepicker2 = _interopRequireDefault(_Datepicker);
+	
+	var _Dropdown = __webpack_require__(9);
 	
 	var _Dropdown2 = _interopRequireDefault(_Dropdown);
 	
-	var _Typeahead = __webpack_require__(9);
+	var _Typeahead = __webpack_require__(14);
 	
 	var _Typeahead2 = _interopRequireDefault(_Typeahead);
 	
@@ -63,6 +67,7 @@
 	new _vue2.default({
 	  el: '#app',
 	  components: {
+	    Datepicker: _Datepicker2.default,
 	    Dropdown: _Dropdown2.default,
 	    Typeahead: _Typeahead2.default
 	  },
@@ -7626,7 +7631,7 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/kazik/Sites/awardforce.com/vue-bootstrap/src/Dropdown.vue"
+	__vue_options__.__file = "/Users/kazik/Sites/awardforce.com/vue-bootstrap/src/Datepicker.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 	
@@ -7637,12 +7642,12 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-d6369744", __vue_options__)
+	    hotAPI.createRecord("data-v-7388e749", __vue_options__)
 	  } else {
-	    hotAPI.reload("data-v-d6369744", __vue_options__)
+	    hotAPI.reload("data-v-7388e749", __vue_options__)
 	  }
 	})()}
-	if (__vue_options__.functional) {console.error("[vue-loader] Dropdown.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+	if (__vue_options__.functional) {console.error("[vue-loader] Datepicker.vue: functional components are not supported and should be defined in plain js files using render functions.")}
 	
 	module.exports = __vue_exports__
 
@@ -7663,8 +7668,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-d6369744!./../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Dropdown.vue", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-d6369744!./../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Dropdown.vue");
+			module.hot.accept("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-7388e749!./../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Datepicker.vue", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-7388e749!./../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Datepicker.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -7682,7 +7687,7 @@
 	
 	
 	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"Dropdown.vue","sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"Datepicker.vue","sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -7999,6 +8004,343 @@
 	//
 	//
 	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	
+	exports.default = {
+	  props: {
+	    name: {
+	      type: String,
+	      default: ''
+	    },
+	    id: {
+	      type: String,
+	      default: ''
+	    },
+	    placeholder: {
+	      type: String,
+	      default: ''
+	    }
+	  },
+	  data: function data() {
+	    return {
+	      date: new Date(),
+	      isOpen: false
+	    };
+	  },
+	
+	  computed: {
+	    visibleWeeks: function visibleWeeks() {
+	      var days = this.daysInMonth(1, 2017);
+	
+	      days = this.fillDays('past', days);
+	      days = this.fillDays('future', days);
+	
+	      // Chunk days into weeks
+	      return this.chunk(days, 7);
+	    }
+	  },
+	  methods: {
+	    open: function open() {
+	      this.isOpen = true;
+	    },
+	    close: function close() {
+	      this.isOpen = false;
+	    },
+	    daysInMonth: function daysInMonth(month, year) {
+	      var date = new Date(year, month, 1);
+	      var days = [];
+	
+	      while (date.getMonth() === month) {
+	        days.push(new Date(date));
+	        date.setDate(date.getDate() + 1);
+	      }
+	
+	      return days;
+	    },
+	    fillDays: function fillDays(mode /* past/future */, days) {
+	      // Stop on first day of the week (Su) if filling dates in the past, stop on the
+	      // last day of the week (Sa) if filling all dates in the future.
+	      var dayOfWeek = mode === 'past' ? 0 : 6;
+	
+	      // Start from the first day of the month if filling dates in the past, start
+	      // from the last day of the month if filling dates in the future.
+	      var fromDate = mode === 'past' ? days[0] : days[days.length - 1];
+	
+	      var i = 1;
+	      var day = void 0;
+	
+	      do {
+	        day = new Date();
+	
+	        if (mode == 'past') {
+	          day.setDate(fromDate.getDate() - i);
+	          days.unshift(day);
+	        } else {
+	          day.setDate(fromDate.getDate() + i);
+	          days.push(day);
+	        }
+	
+	        i++;
+	      } while (day.getDay() !== dayOfWeek);
+	
+	      return days;
+	    },
+	    chunk: function chunk(days, _chunk) {
+	      var i = void 0,
+	          j = void 0;
+	      var array = [];
+	      var chunks = [];
+	
+	      for (i = 0, j = days.length; i < j; i += _chunk) {
+	        array = days.slice(i, i + _chunk);
+	        chunks.push(array);
+	      }
+	
+	      return chunks;
+	    }
+	  },
+	  mounted: function mounted() {
+	    var _this = this;
+	
+	    this.onClickOutside = function (event) {
+	      if (_this.$el !== null && !_this.$el.contains(event.target)) {
+	        _this.close();
+	      }
+	    };
+	
+	    document.addEventListener('click', this.onClickOutside);
+	  },
+	  beforeDestroy: function beforeDestroy() {
+	    document.removeEventListener('click', this.onClickOutside);
+	  }
+	};
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){with(this) {
+	  return _h('div', {
+	    class: [{
+	      'open': isOpen
+	    }, 'dropdown']
+	  }, [_h('input', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (date),
+	      expression: "date"
+	    }],
+	    staticClass: "form-control",
+	    attrs: {
+	      "type": "text",
+	      "name": name,
+	      "id": id,
+	      "placeholder": placeholder,
+	      "aria-expanded": isOpen
+	    },
+	    domProps: {
+	      "value": _s(date)
+	    },
+	    on: {
+	      "focus": open,
+	      "keyup": function($event) {
+	        if ($event.keyCode !== 27) return;
+	        close($event)
+	      },
+	      "input": function($event) {
+	        if ($event.target.composing) return;
+	        date = $event.target.value
+	      }
+	    }
+	  }), " ", _h('div', {
+	    staticClass: "dropdown-menu"
+	  }, [_h('ul', {
+	    staticClass: "list-unstyled"
+	  }, [_h('li', [_h('table', {
+	    staticClass: "table-condensed"
+	  }, [_m(0), " ", _h('tbody', [_l((visibleWeeks), function(week) {
+	    return _h('tr', [_l((week), function(day) {
+	      return _h('td', {
+	        staticClass: "day"
+	      }, [_s(day.getDate())])
+	    })])
+	  })])])])])])])
+	}},staticRenderFns: [function (){with(this) {
+	  return _h('thead', [_h('tr', [_h('th', {
+	    staticClass: "month-previous"
+	  }, [_h('span', {
+	    staticClass: "glyphicon glyphicon-chevron-left"
+	  })]), " ", _h('th', {
+	    staticClass: "month-current",
+	    attrs: {
+	      "colspan": "5"
+	    }
+	  }, ["February 2017"]), " ", _h('th', {
+	    staticClass: "month-next"
+	  }, [_h('span', {
+	    staticClass: "glyphicon glyphicon-chevron-right"
+	  })])]), " ", _h('tr', [_h('th', {
+	    staticClass: "day-of-week"
+	  }, ["Su"]), " ", _h('th', {
+	    staticClass: "day-of-week"
+	  }, ["Mo"]), " ", _h('th', {
+	    staticClass: "day-of-week"
+	  }, ["Tu"]), " ", _h('th', {
+	    staticClass: "day-of-week"
+	  }, ["We"]), " ", _h('th', {
+	    staticClass: "day-of-week"
+	  }, ["Th"]), " ", _h('th', {
+	    staticClass: "day-of-week"
+	  }, ["Fr"]), " ", _h('th', {
+	    staticClass: "day-of-week"
+	  }, ["Sa"])])])
+	}}]}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-7388e749", module.exports)
+	  }
+	}
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	
+	/* styles */
+	__webpack_require__(10)
+	
+	/* script */
+	__vue_exports__ = __webpack_require__(12)
+	
+	/* template */
+	var __vue_template__ = __webpack_require__(13)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "/Users/kazik/Sites/awardforce.com/vue-bootstrap/src/Dropdown.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+	
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-d6369744", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-d6369744", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] Dropdown.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+	
+	module.exports = __vue_exports__
+
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(11);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(6)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-d6369744!./../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Dropdown.vue", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-d6369744!./../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Dropdown.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(5)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"Dropdown.vue","sourceRoot":"webpack://"}]);
+	
+	// exports
+
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 	
 	exports.default = {
 	  props: {
@@ -8048,7 +8390,7 @@
 	};
 
 /***/ },
-/* 8 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){with(this) {
@@ -8095,19 +8437,19 @@
 	}
 
 /***/ },
-/* 9 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	
 	/* styles */
-	__webpack_require__(10)
+	__webpack_require__(15)
 	
 	/* script */
-	__vue_exports__ = __webpack_require__(12)
+	__vue_exports__ = __webpack_require__(17)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(16)
+	var __vue_template__ = __webpack_require__(21)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -8141,13 +8483,13 @@
 
 
 /***/ },
-/* 10 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(11);
+	var content = __webpack_require__(16);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(6)(content, {});
@@ -8167,7 +8509,7 @@
 	}
 
 /***/ },
-/* 11 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(5)();
@@ -8181,7 +8523,7 @@
 
 
 /***/ },
-/* 12 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8190,7 +8532,7 @@
 	  value: true
 	});
 	
-	var _debounce = __webpack_require__(13);
+	var _debounce = __webpack_require__(18);
 	
 	var _debounce2 = _interopRequireDefault(_debounce);
 	
@@ -8198,7 +8540,7 @@
 	
 	var _vue2 = _interopRequireDefault(_vue);
 	
-	var _vueResource = __webpack_require__(15);
+	var _vueResource = __webpack_require__(20);
 	
 	var _vueResource2 = _interopRequireDefault(_vueResource);
 	
@@ -8413,7 +8755,7 @@
 	};
 
 /***/ },
-/* 13 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -8421,7 +8763,7 @@
 	 * Module dependencies.
 	 */
 	
-	var now = __webpack_require__(14);
+	var now = __webpack_require__(19);
 	
 	/**
 	 * Returns a function, that, as long as it continues to be invoked, will not
@@ -8472,7 +8814,7 @@
 
 
 /***/ },
-/* 14 */
+/* 19 */
 /***/ function(module, exports) {
 
 	module.exports = Date.now || now
@@ -8483,7 +8825,7 @@
 
 
 /***/ },
-/* 15 */
+/* 20 */
 /***/ function(module, exports) {
 
 	/*!
@@ -10006,7 +10348,7 @@
 	module.exports = plugin;
 
 /***/ },
-/* 16 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){with(this) {

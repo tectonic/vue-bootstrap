@@ -1,7 +1,9 @@
+import Dropdown from './Datepicker.vue';
 import Dropdown from './Dropdown.vue';
 import Typeahead from './Typeahead.vue';
 
 const VueBootstrap = {
+  Datepicker,
   Dropdown,
   Typeahead
 };

@@ -93,14 +93,14 @@ export default {
 
      return days;
     },
-    fillDays (mode /* past/future */, daysInMonth) {
+    fillDays (mode /* past/future */, days) {
       // Stop on first day of the week (Su) if filling dates in the past, stop on the
       // last day of the week (Sa) if filling all dates in the future.
       const dayOfWeek = (mode === 'past') ? 0 : 6;
 
       // Start from the first day of the month if filling dates in the past, start
       // from the last day of the month if filling dates in the future.
-      const fromDate = (mode === 'past') ? daysInMonth[0] : daysInMonth[daysInMonth.length - 1];
+      const fromDate = (mode === 'past') ? days[0] : days[days.length - 1];
 
       let i = 1;
       let day;
@@ -110,18 +110,18 @@ export default {
 
         if (mode == 'past') {
           day.setDate(fromDate.getDate() - i);
-          daysInMonth.unshift(day);
+          days.unshift(day);
 
         } else {
           day.setDate(fromDate.getDate() + i);
-          daysInMonth.push(day);
+          days.push(day);
         }
 
         i++;
 
       } while (day.getDay() !== dayOfWeek);
 
-      return daysInMonth;
+      return days;
     },
     chunk (days, chunk) {
       let i, j;

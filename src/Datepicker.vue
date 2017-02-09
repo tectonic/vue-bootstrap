@@ -31,14 +31,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td class="day">29</td>
-                <td class="day">30</td>
-                <td class="day">31</td>
-                <td class="day">1</td>
-                <td class="day">2</td>
-                <td class="day">3</td>
-                <td class="day">4</td>
+              <tr v-for="week in visibleWeeks">
+                <td class="day" v-for="day in week">{{ day.getDate() }}</td>
               </tr>
             </tbody>
           </table>
@@ -66,9 +60,20 @@ export default {
   },
   data () {
     return {
-      date: '',
+      date: new Date(),
       isOpen: false
     };
+  },
+  computed: {
+    visibleWeeks () {
+      let days = this.daysInMonth(1, 2017);
+
+      days = this.fillDays('past', days);
+      days = this.fillDays('future', days);
+
+      // Chunk days into weeks
+      return this.chunk(days, 7);
+    }
   },
   methods: {
     open () {
@@ -76,6 +81,61 @@ export default {
     },
     close () {
       this.isOpen = false;
+    },
+    daysInMonth (month, year) {
+     let date = new Date(year, month, 1);
+     let days = [];
+
+     while (date.getMonth() === month) {
+        days.push(new Date(date));
+        date.setDate(date.getDate() + 1);
+     }
+
+     return days;
+    },
+    fillDays (mode /* past/future */, daysInMonth) {
+      // Stop on first day of the week (Su) if filling dates in the past, stop on the
+      // last day of the week (Sa) if filling all dates in the future.
+      const dayOfWeek = (mode === 'past') ? 0 : 6;
+
+      // Start from the first day of the month if filling dates in the past, start
+      // from the last day of the month if filling dates in the future.
+      const fromDate = (mode === 'past') ? daysInMonth[0] : daysInMonth[daysInMonth.length - 1];
+
+      let i = 1;
+      let day;
+
+      do {
+        day = new Date();
+
+        if (mode == 'past') {
+          day.setDate(fromDate.getDate() - i);
+          day.setHours(0, 0, 0);
+          daysInMonth.unshift(day);
+
+        } else {
+          day.setDate(fromDate.getDate() + i);   
+          day.setHours(0, 0, 0);
+          daysInMonth.push(day);
+        }
+
+        i++;
+
+      } while (day.getDay() !== dayOfWeek);
+
+      return daysInMonth;
+    },
+    chunk (days, chunk) {
+      let i, j;
+      let array = [];
+      let chunks = [];
+
+      for (i = 0, j = days.length; i < j; i += chunk) {
+          array = days.slice(i, i + chunk);
+          chunks.push(array);
+      }
+
+      return chunks;      
     }
   },
   mounted () {

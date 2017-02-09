@@ -34,6 +34,6 @@ describe('Datepicker', () => {
 
     expect(chunks).to.be.an('array');
     expect(chunks.length).to.equal(2);
-    expect(chunks.length).to.deep.equal([[1, 2], [3, 4]]);
+    expect(chunks).to.deep.equal([[1, 2], [3, 4]]);
   });
 });

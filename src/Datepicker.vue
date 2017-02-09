@@ -110,12 +110,10 @@ export default {
 
         if (mode == 'past') {
           day.setDate(fromDate.getDate() - i);
-          day.setHours(0, 0, 0);
           daysInMonth.unshift(day);
 
         } else {
-          day.setDate(fromDate.getDate() + i);   
-          day.setHours(0, 0, 0);
+          day.setDate(fromDate.getDate() + i);
           daysInMonth.push(day);
         }
 

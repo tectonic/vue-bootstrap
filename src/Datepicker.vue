@@ -21,7 +21,7 @@
                 <th class="month-next"><span class="glyphicon glyphicon-chevron-right"></span></th>
               </tr>
               <tr>
-                <th class="day-of-week" v-for="daysOfWeek in dayOfWeek">{{ dayOfWeek }}</th>
+                <th class="day-of-week" v-for="dayOfWeek in daysOfWeek">{{ dayOfWeek }}</th>
               </tr>
             </thead>
             <tbody>
@@ -55,14 +55,18 @@ export default {
     },
     daysOfWeek: {
       type: Array,
-      default: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+      default: () => {
+        return ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+      }
     },
     months: {
       type: Array,
-      default: [
-        'January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'
-      ]
+      default: () => {
+        return [
+          'January', 'February', 'March', 'April', 'May', 'June',
+          'July', 'August', 'September', 'October', 'November', 'December'
+        ];
+      }
     }
   },
   data () {

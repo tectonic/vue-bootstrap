@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { expect } from 'chai';
-import { initVM } from './utils/utils.js';
+import { initVM } from './utils.js';
 import Typeahead from '../src/Typeahead.vue';
 
 describe('Typeahead', () => {

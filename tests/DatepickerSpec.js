@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { expect } from 'chai';
-import { initVM } from './utils/utils.js';
+import { initVM } from './utils.js';
 import Datepicker from '../src/Datepicker.vue';
 
 describe('Datepicker', () => {
@@ -25,15 +25,5 @@ describe('Datepicker', () => {
     expect(days).to.be.an('array');
     expect(days.length).to.equal(28);
     expect(days[0]).to.be.a('date');
-  });
-
-  it('should chunk an array', () => {
-    const vm = initVM(Datepicker);
-
-    const chunks = vm.chunk([1, 2, 3, 4], 2);
-
-    expect(chunks).to.be.an('array');
-    expect(chunks.length).to.equal(2);
-    expect(chunks).to.deep.equal([[1, 2], [3, 4]]);
   });
 });

@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import { chunk } from './lib/array.js';
+
 export default {
   props: {
     name: {
@@ -72,7 +74,7 @@ export default {
       days = this.fillDays('future', days);
 
       // Chunk days into weeks
-      return this.chunk(days, 7);
+      return chunk(days, 7);
     }
   },
   methods: {
@@ -122,18 +124,6 @@ export default {
       } while (day.getDay() !== dayOfWeek);
 
       return days;
-    },
-    chunk (days, chunk) {
-      let i, j;
-      let array = [];
-      let chunks = [];
-
-      for (i = 0, j = days.length; i < j; i += chunk) {
-          array = days.slice(i, i + chunk);
-          chunks.push(array);
-      }
-
-      return chunks;      
     }
   },
   mounted () {

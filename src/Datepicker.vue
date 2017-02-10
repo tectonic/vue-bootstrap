@@ -17,17 +17,11 @@
             <thead>
               <tr>
                 <th class="month-previous"><span class="glyphicon glyphicon-chevron-left"></span></th>
-                <th class="month-current" colspan="5">February 2017</th>
+                <th class="month-current" colspan="5">{{ currentMonth }} {{ currentYear }}</th>
                 <th class="month-next"><span class="glyphicon glyphicon-chevron-right"></span></th>
               </tr>
               <tr>
-                <th class="day-of-week">Su</th>
-                <th class="day-of-week">Mo</th>
-                <th class="day-of-week">Tu</th>
-                <th class="day-of-week">We</th>
-                <th class="day-of-week">Th</th>
-                <th class="day-of-week">Fr</th>
-                <th class="day-of-week">Sa</th>
+                <th class="day-of-week" v-for="daysOfWeek in dayOfWeek">{{ dayOfWeek }}</th>
               </tr>
             </thead>
             <tbody>
@@ -58,6 +52,17 @@ export default {
     placeholder: {
       type: String,
       default: ''
+    },
+    daysOfWeek: {
+      type: Array,
+      default: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+    },
+    months: {
+      type: Array,
+      default: [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+      ]
     }
   },
   data () {
@@ -68,13 +73,19 @@ export default {
   },
   computed: {
     visibleWeeks () {
-      let days = this.daysInMonth(1, 2017);
+      let days = this.daysInMonth(this.date.getMonth(), this.date.getFullYear());
 
       days = this.fillDays('past', days);
       days = this.fillDays('future', days);
 
       // Chunk days into weeks
       return chunk(days, 7);
+    },
+    currentMonth () {
+      return this.months[this.date.getMonth()];
+    },
+    currentYear () {
+      return this.date.getFullYear();
     }
   },
   methods: {

@@ -16,9 +16,9 @@
           <table class="table-condensed">
             <thead>
               <tr>
-                <th class="month-previous"><span class="glyphicon glyphicon-chevron-left"></span></th>
-                <th class="month-current" colspan="5">{{ currentMonth }} {{ currentYear }}</th>
-                <th class="month-next"><span class="glyphicon glyphicon-chevron-right"></span></th>
+                <th class="month-previous" @click="previousMonth"><span class="glyphicon glyphicon-chevron-left"></span></th>
+                <th class="month-current" colspan="5">{{ months[month] }} {{ year }}</th>
+                <th class="month-next" @click="nextMonth"><span class="glyphicon glyphicon-chevron-right"></span></th>
               </tr>
               <tr>
                 <th class="day-of-week" v-for="dayOfWeek in daysOfWeek">{{ dayOfWeek }}</th>
@@ -72,24 +72,20 @@ export default {
   data () {
     return {
       date: new Date(),
+      month: new Date().getMonth(),
+      year: new Date().getFullYear(),
       isOpen: false
     };
   },
   computed: {
     visibleWeeks () {
-      let days = this.daysInMonth(this.date.getMonth(), this.date.getFullYear());
+      let days = this.daysInMonth(this.month, this.year);
 
-      days = this.fillDays('past', days);
-      days = this.fillDays('future', days);
+      let pastDays = this.pastDays(days);
+      let futureDays = this.futureDays(days);
 
       // Chunk days into weeks
-      return chunk(days, 7);
-    },
-    currentMonth () {
-      return this.months[this.date.getMonth()];
-    },
-    currentYear () {
-      return this.date.getFullYear();
+      return chunk([...pastDays, ...days, ...futureDays], 7);
     }
   },
   methods: {
@@ -98,6 +94,22 @@ export default {
     },
     close () {
       this.isOpen = false;
+    },
+    nextMonth () {
+      if (this.month < 11) {
+        this.month++;
+      } else {
+        this.month = 0;
+        this.year++;
+      }
+    },
+    previousMonth () {
+      if (this.month > 0) {
+        this.month--;
+      } else {
+        this.month = 11;
+        this.year--;
+      }
     },
     daysInMonth (month, year) {
      let date = new Date(year, month, 1);
@@ -110,33 +122,35 @@ export default {
 
      return days;
     },
-    fillDays (mode /* past/future */, days) {
-      // Stop on first day of the week (Su) if filling dates in the past, stop on the
-      // last day of the week (Sa) if filling all dates in the future.
-      const dayOfWeek = (mode === 'past') ? 0 : 6;
-
-      // Start from the first day of the month if filling dates in the past, start
-      // from the last day of the month if filling dates in the future.
-      const fromDate = (mode === 'past') ? days[0] : days[days.length - 1];
+    pastDays (daysInMonth) {
+      let fromDate = daysInMonth[0];
 
       let i = 1;
       let day;
+      let days = [];
 
       do {
-        day = new Date();
-
-        if (mode == 'past') {
-          day.setDate(fromDate.getDate() - i);
-          days.unshift(day);
-
-        } else {
-          day.setDate(fromDate.getDate() + i);
-          days.push(day);
-        }
-
+        day = new Date(fromDate);
+        day.setDate(fromDate.getDate() - i);
+        days.unshift(day);
         i++;
+      } while (day.getDay() !== 0); // Sunday
 
-      } while (day.getDay() !== dayOfWeek);
+      return days;
+    },
+    futureDays (daysInMonth) {
+      let fromDate = daysInMonth[daysInMonth.length - 1];
+
+      let i = 1;
+      let day;
+      let days = [];
+
+      do {
+        day = new Date(fromDate);
+        day.setDate(fromDate.getDate() + i);
+        days.push(day);
+        i++;
+      } while (day.getDay() !== 6); // Saturday
 
       return days;
     }

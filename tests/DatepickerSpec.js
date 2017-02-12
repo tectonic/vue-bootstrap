@@ -26,4 +26,24 @@ describe('Datepicker', () => {
     expect(days.length).to.equal(28);
     expect(days[0]).to.be.a('date');
   });
+
+  it('should select all past days until it reaches first day of the week', () => {
+    const vm = initVM(Datepicker);
+
+    const pastDays = vm.pastDays(vm.daysInMonth(1, 2017));
+
+    expect(pastDays).to.be.an('array');
+    expect(pastDays.length).to.equal(3);
+    expect(pastDays[0].getDay()).to.equal(0); // Sunday
+  });
+
+  it('should select all future days until it reaches last day of the week', () => {
+    const vm = initVM(Datepicker);
+
+    const futureDays = vm.futureDays(vm.daysInMonth(1, 2017));
+
+    expect(futureDays).to.be.an('array');
+    expect(futureDays.length).to.equal(4);
+    expect(futureDays[futureDays.length - 1].getDay()).to.equal(6); // Saturday
+  });
 });

@@ -36,11 +36,11 @@
           <table :class="[{ 'hidden': view !== 'clock' }, 'clock', 'table-condensed']">
             <tbody>
               <tr>
-                <td class="clock-set">
+                <td class="set-clock" @click="setClock('hours', 'increment')">
                   <span :class="icons.up"></span>
                 </td>
                 <td></td>
-                <td class="clock-set">
+                <td class="set-clock" @click="setClock('minutes', 'increment')">
                   <span :class="icons.up"></span>
                 </td>
               </tr>
@@ -50,11 +50,11 @@
                 <td>{{ pad(date.getMinutes()) }}</td>
               </tr>
               <tr>
-                <td class="clock-set">
+                <td class="set-clock" @click="setClock('hours', 'decrement')">
                   <span :class="icons.down"></span>
                 </td>
                 <td></td>
-                <td class="clock-set">
+                <td class="set-clock" @click="setClock('minutes', 'decrement')">
                   <span :class="icons.down"></span>
                 </td>
               </tr>
@@ -198,7 +198,11 @@ export default {
 
       this.dateInput = this.formatDateTime(this.date);
 
-      this.isOpen = false;
+      // Don't close the datepicker in datetime mode as someone may
+      // want to select time after selecting the date.
+      if (this.mode !== 'datetime') {
+        this.isOpen = false;
+      }
     },
     formatDateTime (date) {
       let formattedDate = this.formatDate(date);
@@ -276,6 +280,20 @@ export default {
       } while (day.getDay() !== 6); // Saturday
 
       return days;
+    },
+    setClock (type, operation) {
+      let hours = this.date.getHours();
+      let minutes = Math.round(this.date.getMinutes() / 5) * 5;
+
+      this.date = new Date(
+        this.date.getFullYear(),
+        this.date.getMonth(),
+        this.date.getDate(),
+        type === 'hours' ? (operation === 'increment' ? hours + 1 : hours - 1) : hours,
+        type === 'minutes' ? (operation === 'increment' ? minutes + 5 : minutes - 5) : minutes
+      );
+
+      this.dateInput = this.formatDateTime(this.date);
     }
   },
   created () {
@@ -318,14 +336,14 @@ export default {
     width: 14.2857%;
   }
 
-  .datepicker .clock-setter,
+  .datepicker .set-clock,
   .datepicker .next-month,
   .datepicker .previous-month,
   .datepicker .day {
     border-radius: 2px;
   }
 
-  .datepicker .clock-set:hover,
+  .datepicker .set-clock:hover,
   .datepicker .switcher span:hover,
   .datepicker .next-month:hover,
   .datepicker .previous-month:hover,

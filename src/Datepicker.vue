@@ -227,6 +227,7 @@ export default {
     parseDate (date) {
       let parsedDate;
 
+      // Accept dates in the format of '2017-03-01' or '2017-03-01 12:10'.
       if (date && (date.length === 10 && /^[0-9-]+$/.test(date)) || (date.length === 16 && /^[0-9-\s:]+$/.test(date))) {
         parsedDate = new Date(date.substring(0, 4), date.substring(5, 7) - 1, date.substring(8, 10));
 

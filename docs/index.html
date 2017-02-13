@@ -172,10 +172,10 @@
             <div class="panel-body">
               <div class="form-group">
                 <label for="datepicker">Datepicker</label>
-                <datepicker label="Datepicker" id="datepicker"></datepicker>
+                <datepicker label="Datepicker" id="datepicker" value="2017-03-01 12:10" mode="datetime"></datepicker>
               </div>
 <pre>
-&lt;datepicker label="Datepicker" id="datepicker"&gt;&lt;/datepicker&gt;
+&lt;datepicker label="Datepicker" id="datepicker" value="2017-03-01 12:10" mode="datetime"&gt;&lt;/datepicker&gt;
 </pre>
             </div>
           </div>
@@ -197,6 +197,12 @@
                 <td>The <code>name</code> attribute of the input element.</td>
               </tr>
               <tr>
+                <td>value</td>
+                <td>String</td>
+                <td></td>
+                <td>The initial value (date) can have a format of '2017-03-01' or '2017-03-01 12:10'</td>
+              </tr>
+              <tr>
                 <td>id</td>
                 <td>String</td>
                 <td></td>
@@ -207,6 +213,30 @@
                 <td>String</td>
                 <td></td>
                 <td>The <code>placeholder</code> attribute of the input element.</td>
+              </tr>
+              <tr>
+                <td>mode</td>
+                <td>String</td>
+                <td>date</td>
+                <td>The <code>mode</code> can be set to <code>date</code> or <code>datetime</code>.</td>
+              </tr>
+              <tr>
+                <td>daysOfWeek</td>
+                <td>Array</td>
+                <td>['Su', 'Mo', 'Tu', ...]</td>
+                <td>Days of the week.</td>
+              </tr>
+              <tr>
+                <td>months</td>
+                <td>Array</td>
+                <td>['January', 'February', 'March', ...]</td>
+                <td>Months.</td>
+              </tr>
+              <tr>
+                <td>icons</td>
+                <td>Object</td>
+                <td>{ left: 'glyphicon glyphicon-chevron-left', ... }</td>
+                <td>Icons.</td>
               </tr>
             </tbody>
           </table>

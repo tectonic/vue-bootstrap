@@ -5,6 +5,7 @@
       :name="name"
       :id="id"
       :placeholder="placeholder"
+      aria-haspopup="true"
       :aria-expanded="isOpen"
       @focus="open"
       @keyup.esc="close"

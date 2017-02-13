@@ -17,9 +17,9 @@
           <table :class="[{ 'hidden': view !== 'calendar' }, 'calendar', 'table-condensed']">
             <thead>
               <tr>
-                <th class="month-previous" @click="previousMonth"><span :class="icons.left"></span></th>
-                <th class="month-current" colspan="5">{{ months[month] }} {{ year }}</th>
-                <th class="month-next" @click="nextMonth"><span :class="icons.right"></span></th>
+                <th class="previous-month" @click="previousMonth"><span :class="icons.left"></span></th>
+                <th class="current-month" colspan="5">{{ months[month] }} {{ year }}</th>
+                <th class="next-month" @click="nextMonth"><span :class="icons.right"></span></th>
               </tr>
               <tr>
                 <th class="day-of-week" v-for="dayOfWeek in daysOfWeek">{{ dayOfWeek }}</th>
@@ -27,7 +27,7 @@
             </thead>
             <tbody>
               <tr v-for="week in visibleWeeks">
-                <td v-for="day in week" :class="['day', { 'muted': !withinCurrentMonth(day), 'selected': isSelected(day) }]" @click="select(day)">
+                <td v-for="day in week" :class="['day', { 'muted': !isWithinCurrentMonth(day), 'selected': isSelected(day) }]" @click="select(day)">
                   {{ day.getDate() }}
                 </td>
               </tr>
@@ -179,7 +179,7 @@ export default {
         this.year--;
       }
     },
-    withinCurrentMonth (date) {
+    isWithinCurrentMonth (date) {
       return date.getMonth() === this.month && date.getFullYear() === this.year;
     },
     isSelected (date) {
@@ -319,16 +319,16 @@ export default {
   }
 
   .datepicker .clock-setter,
-  .datepicker .month-next,
-  .datepicker .month-previous,
+  .datepicker .next-month,
+  .datepicker .previous-month,
   .datepicker .day {
     border-radius: 2px;
   }
 
   .datepicker .clock-set:hover,
   .datepicker .switcher span:hover,
-  .datepicker .month-next:hover,
-  .datepicker .month-previous:hover,
+  .datepicker .next-month:hover,
+  .datepicker .previous-month:hover,
   .datepicker .day:hover {
     background-color: #f2f2f2;
     cursor: pointer;

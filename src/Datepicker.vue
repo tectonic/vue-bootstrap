@@ -122,10 +122,6 @@ export default {
       return date.getMonth() === this.month && date.getFullYear() === this.year;
     },
     select (date) {
-      if (!this.isSelectable(date)) {
-        return;
-      }
-
       this.date = date;
       this.formattedDate = this.formatDate(date);
       this.isOpen = false;

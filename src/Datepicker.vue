@@ -10,7 +10,7 @@
       @keyup.esc="close"
       class="form-control"
     />
-    <div class="dropdown-menu">
+    <div class="datepicker dropdown-menu">
       <ul class="list-unstyled">
         <li>
           <table class="table-condensed">
@@ -26,7 +26,7 @@
             </thead>
             <tbody>
               <tr v-for="week in visibleWeeks">
-                <td class="day" v-for="day in week" :class="[{ 'selectable': isSelectable(day) }, 'day']" @click="select(day)">
+                <td v-for="day in week" :class="['day', { 'muted': !withinCurrentMonth(day), 'selected': isSelected(day) }]" @click="select(day)">
                   {{ day.getDate() }}
                 </td>
               </tr>
@@ -121,8 +121,13 @@ export default {
         this.year--;
       }
     },
-    isSelectable (date) {
+    withinCurrentMonth (date) {
       return date.getMonth() === this.month && date.getFullYear() === this.year;
+    },
+    isSelected (date) {
+      return date.getDate() === this.date.getDate()
+        && date.getMonth() === this.date.getMonth()
+        && date.getFullYear() === this.date.getFullYear();
     },
     select (date) {
       this.date = date;
@@ -225,16 +230,48 @@ export default {
 </script>
 
 <style>
-  .day {
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
+  .datepicker ul {
+    margin-bottom: 0;
+  }
+
+  .datepicker table {
+    margin: 0 5px;
+    table-layout: fixed;
+  }
+  
+  .datepicker .day {
+    width: 14.2857%;
+  }
+
+  .datepicker .month-current {
+    text-align: center;
+  }
+
+  .datepicker .month-next,
+  .datepicker .month-previous,
+  .datepicker .day {
     text-align: center;
     border-radius: 2px;
   }
 
-  .day:hover {
+  .datepicker .month-next:hover,
+  .datepicker .month-previous:hover,
+  .datepicker .day:hover {
     background-color: #f2f2f2;
     cursor: pointer;
+  }
+
+  .datepicker .day.muted {
+    color: #d9d9d9;
+  }
+
+  .datepicker .day.selected {
+    background-color: #333;
+    color: #fff;
+  }
+
+  .datepicker .day.selected:hover {
+    background-color: #333;
+    color: #fff;
   }
 </style>

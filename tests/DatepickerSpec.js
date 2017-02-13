@@ -17,8 +17,9 @@ describe('Datepicker', () => {
 
     const data = Datepicker.data();
 
+    expect(data.view).to.equal('calendar');
     expect(data.isOpen).to.be.false;
-    expect(data.date).to.be.a('date');
+    expect(data.date).to.be.null;
   });
 
   it('should select all days in a month', () => {

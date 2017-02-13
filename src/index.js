@@ -1,4 +1,4 @@
-import Dropdown from './Datepicker.vue';
+import Datepicker from './Datepicker.vue';
 import Dropdown from './Dropdown.vue';
 import Typeahead from './Typeahead.vue';
 

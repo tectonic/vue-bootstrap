@@ -10,6 +10,7 @@
       @focus="open"
       @keyup.esc="close"
       class="form-control"
+      autocomplete="off"
     />
     <div class="datepicker dropdown-menu">
       <ul class="list-unstyled">

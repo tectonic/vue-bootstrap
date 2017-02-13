@@ -8,6 +8,10 @@ describe('Datepicker', () => {
     expect(typeof Datepicker.mounted).to.equal('function');
   });
 
+  it('has a created hook', () => {
+    expect(typeof Datepicker.created).to.equal('function');
+  });
+
   it('initialises with default data', () => {
     expect(typeof Datepicker.data).to.equal('function');
 

@@ -125,7 +125,7 @@ export default {
   data () {
     return {
       view: 'calendar',
-      date: new Date(),
+      date: null,
       dateInput: '',
       month: new Date().getMonth(),
       year: new Date().getFullYear(),
@@ -158,8 +158,7 @@ export default {
     getDateFromInput () {
       const date = this.parseDate(this.dateInput);
 
-      this.date = date;
-      this.dateInput = this.formatDateTime(this.date);
+      this.date = date ? date : new Date();
     },
     toggleView () {
       this.view = this.view === 'calendar' ? 'clock' : 'calendar';
@@ -231,13 +230,9 @@ export default {
           parsedDate.setHours(date.substring(11, 13));
           parsedDate.setMinutes(date.substring(14, 16));
         }
-
-      } else {
-        parsedDate = new Date();
       }
 
-      // Check if the parse was successful
-      return isNaN(parsedDate.getFullYear()) ? new Date() : parsedDate;
+      return parsedDate;
     },
     daysInMonth (month, year) {
      let date = new Date(year, month, 1);
@@ -283,11 +278,11 @@ export default {
       return days;
     }
   },
-  mounted () {
+  created () {
     this.dateInput = this.value;
-
     this.getDateFromInput();
-
+  },
+  mounted () {
     this.onClickOutside = (event) => {
       if (this.$el !== null && !this.$el.contains(event.target)) {
         this.close();

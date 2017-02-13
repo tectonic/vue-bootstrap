@@ -65,4 +65,12 @@ describe('Datepicker', () => {
     expect(parsedDate.getMonth()).to.equal(1);
     expect(parsedDate.getDate()).to.equal(21);
   });
+
+  it('should pad a value', () => {
+    const vm = initVM(Datepicker);
+
+    const paddedValue = vm.pad(1);
+
+    expect(paddedValue).to.equal('01');
+  });
 });

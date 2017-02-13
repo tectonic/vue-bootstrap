@@ -1,7 +1,7 @@
 <template>
   <div :class="[{ 'open': isOpen }, 'dropdown']">
     <input type="text"
-      v-model="formattedDate"
+      v-model="dateInput"
       :name="name"
       :id="id"
       :placeholder="placeholder"
@@ -126,7 +126,7 @@ export default {
     return {
       view: 'calendar',
       date: new Date(),
-      formattedDate: '',
+      dateInput: '',
       month: new Date().getMonth(),
       year: new Date().getFullYear(),
       isOpen: false
@@ -145,6 +145,8 @@ export default {
   },
   methods: {
     open () {
+      this.getDateFromInput();
+
       this.month = this.date.getMonth();
       this.year = this.date.getFullYear();
 
@@ -152,6 +154,12 @@ export default {
     },
     close () {
       this.isOpen = false;
+    },
+    getDateFromInput () {
+      const date = this.parseDate(this.dateInput);
+
+      this.date = date;
+      this.dateInput = this.formatDateTime(this.date);
     },
     toggleView () {
       this.view = this.view === 'calendar' ? 'clock' : 'calendar';
@@ -189,7 +197,7 @@ export default {
         this.date.getMinutes()
       );
 
-      this.formattedDate = this.formatDateTime(this.date);
+      this.dateInput = this.formatDateTime(this.date);
 
       this.isOpen = false;
     },
@@ -276,10 +284,7 @@ export default {
     }
   },
   mounted () {
-    const date = this.parseDate(this.value);
-
-    this.date = date;
-    this.formattedDate = this.formatDateTime(this.date);
+    this.getDateFromInput();
 
     this.onClickOutside = (event) => {
       if (this.$el !== null && !this.$el.contains(event.target)) {

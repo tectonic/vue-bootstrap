@@ -97,6 +97,9 @@ export default {
   },
   methods: {
     open () {
+      this.month = this.date.getMonth();
+      this.year = this.date.getFullYear();
+
       this.isOpen = true;
     },
     close () {
@@ -138,6 +141,24 @@ export default {
       }
 
       return formattedDate;
+    },
+    parseDate (date) {
+      let parsedDate;
+
+      if (date && (date.length === 10 && /^[0-9-]+$/.test(date)) || (date.length === 16 && /^[0-9-\s:]+$/.test(date))) {
+        parsedDate = new Date(date.substring(0, 4), date.substring(5, 7) - 1, date.substring(8, 10));
+
+        if (date.length === 16) {
+          parsedDate.setHours(date.substring(11, 13));
+          parsedDate.setMinutes(date.substring(14, 16));
+        }
+
+      } else {
+        parsedDate = new Date();
+      }
+
+      // Check if the parse was successful
+      return isNaN(parsedDate.getFullYear()) ? new Date() : parsedDate;
     },
     daysInMonth (month, year) {
      let date = new Date(year, month, 1);
@@ -184,6 +205,11 @@ export default {
     }
   },
   mounted () {
+    const date = this.parseDate(this.value);
+
+    this.date = date;
+    this.formattedDate = this.formatDate(date);
+
     this.onClickOutside = (event) => {
       if (this.$el !== null && !this.$el.contains(event.target)) {
         this.close();

@@ -54,4 +54,15 @@ describe('Datepicker', () => {
 
     expect(formattedDate).to.equal('2017-02-01');
   });
+
+  it('should parse date', () => {
+    const vm = initVM(Datepicker);
+
+    const parsedDate = vm.parseDate('2017-02-21');
+
+    expect(parsedDate).to.be.a('date');
+    expect(parsedDate.getFullYear()).to.equal(2017);
+    expect(parsedDate.getMonth()).to.equal(1);
+    expect(parsedDate.getDate()).to.equal(21);
+  });
 });

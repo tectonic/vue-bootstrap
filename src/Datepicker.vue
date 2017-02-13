@@ -13,7 +13,7 @@
     <div class="datepicker dropdown-menu">
       <ul class="list-unstyled">
         <li>
-          <table class="table-condensed">
+          <table :class="[{ 'hidden': view !== 'calendar' }, 'calendar', 'table-condensed']">
             <thead>
               <tr>
                 <th class="month-previous" @click="previousMonth"><span class="glyphicon glyphicon-chevron-left"></span></th>
@@ -32,6 +32,37 @@
               </tr>
             </tbody>
           </table>
+          <table :class="[{ 'hidden': view !== 'clock' }, 'clock', 'table-condensed']">
+            <tbody>
+              <tr>
+                <td class="clock-set">
+                  <span class="glyphicon glyphicon-chevron-up"></span>
+                </td>
+                <td></td>
+                <td class="clock-set">
+                  <span class="glyphicon glyphicon-chevron-up"></span>
+                </td>
+              </tr>
+              <tr>
+                <td>{{ pad(date.getHours()) }}</td>
+                <td>:</td>
+                <td>{{ pad(date.getMinutes()) }}</td>
+              </tr>
+              <tr>
+                <td class="clock-set">
+                  <span class="glyphicon glyphicon-chevron-down"></span>
+                </td>
+                <td></td>
+                <td class="clock-set">
+                  <span class="glyphicon glyphicon-chevron-down"></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="switcher">
+            <span @click="toggleView" v-if="view === 'clock'">{{ formatDate(date) }}</span>
+            <span @click="toggleView" v-else>{{ formatTime(date) }}</span>
+          </div>
         </li>
       </ul>
     </div>
@@ -59,6 +90,10 @@ export default {
       type: String,
       default: ''
     },
+    time: {
+      type: Boolean,
+      default: true
+    },
     daysOfWeek: {
       type: Array,
       default: () => {
@@ -77,6 +112,7 @@ export default {
   },
   data () {
     return {
+      view: 'calendar',
       date: new Date(),
       formattedDate: '',
       month: new Date().getMonth(),
@@ -105,6 +141,9 @@ export default {
     close () {
       this.isOpen = false;
     },
+    toggleView () {
+      this.view = this.view === 'calendar' ? 'clock' : 'calendar';
+    },
     nextMonth () {
       if (this.month < 11) {
         this.month++;
@@ -130,22 +169,37 @@ export default {
         && date.getFullYear() === this.date.getFullYear();
     },
     select (date) {
-      this.date = date;
-      this.formattedDate = this.formatDate(date);
+      this.date = new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate(),
+        this.date.getHours(),
+        this.date.getMinutes()
+      );
+
+      this.formattedDate = this.formatDateTime(this.date);
+
       this.isOpen = false;
     },
-    formatDate (date, withHours) {
-      let formattedDate = date.getFullYear()
-        + '-' + ('0' + (date.getMonth() + 1)).slice(-2)
-        + '-' + ('0' + date.getDate()).slice(-2);
+    formatDateTime (date) {
+      let formattedDate = this.formatDate(date);
 
-      if (withHours) {
-        formattedDate = formattedDate
-          + ' ' + ('0' + date.getHours()).slice(-2)
-          + ":" + ('0' + date.getMinutes()).slice(-2);
+      if (this.time) {
+        formattedDate = formattedDate + ' ' + this.formatTime(date);
       }
 
       return formattedDate;
+    },
+    formatDate (date) {
+      return date.getFullYear()
+        + '-' + this.pad(date.getMonth() + 1)
+        + '-' + this.pad(date.getDate());
+    },
+    formatTime (date) {
+      return this.pad(date.getHours()) + ':' + this.pad(date.getMinutes());
+    },
+    pad (value) {
+      return ('0' + value).slice(-2);
     },
     parseDate (date) {
       let parsedDate;
@@ -213,7 +267,7 @@ export default {
     const date = this.parseDate(this.value);
 
     this.date = date;
-    this.formattedDate = this.formatDate(date);
+    this.formattedDate = this.formatDateTime(this.date);
 
     this.onClickOutside = (event) => {
       if (this.$el !== null && !this.$el.contains(event.target)) {
@@ -237,23 +291,28 @@ export default {
   .datepicker table {
     margin: 0 5px;
     table-layout: fixed;
+    min-width: 280px;
   }
-  
+
+  .datepicker th,
+  .datepicker td {
+    text-align: center;
+    padding: 5px;
+  }
+
   .datepicker .day {
     width: 14.2857%;
   }
 
-  .datepicker .month-current {
-    text-align: center;
-  }
-
+  .datepicker .clock-setter,
   .datepicker .month-next,
   .datepicker .month-previous,
   .datepicker .day {
-    text-align: center;
     border-radius: 2px;
   }
 
+  .datepicker .clock-set:hover,
+  .datepicker .switcher span:hover,
   .datepicker .month-next:hover,
   .datepicker .month-previous:hover,
   .datepicker .day:hover {
@@ -273,5 +332,16 @@ export default {
   .datepicker .day.selected:hover {
     background-color: #333;
     color: #fff;
+  }
+
+  .datepicker .switcher {
+    width: 100%;
+    text-align: center;
+    padding: 5px 5px 0 5px;
+  }
+
+  .datepicker .switcher span {
+    display: block;
+    padding: 5px;
   }
 </style>

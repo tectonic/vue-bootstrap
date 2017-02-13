@@ -1,5 +1,5 @@
 <template>
-  <div :class="[{ 'open': isOpen }, 'dropdown']">
+  <div :class="[{ 'open': isOpen }, 'dropdown', containerClass]">
     <input type="text"
       v-model="dateInput"
       :name="name"
@@ -99,6 +99,10 @@ export default {
     mode: {
       type: String,
       default: 'date'
+    },
+    containerClass: {
+      type: String,
+      default: ''
     },
     daysOfWeek: {
       type: Array,

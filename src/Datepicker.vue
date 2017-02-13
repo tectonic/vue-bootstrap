@@ -61,8 +61,12 @@
             </tbody>
           </table>
           <div class="switcher" v-if="mode === 'datetime'">
-            <span @click="toggleView" v-if="view === 'clock'">{{ formatDate(date) }}</span>
-            <span @click="toggleView" v-else>{{ formatTime(date) }}</span>
+            <span @click="toggleView" v-if="view === 'clock'">
+              <i :class="icons.calendar"></i> {{ formatDate(date) }}
+            </span>
+            <span @click="toggleView" v-else>
+              <i :class="icons.time"></i> {{ formatTime(date) }}
+            </span>
           </div>
         </li>
       </ul>
@@ -117,7 +121,9 @@ export default {
           left: 'glyphicon glyphicon-chevron-left',
           right: 'glyphicon glyphicon-chevron-right',
           up: 'glyphicon glyphicon-chevron-up',
-          down: 'glyphicon glyphicon-chevron-down'
+          down: 'glyphicon glyphicon-chevron-down',
+          calendar: 'glyphicon glyphicon-calendar',
+          time: 'glyphicon glyphicon-time'
         };
       }
     }
@@ -376,5 +382,9 @@ export default {
   .datepicker .switcher span {
     display: block;
     padding: 5px;
+  }
+
+  .datepicker .switcher i {
+    margin-right: 3px;
   }
 </style>

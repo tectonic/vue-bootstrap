@@ -54,11 +54,11 @@
 	
 	var _Datepicker2 = _interopRequireDefault(_Datepicker);
 	
-	var _Dropdown = __webpack_require__(9);
+	var _Dropdown = __webpack_require__(64);
 	
 	var _Dropdown2 = _interopRequireDefault(_Dropdown);
 	
-	var _Typeahead = __webpack_require__(14);
+	var _Typeahead = __webpack_require__(69);
 	
 	var _Typeahead2 = _interopRequireDefault(_Typeahead);
 	
@@ -7619,7 +7619,7 @@
 	__vue_exports__ = __webpack_require__(7)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(8)
+	var __vue_template__ = __webpack_require__(63)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -7687,7 +7687,7 @@
 	
 	
 	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"Datepicker.vue","sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\n.datepicker ul {\n  margin-bottom: 0;\n}\n.datepicker table {\n  margin: 0 5px;\n  table-layout: fixed;\n  min-width: 280px;\n}\n.datepicker th,\n.datepicker td {\n  text-align: center;\n  padding: 5px;\n}\n.datepicker .day {\n  width: 14.2857%;\n}\n.datepicker .set-clock,\n.datepicker .next-month,\n.datepicker .previous-month,\n.datepicker .day {\n  border-radius: 2px;\n}\n.datepicker .set-clock:hover,\n.datepicker .switcher span:hover,\n.datepicker .next-month:hover,\n.datepicker .previous-month:hover,\n.datepicker .day:hover {\n  background-color: #f2f2f2;\n  cursor: pointer;\n}\n.datepicker .day.muted {\n  color: #d9d9d9;\n}\n.datepicker .day.selected {\n  background-color: #333;\n  color: #fff;\n}\n.datepicker .day.selected:hover {\n  background-color: #333;\n  color: #fff;\n}\n.datepicker .switcher {\n  width: 100%;\n  text-align: center;\n  padding: 5px 5px 0 5px;\n}\n.datepicker .switcher span {\n  display: block;\n  padding: 5px;\n}\n", "", {"version":3,"sources":["/./src/Datepicker.vue?370919c4"],"names":[],"mappings":";AA+TA;EACA,iBAAA;CACA;AAEA;EACA,cAAA;EACA,oBAAA;EACA,iBAAA;CACA;AAEA;;EAEA,mBAAA;EACA,aAAA;CACA;AAEA;EACA,gBAAA;CACA;AAEA;;;;EAIA,mBAAA;CACA;AAEA;;;;;EAKA,0BAAA;EACA,gBAAA;CACA;AAEA;EACA,eAAA;CACA;AAEA;EACA,uBAAA;EACA,YAAA;CACA;AAEA;EACA,uBAAA;EACA,YAAA;CACA;AAEA;EACA,YAAA;EACA,mBAAA;EACA,uBAAA;CACA;AAEA;EACA,eAAA;EACA,aAAA;CACA","file":"Datepicker.vue","sourcesContent":["<template>\n  <div :class=\"[{ 'open': isOpen }, 'dropdown']\">\n    <input type=\"text\"\n      v-model=\"dateInput\"\n      :name=\"name\"\n      :id=\"id\"\n      :placeholder=\"placeholder\"\n      aria-haspopup=\"true\"\n      :aria-expanded=\"isOpen\"\n      @focus=\"open\"\n      @keyup.esc=\"close\"\n      class=\"form-control\"\n    />\n    <div class=\"datepicker dropdown-menu\">\n      <ul class=\"list-unstyled\">\n        <li>\n          <table :class=\"[{ 'hidden': view !== 'calendar' }, 'calendar', 'table-condensed']\">\n            <thead>\n              <tr>\n                <th class=\"previous-month\" @click=\"previousMonth\"><span :class=\"icons.left\"></span></th>\n                <th class=\"current-month\" colspan=\"5\">{{ months[month] }} {{ year }}</th>\n                <th class=\"next-month\" @click=\"nextMonth\"><span :class=\"icons.right\"></span></th>\n              </tr>\n              <tr>\n                <th class=\"day-of-week\" v-for=\"dayOfWeek in daysOfWeek\">{{ dayOfWeek }}</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr v-for=\"week in visibleWeeks\">\n                <td v-for=\"day in week\" :class=\"['day', { 'muted': !isWithinCurrentMonth(day), 'selected': isSelected(day) }]\" @click=\"select(day)\">\n                  {{ day.getDate() }}\n                </td>\n              </tr>\n            </tbody>\n          </table>\n          <table :class=\"[{ 'hidden': view !== 'clock' }, 'clock', 'table-condensed']\">\n            <tbody>\n              <tr>\n                <td class=\"set-clock\" @click=\"setClock('hours', 'increment')\">\n                  <span :class=\"icons.up\"></span>\n                </td>\n                <td></td>\n                <td class=\"set-clock\" @click=\"setClock('minutes', 'increment')\">\n                  <span :class=\"icons.up\"></span>\n                </td>\n              </tr>\n              <tr>\n                <td>{{ pad(date.getHours()) }}</td>\n                <td>:</td>\n                <td>{{ pad(date.getMinutes()) }}</td>\n              </tr>\n              <tr>\n                <td class=\"set-clock\" @click=\"setClock('hours', 'decrement')\">\n                  <span :class=\"icons.down\"></span>\n                </td>\n                <td></td>\n                <td class=\"set-clock\" @click=\"setClock('minutes', 'decrement')\">\n                  <span :class=\"icons.down\"></span>\n                </td>\n              </tr>\n            </tbody>\n          </table>\n          <div class=\"switcher\" v-if=\"mode === 'datetime'\">\n            <span @click=\"toggleView\" v-if=\"view === 'clock'\">{{ formatDate(date) }}</span>\n            <span @click=\"toggleView\" v-else>{{ formatTime(date) }}</span>\n          </div>\n        </li>\n      </ul>\n    </div>\n  </div>\n</template>\n\n<script>\nimport { chunk } from './lib/array.js';\n\nexport default {\n  props: {\n    name: {\n      type: String,\n      default: ''\n    },\n    value: {\n      type: String,\n      default: ''\n    },\n    id: {\n      type: String,\n      default: ''\n    },\n    placeholder: {\n      type: String,\n      default: ''\n    },\n    mode: {\n      type: String,\n      default: 'date'\n    },\n    daysOfWeek: {\n      type: Array,\n      default: () => {\n        return ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];\n      }\n    },\n    months: {\n      type: Array,\n      default: () => {\n        return [\n          'January', 'February', 'March', 'April', 'May', 'June',\n          'July', 'August', 'September', 'October', 'November', 'December'\n        ];\n      }\n    },\n    icons: {\n      type: Object,\n      default: () => {\n        return {\n          left: 'glyphicon glyphicon-chevron-left',\n          right: 'glyphicon glyphicon-chevron-right',\n          up: 'glyphicon glyphicon-chevron-up',\n          down: 'glyphicon glyphicon-chevron-down'\n        };\n      }\n    }\n  },\n  data () {\n    return {\n      view: 'calendar',\n      date: null,\n      dateInput: '',\n      month: new Date().getMonth(),\n      year: new Date().getFullYear(),\n      isOpen: false\n    };\n  },\n  computed: {\n    visibleWeeks () {\n      const days = this.daysInMonth(this.month, this.year);\n\n      const pastDays = this.pastDays(days);\n      const futureDays = this.futureDays(days);\n\n      // Chunk days into weeks\n      return chunk([...pastDays, ...days, ...futureDays], 7);\n    }\n  },\n  methods: {\n    open () {\n      this.getDateFromInput();\n\n      this.month = this.date.getMonth();\n      this.year = this.date.getFullYear();\n\n      this.isOpen = true;\n    },\n    close () {\n      this.isOpen = false;\n    },\n    getDateFromInput () {\n      const date = this.parseDate(this.dateInput);\n\n      this.date = date || new Date();\n    },\n    toggleView () {\n      this.view = this.view === 'calendar' ? 'clock' : 'calendar';\n    },\n    nextMonth () {\n      if (this.month < 11) {\n        this.month++;\n      } else {\n        this.month = 0;\n        this.year++;\n      }\n    },\n    previousMonth () {\n      if (this.month > 0) {\n        this.month--;\n      } else {\n        this.month = 11;\n        this.year--;\n      }\n    },\n    isWithinCurrentMonth (date) {\n      return date.getMonth() === this.month && date.getFullYear() === this.year;\n    },\n    isSelected (date) {\n      return date.getDate() === this.date.getDate() &&\n        date.getMonth() === this.date.getMonth() &&\n        date.getFullYear() === this.date.getFullYear();\n    },\n    select (date) {\n      this.date = new Date(\n        date.getFullYear(),\n        date.getMonth(),\n        date.getDate(),\n        this.date.getHours(),\n        this.date.getMinutes()\n      );\n\n      this.dateInput = this.formatDateTime(this.date);\n\n      // Don't close the datepicker in datetime mode as someone may\n      // want to select time after selecting the date.\n      if (this.mode !== 'datetime') {\n        this.isOpen = false;\n      }\n    },\n    formatDateTime (date) {\n      let formattedDate = this.formatDate(date);\n\n      if (this.mode === 'datetime') {\n        formattedDate = formattedDate + ' ' + this.formatTime(date);\n      }\n\n      return formattedDate;\n    },\n    formatDate (date) {\n      return date.getFullYear() +\n        '-' + this.pad(date.getMonth() + 1) +\n        '-' + this.pad(date.getDate());\n    },\n    formatTime (date) {\n      return this.pad(date.getHours()) + ':' + this.pad(date.getMinutes());\n    },\n    pad (value) {\n      return ('0' + value).slice(-2);\n    },\n    parseDate (date) {\n      let parsedDate;\n\n      // Accept dates in the format of '2017-03-01' or '2017-03-01 12:10'.\n      if (date && (date.length === 10 && /^[0-9-]+$/.test(date)) || (date.length === 16 && /^[0-9-\\s:]+$/.test(date))) {\n        parsedDate = new Date(date.substring(0, 4), date.substring(5, 7) - 1, date.substring(8, 10));\n\n        if (date.length === 16) {\n          parsedDate.setHours(date.substring(11, 13));\n          parsedDate.setMinutes(date.substring(14, 16));\n        }\n      }\n\n      return parsedDate;\n    },\n    daysInMonth (month, year) {\n      const date = new Date(year, month, 1);\n      const days = [];\n\n      while (date.getMonth() === month) {\n        days.push(new Date(date));\n        date.setDate(date.getDate() + 1);\n      }\n\n      return days;\n    },\n    pastDays (daysInMonth) {\n      const fromDate = daysInMonth[0];\n\n      let i = 1;\n      let day;\n      const days = [];\n\n      do {\n        day = new Date(fromDate);\n        day.setDate(fromDate.getDate() - i);\n        days.unshift(day);\n        i++;\n      } while (day.getDay() !== 0); // Sunday\n\n      return days;\n    },\n    futureDays (daysInMonth) {\n      const fromDate = daysInMonth[daysInMonth.length - 1];\n\n      let i = 1;\n      let day;\n      const days = [];\n\n      do {\n        day = new Date(fromDate);\n        day.setDate(fromDate.getDate() + i);\n        days.push(day);\n        i++;\n      } while (day.getDay() !== 6); // Saturday\n\n      return days;\n    },\n    setClock (type, operation) {\n      const hours = this.date.getHours();\n      const minutes = Math.round(this.date.getMinutes() / 5) * 5;\n\n      this.date = new Date(\n        this.date.getFullYear(),\n        this.date.getMonth(),\n        this.date.getDate(),\n        type === 'hours' ? (operation === 'increment' ? hours + 1 : hours - 1) : hours,\n        type === 'minutes' ? (operation === 'increment' ? minutes + 5 : minutes - 5) : minutes\n      );\n\n      this.dateInput = this.formatDateTime(this.date);\n    }\n  },\n  created () {\n    this.dateInput = this.value;\n    this.getDateFromInput();\n  },\n  mounted () {\n    this.onClickOutside = (event) => {\n      if (this.$el !== null && !this.$el.contains(event.target)) {\n        this.close();\n      }\n    };\n\n    document.addEventListener('click', this.onClickOutside);\n  },\n  beforeDestroy () {\n    document.removeEventListener('click', this.onClickOutside);\n  }\n};\n</script>\n\n<style>\n  .datepicker ul {\n    margin-bottom: 0;\n  }\n\n  .datepicker table {\n    margin: 0 5px;\n    table-layout: fixed;\n    min-width: 280px;\n  }\n\n  .datepicker th,\n  .datepicker td {\n    text-align: center;\n    padding: 5px;\n  }\n\n  .datepicker .day {\n    width: 14.2857%;\n  }\n\n  .datepicker .set-clock,\n  .datepicker .next-month,\n  .datepicker .previous-month,\n  .datepicker .day {\n    border-radius: 2px;\n  }\n\n  .datepicker .set-clock:hover,\n  .datepicker .switcher span:hover,\n  .datepicker .next-month:hover,\n  .datepicker .previous-month:hover,\n  .datepicker .day:hover {\n    background-color: #f2f2f2;\n    cursor: pointer;\n  }\n\n  .datepicker .day.muted {\n    color: #d9d9d9;\n  }\n\n  .datepicker .day.selected {\n    background-color: #333;\n    color: #fff;\n  }\n\n  .datepicker .day.selected:hover {\n    background-color: #333;\n    color: #fff;\n  }\n\n  .datepicker .switcher {\n    width: 100%;\n    text-align: center;\n    padding: 5px 5px 0 5px;\n  }\n\n  .datepicker .switcher span {\n    display: block;\n    padding: 5px;\n  }\n</style>\n"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -7972,61 +7972,29 @@
 
 /***/ },
 /* 7 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
+	
+	var _toConsumableArray2 = __webpack_require__(8);
+	
+	var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+	
+	var _array = __webpack_require__(62);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = {
 	  props: {
 	    name: {
+	      type: String,
+	      default: ''
+	    },
+	    value: {
 	      type: String,
 	      default: ''
 	    },
@@ -8037,32 +8005,142 @@
 	    placeholder: {
 	      type: String,
 	      default: ''
+	    },
+	    mode: {
+	      type: String,
+	      default: 'date'
+	    },
+	    daysOfWeek: {
+	      type: Array,
+	      default: function _default() {
+	        return ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+	      }
+	    },
+	    months: {
+	      type: Array,
+	      default: function _default() {
+	        return ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+	      }
+	    },
+	    icons: {
+	      type: Object,
+	      default: function _default() {
+	        return {
+	          left: 'glyphicon glyphicon-chevron-left',
+	          right: 'glyphicon glyphicon-chevron-right',
+	          up: 'glyphicon glyphicon-chevron-up',
+	          down: 'glyphicon glyphicon-chevron-down'
+	        };
+	      }
 	    }
 	  },
 	  data: function data() {
 	    return {
-	      date: new Date(),
+	      view: 'calendar',
+	      date: null,
+	      dateInput: '',
+	      month: new Date().getMonth(),
+	      year: new Date().getFullYear(),
 	      isOpen: false
 	    };
 	  },
 	
 	  computed: {
 	    visibleWeeks: function visibleWeeks() {
-	      var days = this.daysInMonth(1, 2017);
+	      var days = this.daysInMonth(this.month, this.year);
 	
-	      days = this.fillDays('past', days);
-	      days = this.fillDays('future', days);
+	      var pastDays = this.pastDays(days);
+	      var futureDays = this.futureDays(days);
 	
 	      // Chunk days into weeks
-	      return this.chunk(days, 7);
+	      return (0, _array.chunk)([].concat((0, _toConsumableArray3.default)(pastDays), (0, _toConsumableArray3.default)(days), (0, _toConsumableArray3.default)(futureDays)), 7);
 	    }
 	  },
 	  methods: {
 	    open: function open() {
+	      this.getDateFromInput();
+	
+	      this.month = this.date.getMonth();
+	      this.year = this.date.getFullYear();
+	
 	      this.isOpen = true;
 	    },
 	    close: function close() {
 	      this.isOpen = false;
+	    },
+	    getDateFromInput: function getDateFromInput() {
+	      var date = this.parseDate(this.dateInput);
+	
+	      this.date = date || new Date();
+	    },
+	    toggleView: function toggleView() {
+	      this.view = this.view === 'calendar' ? 'clock' : 'calendar';
+	    },
+	    nextMonth: function nextMonth() {
+	      if (this.month < 11) {
+	        this.month++;
+	      } else {
+	        this.month = 0;
+	        this.year++;
+	      }
+	    },
+	    previousMonth: function previousMonth() {
+	      if (this.month > 0) {
+	        this.month--;
+	      } else {
+	        this.month = 11;
+	        this.year--;
+	      }
+	    },
+	    isWithinCurrentMonth: function isWithinCurrentMonth(date) {
+	      return date.getMonth() === this.month && date.getFullYear() === this.year;
+	    },
+	    isSelected: function isSelected(date) {
+	      return date.getDate() === this.date.getDate() && date.getMonth() === this.date.getMonth() && date.getFullYear() === this.date.getFullYear();
+	    },
+	    select: function select(date) {
+	      this.date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), this.date.getHours(), this.date.getMinutes());
+	
+	      this.dateInput = this.formatDateTime(this.date);
+	
+	      // Don't close the datepicker in datetime mode as someone may
+	      // want to select time after selecting the date.
+	      if (this.mode !== 'datetime') {
+	        this.isOpen = false;
+	      }
+	    },
+	    formatDateTime: function formatDateTime(date) {
+	      var formattedDate = this.formatDate(date);
+	
+	      if (this.mode === 'datetime') {
+	        formattedDate = formattedDate + ' ' + this.formatTime(date);
+	      }
+	
+	      return formattedDate;
+	    },
+	    formatDate: function formatDate(date) {
+	      return date.getFullYear() + '-' + this.pad(date.getMonth() + 1) + '-' + this.pad(date.getDate());
+	    },
+	    formatTime: function formatTime(date) {
+	      return this.pad(date.getHours()) + ':' + this.pad(date.getMinutes());
+	    },
+	    pad: function pad(value) {
+	      return ('0' + value).slice(-2);
+	    },
+	    parseDate: function parseDate(date) {
+	      var parsedDate = void 0;
+	
+	      // Accept dates in the format of '2017-03-01' or '2017-03-01 12:10'.
+	      if (date && date.length === 10 && /^[0-9-]+$/.test(date) || date.length === 16 && /^[0-9-\s:]+$/.test(date)) {
+	        parsedDate = new Date(date.substring(0, 4), date.substring(5, 7) - 1, date.substring(8, 10));
+	
+	        if (date.length === 16) {
+	          parsedDate.setHours(date.substring(11, 13));
+	          parsedDate.setMinutes(date.substring(14, 16));
+	        }
+	      }
+	
+	      return parsedDate;
 	    },
 	    daysInMonth: function daysInMonth(month, year) {
 	      var date = new Date(year, month, 1);
@@ -8075,47 +8153,50 @@
 	
 	      return days;
 	    },
-	    fillDays: function fillDays(mode /* past/future */, days) {
-	      // Stop on first day of the week (Su) if filling dates in the past, stop on the
-	      // last day of the week (Sa) if filling all dates in the future.
-	      var dayOfWeek = mode === 'past' ? 0 : 6;
-	
-	      // Start from the first day of the month if filling dates in the past, start
-	      // from the last day of the month if filling dates in the future.
-	      var fromDate = mode === 'past' ? days[0] : days[days.length - 1];
+	    pastDays: function pastDays(daysInMonth) {
+	      var fromDate = daysInMonth[0];
 	
 	      var i = 1;
 	      var day = void 0;
+	      var days = [];
 	
 	      do {
-	        day = new Date();
-	
-	        if (mode == 'past') {
-	          day.setDate(fromDate.getDate() - i);
-	          days.unshift(day);
-	        } else {
-	          day.setDate(fromDate.getDate() + i);
-	          days.push(day);
-	        }
-	
+	        day = new Date(fromDate);
+	        day.setDate(fromDate.getDate() - i);
+	        days.unshift(day);
 	        i++;
-	      } while (day.getDay() !== dayOfWeek);
+	      } while (day.getDay() !== 0); // Sunday
 	
 	      return days;
 	    },
-	    chunk: function chunk(days, _chunk) {
-	      var i = void 0,
-	          j = void 0;
-	      var array = [];
-	      var chunks = [];
+	    futureDays: function futureDays(daysInMonth) {
+	      var fromDate = daysInMonth[daysInMonth.length - 1];
 	
-	      for (i = 0, j = days.length; i < j; i += _chunk) {
-	        array = days.slice(i, i + _chunk);
-	        chunks.push(array);
-	      }
+	      var i = 1;
+	      var day = void 0;
+	      var days = [];
 	
-	      return chunks;
+	      do {
+	        day = new Date(fromDate);
+	        day.setDate(fromDate.getDate() + i);
+	        days.push(day);
+	        i++;
+	      } while (day.getDay() !== 6); // Saturday
+	
+	      return days;
+	    },
+	    setClock: function setClock(type, operation) {
+	      var hours = this.date.getHours();
+	      var minutes = Math.round(this.date.getMinutes() / 5) * 5;
+	
+	      this.date = new Date(this.date.getFullYear(), this.date.getMonth(), this.date.getDate(), type === 'hours' ? operation === 'increment' ? hours + 1 : hours - 1 : hours, type === 'minutes' ? operation === 'increment' ? minutes + 5 : minutes - 5 : minutes);
+	
+	      this.dateInput = this.formatDateTime(this.date);
 	    }
+	  },
+	  created: function created() {
+	    this.dateInput = this.value;
+	    this.getDateFromInput();
 	  },
 	  mounted: function mounted() {
 	    var _this = this;
@@ -8131,10 +8212,1006 @@
 	  beforeDestroy: function beforeDestroy() {
 	    document.removeEventListener('click', this.onClickOutside);
 	  }
-	};
+	}; //
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 
 /***/ },
 /* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	exports.__esModule = true;
+	
+	var _from = __webpack_require__(9);
+	
+	var _from2 = _interopRequireDefault(_from);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function (arr) {
+	  if (Array.isArray(arr)) {
+	    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+	      arr2[i] = arr[i];
+	    }
+	
+	    return arr2;
+	  } else {
+	    return (0, _from2.default)(arr);
+	  }
+	};
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(10), __esModule: true };
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(11);
+	__webpack_require__(55);
+	module.exports = __webpack_require__(19).Array.from;
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $at  = __webpack_require__(12)(true);
+	
+	// 21.1.3.27 String.prototype[@@iterator]()
+	__webpack_require__(15)(String, 'String', function(iterated){
+	  this._t = String(iterated); // target
+	  this._i = 0;                // next index
+	// 21.1.5.2.1 %StringIteratorPrototype%.next()
+	}, function(){
+	  var O     = this._t
+	    , index = this._i
+	    , point;
+	  if(index >= O.length)return {value: undefined, done: true};
+	  point = $at(O, index);
+	  this._i += point.length;
+	  return {value: point, done: false};
+	});
+
+/***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var toInteger = __webpack_require__(13)
+	  , defined   = __webpack_require__(14);
+	// true  -> String#at
+	// false -> String#codePointAt
+	module.exports = function(TO_STRING){
+	  return function(that, pos){
+	    var s = String(defined(that))
+	      , i = toInteger(pos)
+	      , l = s.length
+	      , a, b;
+	    if(i < 0 || i >= l)return TO_STRING ? '' : undefined;
+	    a = s.charCodeAt(i);
+	    return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
+	      ? TO_STRING ? s.charAt(i) : a
+	      : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
+	  };
+	};
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	// 7.1.4 ToInteger
+	var ceil  = Math.ceil
+	  , floor = Math.floor;
+	module.exports = function(it){
+	  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+	};
+
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	// 7.2.1 RequireObjectCoercible(argument)
+	module.exports = function(it){
+	  if(it == undefined)throw TypeError("Can't call method on  " + it);
+	  return it;
+	};
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var LIBRARY        = __webpack_require__(16)
+	  , $export        = __webpack_require__(17)
+	  , redefine       = __webpack_require__(32)
+	  , hide           = __webpack_require__(22)
+	  , has            = __webpack_require__(33)
+	  , Iterators      = __webpack_require__(34)
+	  , $iterCreate    = __webpack_require__(35)
+	  , setToStringTag = __webpack_require__(51)
+	  , getPrototypeOf = __webpack_require__(53)
+	  , ITERATOR       = __webpack_require__(52)('iterator')
+	  , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
+	  , FF_ITERATOR    = '@@iterator'
+	  , KEYS           = 'keys'
+	  , VALUES         = 'values';
+	
+	var returnThis = function(){ return this; };
+	
+	module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED){
+	  $iterCreate(Constructor, NAME, next);
+	  var getMethod = function(kind){
+	    if(!BUGGY && kind in proto)return proto[kind];
+	    switch(kind){
+	      case KEYS: return function keys(){ return new Constructor(this, kind); };
+	      case VALUES: return function values(){ return new Constructor(this, kind); };
+	    } return function entries(){ return new Constructor(this, kind); };
+	  };
+	  var TAG        = NAME + ' Iterator'
+	    , DEF_VALUES = DEFAULT == VALUES
+	    , VALUES_BUG = false
+	    , proto      = Base.prototype
+	    , $native    = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT]
+	    , $default   = $native || getMethod(DEFAULT)
+	    , $entries   = DEFAULT ? !DEF_VALUES ? $default : getMethod('entries') : undefined
+	    , $anyNative = NAME == 'Array' ? proto.entries || $native : $native
+	    , methods, key, IteratorPrototype;
+	  // Fix native
+	  if($anyNative){
+	    IteratorPrototype = getPrototypeOf($anyNative.call(new Base));
+	    if(IteratorPrototype !== Object.prototype){
+	      // Set @@toStringTag to native iterators
+	      setToStringTag(IteratorPrototype, TAG, true);
+	      // fix for some old engines
+	      if(!LIBRARY && !has(IteratorPrototype, ITERATOR))hide(IteratorPrototype, ITERATOR, returnThis);
+	    }
+	  }
+	  // fix Array#{values, @@iterator}.name in V8 / FF
+	  if(DEF_VALUES && $native && $native.name !== VALUES){
+	    VALUES_BUG = true;
+	    $default = function values(){ return $native.call(this); };
+	  }
+	  // Define iterator
+	  if((!LIBRARY || FORCED) && (BUGGY || VALUES_BUG || !proto[ITERATOR])){
+	    hide(proto, ITERATOR, $default);
+	  }
+	  // Plug for library
+	  Iterators[NAME] = $default;
+	  Iterators[TAG]  = returnThis;
+	  if(DEFAULT){
+	    methods = {
+	      values:  DEF_VALUES ? $default : getMethod(VALUES),
+	      keys:    IS_SET     ? $default : getMethod(KEYS),
+	      entries: $entries
+	    };
+	    if(FORCED)for(key in methods){
+	      if(!(key in proto))redefine(proto, key, methods[key]);
+	    } else $export($export.P + $export.F * (BUGGY || VALUES_BUG), NAME, methods);
+	  }
+	  return methods;
+	};
+
+/***/ },
+/* 16 */
+/***/ function(module, exports) {
+
+	module.exports = true;
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var global    = __webpack_require__(18)
+	  , core      = __webpack_require__(19)
+	  , ctx       = __webpack_require__(20)
+	  , hide      = __webpack_require__(22)
+	  , PROTOTYPE = 'prototype';
+	
+	var $export = function(type, name, source){
+	  var IS_FORCED = type & $export.F
+	    , IS_GLOBAL = type & $export.G
+	    , IS_STATIC = type & $export.S
+	    , IS_PROTO  = type & $export.P
+	    , IS_BIND   = type & $export.B
+	    , IS_WRAP   = type & $export.W
+	    , exports   = IS_GLOBAL ? core : core[name] || (core[name] = {})
+	    , expProto  = exports[PROTOTYPE]
+	    , target    = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE]
+	    , key, own, out;
+	  if(IS_GLOBAL)source = name;
+	  for(key in source){
+	    // contains in native
+	    own = !IS_FORCED && target && target[key] !== undefined;
+	    if(own && key in exports)continue;
+	    // export native or passed
+	    out = own ? target[key] : source[key];
+	    // prevent global pollution for namespaces
+	    exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key]
+	    // bind timers to global for call from export context
+	    : IS_BIND && own ? ctx(out, global)
+	    // wrap global constructors for prevent change them in library
+	    : IS_WRAP && target[key] == out ? (function(C){
+	      var F = function(a, b, c){
+	        if(this instanceof C){
+	          switch(arguments.length){
+	            case 0: return new C;
+	            case 1: return new C(a);
+	            case 2: return new C(a, b);
+	          } return new C(a, b, c);
+	        } return C.apply(this, arguments);
+	      };
+	      F[PROTOTYPE] = C[PROTOTYPE];
+	      return F;
+	    // make static versions for prototype methods
+	    })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
+	    // export proto methods to core.%CONSTRUCTOR%.methods.%NAME%
+	    if(IS_PROTO){
+	      (exports.virtual || (exports.virtual = {}))[key] = out;
+	      // export proto methods to core.%CONSTRUCTOR%.prototype.%NAME%
+	      if(type & $export.R && expProto && !expProto[key])hide(expProto, key, out);
+	    }
+	  }
+	};
+	// type bitmap
+	$export.F = 1;   // forced
+	$export.G = 2;   // global
+	$export.S = 4;   // static
+	$export.P = 8;   // proto
+	$export.B = 16;  // bind
+	$export.W = 32;  // wrap
+	$export.U = 64;  // safe
+	$export.R = 128; // real proto method for `library` 
+	module.exports = $export;
+
+/***/ },
+/* 18 */
+/***/ function(module, exports) {
+
+	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+	var global = module.exports = typeof window != 'undefined' && window.Math == Math
+	  ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
+	if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
+
+/***/ },
+/* 19 */
+/***/ function(module, exports) {
+
+	var core = module.exports = {version: '2.4.0'};
+	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// optional / simple context binding
+	var aFunction = __webpack_require__(21);
+	module.exports = function(fn, that, length){
+	  aFunction(fn);
+	  if(that === undefined)return fn;
+	  switch(length){
+	    case 1: return function(a){
+	      return fn.call(that, a);
+	    };
+	    case 2: return function(a, b){
+	      return fn.call(that, a, b);
+	    };
+	    case 3: return function(a, b, c){
+	      return fn.call(that, a, b, c);
+	    };
+	  }
+	  return function(/* ...args */){
+	    return fn.apply(that, arguments);
+	  };
+	};
+
+/***/ },
+/* 21 */
+/***/ function(module, exports) {
+
+	module.exports = function(it){
+	  if(typeof it != 'function')throw TypeError(it + ' is not a function!');
+	  return it;
+	};
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var dP         = __webpack_require__(23)
+	  , createDesc = __webpack_require__(31);
+	module.exports = __webpack_require__(27) ? function(object, key, value){
+	  return dP.f(object, key, createDesc(1, value));
+	} : function(object, key, value){
+	  object[key] = value;
+	  return object;
+	};
+
+/***/ },
+/* 23 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var anObject       = __webpack_require__(24)
+	  , IE8_DOM_DEFINE = __webpack_require__(26)
+	  , toPrimitive    = __webpack_require__(30)
+	  , dP             = Object.defineProperty;
+	
+	exports.f = __webpack_require__(27) ? Object.defineProperty : function defineProperty(O, P, Attributes){
+	  anObject(O);
+	  P = toPrimitive(P, true);
+	  anObject(Attributes);
+	  if(IE8_DOM_DEFINE)try {
+	    return dP(O, P, Attributes);
+	  } catch(e){ /* empty */ }
+	  if('get' in Attributes || 'set' in Attributes)throw TypeError('Accessors not supported!');
+	  if('value' in Attributes)O[P] = Attributes.value;
+	  return O;
+	};
+
+/***/ },
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isObject = __webpack_require__(25);
+	module.exports = function(it){
+	  if(!isObject(it))throw TypeError(it + ' is not an object!');
+	  return it;
+	};
+
+/***/ },
+/* 25 */
+/***/ function(module, exports) {
+
+	module.exports = function(it){
+	  return typeof it === 'object' ? it !== null : typeof it === 'function';
+	};
+
+/***/ },
+/* 26 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = !__webpack_require__(27) && !__webpack_require__(28)(function(){
+	  return Object.defineProperty(__webpack_require__(29)('div'), 'a', {get: function(){ return 7; }}).a != 7;
+	});
+
+/***/ },
+/* 27 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Thank's IE8 for his funny defineProperty
+	module.exports = !__webpack_require__(28)(function(){
+	  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
+	});
+
+/***/ },
+/* 28 */
+/***/ function(module, exports) {
+
+	module.exports = function(exec){
+	  try {
+	    return !!exec();
+	  } catch(e){
+	    return true;
+	  }
+	};
+
+/***/ },
+/* 29 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isObject = __webpack_require__(25)
+	  , document = __webpack_require__(18).document
+	  // in old IE typeof document.createElement is 'object'
+	  , is = isObject(document) && isObject(document.createElement);
+	module.exports = function(it){
+	  return is ? document.createElement(it) : {};
+	};
+
+/***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 7.1.1 ToPrimitive(input [, PreferredType])
+	var isObject = __webpack_require__(25);
+	// instead of the ES6 spec version, we didn't implement @@toPrimitive case
+	// and the second argument - flag - preferred type is a string
+	module.exports = function(it, S){
+	  if(!isObject(it))return it;
+	  var fn, val;
+	  if(S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
+	  if(typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it)))return val;
+	  if(!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
+	  throw TypeError("Can't convert object to primitive value");
+	};
+
+/***/ },
+/* 31 */
+/***/ function(module, exports) {
+
+	module.exports = function(bitmap, value){
+	  return {
+	    enumerable  : !(bitmap & 1),
+	    configurable: !(bitmap & 2),
+	    writable    : !(bitmap & 4),
+	    value       : value
+	  };
+	};
+
+/***/ },
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(22);
+
+/***/ },
+/* 33 */
+/***/ function(module, exports) {
+
+	var hasOwnProperty = {}.hasOwnProperty;
+	module.exports = function(it, key){
+	  return hasOwnProperty.call(it, key);
+	};
+
+/***/ },
+/* 34 */
+/***/ function(module, exports) {
+
+	module.exports = {};
+
+/***/ },
+/* 35 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var create         = __webpack_require__(36)
+	  , descriptor     = __webpack_require__(31)
+	  , setToStringTag = __webpack_require__(51)
+	  , IteratorPrototype = {};
+	
+	// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
+	__webpack_require__(22)(IteratorPrototype, __webpack_require__(52)('iterator'), function(){ return this; });
+	
+	module.exports = function(Constructor, NAME, next){
+	  Constructor.prototype = create(IteratorPrototype, {next: descriptor(1, next)});
+	  setToStringTag(Constructor, NAME + ' Iterator');
+	};
+
+/***/ },
+/* 36 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
+	var anObject    = __webpack_require__(24)
+	  , dPs         = __webpack_require__(37)
+	  , enumBugKeys = __webpack_require__(49)
+	  , IE_PROTO    = __webpack_require__(46)('IE_PROTO')
+	  , Empty       = function(){ /* empty */ }
+	  , PROTOTYPE   = 'prototype';
+	
+	// Create object with fake `null` prototype: use iframe Object with cleared prototype
+	var createDict = function(){
+	  // Thrash, waste and sodomy: IE GC bug
+	  var iframe = __webpack_require__(29)('iframe')
+	    , i      = enumBugKeys.length
+	    , lt     = '<'
+	    , gt     = '>'
+	    , iframeDocument;
+	  iframe.style.display = 'none';
+	  __webpack_require__(50).appendChild(iframe);
+	  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
+	  // createDict = iframe.contentWindow.Object;
+	  // html.removeChild(iframe);
+	  iframeDocument = iframe.contentWindow.document;
+	  iframeDocument.open();
+	  iframeDocument.write(lt + 'script' + gt + 'document.F=Object' + lt + '/script' + gt);
+	  iframeDocument.close();
+	  createDict = iframeDocument.F;
+	  while(i--)delete createDict[PROTOTYPE][enumBugKeys[i]];
+	  return createDict();
+	};
+	
+	module.exports = Object.create || function create(O, Properties){
+	  var result;
+	  if(O !== null){
+	    Empty[PROTOTYPE] = anObject(O);
+	    result = new Empty;
+	    Empty[PROTOTYPE] = null;
+	    // add "__proto__" for Object.getPrototypeOf polyfill
+	    result[IE_PROTO] = O;
+	  } else result = createDict();
+	  return Properties === undefined ? result : dPs(result, Properties);
+	};
+
+
+/***/ },
+/* 37 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var dP       = __webpack_require__(23)
+	  , anObject = __webpack_require__(24)
+	  , getKeys  = __webpack_require__(38);
+	
+	module.exports = __webpack_require__(27) ? Object.defineProperties : function defineProperties(O, Properties){
+	  anObject(O);
+	  var keys   = getKeys(Properties)
+	    , length = keys.length
+	    , i = 0
+	    , P;
+	  while(length > i)dP.f(O, P = keys[i++], Properties[P]);
+	  return O;
+	};
+
+/***/ },
+/* 38 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.14 / 15.2.3.14 Object.keys(O)
+	var $keys       = __webpack_require__(39)
+	  , enumBugKeys = __webpack_require__(49);
+	
+	module.exports = Object.keys || function keys(O){
+	  return $keys(O, enumBugKeys);
+	};
+
+/***/ },
+/* 39 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var has          = __webpack_require__(33)
+	  , toIObject    = __webpack_require__(40)
+	  , arrayIndexOf = __webpack_require__(43)(false)
+	  , IE_PROTO     = __webpack_require__(46)('IE_PROTO');
+	
+	module.exports = function(object, names){
+	  var O      = toIObject(object)
+	    , i      = 0
+	    , result = []
+	    , key;
+	  for(key in O)if(key != IE_PROTO)has(O, key) && result.push(key);
+	  // Don't enum bug & hidden keys
+	  while(names.length > i)if(has(O, key = names[i++])){
+	    ~arrayIndexOf(result, key) || result.push(key);
+	  }
+	  return result;
+	};
+
+/***/ },
+/* 40 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// to indexed object, toObject with fallback for non-array-like ES3 strings
+	var IObject = __webpack_require__(41)
+	  , defined = __webpack_require__(14);
+	module.exports = function(it){
+	  return IObject(defined(it));
+	};
+
+/***/ },
+/* 41 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// fallback for non-array-like ES3 and non-enumerable old V8 strings
+	var cof = __webpack_require__(42);
+	module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
+	  return cof(it) == 'String' ? it.split('') : Object(it);
+	};
+
+/***/ },
+/* 42 */
+/***/ function(module, exports) {
+
+	var toString = {}.toString;
+	
+	module.exports = function(it){
+	  return toString.call(it).slice(8, -1);
+	};
+
+/***/ },
+/* 43 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// false -> Array#indexOf
+	// true  -> Array#includes
+	var toIObject = __webpack_require__(40)
+	  , toLength  = __webpack_require__(44)
+	  , toIndex   = __webpack_require__(45);
+	module.exports = function(IS_INCLUDES){
+	  return function($this, el, fromIndex){
+	    var O      = toIObject($this)
+	      , length = toLength(O.length)
+	      , index  = toIndex(fromIndex, length)
+	      , value;
+	    // Array#includes uses SameValueZero equality algorithm
+	    if(IS_INCLUDES && el != el)while(length > index){
+	      value = O[index++];
+	      if(value != value)return true;
+	    // Array#toIndex ignores holes, Array#includes - not
+	    } else for(;length > index; index++)if(IS_INCLUDES || index in O){
+	      if(O[index] === el)return IS_INCLUDES || index || 0;
+	    } return !IS_INCLUDES && -1;
+	  };
+	};
+
+/***/ },
+/* 44 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 7.1.15 ToLength
+	var toInteger = __webpack_require__(13)
+	  , min       = Math.min;
+	module.exports = function(it){
+	  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
+	};
+
+/***/ },
+/* 45 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var toInteger = __webpack_require__(13)
+	  , max       = Math.max
+	  , min       = Math.min;
+	module.exports = function(index, length){
+	  index = toInteger(index);
+	  return index < 0 ? max(index + length, 0) : min(index, length);
+	};
+
+/***/ },
+/* 46 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var shared = __webpack_require__(47)('keys')
+	  , uid    = __webpack_require__(48);
+	module.exports = function(key){
+	  return shared[key] || (shared[key] = uid(key));
+	};
+
+/***/ },
+/* 47 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var global = __webpack_require__(18)
+	  , SHARED = '__core-js_shared__'
+	  , store  = global[SHARED] || (global[SHARED] = {});
+	module.exports = function(key){
+	  return store[key] || (store[key] = {});
+	};
+
+/***/ },
+/* 48 */
+/***/ function(module, exports) {
+
+	var id = 0
+	  , px = Math.random();
+	module.exports = function(key){
+	  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+	};
+
+/***/ },
+/* 49 */
+/***/ function(module, exports) {
+
+	// IE 8- don't enum bug keys
+	module.exports = (
+	  'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
+	).split(',');
+
+/***/ },
+/* 50 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(18).document && document.documentElement;
+
+/***/ },
+/* 51 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var def = __webpack_require__(23).f
+	  , has = __webpack_require__(33)
+	  , TAG = __webpack_require__(52)('toStringTag');
+	
+	module.exports = function(it, tag, stat){
+	  if(it && !has(it = stat ? it : it.prototype, TAG))def(it, TAG, {configurable: true, value: tag});
+	};
+
+/***/ },
+/* 52 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var store      = __webpack_require__(47)('wks')
+	  , uid        = __webpack_require__(48)
+	  , Symbol     = __webpack_require__(18).Symbol
+	  , USE_SYMBOL = typeof Symbol == 'function';
+	
+	var $exports = module.exports = function(name){
+	  return store[name] || (store[name] =
+	    USE_SYMBOL && Symbol[name] || (USE_SYMBOL ? Symbol : uid)('Symbol.' + name));
+	};
+	
+	$exports.store = store;
+
+/***/ },
+/* 53 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
+	var has         = __webpack_require__(33)
+	  , toObject    = __webpack_require__(54)
+	  , IE_PROTO    = __webpack_require__(46)('IE_PROTO')
+	  , ObjectProto = Object.prototype;
+	
+	module.exports = Object.getPrototypeOf || function(O){
+	  O = toObject(O);
+	  if(has(O, IE_PROTO))return O[IE_PROTO];
+	  if(typeof O.constructor == 'function' && O instanceof O.constructor){
+	    return O.constructor.prototype;
+	  } return O instanceof Object ? ObjectProto : null;
+	};
+
+/***/ },
+/* 54 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 7.1.13 ToObject(argument)
+	var defined = __webpack_require__(14);
+	module.exports = function(it){
+	  return Object(defined(it));
+	};
+
+/***/ },
+/* 55 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var ctx            = __webpack_require__(20)
+	  , $export        = __webpack_require__(17)
+	  , toObject       = __webpack_require__(54)
+	  , call           = __webpack_require__(56)
+	  , isArrayIter    = __webpack_require__(57)
+	  , toLength       = __webpack_require__(44)
+	  , createProperty = __webpack_require__(58)
+	  , getIterFn      = __webpack_require__(59);
+	
+	$export($export.S + $export.F * !__webpack_require__(61)(function(iter){ Array.from(iter); }), 'Array', {
+	  // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
+	  from: function from(arrayLike/*, mapfn = undefined, thisArg = undefined*/){
+	    var O       = toObject(arrayLike)
+	      , C       = typeof this == 'function' ? this : Array
+	      , aLen    = arguments.length
+	      , mapfn   = aLen > 1 ? arguments[1] : undefined
+	      , mapping = mapfn !== undefined
+	      , index   = 0
+	      , iterFn  = getIterFn(O)
+	      , length, result, step, iterator;
+	    if(mapping)mapfn = ctx(mapfn, aLen > 2 ? arguments[2] : undefined, 2);
+	    // if object isn't iterable or it's array with default iterator - use simple case
+	    if(iterFn != undefined && !(C == Array && isArrayIter(iterFn))){
+	      for(iterator = iterFn.call(O), result = new C; !(step = iterator.next()).done; index++){
+	        createProperty(result, index, mapping ? call(iterator, mapfn, [step.value, index], true) : step.value);
+	      }
+	    } else {
+	      length = toLength(O.length);
+	      for(result = new C(length); length > index; index++){
+	        createProperty(result, index, mapping ? mapfn(O[index], index) : O[index]);
+	      }
+	    }
+	    result.length = index;
+	    return result;
+	  }
+	});
+
+
+/***/ },
+/* 56 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// call something on iterator step with safe closing on error
+	var anObject = __webpack_require__(24);
+	module.exports = function(iterator, fn, value, entries){
+	  try {
+	    return entries ? fn(anObject(value)[0], value[1]) : fn(value);
+	  // 7.4.6 IteratorClose(iterator, completion)
+	  } catch(e){
+	    var ret = iterator['return'];
+	    if(ret !== undefined)anObject(ret.call(iterator));
+	    throw e;
+	  }
+	};
+
+/***/ },
+/* 57 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// check on default Array iterator
+	var Iterators  = __webpack_require__(34)
+	  , ITERATOR   = __webpack_require__(52)('iterator')
+	  , ArrayProto = Array.prototype;
+	
+	module.exports = function(it){
+	  return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);
+	};
+
+/***/ },
+/* 58 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $defineProperty = __webpack_require__(23)
+	  , createDesc      = __webpack_require__(31);
+	
+	module.exports = function(object, index, value){
+	  if(index in object)$defineProperty.f(object, index, createDesc(0, value));
+	  else object[index] = value;
+	};
+
+/***/ },
+/* 59 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var classof   = __webpack_require__(60)
+	  , ITERATOR  = __webpack_require__(52)('iterator')
+	  , Iterators = __webpack_require__(34);
+	module.exports = __webpack_require__(19).getIteratorMethod = function(it){
+	  if(it != undefined)return it[ITERATOR]
+	    || it['@@iterator']
+	    || Iterators[classof(it)];
+	};
+
+/***/ },
+/* 60 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// getting tag from 19.1.3.6 Object.prototype.toString()
+	var cof = __webpack_require__(42)
+	  , TAG = __webpack_require__(52)('toStringTag')
+	  // ES3 wrong here
+	  , ARG = cof(function(){ return arguments; }()) == 'Arguments';
+	
+	// fallback for IE11 Script Access Denied error
+	var tryGet = function(it, key){
+	  try {
+	    return it[key];
+	  } catch(e){ /* empty */ }
+	};
+	
+	module.exports = function(it){
+	  var O, T, B;
+	  return it === undefined ? 'Undefined' : it === null ? 'Null'
+	    // @@toStringTag case
+	    : typeof (T = tryGet(O = Object(it), TAG)) == 'string' ? T
+	    // builtinTag case
+	    : ARG ? cof(O)
+	    // ES3 arguments fallback
+	    : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
+	};
+
+/***/ },
+/* 61 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var ITERATOR     = __webpack_require__(52)('iterator')
+	  , SAFE_CLOSING = false;
+	
+	try {
+	  var riter = [7][ITERATOR]();
+	  riter['return'] = function(){ SAFE_CLOSING = true; };
+	  Array.from(riter, function(){ throw 2; });
+	} catch(e){ /* empty */ }
+	
+	module.exports = function(exec, skipClosing){
+	  if(!skipClosing && !SAFE_CLOSING)return false;
+	  var safe = false;
+	  try {
+	    var arr  = [7]
+	      , iter = arr[ITERATOR]();
+	    iter.next = function(){ return {done: safe = true}; };
+	    arr[ITERATOR] = function(){ return iter; };
+	    exec(arr);
+	  } catch(e){ /* empty */ }
+	  return safe;
+	};
+
+/***/ },
+/* 62 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.chunk = chunk;
+	/**
+	 * Chunk an array
+	 */
+	function chunk(input, chunk) {
+	  var i = void 0,
+	      j = void 0;
+	  var array = [];
+	  var chunks = [];
+	
+	  for (i = 0, j = input.length; i < j; i += chunk) {
+	    array = input.slice(i, i + chunk);
+	    chunks.push(array);
+	  }
+	
+	  return chunks;
+	}
+
+/***/ },
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){with(this) {
@@ -8146,8 +9223,8 @@
 	    directives: [{
 	      name: "model",
 	      rawName: "v-model",
-	      value: (date),
-	      expression: "date"
+	      value: (dateInput),
+	      expression: "dateInput"
 	    }],
 	    staticClass: "form-control",
 	    attrs: {
@@ -8155,10 +9232,11 @@
 	      "name": name,
 	      "id": id,
 	      "placeholder": placeholder,
+	      "aria-haspopup": "true",
 	      "aria-expanded": isOpen
 	    },
 	    domProps: {
-	      "value": _s(date)
+	      "value": _s(dateInput)
 	    },
 	    on: {
 	      "focus": open,
@@ -8168,51 +9246,111 @@
 	      },
 	      "input": function($event) {
 	        if ($event.target.composing) return;
-	        date = $event.target.value
+	        dateInput = $event.target.value
 	      }
 	    }
 	  }), " ", _h('div', {
-	    staticClass: "dropdown-menu"
+	    staticClass: "datepicker dropdown-menu"
 	  }, [_h('ul', {
 	    staticClass: "list-unstyled"
 	  }, [_h('li', [_h('table', {
-	    staticClass: "table-condensed"
-	  }, [_m(0), " ", _h('tbody', [_l((visibleWeeks), function(week) {
-	    return _h('tr', [_l((week), function(day) {
-	      return _h('td', {
-	        staticClass: "day"
-	      }, [_s(day.getDate())])
-	    })])
-	  })])])])])])])
-	}},staticRenderFns: [function (){with(this) {
-	  return _h('thead', [_h('tr', [_h('th', {
-	    staticClass: "month-previous"
+	    class: [{
+	      'hidden': view !== 'calendar'
+	    }, 'calendar', 'table-condensed']
+	  }, [_h('thead', [_h('tr', [_h('th', {
+	    staticClass: "previous-month",
+	    on: {
+	      "click": previousMonth
+	    }
 	  }, [_h('span', {
-	    staticClass: "glyphicon glyphicon-chevron-left"
+	    class: icons.left
 	  })]), " ", _h('th', {
-	    staticClass: "month-current",
+	    staticClass: "current-month",
 	    attrs: {
 	      "colspan": "5"
 	    }
-	  }, ["February 2017"]), " ", _h('th', {
-	    staticClass: "month-next"
+	  }, [_s(months[month]) + " " + _s(year)]), " ", _h('th', {
+	    staticClass: "next-month",
+	    on: {
+	      "click": nextMonth
+	    }
 	  }, [_h('span', {
-	    staticClass: "glyphicon glyphicon-chevron-right"
-	  })])]), " ", _h('tr', [_h('th', {
-	    staticClass: "day-of-week"
-	  }, ["Su"]), " ", _h('th', {
-	    staticClass: "day-of-week"
-	  }, ["Mo"]), " ", _h('th', {
-	    staticClass: "day-of-week"
-	  }, ["Tu"]), " ", _h('th', {
-	    staticClass: "day-of-week"
-	  }, ["We"]), " ", _h('th', {
-	    staticClass: "day-of-week"
-	  }, ["Th"]), " ", _h('th', {
-	    staticClass: "day-of-week"
-	  }, ["Fr"]), " ", _h('th', {
-	    staticClass: "day-of-week"
-	  }, ["Sa"])])])
+	    class: icons.right
+	  })])]), " ", _h('tr', [_l((daysOfWeek), function(dayOfWeek) {
+	    return _h('th', {
+	      staticClass: "day-of-week"
+	    }, [_s(dayOfWeek)])
+	  })])]), " ", _h('tbody', [_l((visibleWeeks), function(week) {
+	    return _h('tr', [_l((week), function(day) {
+	      return _h('td', {
+	        class: ['day', {
+	          'muted': !isWithinCurrentMonth(day),
+	          'selected': isSelected(day)
+	        }],
+	        on: {
+	          "click": function($event) {
+	            select(day)
+	          }
+	        }
+	      }, ["\n                " + _s(day.getDate()) + "\n              "])
+	    })])
+	  })])]), " ", _h('table', {
+	    class: [{
+	      'hidden': view !== 'clock'
+	    }, 'clock', 'table-condensed']
+	  }, [_h('tbody', [_h('tr', [_h('td', {
+	    staticClass: "set-clock",
+	    on: {
+	      "click": function($event) {
+	        setClock('hours', 'increment')
+	      }
+	    }
+	  }, [_h('span', {
+	    class: icons.up
+	  })]), " ", _m(0), " ", _h('td', {
+	    staticClass: "set-clock",
+	    on: {
+	      "click": function($event) {
+	        setClock('minutes', 'increment')
+	      }
+	    }
+	  }, [_h('span', {
+	    class: icons.up
+	  })])]), " ", _h('tr', [_h('td', [_s(pad(date.getHours()))]), " ", _m(1), " ", _h('td', [_s(pad(date.getMinutes()))])]), " ", _h('tr', [_h('td', {
+	    staticClass: "set-clock",
+	    on: {
+	      "click": function($event) {
+	        setClock('hours', 'decrement')
+	      }
+	    }
+	  }, [_h('span', {
+	    class: icons.down
+	  })]), " ", _m(2), " ", _h('td', {
+	    staticClass: "set-clock",
+	    on: {
+	      "click": function($event) {
+	        setClock('minutes', 'decrement')
+	      }
+	    }
+	  }, [_h('span', {
+	    class: icons.down
+	  })])])])]), " ", (mode === 'datetime') ? _h('div', {
+	    staticClass: "switcher"
+	  }, [(view === 'clock') ? _h('span', {
+	    on: {
+	      "click": toggleView
+	    }
+	  }, [_s(formatDate(date))]) : _h('span', {
+	    on: {
+	      "click": toggleView
+	    }
+	  }, [_s(formatTime(date))]), " "]) : _e()])])])])
+	}},staticRenderFns: [function (){with(this) {
+	  return _h('td')
+	}},function (){with(this) {
+	  return _h('td', [":"])
+	}},function (){with(this) {
+	  return _h('td')
 	}}]}
 	if (false) {
 	  module.hot.accept()
@@ -8222,19 +9360,19 @@
 	}
 
 /***/ },
-/* 9 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	
 	/* styles */
-	__webpack_require__(10)
+	__webpack_require__(65)
 	
 	/* script */
-	__vue_exports__ = __webpack_require__(12)
+	__vue_exports__ = __webpack_require__(67)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(13)
+	var __vue_template__ = __webpack_require__(68)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -8268,13 +9406,13 @@
 
 
 /***/ },
-/* 10 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(11);
+	var content = __webpack_require__(66);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(6)(content, {});
@@ -8294,7 +9432,7 @@
 	}
 
 /***/ },
-/* 11 */
+/* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(5)();
@@ -8308,7 +9446,7 @@
 
 
 /***/ },
-/* 12 */
+/* 67 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -8390,7 +9528,7 @@
 	};
 
 /***/ },
-/* 13 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){with(this) {
@@ -8437,19 +9575,19 @@
 	}
 
 /***/ },
-/* 14 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	
 	/* styles */
-	__webpack_require__(15)
+	__webpack_require__(70)
 	
 	/* script */
-	__vue_exports__ = __webpack_require__(17)
+	__vue_exports__ = __webpack_require__(72)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(21)
+	var __vue_template__ = __webpack_require__(76)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -8483,13 +9621,13 @@
 
 
 /***/ },
-/* 15 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(16);
+	var content = __webpack_require__(71);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(6)(content, {});
@@ -8509,7 +9647,7 @@
 	}
 
 /***/ },
-/* 16 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(5)();
@@ -8523,7 +9661,7 @@
 
 
 /***/ },
-/* 17 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8532,7 +9670,7 @@
 	  value: true
 	});
 	
-	var _debounce = __webpack_require__(18);
+	var _debounce = __webpack_require__(73);
 	
 	var _debounce2 = _interopRequireDefault(_debounce);
 	
@@ -8540,7 +9678,7 @@
 	
 	var _vue2 = _interopRequireDefault(_vue);
 	
-	var _vueResource = __webpack_require__(20);
+	var _vueResource = __webpack_require__(75);
 	
 	var _vueResource2 = _interopRequireDefault(_vueResource);
 	
@@ -8755,7 +9893,7 @@
 	};
 
 /***/ },
-/* 18 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -8763,7 +9901,7 @@
 	 * Module dependencies.
 	 */
 	
-	var now = __webpack_require__(19);
+	var now = __webpack_require__(74);
 	
 	/**
 	 * Returns a function, that, as long as it continues to be invoked, will not
@@ -8814,7 +9952,7 @@
 
 
 /***/ },
-/* 19 */
+/* 74 */
 /***/ function(module, exports) {
 
 	module.exports = Date.now || now
@@ -8825,7 +9963,7 @@
 
 
 /***/ },
-/* 20 */
+/* 75 */
 /***/ function(module, exports) {
 
 	/*!
@@ -10348,7 +11486,7 @@
 	module.exports = plugin;
 
 /***/ },
-/* 21 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){with(this) {

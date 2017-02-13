@@ -22,6 +22,14 @@ describe('Datepicker', () => {
     expect(data.date).to.be.null;
   });
 
+  it('sets dateInput when created', () => {
+    const vm = initVM(Datepicker, {
+      value: '2017-02-01'
+    });
+
+    expect(vm.dateInput).to.equal('2017-02-01');
+  });
+
   it('should select all days in a month', () => {
     const vm = initVM(Datepicker);
 
@@ -55,9 +63,26 @@ describe('Datepicker', () => {
   it('should format date', () => {
     const vm = initVM(Datepicker);
 
-    const formattedDate = vm.formatDate(new Date(2017, 1, 1));
+    vm.mode = 'datetime';
 
-    expect(formattedDate).to.equal('2017-02-01');
+    const date = new Date(2017, 1, 1, 12, 10, 10);
+
+    expect(vm.formatDate(date)).to.equal('2017-02-01');
+    expect(vm.formatTime(date)).to.equal('12:10');
+    expect(vm.formatDateTime(date)).to.equal('2017-02-01 12:10');
+  });
+
+  it('should recognise a date within current month', () => {
+    const vm = initVM(Datepicker);
+
+    vm.month = 1;
+    vm.year = 2017;
+
+    const date1 = new Date(2017, 1, 1, 12, 10, 10);
+    const date2 = new Date(2017, 5, 1, 12, 10, 10);
+
+    expect(vm.isWithinCurrentMonth(date1)).to.be.true;
+    expect(vm.isWithinCurrentMonth(date2)).to.be.false;
   });
 
   it('should parse date', () => {

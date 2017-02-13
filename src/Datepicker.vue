@@ -60,7 +60,7 @@
               </tr>
             </tbody>
           </table>
-          <div class="switcher">
+          <div class="switcher" v-if="mode === 'datetime'">
             <span @click="toggleView" v-if="view === 'clock'">{{ formatDate(date) }}</span>
             <span @click="toggleView" v-else>{{ formatTime(date) }}</span>
           </div>
@@ -75,10 +75,6 @@ import { chunk } from './lib/array.js';
 
 export default {
   props: {
-    value: {
-      type: String,
-      default: ''
-    },
     name: {
       type: String,
       default: ''
@@ -91,9 +87,9 @@ export default {
       type: String,
       default: ''
     },
-    time: {
-      type: Boolean,
-      default: true
+    mode: {
+      type: String,
+      default: 'date'
     },
     daysOfWeek: {
       type: Array,
@@ -204,7 +200,7 @@ export default {
     formatDateTime (date) {
       let formattedDate = this.formatDate(date);
 
-      if (this.time) {
+      if (this.mode === 'datetime') {
         formattedDate = formattedDate + ' ' + this.formatTime(date);
       }
 

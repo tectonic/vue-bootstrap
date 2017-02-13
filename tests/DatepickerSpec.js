@@ -46,4 +46,12 @@ describe('Datepicker', () => {
     expect(futureDays.length).to.equal(4);
     expect(futureDays[futureDays.length - 1].getDay()).to.equal(6); // Saturday
   });
+
+  it('should format date', () => {
+    const vm = initVM(Datepicker);
+
+    const formattedDate = vm.formatDate(new Date(2017, 1, 1));
+
+    expect(formattedDate).to.equal('2017-02-01');
+  });
 });

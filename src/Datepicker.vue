@@ -1,7 +1,7 @@
 <template>
   <div :class="[{ 'open': isOpen }, 'dropdown']">
     <input type="text"
-      v-model="date"
+      v-model="formattedDate"
       :name="name"
       :id="id"
       :placeholder="placeholder"
@@ -26,7 +26,9 @@
             </thead>
             <tbody>
               <tr v-for="week in visibleWeeks">
-                <td class="day" v-for="day in week">{{ day.getDate() }}</td>
+                <td class="day" v-for="day in week" :class="[{ 'selectable': isSelectable(day) }, 'day']" @click="select(day)">
+                  {{ day.getDate() }}
+                </td>
               </tr>
             </tbody>
           </table>
@@ -41,6 +43,10 @@ import { chunk } from './lib/array.js';
 
 export default {
   props: {
+    value: {
+      type: String,
+      default: ''
+    },
     name: {
       type: String,
       default: ''
@@ -72,6 +78,7 @@ export default {
   data () {
     return {
       date: new Date(),
+      formattedDate: '',
       month: new Date().getMonth(),
       year: new Date().getFullYear(),
       isOpen: false
@@ -110,6 +117,31 @@ export default {
         this.month = 11;
         this.year--;
       }
+    },
+    isSelectable (date) {
+      return date.getMonth() === this.month && date.getFullYear() === this.year;
+    },
+    select (date) {
+      if (!this.isSelectable(date)) {
+        return;
+      }
+
+      this.date = date;
+      this.formattedDate = this.formatDate(date);
+      this.isOpen = false;
+    },
+    formatDate (date, withHours) {
+      let formattedDate = date.getFullYear()
+        + '-' + ('0' + (date.getMonth() + 1)).slice(-2)
+        + '-' + ('0' + date.getDate()).slice(-2);
+
+      if (withHours) {
+        formattedDate = formattedDate
+          + ' ' + ('0' + date.getHours()).slice(-2)
+          + ":" + ('0' + date.getMinutes()).slice(-2);
+      }
+
+      return formattedDate;
     },
     daysInMonth (month, year) {
      let date = new Date(year, month, 1);
@@ -171,4 +203,16 @@ export default {
 </script>
 
 <style>
+  .day {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 2px;
+  }
+
+  .day:hover {
+    background-color: #f2f2f2;
+    cursor: pointer;
+  }
 </style>

@@ -118,7 +118,7 @@ export default {
           right: 'glyphicon glyphicon-chevron-right',
           up: 'glyphicon glyphicon-chevron-up',
           down: 'glyphicon glyphicon-chevron-down'
-        }
+        };
       }
     }
   },
@@ -134,10 +134,10 @@ export default {
   },
   computed: {
     visibleWeeks () {
-      let days = this.daysInMonth(this.month, this.year);
+      const days = this.daysInMonth(this.month, this.year);
 
-      let pastDays = this.pastDays(days);
-      let futureDays = this.futureDays(days);
+      const pastDays = this.pastDays(days);
+      const futureDays = this.futureDays(days);
 
       // Chunk days into weeks
       return chunk([...pastDays, ...days, ...futureDays], 7);
@@ -158,7 +158,7 @@ export default {
     getDateFromInput () {
       const date = this.parseDate(this.dateInput);
 
-      this.date = date ? date : new Date();
+      this.date = date || new Date();
     },
     toggleView () {
       this.view = this.view === 'calendar' ? 'clock' : 'calendar';
@@ -183,9 +183,9 @@ export default {
       return date.getMonth() === this.month && date.getFullYear() === this.year;
     },
     isSelected (date) {
-      return date.getDate() === this.date.getDate()
-        && date.getMonth() === this.date.getMonth()
-        && date.getFullYear() === this.date.getFullYear();
+      return date.getDate() === this.date.getDate() &&
+        date.getMonth() === this.date.getMonth() &&
+        date.getFullYear() === this.date.getFullYear();
     },
     select (date) {
       this.date = new Date(
@@ -214,9 +214,9 @@ export default {
       return formattedDate;
     },
     formatDate (date) {
-      return date.getFullYear()
-        + '-' + this.pad(date.getMonth() + 1)
-        + '-' + this.pad(date.getDate());
+      return date.getFullYear() +
+        '-' + this.pad(date.getMonth() + 1) +
+        '-' + this.pad(date.getDate());
     },
     formatTime (date) {
       return this.pad(date.getHours()) + ':' + this.pad(date.getMinutes());
@@ -239,22 +239,22 @@ export default {
       return parsedDate;
     },
     daysInMonth (month, year) {
-     let date = new Date(year, month, 1);
-     let days = [];
+      const date = new Date(year, month, 1);
+      const days = [];
 
-     while (date.getMonth() === month) {
+      while (date.getMonth() === month) {
         days.push(new Date(date));
         date.setDate(date.getDate() + 1);
-     }
+      }
 
-     return days;
+      return days;
     },
     pastDays (daysInMonth) {
-      let fromDate = daysInMonth[0];
+      const fromDate = daysInMonth[0];
 
       let i = 1;
       let day;
-      let days = [];
+      const days = [];
 
       do {
         day = new Date(fromDate);
@@ -266,11 +266,11 @@ export default {
       return days;
     },
     futureDays (daysInMonth) {
-      let fromDate = daysInMonth[daysInMonth.length - 1];
+      const fromDate = daysInMonth[daysInMonth.length - 1];
 
       let i = 1;
       let day;
-      let days = [];
+      const days = [];
 
       do {
         day = new Date(fromDate);
@@ -282,8 +282,8 @@ export default {
       return days;
     },
     setClock (type, operation) {
-      let hours = this.date.getHours();
-      let minutes = Math.round(this.date.getMinutes() / 5) * 5;
+      const hours = this.date.getHours();
+      const minutes = Math.round(this.date.getMinutes() / 5) * 5;
 
       this.date = new Date(
         this.date.getFullYear(),
@@ -305,7 +305,7 @@ export default {
       if (this.$el !== null && !this.$el.contains(event.target)) {
         this.close();
       }
-    }
+    };
 
     document.addEventListener('click', this.onClickOutside);
   },

@@ -45,9 +45,9 @@
                 </td>
               </tr>
               <tr>
-                <td>{{ pad(date.getHours()) }}</td>
-                <td>:</td>
-                <td>{{ pad(date.getMinutes()) }}</td>
+                <td class="hours">{{ pad(date.getHours()) }}</td>
+                <td class="colon">:</td>
+                <td class="minutes">{{ pad(date.getMinutes()) }}</td>
               </tr>
               <tr>
                 <td class="set-clock" @click="setClock('hours', 'decrement')">
@@ -371,6 +371,12 @@ export default {
   .datepicker .day.selected:hover {
     background-color: #333;
     color: #fff;
+  }
+
+  .datepicker .clock .hours,
+  .datepicker .clock .minutes,
+  .datepicker .clock .colon {
+    font-size: 1.25em;
   }
 
   .datepicker .switcher {

@@ -79,6 +79,10 @@ export default {
       type: String,
       default: ''
     },
+    value: {
+      type: String,
+      default: ''
+    },
     id: {
       type: String,
       default: ''
@@ -280,6 +284,8 @@ export default {
     }
   },
   mounted () {
+    this.dateInput = this.value;
+
     this.getDateFromInput();
 
     this.onClickOutside = (event) => {

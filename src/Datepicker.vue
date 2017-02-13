@@ -17,9 +17,9 @@
           <table :class="[{ 'hidden': view !== 'calendar' }, 'calendar', 'table-condensed']">
             <thead>
               <tr>
-                <th class="month-previous" @click="previousMonth"><span class="glyphicon glyphicon-chevron-left"></span></th>
+                <th class="month-previous" @click="previousMonth"><span :class="icons.left"></span></th>
                 <th class="month-current" colspan="5">{{ months[month] }} {{ year }}</th>
-                <th class="month-next" @click="nextMonth"><span class="glyphicon glyphicon-chevron-right"></span></th>
+                <th class="month-next" @click="nextMonth"><span :class="icons.right"></span></th>
               </tr>
               <tr>
                 <th class="day-of-week" v-for="dayOfWeek in daysOfWeek">{{ dayOfWeek }}</th>
@@ -37,11 +37,11 @@
             <tbody>
               <tr>
                 <td class="clock-set">
-                  <span class="glyphicon glyphicon-chevron-up"></span>
+                  <span :class="icons.up"></span>
                 </td>
                 <td></td>
                 <td class="clock-set">
-                  <span class="glyphicon glyphicon-chevron-up"></span>
+                  <span :class="icons.up"></span>
                 </td>
               </tr>
               <tr>
@@ -51,11 +51,11 @@
               </tr>
               <tr>
                 <td class="clock-set">
-                  <span class="glyphicon glyphicon-chevron-down"></span>
+                  <span :class="icons.down"></span>
                 </td>
                 <td></td>
                 <td class="clock-set">
-                  <span class="glyphicon glyphicon-chevron-down"></span>
+                  <span :class="icons.down"></span>
                 </td>
               </tr>
             </tbody>
@@ -108,6 +108,17 @@ export default {
           'January', 'February', 'March', 'April', 'May', 'June',
           'July', 'August', 'September', 'October', 'November', 'December'
         ];
+      }
+    },
+    icons: {
+      type: Object,
+      default: () => {
+        return {
+          left: 'glyphicon glyphicon-chevron-left',
+          right: 'glyphicon glyphicon-chevron-right',
+          up: 'glyphicon glyphicon-chevron-up',
+          down: 'glyphicon glyphicon-chevron-down'
+        }
       }
     }
   },

@@ -1,18 +1,16 @@
 <template>
   <span>
-    <span ref="trigger" @click="onClick" @mouseover="onMouseover" @mouseout="onMouseout">
+    <span ref="trigger" @click="onClick" @mouseover="onMouseover" @mouseout="onMouseout" :aria-describedby="id">
       <slot></slot>
     </span>
     <transition :name="effect">
-      <div ref="popover" v-if="isOpen" :class="['popover', { 'in': isOpen }, placement]">
+      <div ref="popover" v-if="isOpen" :class="['popover', { 'in': isOpen }, placement]" role="tooltip" :id="id">
         <div class="arrow"></div>
         <h3 class="popover-title" v-if="title">
           <slot name="title">{{ title }}</slot>
         </h3>
         <div class="popover-content">
-          <slot name="content">
-            <span v-html="content"></span>
-          </slot>
+          <slot name="content"></slot>
         </div>
       </div>
     </transition>
@@ -49,7 +47,8 @@ export default {
   },
   data () {
     return {
-      isOpen: false
+      isOpen: false,
+      id: 'popover-' + this._uid
     };
   },
   methods: {

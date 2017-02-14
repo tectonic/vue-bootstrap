@@ -85,12 +85,25 @@ describe('Datepicker', () => {
     expect(vm.isWithinCurrentMonth(date2)).to.be.false;
   });
 
+  it('should validate date format', () => {
+    const vm = initVM(Datepicker);
+
+    const date1 = '2017-02-21';
+    const date2 = '2017-02-21 12:10';
+    const date3 = '2017/02/21 12.10';
+
+    expect(vm.validFormat(date1)).to.be.true;
+    expect(vm.validFormat(date2)).to.be.true;
+    expect(vm.validFormat(date3)).to.be.false;
+  });
+
   it('should parse date', () => {
     const vm = initVM(Datepicker);
 
     const parsedDate = vm.parseDate('2017-02-21');
 
     expect(parsedDate).to.be.a('date');
+
     expect(parsedDate.getFullYear()).to.equal(2017);
     expect(parsedDate.getMonth()).to.equal(1);
     expect(parsedDate.getDate()).to.equal(21);

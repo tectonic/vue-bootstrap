@@ -235,12 +235,20 @@ export default {
     pad (value) {
       return ('0' + value).slice(-2);
     },
+    validFormat (date) {
+      // Accept dates in the format of '2017-03-01' or '2017-03-01 12:10'.
+      return (date.length === 10 && /^[0-9-]+$/.test(date)) ||
+        (date.length === 16 && /^[0-9-\s:]+$/.test(date));
+    },
     parseDate (date) {
       let parsedDate;
 
-      // Accept dates in the format of '2017-03-01' or '2017-03-01 12:10'.
-      if (date && (date.length === 10 && /^[0-9-]+$/.test(date)) || (date.length === 16 && /^[0-9-\s:]+$/.test(date))) {
-        parsedDate = new Date(date.substring(0, 4), date.substring(5, 7) - 1, date.substring(8, 10));
+      if (date && this.validFormat(date)) {
+        parsedDate = new Date(
+          date.substring(0, 4),
+          date.substring(5, 7) - 1,
+          date.substring(8, 10)
+        );
 
         if (date.length === 16) {
           parsedDate.setHours(date.substring(11, 13));

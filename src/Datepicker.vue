@@ -98,7 +98,10 @@ export default {
     },
     mode: {
       type: String,
-      default: 'date'
+      default: 'date',
+      validator: (value) => {
+        return value === 'date' || value === 'datetime';
+      }
     },
     containerClass: {
       type: String,

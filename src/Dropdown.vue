@@ -43,6 +43,12 @@ export default {
       default: ''
     }
   },
+  data () {
+    return {
+      closeTimeout: 200,
+      isOpen: false
+    };
+  },
   methods: {
     toggle () {
       this.isOpen = !this.isOpen;
@@ -50,12 +56,6 @@ export default {
     close () {
       this.isOpen = false;
     }
-  },
-  data () {
-    return {
-      closeTimeout: 200,
-      isOpen: false
-    };
   },
   mounted () {
     const button = this.$refs.button;

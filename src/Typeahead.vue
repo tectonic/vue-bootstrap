@@ -76,6 +76,18 @@ export default {
       default: () => {}
     }
   },
+  data () {
+    return {
+      query: '',
+      isDropdownOpen: false,
+      items: [],
+      currentItem: 0,
+      selectedItem: {
+        id: '',
+        value: ''
+      }
+    };
+  },
   computed: {
     filteredItems () {
       if (!this.query) {
@@ -180,18 +192,6 @@ export default {
 
       this.query = value;
     }
-  },
-  data () {
-    return {
-      query: '',
-      isDropdownOpen: false,
-      items: [],
-      currentItem: 0,
-      selectedItem: {
-        id: '',
-        value: ''
-      }
-    };
   },
   mounted () {
     this.query = this.initialValue;

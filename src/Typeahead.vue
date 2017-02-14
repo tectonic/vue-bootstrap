@@ -1,5 +1,5 @@
 <template>
-  <div :class="[{ 'open': isDropdownOpen }, 'dropdown']">
+  <div :class="[{ 'open': isOpen }, 'dropdown']">
     <input type="text"
       v-model="query"
       :name="name"
@@ -10,7 +10,7 @@
       @keydown.up="markPreviousItem"
       @keydown.down="markNextItem"
       @keydown.enter.prevent="selectItem"
-      @keydown.esc="resetDropdown"
+      @keydown.esc="close"
       class="form-control"
       autocomplete="off"
       ref="input"
@@ -79,7 +79,7 @@ export default {
   data () {
     return {
       query: '',
-      isDropdownOpen: false,
+      isOpen: false,
       items: [],
       currentItem: 0,
       selectedItem: {
@@ -108,7 +108,7 @@ export default {
   },
   methods: {
     onInput () {
-      this.openDropdown();
+      this.open();
 
       if (this.src && this.query) {
         this.fetchItems();
@@ -119,16 +119,16 @@ export default {
         this.items = response.data;
 
         // New items arrived - open drop-down menu
-        this.openDropdown();
+        this.open();
       }, (response) => {
         console.log('Typeahead: connection error');
       });
     },
-    openDropdown () {
-      this.isDropdownOpen = this.filteredItems.length > 0;
+    open () {
+      this.isOpen = this.filteredItems.length > 0;
     },
-    resetDropdown () {
-      this.isDropdownOpen = false;
+    close () {
+      this.isOpen = false;
       this.currentItem = 0;
     },
     isMarked (index) {
@@ -155,13 +155,13 @@ export default {
       this.selectedItem = this.filteredItems[this.currentItem];
       this.query = this.selectedItem.value;
 
-      this.resetDropdown();
+      this.close();
 
       // Fire the callback
       this.onSelect(this.selectedItem);
     },
     onBlur () {
-      this.resetDropdown();
+      this.close();
 
       // If the input field contains initial value, reset selected
       // item to initial state.

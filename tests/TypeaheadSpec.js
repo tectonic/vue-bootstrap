@@ -14,7 +14,7 @@ describe('Typeahead', () => {
     const data = Typeahead.data();
 
     expect(data.query).to.equal('');
-    expect(data.isDropdownOpen).to.be.false;
+    expect(data.isOpen).to.be.false;
     expect(data.items).to.deep.equal([]);
     expect(data.currentItem).to.equal(0);
   });
@@ -45,7 +45,7 @@ describe('Typeahead', () => {
     vm.onInput();
 
     Vue.nextTick(() => {
-      expect(vm.isDropdownOpen).to.be.true;
+      expect(vm.isOpen).to.be.true;
       done();
     });
   });

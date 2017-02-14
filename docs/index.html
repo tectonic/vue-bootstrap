@@ -248,6 +248,77 @@
           </table>
         </div>
       </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Popover</h2>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="form-group">
+                <label for="menu">Popover</label>
+                <div>
+                  <popover title="Hello world!" placement="right">
+                    <a class="btn btn-primary">Click me</a>
+                    <div slot="content">
+                      This is the content.
+                    </div>
+                  </popover>
+                </div>
+              </div>
+<pre>
+  &lt;popover title="Hello world!" placement="right"&gt;
+    &lt;a class="btn btn-primary">Click me&lt;/a&gt;
+    &lt;div slot="content"&gt;
+      This is the content.
+    &lt;/div&gt;
+  &lt;/popover&gt;
+</pre>
+            </div>
+          </div>
+          <h3>Props:</h3>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>title</td>
+                <td>String</td>
+                <td></td>
+                <td>The title.</td>
+              </tr>
+              <tr>
+                <td>content</td>
+                <td>String</td>
+                <td></td>
+                <td>The content.</td>
+              </tr>
+              <tr>
+                <td>placement</td>
+                <td>String</td>
+                <td>top</td>
+                <td>Placement (<code>top</code>, <code>bottom</code>, <code>left</code> or <code>right</code>).</td>
+              </tr>
+              <tr>
+                <td>effect</td>
+                <td>String</td>
+                <td>fade</td>
+                <td>Effect (currently only the <code>fade</code> effect is supported).</td>
+              </tr>
+              <tr>
+                <td>trigger</td>
+                <td>String</td>
+                <td>click</td>
+                <td>Trigger (<code>click</code>, <code>hover</code> or <code>manual</code>).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <hr>
       <div class="row">
         <div class="col-xs-12">

@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "dependencies": {
     "debounce": "^1.0.0",
-    "vue": "^2.0.3",
+    "vue": "~2.1.0",
+    "vue-template-compiler": "~2.1.0",
     "vue-resource": "^1.0.3"
   },
   "devDependencies": {

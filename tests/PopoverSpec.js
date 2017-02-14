@@ -23,8 +23,10 @@ describe('Popover', () => {
 
   it('renders title and content', (done) => {
     const vm = new Vue({
-      template: `<popover ref="test" title="Hello world!">
-        <a class="btn btn-primary">Click me</a><span slot="content">This is the content.</span></popover>`,
+      template:  `<popover ref="test" title="Hello world!">
+                    <a class="btn btn-primary">Click me</a>
+                    <span slot="content">This is the content.</span>
+                  </popover>`,
       components: {
         Popover
       }

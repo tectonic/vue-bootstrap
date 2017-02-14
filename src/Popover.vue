@@ -85,7 +85,7 @@ export default {
     },
     setPosition () {
       const popover = this.$refs.popover;
-      const trigger = this.$refs.trigger.children[0];
+      const trigger = this.$refs.trigger;
 
       let top, left;
 

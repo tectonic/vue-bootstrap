@@ -87,9 +87,14 @@ export default {
     },
     setPosition () {
       const popover = this.$refs.popover;
-      const trigger = this.$refs.trigger;
-
+      let trigger = this.$refs.trigger;
       let top, left;
+
+      // If the trigger contains elements position the popover in relation
+      // to the first element found.
+      if (trigger.children.length > 0) {
+        trigger = this.$refs.trigger.children[0];
+      }
 
       switch (this.placement) {
         case 'top':

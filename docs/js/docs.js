@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Datepicker from '../../src/Datepicker.vue';
 import Dropdown from '../../src/Dropdown.vue';
+import Popover from '../../src/Popover.vue';
 import Typeahead from '../../src/Typeahead.vue';
 
 new Vue({
@@ -8,6 +9,7 @@ new Vue({
   components: {
     Datepicker,
     Dropdown,
+    Popover,
     Typeahead
   },
   data () {

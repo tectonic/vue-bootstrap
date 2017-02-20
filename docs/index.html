@@ -5,332 +5,356 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>vue-bootstrap - bootstrap components in Vue.js</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" type="text/css" rel="stylesheet">
+  <style>
+    h1, .h1, h2, .h2, h3, .h3 {
+      margin: 20px 0;
+    }
+    .jumbotron {
+      text-align: center;
+      background-color: #2f79b9;
+      color: #fff;
+    }
+    .island {
+      margin-bottom: 50px;
+    }
+    .back-to-github {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+    #app .datepicker .day.selected {
+      background-color: #2f79b9;
+    }
+  </style>
 </head>
 <body>
   <div id="app">
+    <div class="jumbotron">
+      <a href="https://github.com/tectonic/vue-bootstrap" class="btn btn-primary back-to-github">Back to GitHub</a>
+      <div class="container">
+       <div class="row">
+          <div class="col-xs-12">
+            <h1>vue-bootstrap</h1>
+            <p>Bootstrap components in Vue.js</p>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container">
       <div class="row">
-        <div class="col-xs-12">
-          <h1>vue-bootstrap</h1>
-          <p>Bootstrap components in Vue.js</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <h2>Typeahead</h2>
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <div class="form-group">
-                <label for="typeahead-input">Text input with autocomplete</label>
-                <typeahead id="typeahead-input" placeholder="Type a name" :limit="16" :initial-items="typeaheadItems" :on-select="onSelect"></typeahead>
-              </div>
-<pre>
-&lt;typeahead id="typeahead-input" placeholder="Type a name" :limit="16" :initial-items="typeaheadItems" :on-select="onSelect"&gt;&lt;/typeahead&gt;
-</pre>
-            </div>
-          </div>
-          <h3>Props:</h3>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>initial-items</td>
-                <td>Array</td>
-                <td></td>
-                <td>An array of items that will be used to display autocomplete suggestions (<code>[{ id: 1, value: 'hey' }]</code>).</td>
-              </tr>
-              <tr>
-                <td>initial-value</td>
-                <td>String</td>
-                <td></td>
-                <td>Initial value of the autocomplete suggestion.</td>
-              </tr>
-              <tr>
-                <td>initial-id</td>
-                <td>String</td>
-                <td></td>
-                <td>Initial id of the autocomplete suggestion.</td>
-              </tr>
-              <tr>
-                <td>src</td>
-                <td>String</td>
-                <td></td>
-                <td>An URL that will be used to fetch autocomplete suggestions (such as: /user/search?q=).<br>
-                  A query will be appended to this URL.<br>
-                  There is no need to define <code>initial-items</code> when a remote source is defined.</td>
-              </tr>
-              <tr>
-                <td>id</td>
-                <td>String</td>
-                <td></td>
-                <td>The <code>id</code> attribute of the input element.</td>
-              </tr>
-              <tr>
-                <td>placeholder</td>
-                <td>String</td>
-                <td></td>
-                <td>The <code>placeholder</code> attribute of the input element.</td>
-              </tr>
-              <tr>
-                <td>limit</td>
-                <td>Number</td>
-                <td>0</td>
-                <td>Limit the number of autocomplete suggestions. No limit is applied by default.</td>
-              </tr>
-              <tr>
-                <td>name</td>
-                <td>String</td>
-                <td></td>
-                <td>A name of the input field.</td>
-              </tr>
-              <tr>
-                <td>hidden-field-name</td>
-                <td>String</td>
-                <td></td>
-                <td>A name of a hidden input field that will be populated with autocomplete suggestion's id.</td>
-              </tr>
-              <tr>
-                <td>on-select</td>
-                <td>Function</td>
-                <td></td>
-                <td>Callback.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <h2>Dropdown</h2>
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <div class="form-group">
-                <label for="menu">Dropdown</label>
-                <dropdown label="Dropdown" id="menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                </dropdown>
-              </div>
-<pre>
-&lt;dropdown label="Dropdown" id="menu"&gt;
-  &lt;li&gt;&lt;a href="#">Action&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="#">Another action&lt;/a&gt;&lt;/li&gt;
-&lt;/dropdown&gt;
-</pre>
-            </div>
-          </div>
-          <h3>Props:</h3>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>id</td>
-                <td>String</td>
-                <td></td>
-                <td>The <code>id</code> attribute of the button.</td>
-              </tr>
-              <tr>
-                <td>label</td>
-                <td>String</td>
-                <td></td>
-                <td>The label of the button.</td>
-              </tr>
-              <tr>
-                <td>button-class</td>
-                <td>String</td>
-                <td>btn btn-default</td>
-                <td>The class/classes of the button element.</td>
-              </tr>
-              <tr>
-                <td>container-class</td>
-                <td>String</td>
-                <td></td>
-                <td>The class/classes of the container element.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <h2>Datepicker</h2>
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <div class="form-group">
-                <label for="datepicker">Datepicker</label>
-                <datepicker value="2017-03-01 12:10" mode="datetime"></datepicker>
-              </div>
+        <div class="col-xs-12 col-md-8 col-md-offset-2">
+          <div class="island">
+            <h1>Datepicker</h1>
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <div class="form-group">
+                  <label for="datepicker">Datepicker</label>
+                  <datepicker value="2017-03-01 12:10" mode="datetime"></datepicker>
+                </div>
 <pre>
 &lt;datepicker value="2017-03-01 12:10" mode="datetime"&gt;&lt;/datepicker&gt;
 </pre>
-            </div>
-          </div>
-          <h3>Props:</h3>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>name</td>
-                <td>String</td>
-                <td></td>
-                <td>The <code>name</code> attribute of the input element.</td>
-              </tr>
-              <tr>
-                <td>value</td>
-                <td>String</td>
-                <td></td>
-                <td>The initial value (date) can have a format of '2017-03-01' or '2017-03-01 12:10'</td>
-              </tr>
-              <tr>
-                <td>id</td>
-                <td>String</td>
-                <td></td>
-                <td>The <code>id</code> attribute of the input element.</td>
-              </tr>
-              <tr>
-                <td>placeholder</td>
-                <td>String</td>
-                <td></td>
-                <td>The <code>placeholder</code> attribute of the input element.</td>
-              </tr>
-              <tr>
-                <td>mode</td>
-                <td>String</td>
-                <td>date</td>
-                <td>The <code>mode</code> can be set to <code>date</code> or <code>datetime</code>.</td>
-              </tr>
-              <tr>
-                <td>container-class</td>
-                <td>String</td>
-                <td></td>
-                <td>The class/classes of the container element.</td>
-              </tr>
-              <tr>
-                <td>daysOfWeek</td>
-                <td>Array</td>
-                <td>['Su', 'Mo', 'Tu', ...]</td>
-                <td>Days of the week.</td>
-              </tr>
-              <tr>
-                <td>months</td>
-                <td>Array</td>
-                <td>['January', 'February', 'March', ...]</td>
-                <td>Months.</td>
-              </tr>
-              <tr>
-                <td>icons</td>
-                <td>Object</td>
-                <td>{ left: 'glyphicon glyphicon-chevron-left', ... }</td>
-                <td>Icons.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <h2>Popover</h2>
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <div class="form-group">
-                <label for="menu">Popover</label>
-                <div>
-                  <popover title="Hello world!" placement="right">
-                    <a class="btn btn-primary">Click me</a>
-                    <div slot="content">
-                      This is the content.
-                    </div>
-                  </popover>
-                </div>
               </div>
-<pre>
-  &lt;popover title="Hello world!" placement="right"&gt;
-    &lt;a class="btn btn-primary">Click me&lt;/a&gt;
-    &lt;div slot="content"&gt;
-      This is the content.
-    &lt;/div&gt;
-  &lt;/popover&gt;
-</pre>
             </div>
+            <h3>Props:</h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>name</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>The <code>name</code> attribute of the input element.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>Initial value (date). Date needs to have a format such as <i>2017-03-01</i> or <i>2017-03-01 12:10</i></td>
+                </tr>
+                <tr>
+                  <td>id</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>The <code>id</code> attribute of the input element.</td>
+                </tr>
+                <tr>
+                  <td>placeholder</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>The <code>placeholder</code> attribute of the input element.</td>
+                </tr>
+                <tr>
+                  <td>mode</td>
+                  <td>String</td>
+                  <td>date</td>
+                  <td>Mode can be set to <code>date</code> or <code>datetime</code>.</td>
+                </tr>
+                <tr>
+                  <td>container-class</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>The class/classes of the container element.</td>
+                </tr>
+                <tr>
+                  <td>daysOfWeek</td>
+                  <td>Array</td>
+                  <td>['Su', 'Mo', 'Tu', ...]</td>
+                  <td>Days of the week.</td>
+                </tr>
+                <tr>
+                  <td>months</td>
+                  <td>Array</td>
+                  <td>['January', 'February', 'March', ...]</td>
+                  <td>Months.</td>
+                </tr>
+                <tr>
+                  <td>icons</td>
+                  <td>Object</td>
+                  <td>{ left: 'glyphicon glyphicon-chevron-left', ... }</td>
+                  <td>Icons.</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <h3>Props:</h3>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>title</td>
-                <td>String</td>
-                <td></td>
-                <td>The title.</td>
-              </tr>
-              <tr>
-                <td>content</td>
-                <td>String</td>
-                <td></td>
-                <td>The content can be specified by passing a prop or by using a slot in the template (see example above).</td>
-              </tr>
-              <tr>
-                <td>placement</td>
-                <td>String</td>
-                <td>top</td>
-                <td>Placement (<code>top</code>, <code>bottom</code>, <code>left</code> or <code>right</code>).</td>
-              </tr>
-              <tr>
-                <td>effect</td>
-                <td>String</td>
-                <td>fade</td>
-                <td>Effect (currently only the <code>fade</code> effect is supported).</td>
-              </tr>
-              <tr>
-                <td>trigger</td>
-                <td>String</td>
-                <td>click</td>
-                <td>Trigger (<code>click</code>, <code>hover</code> or <code>manual</code>).</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <hr>
-      <div class="row">
-        <div class="col-xs-12">
-          <h2>Custom templates</h2>
-          <p>Some of the components define <a href="https://vuejs.org/v2/guide/components.html#Content-Distribution-with-Slots">slots</a>
-            that can be used to insert custom content.</p>
-          <p>Alternatively, you can use an inline template to fully replace the default template of any of the components.</p>
+          <div class="island">
+            <h1>Dropdown</h1>
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <div class="form-group">
+                  <label for="menu">Dropdown</label>
+                  <dropdown label="Dropdown" id="menu">
+                    <li><a href="">Action</a></li>
+                    <li><a href="">Another action</a></li>
+                  </dropdown>
+                </div>
+<pre>
+&lt;dropdown label="Dropdown" id="menu"&gt;
+  &lt;li&gt;&lt;a href="">Action&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="">Another action&lt;/a&gt;&lt;/li&gt;
+&lt;/dropdown&gt;
+</pre>
+              </div>
+            </div>
+            <h3>Props:</h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>id</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>The <code>id</code> attribute of the button.</td>
+                </tr>
+                <tr>
+                  <td>label</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>The label of the button.</td>
+                </tr>
+                <tr>
+                  <td>button-class</td>
+                  <td>String</td>
+                  <td>btn btn-default</td>
+                  <td>The class/classes of the button element.</td>
+                </tr>
+                <tr>
+                  <td>container-class</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>The class/classes of the container element.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="island">
+            <h1>Popover</h1>
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <div class="form-group">
+                  <label for="menu">Popover</label>
+                  <div>
+                    <popover title="Hello world!" placement="right">
+                      <a class="btn btn-primary">Click me</a>
+                      <div slot="content">
+                        This is the content.
+                      </div>
+                    </popover>
+                  </div>
+                </div>
+<pre>
+&lt;popover title="Hello world!" placement="right"&gt;
+  &lt;a class="btn btn-primary">Click me&lt;/a&gt;
+  &lt;div slot="content"&gt;
+    This is the content.
+  &lt;/div&gt;
+&lt;/popover&gt;
+</pre>
+              </div>
+            </div>
+            <h3>Props:</h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>title</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>Title.</td>
+                </tr>
+                <tr>
+                  <td>content</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>
+                    Content.<br>
+                    A slot can also be used to insert content (like in the example above).
+                  </td>
+                </tr>
+                <tr>
+                  <td>placement</td>
+                  <td>String</td>
+                  <td>top</td>
+                  <td>Placement (<code>top</code>, <code>bottom</code>, <code>left</code> or <code>right</code>).</td>
+                </tr>
+                <tr>
+                  <td>effect</td>
+                  <td>String</td>
+                  <td>fade</td>
+                  <td>Effect (currently only the <code>fade</code> effect is supported).</td>
+                </tr>
+                <tr>
+                  <td>trigger</td>
+                  <td>String</td>
+                  <td>click</td>
+                  <td>Trigger (<code>click</code>, <code>hover</code> or <code>manual</code>).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="island">
+            <h2>Typeahead</h2>
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <div class="form-group">
+                  <label for="typeahead-input">Text input with autocomplete</label>
+                  <typeahead id="typeahead-input" placeholder="Type a name" :initial-items="typeaheadItems" :on-select="onSelect"></typeahead>
+                </div>
+<pre>
+&lt;typeahead id="typeahead-input" placeholder="Type a name" :initial-items="typeaheadItems" :on-select="onSelect"&gt;&lt;/typeahead&gt;
+</pre>
+              </div>
+            </div>
+            <h3>Props:</h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>initial-items</td>
+                  <td>Array</td>
+                  <td></td>
+                  <td>An array of items that will be used to display autocomplete suggestions (<code>[{ id: 1, value: 'hey' }]</code>).</td>
+                </tr>
+                <tr>
+                  <td>initial-value</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>Initial value of the autocomplete suggestion.</td>
+                </tr>
+                <tr>
+                  <td>initial-id</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>Initial id of the autocomplete suggestion.</td>
+                </tr>
+                <tr>
+                  <td>src</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>URL that will be used to fetch autocomplete suggestions (such as: /user/search?q=).<br>
+                    A query will be appended to this URL.<br>
+                    There is no need to define <code>initial-items</code> when a remote source is defined.</td>
+                </tr>
+                <tr>
+                  <td>id</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>The <code>id</code> attribute of the input element.</td>
+                </tr>
+                <tr>
+                  <td>placeholder</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>The <code>placeholder</code> attribute of the input element.</td>
+                </tr>
+                <tr>
+                  <td>limit</td>
+                  <td>Number</td>
+                  <td>0</td>
+                  <td>Limit the number of autocomplete suggestions. No limit is applied by default.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>The name of the input field.</td>
+                </tr>
+                <tr>
+                  <td>hidden-field-name</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>The name of a hidden input field that will be populated with autocomplete suggestion's id.</td>
+                </tr>
+                <tr>
+                  <td>on-select</td>
+                  <td>Function</td>
+                  <td></td>
+                  <td>Callback.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="island">
+            <h1>Customising templates</h1>
+            <p>
+              The preferred way to customise templates is by using
+              <a href="https://vuejs.org/v2/guide/components.html#Content-Distribution-with-Slots">slots</a>.
+            </p>
+            <p>Alternatively, you can use an inline template to fully replace the default template of any of the components.</p>
 <pre>
 &lt;component inline-template&gt;
   &lt;div&gt;...your custom template goes here...&lt;/div&gt;
 &lt;/component&gt;
 </pre>
+          </div>
         </div>
       </div>
       <p>&nbsp;</p>

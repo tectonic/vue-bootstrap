@@ -45,6 +45,10 @@ export default {
       validator: (value) => {
         return ['click', 'hover', 'manual'].indexOf(value) >= 0;
       }
+    },
+    appendTo: {
+      type: String,
+      default: 'body'
     }
   },
   data () {
@@ -85,33 +89,58 @@ export default {
     close () {
       this.isOpen = false;
     },
-    setPosition () {
-      const popover = this.$refs.popover;
-      let trigger = this.$refs.trigger;
-      let top, left;
+    triggerElement () {
+      const trigger = this.$refs.trigger;
 
-      // If the trigger contains elements position the popover in relation
+      // If the trigger contains multiple elements position the popover in relation
       // to the first element found.
       if (trigger.children.length > 0) {
-        trigger = this.$refs.trigger.children[0];
+        return trigger.children[0];
       }
+
+      return trigger;
+    },
+    setPosition () {
+      const popover = this.$refs.popover;
+      const trigger = this.triggerElement();
+
+      let top, left;
+      let documentElement;
+      let containerScrollLeft, containerScrollTop;
+
+      const container = (this.appendTo === 'body') ? document.body : document.querySelector(this.appendTo);
+
+      if (this.appendTo === 'body') {
+        documentElement = document.documentElement;
+
+        containerScrollLeft = (window.pageXOffset || documentElement.scrollLeft) - (documentElement.clientLeft || 0);
+        containerScrollTop = (window.pageYOffset || documentElement.scrollTop) - (documentElement.clientTop || 0);
+      } else {
+        containerScrollLeft = container.scrollLeft;
+        containerScrollTop = container.scrollTop;
+      }
+
+      container.appendChild(popover);
+
+      const triggerRect = trigger.getBoundingClientRect();
+      const popoverRect = popover.getBoundingClientRect();
 
       switch (this.placement) {
         case 'top':
-          left = trigger.offsetLeft - popover.offsetWidth / 2 + trigger.offsetWidth / 2;
-          top = trigger.offsetTop - popover.offsetHeight;
+          left = containerScrollLeft + triggerRect.left + triggerRect.width / 2 - popoverRect.width / 2;
+          top = containerScrollTop + triggerRect.top - popoverRect.height;
           break;
         case 'left':
-          left = trigger.offsetLeft - popover.offsetWidth;
-          top = trigger.offsetTop + trigger.offsetHeight / 2 - popover.offsetHeight / 2;
+          left = containerScrollLeft + triggerRect.left - popoverRect.width;
+          top = containerScrollTop + triggerRect.top + triggerRect.height / 2 - popoverRect.height / 2;
           break;
         case 'right':
-          left = trigger.offsetLeft + trigger.offsetWidth;
-          top = trigger.offsetTop + trigger.offsetHeight / 2 - popover.offsetHeight / 2;
+          left = containerScrollLeft + triggerRect.left + triggerRect.width;
+          top = containerScrollTop + triggerRect.top + triggerRect.height / 2 - popoverRect.height / 2;
           break;
         case 'bottom':
-          left = trigger.offsetLeft - popover.offsetWidth / 2 + trigger.offsetWidth / 2;
-          top = trigger.offsetTop + trigger.offsetHeight;
+          left = containerScrollLeft + triggerRect.left + triggerRect.width / 2 - popoverRect.width / 2;
+          top = containerScrollTop + triggerRect.top + triggerRect.height;
           break;
       }
 

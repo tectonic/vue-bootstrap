@@ -37,8 +37,8 @@ describe('Popover', () => {
     popover.open();
 
     Vue.nextTick(() => {
-      expect(popover.$el.querySelector('.popover-title').textContent).to.equal('Hello world!');
-      expect(popover.$el.querySelector('.popover-content').textContent).to.equal('This is the content.');
+      expect(popover.$refs.popover.querySelector('.popover-title').textContent).to.equal('Hello world!');
+      expect(popover.$refs.popover.querySelector('.popover-content').textContent).to.equal('This is the content.');
 
       done();
     });

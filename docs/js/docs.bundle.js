@@ -10735,7 +10735,7 @@
 	
 	
 	// module
-	exports.push([module.id, "\n.popover.in {\n  display: block;\n}\n.fade-enter-active, .fade-leave-active {\n  transition: opacity .5s;\n}\n.fade-enter, .fade-leave-to {\n  opacity: 0;\n}\n", "", {"version":3,"sources":["/./src/Popover.vue?26c361bd"],"names":[],"mappings":";AA8IA;EACA,eAAA;CACA;AAEA;EACA,wBAAA;CACA;AAEA;EACA,WAAA;CACA","file":"Popover.vue","sourcesContent":["<template>\n  <span>\n    <span ref=\"trigger\" @click=\"onClick\" @mouseover=\"onMouseover\" @mouseout=\"onMouseout\" :aria-describedby=\"id\">\n      <slot></slot>\n    </span>\n    <transition :name=\"effect\">\n      <div ref=\"popover\" v-if=\"isOpen\" :class=\"['popover', { 'in': isOpen }, placement]\" role=\"tooltip\" :id=\"id\">\n        <div class=\"arrow\"></div>\n        <h3 class=\"popover-title\" v-if=\"title\">\n          <slot name=\"title\">{{ title }}</slot>\n        </h3>\n        <div class=\"popover-content\">\n          <slot name=\"content\">\n            <span v-html=\"content\"></span>\n          </slot>\n        </div>\n      </div>\n    </transition>\n  </span>\n</template>\n\n<script>\nexport default {\n  props: {\n    title: {\n      type: String\n    },\n    content: {\n      type: String\n    },\n    placement: {\n      type: String,\n      default: 'top',\n      validator: (value) => {\n        return ['top', 'bottom', 'right', 'left'].indexOf(value) >= 0;\n      }\n    },\n    effect: {\n      type: String,\n      default: 'fade'\n    },\n    trigger: {\n      type: String,\n      default: 'click',\n      validator: (value) => {\n        return ['click', 'hover', 'manual'].indexOf(value) >= 0;\n      }\n    }\n  },\n  data () {\n    return {\n      isOpen: false,\n      id: 'popover-' + this._uid\n    };\n  },\n  methods: {\n    onClick () {\n      if (this.trigger !== 'click') {\n        return;\n      }\n\n      this.toggle();\n    },\n    onMouseover () {\n      if (this.trigger !== 'hover') {\n        return;\n      }\n\n      this.open();\n    },\n    onMouseout () {\n      if (this.trigger !== 'hover') {\n        return;\n      }\n\n      this.close();\n    },\n    toggle () {\n      this.isOpen ? this.close() : this.open();\n    },\n    open () {\n      this.isOpen = true;\n      this.position();\n    },\n    close () {\n      this.isOpen = false;\n    },\n    setPosition () {\n      const popover = this.$refs.popover;\n      let trigger = this.$refs.trigger;\n      let top, left;\n\n      // If the trigger contains elements position the popover in relation\n      // to the first element found.\n      if (trigger.children.length > 0) {\n        trigger = this.$refs.trigger.children[0];\n      }\n\n      switch (this.placement) {\n        case 'top':\n          left = trigger.offsetLeft - popover.offsetWidth / 2 + trigger.offsetWidth / 2;\n          top = trigger.offsetTop - popover.offsetHeight;\n          break;\n        case 'left':\n          left = trigger.offsetLeft - popover.offsetWidth;\n          top = trigger.offsetTop + trigger.offsetHeight / 2 - popover.offsetHeight / 2;\n          break;\n        case 'right':\n          left = trigger.offsetLeft + trigger.offsetWidth;\n          top = trigger.offsetTop + trigger.offsetHeight / 2 - popover.offsetHeight / 2;\n          break;\n        case 'bottom':\n          left = trigger.offsetLeft - popover.offsetWidth / 2 + trigger.offsetWidth / 2;\n          top = trigger.offsetTop + trigger.offsetHeight;\n          break;\n      }\n\n      popover.style.top = top + 'px';\n      popover.style.left = left + 'px';\n    },\n    position () {\n      this.$nextTick(() => {\n        this.setPosition();\n      });\n    }\n  },\n  mounted () {\n    this.onClickOutside = (event) => {\n      if (this.$el !== null && !this.$el.contains(event.target)) {\n        this.close();\n      }\n    };\n\n    document.addEventListener('click', this.onClickOutside);\n  },\n  beforeDestroy () {\n    document.removeEventListener('click', this.onClickOutside);\n  }\n};\n</script>\n\n<style>\n  .popover.in {\n    display: block;\n  }\n\n  .fade-enter-active, .fade-leave-active {\n    transition: opacity .5s;\n  }\n\n  .fade-enter, .fade-leave-to {\n    opacity: 0;\n  }\n</style>\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\n.popover.in {\n  display: block;\n}\n.fade-enter-active, .fade-leave-active {\n  transition: opacity .5s;\n}\n.fade-enter, .fade-leave-to {\n  opacity: 0;\n}\n", "", {"version":3,"sources":["/./src/Popover.vue?31c4327e"],"names":[],"mappings":";AA2KA;EACA,eAAA;CACA;AAEA;EACA,wBAAA;CACA;AAEA;EACA,WAAA;CACA","file":"Popover.vue","sourcesContent":["<template>\n  <span>\n    <span ref=\"trigger\" @click=\"onClick\" @mouseover=\"onMouseover\" @mouseout=\"onMouseout\" :aria-describedby=\"id\">\n      <slot></slot>\n    </span>\n    <transition :name=\"effect\">\n      <div ref=\"popover\" v-if=\"isOpen\" :class=\"['popover', { 'in': isOpen }, placement]\" role=\"tooltip\" :id=\"id\">\n        <div class=\"arrow\"></div>\n        <h3 class=\"popover-title\" v-if=\"title\">\n          <slot name=\"title\">{{ title }}</slot>\n        </h3>\n        <div class=\"popover-content\">\n          <slot name=\"content\">\n            <span v-html=\"content\"></span>\n          </slot>\n        </div>\n      </div>\n    </transition>\n  </span>\n</template>\n\n<script>\nexport default {\n  props: {\n    title: {\n      type: String\n    },\n    content: {\n      type: String\n    },\n    placement: {\n      type: String,\n      default: 'top',\n      validator: (value) => {\n        return ['top', 'bottom', 'right', 'left'].indexOf(value) >= 0;\n      }\n    },\n    effect: {\n      type: String,\n      default: 'fade'\n    },\n    trigger: {\n      type: String,\n      default: 'click',\n      validator: (value) => {\n        return ['click', 'hover', 'manual'].indexOf(value) >= 0;\n      }\n    },\n    appendTo: {\n      type: String,\n      default: 'body'\n    }\n  },\n  data () {\n    return {\n      isOpen: false,\n      id: 'popover-' + this._uid\n    };\n  },\n  methods: {\n    onClick () {\n      if (this.trigger !== 'click') {\n        return;\n      }\n\n      this.toggle();\n    },\n    onMouseover () {\n      if (this.trigger !== 'hover') {\n        return;\n      }\n\n      this.open();\n    },\n    onMouseout () {\n      if (this.trigger !== 'hover') {\n        return;\n      }\n\n      this.close();\n    },\n    toggle () {\n      this.isOpen ? this.close() : this.open();\n    },\n    open () {\n      this.isOpen = true;\n      this.position();\n    },\n    close () {\n      this.isOpen = false;\n    },\n    triggerElement () {\n      const trigger = this.$refs.trigger;\n\n      // If the trigger contains multiple elements position the popover in relation\n      // to the first element found.\n      if (trigger.children.length > 0) {\n        return trigger.children[0];\n      }\n\n      return trigger;\n    },\n    setPosition () {\n      const popover = this.$refs.popover;\n      const trigger = this.triggerElement();\n\n      let top, left;\n      let documentElement;\n      let containerScrollLeft, containerScrollTop;\n\n      const container = (this.appendTo === 'body') ? document.body : document.querySelector(this.appendTo);\n\n      if (this.appendTo === 'body') {\n        documentElement = document.documentElement;\n\n        containerScrollLeft = (window.pageXOffset || documentElement.scrollLeft) - (documentElement.clientLeft || 0);\n        containerScrollTop = (window.pageYOffset || documentElement.scrollTop) - (documentElement.clientTop || 0);\n      } else {\n        containerScrollLeft = container.scrollLeft;\n        containerScrollTop = container.scrollTop;\n      }\n\n      container.appendChild(popover);\n\n      const triggerRect = trigger.getBoundingClientRect();\n      const popoverRect = popover.getBoundingClientRect();\n\n      switch (this.placement) {\n        case 'top':\n          left = containerScrollLeft + triggerRect.left + triggerRect.width / 2 - popoverRect.width / 2;\n          top = containerScrollTop + triggerRect.top - popoverRect.height;\n          break;\n        case 'left':\n          left = containerScrollLeft + triggerRect.left - popoverRect.width;\n          top = containerScrollTop + triggerRect.top + triggerRect.height / 2 - popoverRect.height / 2;\n          break;\n        case 'right':\n          left = containerScrollLeft + triggerRect.left + triggerRect.width;\n          top = containerScrollTop + triggerRect.top + triggerRect.height / 2 - popoverRect.height / 2;\n          break;\n        case 'bottom':\n          left = containerScrollLeft + triggerRect.left + triggerRect.width / 2 - popoverRect.width / 2;\n          top = containerScrollTop + triggerRect.top + triggerRect.height;\n          break;\n      }\n\n      popover.style.top = top + 'px';\n      popover.style.left = left + 'px';\n    },\n    position () {\n      this.$nextTick(() => {\n        this.setPosition();\n      });\n    }\n  },\n  mounted () {\n    this.onClickOutside = (event) => {\n      if (this.$el !== null && !this.$el.contains(event.target)) {\n        this.close();\n      }\n    };\n\n    document.addEventListener('click', this.onClickOutside);\n  },\n  beforeDestroy () {\n    document.removeEventListener('click', this.onClickOutside);\n  }\n};\n</script>\n\n<style>\n  .popover.in {\n    display: block;\n  }\n\n  .fade-enter-active, .fade-leave-active {\n    transition: opacity .5s;\n  }\n\n  .fade-enter, .fade-leave-to {\n    opacity: 0;\n  }\n</style>\n"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -10796,6 +10796,10 @@
 	      validator: function validator(value) {
 	        return ['click', 'hover', 'manual'].indexOf(value) >= 0;
 	      }
+	    },
+	    appendTo: {
+	      type: String,
+	      default: 'body'
 	    }
 	  },
 	  data: function data() {
@@ -10837,34 +10841,60 @@
 	    close: function close() {
 	      this.isOpen = false;
 	    },
-	    setPosition: function setPosition() {
-	      var popover = this.$refs.popover;
+	    triggerElement: function triggerElement() {
 	      var trigger = this.$refs.trigger;
-	      var top = void 0,
-	          left = void 0;
 	
-	      // If the trigger contains elements position the popover in relation
+	      // If the trigger contains multiple elements position the popover in relation
 	      // to the first element found.
 	      if (trigger.children.length > 0) {
-	        trigger = this.$refs.trigger.children[0];
+	        return trigger.children[0];
 	      }
+	
+	      return trigger;
+	    },
+	    setPosition: function setPosition() {
+	      var popover = this.$refs.popover;
+	      var trigger = this.triggerElement();
+	
+	      var top = void 0,
+	          left = void 0;
+	      var documentElement = void 0;
+	      var containerScrollLeft = void 0,
+	          containerScrollTop = void 0;
+	
+	      var container = this.appendTo === 'body' ? document.body : document.querySelector(this.appendTo);
+	
+	      if (this.appendTo === 'body') {
+	        documentElement = document.documentElement;
+	
+	        containerScrollLeft = (window.pageXOffset || documentElement.scrollLeft) - (documentElement.clientLeft || 0);
+	        containerScrollTop = (window.pageYOffset || documentElement.scrollTop) - (documentElement.clientTop || 0);
+	      } else {
+	        containerScrollLeft = container.scrollLeft;
+	        containerScrollTop = container.scrollTop;
+	      }
+	
+	      container.appendChild(popover);
+	
+	      var triggerRect = trigger.getBoundingClientRect();
+	      var popoverRect = popover.getBoundingClientRect();
 	
 	      switch (this.placement) {
 	        case 'top':
-	          left = trigger.offsetLeft - popover.offsetWidth / 2 + trigger.offsetWidth / 2;
-	          top = trigger.offsetTop - popover.offsetHeight;
+	          left = containerScrollLeft + triggerRect.left + triggerRect.width / 2 - popoverRect.width / 2;
+	          top = containerScrollTop + triggerRect.top - popoverRect.height;
 	          break;
 	        case 'left':
-	          left = trigger.offsetLeft - popover.offsetWidth;
-	          top = trigger.offsetTop + trigger.offsetHeight / 2 - popover.offsetHeight / 2;
+	          left = containerScrollLeft + triggerRect.left - popoverRect.width;
+	          top = containerScrollTop + triggerRect.top + triggerRect.height / 2 - popoverRect.height / 2;
 	          break;
 	        case 'right':
-	          left = trigger.offsetLeft + trigger.offsetWidth;
-	          top = trigger.offsetTop + trigger.offsetHeight / 2 - popover.offsetHeight / 2;
+	          left = containerScrollLeft + triggerRect.left + triggerRect.width;
+	          top = containerScrollTop + triggerRect.top + triggerRect.height / 2 - popoverRect.height / 2;
 	          break;
 	        case 'bottom':
-	          left = trigger.offsetLeft - popover.offsetWidth / 2 + trigger.offsetWidth / 2;
-	          top = trigger.offsetTop + trigger.offsetHeight;
+	          left = containerScrollLeft + triggerRect.left + triggerRect.width / 2 - popoverRect.width / 2;
+	          top = containerScrollTop + triggerRect.top + triggerRect.height;
 	          break;
 	      }
 	

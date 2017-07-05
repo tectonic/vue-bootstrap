@@ -70,10 +70,6 @@ export default {
     hiddenInputName: {
       type: String,
       default: ''
-    },
-    onSelect: {
-      type: Function,
-      default: () => {}
     }
   },
   data () {
@@ -121,7 +117,7 @@ export default {
         // New items arrived - open drop-down menu
         this.open();
       }, (response) => {
-        console.log('Typeahead: connection error');
+        this.$emit('error', response);
       });
     },
     open () {
@@ -157,8 +153,7 @@ export default {
 
       this.close();
 
-      // Fire the callback
-      this.onSelect(this.selectedItem);
+      this.$emit('selected', this.selectedItem);
     },
     onBlur () {
       this.close();

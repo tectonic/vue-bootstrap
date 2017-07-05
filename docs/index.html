@@ -339,11 +339,27 @@
                   <td></td>
                   <td>The name of a hidden input field that will be populated with autocomplete suggestion's id.</td>
                 </tr>
+              </tbody>
+            </table>
+            <h3>Events:</h3>
+            <table class="table">
+              <thead>
                 <tr>
-                  <td>on-select</td>
-                  <td>Function</td>
-                  <td></td>
-                  <td>Callback.</td>
+                  <th>Name</th>
+                  <th>Parameters</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>selected</td>
+                  <td>Item (Object)</td>
+                  <td>Emitted when an item gets selected.</td>
+                </tr>
+                <tr>
+                  <td>error</td>
+                  <td>Response (Object)</td>
+                  <td>Emitted when there was an error communicating with the remote source.</td>
                 </tr>
               </tbody>
             </table>

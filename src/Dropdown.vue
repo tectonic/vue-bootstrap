@@ -16,7 +16,7 @@
       </a>
     </slot>
     <slot name="items">
-      <ul class="dropdown-menu" :aria-labelledby="id">
+      <ul class="dropdown-menu" :aria-labelledby="id" ref="ul">
         <slot></slot>
       </ul>
     </slot>
@@ -58,14 +58,16 @@ export default {
     }
   },
   mounted () {
-    const button = this.$refs.button;
-
-    button.addEventListener('blur', e => {
-      // Wait in case any of the links were clicked, prevent the dropdown from closing too soon.
-      setTimeout(() => {
+    this.onClickOutside = (event) => {
+      if (!this.$refs.ul.contains(event.target) && !this.$refs.button.contains(event.target)) {
         this.close();
-      }, this.closeTimeout);
-    });
+      }
+    };
+
+    document.addEventListener('click', this.onClickOutside);
+  },
+  beforeDestroy () {
+    document.removeEventListener('click', this.onClickOutside);
   }
 };
 </script>

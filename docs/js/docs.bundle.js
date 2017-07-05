@@ -10521,7 +10521,7 @@
 	
 	
 	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"Dropdown.vue","sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"Dropdown.vue","sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -10598,14 +10598,16 @@
 	  mounted: function mounted() {
 	    var _this = this;
 	
-	    var button = this.$refs.button;
-	
-	    button.addEventListener('blur', function (e) {
-	      // Wait in case any of the links were clicked, prevent the dropdown from closing too soon.
-	      setTimeout(function () {
+	    this.onClickOutside = function (event) {
+	      if (!_this.$refs.ul.contains(event.target) && !_this.$refs.button.contains(event.target)) {
 	        _this.close();
-	      }, _this.closeTimeout);
-	    });
+	      }
+	    };
+	
+	    document.addEventListener('click', this.onClickOutside);
+	  },
+	  beforeDestroy: function beforeDestroy() {
+	    document.removeEventListener('click', this.onClickOutside);
 	  }
 	};
 
@@ -10641,6 +10643,7 @@
 	  }, [_t("label", [_v("\n        " + _s(label) + " "), _c('span', {
 	    staticClass: "caret"
 	  })])], 2)]), _v(" "), _t("items", [_c('ul', {
+	    ref: "ul",
 	    staticClass: "dropdown-menu",
 	    attrs: {
 	      "aria-labelledby": id
@@ -11053,7 +11056,7 @@
 	
 	
 	// module
-	exports.push([module.id, "\n.dropdown-menu-typeahead {\n  max-height: 300px;\n  overflow: hidden;\n  overflow-y: auto;\n}\n.dropdown-menu-typeahead::-webkit-scrollbar {\n  width: 14px;\n}\n.dropdown-menu-typeahead::-webkit-scrollbar-thumb {\n  border: 4px solid rgba(0, 0, 0, 0);\n  background-clip: padding-box;\n  background-color: rgba(0, 0, 0, 0.2);\n  -webkit-border-radius: 7px;\n}\n.dropdown-menu-typeahead::-webkit-scrollbar-thumb:hover {\n  background-color: rgba(0, 0, 0, 0.5);\n}\n.dropdown-menu-typeahead::-webkit-scrollbar-button {\n  width: 0;\n  height: 0;\n  display: none;\n}\n.dropdown-menu-typeahead::-webkit-scrollbar-corner {\n  background-color: transparent;\n}\n", "", {"version":3,"sources":["/./src/Typeahead.vue?e4d25d52"],"names":[],"mappings":";AAkNA;EACA,kBAAA;EACA,iBAAA;EACA,iBAAA;CACA;AAEA;EACA,YAAA;CACA;AAEA;EACA,mCAAA;EACA,6BAAA;EACA,qCAAA;EACA,2BAAA;CACA;AAEA;EACA,qCAAA;CACA;AAEA;EACA,SAAA;EACA,UAAA;EACA,cAAA;CACA;AAEA;EACA,8BAAA;CACA","file":"Typeahead.vue","sourcesContent":["<template>\n  <div :class=\"[{ 'open': isOpen }, 'dropdown']\">\n    <input type=\"text\"\n      v-model=\"query\"\n      :name=\"name\"\n      :id=\"id\"\n      :placeholder=\"placeholder\"\n      @input=\"onInput\"\n      @blur=\"onBlur\"\n      @keydown.up=\"markPreviousItem\"\n      @keydown.down=\"markNextItem\"\n      @keydown.enter.prevent=\"selectItem\"\n      @keydown.esc=\"close\"\n      class=\"form-control\"\n      autocomplete=\"off\"\n      ref=\"input\"\n    />\n    <ul class=\"dropdown-menu dropdown-menu-typeahead\">\n      <li v-for=\"(item, index) in filteredItems\" v-bind:class=\"{ 'active': isMarked(index) }\">\n        <a href=\"#\" v-on:mousedown.prevent=\"selectItem\" v-on:mousemove=\"markItem(index)\">{{ item.value }}</a>\n      </li>\n    </ul>\n    <input type=\"hidden\" :value=\"selectedItem.id\" v-if=\"hiddenInputName\" :name=\"hiddenInputName\">\n  </div>\n</template>\n\n<script>\nimport debounce from 'debounce';\nimport Vue from 'vue';\nimport VueResource from 'vue-resource';\n\nVue.use(VueResource);\n\nexport default {\n  props: {\n    initialItems: {\n      type: Array,\n      default: () => {\n        return [];\n      }\n    },\n    initialValue: {\n      type: String,\n      default: ''\n    },\n    initialId: {\n      type: String,\n      default: ''\n    },\n    src: {\n      type: String,\n      default: ''\n    },\n    id: {\n      type: String,\n      default: ''\n    },\n    placeholder: {\n      type: String,\n      default: ''\n    },\n    limit: {\n      type: Number,\n      default: 0\n    },\n    name: {\n      type: String,\n      default: ''\n    },\n    hiddenInputName: {\n      type: String,\n      default: ''\n    },\n    onSelect: {\n      type: Function,\n      default: () => {}\n    }\n  },\n  data () {\n    return {\n      query: '',\n      isOpen: false,\n      items: [],\n      currentItem: 0,\n      selectedItem: {\n        id: '',\n        value: ''\n      }\n    };\n  },\n  computed: {\n    filteredItems () {\n      if (!this.query) {\n        return [];\n      }\n\n      // Filter items by query\n      let filteredItems = this.src ? this.items : this.items.filter(item => {\n        return item.value.toLowerCase().indexOf(this.query.toLowerCase()) !== -1;\n      });\n\n      if (this.limit !== 0) {\n        filteredItems = filteredItems.slice(0, this.limit);\n      }\n\n      return filteredItems;\n    }\n  },\n  methods: {\n    onInput () {\n      this.open();\n\n      if (this.src && this.query) {\n        this.fetchItems();\n      }\n    },\n    fetchItems () {\n      Vue.http.get(this.src + this.query).then((response) => {\n        this.items = response.data;\n\n        // New items arrived - open drop-down menu\n        this.open();\n      }, (response) => {\n        console.log('Typeahead: connection error');\n      });\n    },\n    open () {\n      this.isOpen = this.filteredItems.length > 0;\n    },\n    close () {\n      this.isOpen = false;\n      this.currentItem = 0;\n    },\n    isMarked (index) {\n      return this.currentItem === index;\n    },\n    markPreviousItem () {\n      if (this.currentItem === 0) {\n        this.currentItem = this.filteredItems.length - 1;\n      } else {\n        this.currentItem--;\n      }\n    },\n    markNextItem () {\n      if (this.currentItem < this.filteredItems.length - 1) {\n        this.currentItem++;\n      } else {\n        this.currentItem = 0;\n      }\n    },\n    markItem (index) {\n      this.currentItem = index;\n    },\n    selectItem () {\n      this.selectedItem = this.filteredItems[this.currentItem];\n      this.query = this.selectedItem.value;\n\n      this.close();\n\n      // Fire the callback\n      this.onSelect(this.selectedItem);\n    },\n    onBlur () {\n      this.close();\n\n      // If the input field contains initial value, reset selected\n      // item to initial state.\n      if (this.$refs.input.value === this.initialValue) {\n        this.resetSelectedItem(this.initialId, this.initialValue);\n\n        return;\n      }\n\n      // Otherwise, check whether input field contains a valid value.\n      // The 'selectedItem' needs to hold the correct data for\n      // the hidden field to be populated correctly on blur.\n      const validItem = this.items.find(item => {\n        return this.$refs.input.value.toLowerCase() === item.value.toLowerCase();\n      });\n\n      if (validItem) {\n        this.selectedItem = validItem;\n      } else {\n        this.resetSelectedItem('', '');\n      }\n    },\n    resetSelectedItem (id, value) {\n      this.selectedItem = {\n        id: id,\n        value: value\n      };\n\n      this.query = value;\n    }\n  },\n  mounted () {\n    this.query = this.initialValue;\n    this.items = this.initialItems;\n\n    this.selectedItem = {\n      id: this.initialId,\n      value: this.initialValue\n    };\n\n    this.fetchItems = debounce(this.fetchItems, 200);\n  }\n};\n</script>\n\n<style>\n  .dropdown-menu-typeahead {\n    max-height: 300px;\n    overflow: hidden;\n    overflow-y: auto;\n  }\n\n  .dropdown-menu-typeahead::-webkit-scrollbar {\n    width: 14px;\n  }\n\n  .dropdown-menu-typeahead::-webkit-scrollbar-thumb {\n    border: 4px solid rgba(0, 0, 0, 0);\n    background-clip: padding-box;\n    background-color: rgba(0, 0, 0, 0.2);\n    -webkit-border-radius: 7px;\n  }\n\n  .dropdown-menu-typeahead::-webkit-scrollbar-thumb:hover {\n    background-color: rgba(0, 0, 0, 0.5);\n  }\n\n  .dropdown-menu-typeahead::-webkit-scrollbar-button {\n    width: 0;\n    height: 0;\n    display: none;\n  }\n\n  .dropdown-menu-typeahead::-webkit-scrollbar-corner {\n    background-color: transparent;\n  }\n</style>\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\n.dropdown-menu-typeahead {\n  max-height: 300px;\n  overflow: hidden;\n  overflow-y: auto;\n}\n.dropdown-menu-typeahead::-webkit-scrollbar {\n  width: 14px;\n}\n.dropdown-menu-typeahead::-webkit-scrollbar-thumb {\n  border: 4px solid rgba(0, 0, 0, 0);\n  background-clip: padding-box;\n  background-color: rgba(0, 0, 0, 0.2);\n  -webkit-border-radius: 7px;\n}\n.dropdown-menu-typeahead::-webkit-scrollbar-thumb:hover {\n  background-color: rgba(0, 0, 0, 0.5);\n}\n.dropdown-menu-typeahead::-webkit-scrollbar-button {\n  width: 0;\n  height: 0;\n  display: none;\n}\n.dropdown-menu-typeahead::-webkit-scrollbar-corner {\n  background-color: transparent;\n}\n", "", {"version":3,"sources":["/./src/Typeahead.vue?52ade308"],"names":[],"mappings":";AA6MA;EACA,kBAAA;EACA,iBAAA;EACA,iBAAA;CACA;AAEA;EACA,YAAA;CACA;AAEA;EACA,mCAAA;EACA,6BAAA;EACA,qCAAA;EACA,2BAAA;CACA;AAEA;EACA,qCAAA;CACA;AAEA;EACA,SAAA;EACA,UAAA;EACA,cAAA;CACA;AAEA;EACA,8BAAA;CACA","file":"Typeahead.vue","sourcesContent":["<template>\n  <div :class=\"[{ 'open': isOpen }, 'dropdown']\">\n    <input type=\"text\"\n      v-model=\"query\"\n      :name=\"name\"\n      :id=\"id\"\n      :placeholder=\"placeholder\"\n      @input=\"onInput\"\n      @blur=\"onBlur\"\n      @keydown.up=\"markPreviousItem\"\n      @keydown.down=\"markNextItem\"\n      @keydown.enter.prevent=\"selectItem\"\n      @keydown.esc=\"close\"\n      class=\"form-control\"\n      autocomplete=\"off\"\n      ref=\"input\"\n    />\n    <ul class=\"dropdown-menu dropdown-menu-typeahead\">\n      <li v-for=\"(item, index) in filteredItems\" v-bind:class=\"{ 'active': isMarked(index) }\">\n        <a href=\"#\" v-on:mousedown.prevent=\"selectItem\" v-on:mousemove=\"markItem(index)\">{{ item.value }}</a>\n      </li>\n    </ul>\n    <input type=\"hidden\" :value=\"selectedItem.id\" v-if=\"hiddenInputName\" :name=\"hiddenInputName\">\n  </div>\n</template>\n\n<script>\nimport debounce from 'debounce';\nimport Vue from 'vue';\nimport VueResource from 'vue-resource';\n\nVue.use(VueResource);\n\nexport default {\n  props: {\n    initialItems: {\n      type: Array,\n      default: () => {\n        return [];\n      }\n    },\n    initialValue: {\n      type: String,\n      default: ''\n    },\n    initialId: {\n      type: String,\n      default: ''\n    },\n    src: {\n      type: String,\n      default: ''\n    },\n    id: {\n      type: String,\n      default: ''\n    },\n    placeholder: {\n      type: String,\n      default: ''\n    },\n    limit: {\n      type: Number,\n      default: 0\n    },\n    name: {\n      type: String,\n      default: ''\n    },\n    hiddenInputName: {\n      type: String,\n      default: ''\n    }\n  },\n  data () {\n    return {\n      query: '',\n      isOpen: false,\n      items: [],\n      currentItem: 0,\n      selectedItem: {\n        id: '',\n        value: ''\n      }\n    };\n  },\n  computed: {\n    filteredItems () {\n      if (!this.query) {\n        return [];\n      }\n\n      // Filter items by query\n      let filteredItems = this.src ? this.items : this.items.filter(item => {\n        return item.value.toLowerCase().indexOf(this.query.toLowerCase()) !== -1;\n      });\n\n      if (this.limit !== 0) {\n        filteredItems = filteredItems.slice(0, this.limit);\n      }\n\n      return filteredItems;\n    }\n  },\n  methods: {\n    onInput () {\n      this.open();\n\n      if (this.src && this.query) {\n        this.fetchItems();\n      }\n    },\n    fetchItems () {\n      Vue.http.get(this.src + this.query).then((response) => {\n        this.items = response.data;\n\n        // New items arrived - open drop-down menu\n        this.open();\n      }, (response) => {\n        this.$emit('error', response);\n      });\n    },\n    open () {\n      this.isOpen = this.filteredItems.length > 0;\n    },\n    close () {\n      this.isOpen = false;\n      this.currentItem = 0;\n    },\n    isMarked (index) {\n      return this.currentItem === index;\n    },\n    markPreviousItem () {\n      if (this.currentItem === 0) {\n        this.currentItem = this.filteredItems.length - 1;\n      } else {\n        this.currentItem--;\n      }\n    },\n    markNextItem () {\n      if (this.currentItem < this.filteredItems.length - 1) {\n        this.currentItem++;\n      } else {\n        this.currentItem = 0;\n      }\n    },\n    markItem (index) {\n      this.currentItem = index;\n    },\n    selectItem () {\n      this.selectedItem = this.filteredItems[this.currentItem];\n      this.query = this.selectedItem.value;\n\n      this.close();\n\n      this.$emit('selected', this.selectedItem);\n    },\n    onBlur () {\n      this.close();\n\n      // If the input field contains initial value, reset selected\n      // item to initial state.\n      if (this.$refs.input.value === this.initialValue) {\n        this.resetSelectedItem(this.initialId, this.initialValue);\n\n        return;\n      }\n\n      // Otherwise, check whether input field contains a valid value.\n      // The 'selectedItem' needs to hold the correct data for\n      // the hidden field to be populated correctly on blur.\n      const validItem = this.items.find(item => {\n        return this.$refs.input.value.toLowerCase() === item.value.toLowerCase();\n      });\n\n      if (validItem) {\n        this.selectedItem = validItem;\n      } else {\n        this.resetSelectedItem('', '');\n      }\n    },\n    resetSelectedItem (id, value) {\n      this.selectedItem = {\n        id: id,\n        value: value\n      };\n\n      this.query = value;\n    }\n  },\n  mounted () {\n    this.query = this.initialValue;\n    this.items = this.initialItems;\n\n    this.selectedItem = {\n      id: this.initialId,\n      value: this.initialValue\n    };\n\n    this.fetchItems = debounce(this.fetchItems, 200);\n  }\n};\n</script>\n\n<style>\n  .dropdown-menu-typeahead {\n    max-height: 300px;\n    overflow: hidden;\n    overflow-y: auto;\n  }\n\n  .dropdown-menu-typeahead::-webkit-scrollbar {\n    width: 14px;\n  }\n\n  .dropdown-menu-typeahead::-webkit-scrollbar-thumb {\n    border: 4px solid rgba(0, 0, 0, 0);\n    background-clip: padding-box;\n    background-color: rgba(0, 0, 0, 0.2);\n    -webkit-border-radius: 7px;\n  }\n\n  .dropdown-menu-typeahead::-webkit-scrollbar-thumb:hover {\n    background-color: rgba(0, 0, 0, 0.5);\n  }\n\n  .dropdown-menu-typeahead::-webkit-scrollbar-button {\n    width: 0;\n    height: 0;\n    display: none;\n  }\n\n  .dropdown-menu-typeahead::-webkit-scrollbar-corner {\n    background-color: transparent;\n  }\n</style>\n"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -11148,10 +11151,6 @@
 	    hiddenInputName: {
 	      type: String,
 	      default: ''
-	    },
-	    onSelect: {
-	      type: Function,
-	      default: function _default() {}
 	    }
 	  },
 	  data: function data() {
@@ -11204,7 +11203,7 @@
 	        // New items arrived - open drop-down menu
 	        _this2.open();
 	      }, function (response) {
-	        console.log('Typeahead: connection error');
+	        _this2.$emit('error', response);
 	      });
 	    },
 	    open: function open() {
@@ -11240,8 +11239,7 @@
 	
 	      this.close();
 	
-	      // Fire the callback
-	      this.onSelect(this.selectedItem);
+	      this.$emit('selected', this.selectedItem);
 	    },
 	    onBlur: function onBlur() {
 	      var _this3 = this;

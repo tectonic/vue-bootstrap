@@ -210,6 +210,7 @@ export default {
   }
 
   .dropdown-menu-typeahead::-webkit-scrollbar {
+    background: #fff;
     width: 14px;
   }
 

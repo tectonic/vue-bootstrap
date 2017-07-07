@@ -168,7 +168,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
   .popover.in {
     display: block;
   }

@@ -15,7 +15,7 @@
       autocomplete="off"
       ref="input"
     />
-    <ul class="dropdown-menu dropdown-menu-typeahead">
+    <ul class="dropdown-menu">
       <li v-for="(item, index) in filteredItems" v-bind:class="{ 'active': isMarked(index) }">
         <a href="#" v-on:mousedown.prevent="selectItem" v-on:mousemove="markItem(index)">{{ item.value }}</a>
       </li>
@@ -202,36 +202,36 @@ export default {
 };
 </script>
 
-<style>
-  .dropdown-menu-typeahead {
+<style scoped>
+  .dropdown-menu {
     max-height: 300px;
     overflow: hidden;
     overflow-y: auto;
   }
 
-  .dropdown-menu-typeahead::-webkit-scrollbar {
+  .dropdown-menu::-webkit-scrollbar {
     background: #fff;
     width: 14px;
   }
 
-  .dropdown-menu-typeahead::-webkit-scrollbar-thumb {
+  .dropdown-menu::-webkit-scrollbar-thumb {
     border: 4px solid rgba(0, 0, 0, 0);
     background-clip: padding-box;
     background-color: rgba(0, 0, 0, 0.2);
     -webkit-border-radius: 7px;
   }
 
-  .dropdown-menu-typeahead::-webkit-scrollbar-thumb:hover {
+  .dropdown-menu::-webkit-scrollbar-thumb:hover {
     background-color: rgba(0, 0, 0, 0.5);
   }
 
-  .dropdown-menu-typeahead::-webkit-scrollbar-button {
+  .dropdown-menu::-webkit-scrollbar-button {
     width: 0;
     height: 0;
     display: none;
   }
 
-  .dropdown-menu-typeahead::-webkit-scrollbar-corner {
+  .dropdown-menu::-webkit-scrollbar-corner {
     background-color: transparent;
   }
 </style>

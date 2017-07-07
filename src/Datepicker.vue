@@ -338,75 +338,79 @@ export default {
 };
 </script>
 
-<style>
-  .datepicker ul {
+<style scoped>
+  ul {
     margin-bottom: 0;
   }
 
-  .datepicker table {
+  table {
     margin: 0 5px;
     table-layout: fixed;
     min-width: 280px;
   }
 
-  .datepicker th,
-  .datepicker td {
+  table th,
+  table td {
     text-align: center;
     padding: 5px;
   }
 
-  .datepicker .day {
+  .day {
     width: 14.2857%;
   }
 
-  .datepicker .set-clock,
-  .datepicker .next-month,
-  .datepicker .previous-month,
-  .datepicker .day {
+  .set-clock,
+  .next-month,
+  .previous-month,
+  .day {
     border-radius: 2px;
   }
 
-  .datepicker .set-clock:hover,
-  .datepicker .switcher span:hover,
-  .datepicker .next-month:hover,
-  .datepicker .previous-month:hover,
-  .datepicker .day:hover {
+  .set-clock:hover,
+  .next-month:hover,
+  .previous-month:hover,
+  .day:hover {
     background-color: #f2f2f2;
     cursor: pointer;
   }
 
-  .datepicker .day.muted {
+  .day.muted {
     color: #d9d9d9;
   }
 
-  .datepicker .day.selected {
+  .day.selected {
     background-color: #333;
     color: #fff;
   }
 
-  .datepicker .day.selected:hover {
+  .day.selected:hover {
     background-color: #333;
     color: #fff;
   }
 
-  .datepicker .clock .hours,
-  .datepicker .clock .minutes,
-  .datepicker .clock .colon {
+  .clock .hours,
+  .clock .minutes,
+  .clock .colon {
     font-size: 1.25em;
   }
 
-  .datepicker .switcher {
+  .switcher {
     width: 100%;
     text-align: center;
     padding: 5px 5px 0 5px;
   }
 
-  .datepicker .switcher span {
+  .switcher span {
     display: block;
     padding: 5px;
   }
 
-  .datepicker .switcher i {
+  .switcher span:hover {
+    background-color: #f2f2f2;
+    cursor: pointer;
+  }
+
+  .switcher i {
     margin-right: 3px;
   }
 </style>

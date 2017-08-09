@@ -26,10 +26,6 @@
 
 <script>
 import debounce from 'debounce';
-import Vue from 'vue';
-import VueResource from 'vue-resource';
-
-Vue.use(VueResource);
 
 export default {
   props: {
@@ -111,7 +107,7 @@ export default {
       }
     },
     fetchItems () {
-      Vue.http.get(this.src + this.query).then((response) => {
+      this.$http.get(this.src + this.query).then((response) => {
         this.items = response.data;
 
         // New items arrived - open drop-down menu

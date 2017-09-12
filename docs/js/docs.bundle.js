@@ -10581,7 +10581,7 @@
 	
 	
 	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"Dropdown.vue","sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"Dropdown.vue","sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -10636,6 +10636,10 @@
 	      default: 'btn btn-default'
 	    },
 	    containerClass: {
+	      type: String,
+	      default: ''
+	    },
+	    menuClass: {
 	      type: String,
 	      default: ''
 	    }
@@ -10704,7 +10708,7 @@
 	    staticClass: "caret"
 	  })])], 2)]), _vm._v(" "), _vm._t("items", [_c('ul', {
 	    ref: "ul",
-	    staticClass: "dropdown-menu",
+	    class: ['dropdown-menu', _vm.menuClass],
 	    attrs: {
 	      "aria-labelledby": _vm.id
 	    }

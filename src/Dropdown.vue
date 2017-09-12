@@ -16,7 +16,7 @@
       </a>
     </slot>
     <slot name="items">
-      <ul class="dropdown-menu" :aria-labelledby="id" ref="ul">
+      <ul :class="['dropdown-menu', menuClass]" :aria-labelledby="id" ref="ul">
         <slot></slot>
       </ul>
     </slot>
@@ -39,6 +39,10 @@ export default {
       default: 'btn btn-default'
     },
     containerClass: {
+      type: String,
+      default: ''
+    },
+    menuClass: {
       type: String,
       default: ''
     }

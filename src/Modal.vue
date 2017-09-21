@@ -120,6 +120,11 @@ export default {
       // Remove the .modal-open class from the body
       removeClass(document.body, 'modal-open');
     }
+  },
+  mounted () {
+    if (this.value) {
+      this.open();
+    }
   }
 };
 </script>

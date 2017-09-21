@@ -19,7 +19,8 @@
         :aria-labelledby="uniqueId()"
         :aria-hidden="show"
         tabindex="-1"
-        role="dialog">
+        role="dialog"
+        @keyup.esc="close">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -107,6 +108,10 @@ export default {
     },
     onAfterEnter () {
       this.isIn = true;
+
+      // Focus on the modal - this allows to react to the Esc button press
+      // from this point on.
+      this.$refs.modal.focus();
     },
     onBeforeLeave () {
     },

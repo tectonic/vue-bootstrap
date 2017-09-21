@@ -50,7 +50,7 @@ import { addClass, removeClass, hasScrollbar, scrollbarWidth } from './lib/dom.j
 
 export default {
   props: {
-    show: {
+    value: {
       type: Boolean,
       default: false
     },
@@ -73,17 +73,25 @@ export default {
     };
   },
   watch: {
-    show (value) {
-      this.isVisible = value ? true : false;
+    value (v) {
+      if (v) {
+        this.open();
+      } else {
+        this.close();
+      }
     }
   },
   methods: {
     uniqueId () {
       return 'v-bs-modal-title-' + this._uid;
     },
+    open () {
+      this.isVisible = true;
+      this.$emit('opened');
+    },
     close () {
+      this.isVisible = false;
       this.$emit('closed');
-      this.$emit('update:show', false);
     },
     onBeforeEnter () {
       // Adjust padding on the body accounting for the scrollbar width,

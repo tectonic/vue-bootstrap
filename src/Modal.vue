@@ -32,7 +32,7 @@
               </h4>
             </div>
             <div class="modal-body">
-              <slot name="body">{{ body }}</slot>
+              <slot>{{ body }}</slot>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" @click.prevent="close">Close</button>

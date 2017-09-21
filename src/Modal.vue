@@ -46,6 +46,8 @@
 </template>
 
 <script>
+import { addClass, removeClass, hasScrollbar, scrollbarWidth } from './lib/dom.js';
+
 export default {
   props: {
     show: {
@@ -84,24 +86,31 @@ export default {
       this.$emit('update:show', false);
     },
     onBeforeEnter () {
-      console.log('onBeforeEnter');
+      // Adjust padding on the body accounting for the scrollbar width,
+      // wchich is not going to be visible while the modal is open.
+      if (hasScrollbar(document.documentElement)) {
+        document.body.style.paddingRight = `${scrollbarWidth()}px`;
+      }
+
+      // Add the .modal-open class to the body
+      addClass(document.body, 'modal-open');
     },
     onEnter () {
-      console.log('onEnter');
     },
     onAfterEnter () {
       this.isIn = true;
-      console.log('onAfterEnter');
     },
     onBeforeLeave () {
-      console.log('onBeforeLeave');
     },
     onLeave () {
       this.isIn = false;
-      console.log('onLeave');
     },
     onAfterLeave () {
-      console.log('onAfterLeave');
+      // Reset padding on the body
+      document.body.style.paddingRight = null;
+
+      // Remove the .modal-open class from the body
+      removeClass(document.body, 'modal-open');
     }
   }
 };

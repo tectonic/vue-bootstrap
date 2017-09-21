@@ -79,7 +79,7 @@ export default {
   },
   methods: {
     uniqueId () {
-      return 'modal-title-' + this._uid;
+      return 'v-bs-modal-title-' + this._uid;
     },
     close () {
       this.$emit('closed');

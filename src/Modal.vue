@@ -34,7 +34,7 @@
             <div class="modal-body">
               <slot>{{ body }}</slot>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" v-if="footer">
               <button type="button" class="btn btn-default" @click.prevent="close">Close</button>
               <button type="button" class="btn btn-primary">Save</button>
             </div>
@@ -65,6 +65,10 @@ export default {
     },
     id: {
       type: String
+    },
+    footer: {
+      type: Boolean,
+      default: true
     }
   },
   data () {

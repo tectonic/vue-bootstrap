@@ -35,8 +35,12 @@
               <slot>{{ body }}</slot>
             </div>
             <div class="modal-footer" v-if="footer">
-              <button type="button" class="btn btn-default" @click.prevent="close">Close</button>
-              <button type="button" class="btn btn-primary">Save</button>
+              <button type="button" class="btn btn-default" @click.prevent="close" v-if="closeButton">
+                {{ closeButtonLabel }}
+              </button>
+              <button type="button" class="btn btn-primary" @click.prevent="confirm" v-if="confirmButton">
+                {{ confirmButtonLabel }}
+              </button>
             </div>
           </div>
         </div>
@@ -69,6 +73,26 @@ export default {
     footer: {
       type: Boolean,
       default: true
+    },
+    confirmButton: {
+      type: Boolean,
+      default: true
+    },
+    confirmButtonLabel: {
+      type: String,
+      default: 'Confirm'
+    },
+    closeOnConfirm: {
+      type: Boolean,
+      default: true
+    },
+    closeButton: {
+      type: Boolean,
+      default: true
+    },
+    closeButtonLabel: {
+      type: String,
+      default: 'Close'
     }
   },
   data () {
@@ -97,6 +121,13 @@ export default {
     close () {
       this.isVisible = false;
       this.$emit('closed');
+    },
+    confirm () {
+      if (this.closeOnConfirm) {
+        this.close();
+      }
+
+      this.$emit('confirmed');
     },
     onBeforeEnter () {
       // Adjust padding on the body accounting for the scrollbar width,

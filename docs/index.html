@@ -48,7 +48,6 @@
             <div class="panel panel-default">
               <div class="panel-body">
                 <div class="form-group">
-                  <label for="datepicker">Datepicker</label>
                   <datepicker value="2017-03-01 12:10" mode="datetime"></datepicker>
                 </div>
 <pre>
@@ -56,17 +55,17 @@
 </pre>
               </div>
             </div>
-            <h3>Props:</h3>
-            <table class="table">
-              <thead>
+            <table class="table table-bordered">
+              <tbody>
+                <tr>
+                  <th colspan="4"><span class="label label-lg label-success">Props</span></th>
+                </tr>
                 <tr>
                   <th>Name</th>
                   <th>Type</th>
                   <th>Default</th>
                   <th>Description</th>
                 </tr>
-              </thead>
-              <tbody>
                 <tr>
                   <td>name</td>
                   <td>String</td>
@@ -129,7 +128,6 @@
             <div class="panel panel-default">
               <div class="panel-body">
                 <div class="form-group">
-                  <label for="menu">Dropdown</label>
                   <dropdown label="Dropdown" id="menu">
                     <li><a href="javascript:;">Action</a></li>
                     <li><a href="javascript:;">Another action</a></li>
@@ -143,17 +141,17 @@
 </pre>
               </div>
             </div>
-            <h3>Props:</h3>
-            <table class="table">
-              <thead>
+            <table class="table table-bordered">
+              <tbody>
+                <tr>
+                  <th colspan="4"><span class="label label-lg label-success">Props</span></th>
+                </tr>
                 <tr>
                   <th>Name</th>
                   <th>Type</th>
                   <th>Default</th>
                   <th>Description</th>
                 </tr>
-              </thead>
-              <tbody>
                 <tr>
                   <td>id</td>
                   <td>String</td>
@@ -192,15 +190,12 @@
             <div class="panel panel-default">
               <div class="panel-body">
                 <div class="form-group">
-                  <label for="menu">Popover</label>
-                  <div>
-                    <popover title="Hello world!" placement="right">
-                      <a class="btn btn-primary">Click me</a>
-                      <div slot="content">
-                        This is the content.
-                      </div>
-                    </popover>
-                  </div>
+                  <popover title="Hello world!" placement="right">
+                    <a class="btn btn-primary">Click me</a>
+                    <div slot="content">
+                      This is the content.
+                    </div>
+                  </popover>
                 </div>
 <pre>
 &lt;popover title="Hello world!" placement="right"&gt;
@@ -212,17 +207,17 @@
 </pre>
               </div>
             </div>
-            <h3>Props:</h3>
-            <table class="table">
-              <thead>
+            <table class="table table-bordered">
+              <tbody>
+                <tr>
+                  <th colspan="4"><span class="label label-lg label-success">Props</span></th>
+                </tr>
                 <tr>
                   <th>Name</th>
                   <th>Type</th>
                   <th>Default</th>
                   <th>Description</th>
                 </tr>
-              </thead>
-              <tbody>
                 <tr>
                   <td>title</td>
                   <td>String</td>
@@ -266,7 +261,7 @@
             </table>
           </div>
           <div class="island">
-            <h2>Typeahead</h2>
+            <h1>Typeahead</h1>
             <div class="panel panel-default">
               <div class="panel-body">
                 <div class="form-group">
@@ -278,30 +273,17 @@
 </pre>
               </div>
             </div>
-            <h3>Ajax</h3>
-            <p>
-Using the Typeahead component with Ajax by defining the <code>src</code> prop will require 'vue-resource' peer
-dependency to be installed. Install 'vue-resource' with NPM and hook it to the main Vue instance.
-
-<pre>
-import Vue from 'vue';
-import VueResource from 'vue-resource';
-
-Vue.use(VueResource);
-</pre>
-
-            </p>
-            <h3>Props:</h3>
-            <table class="table">
-              <thead>
+            <table class="table table-bordered">
+              <tbody>
+                <tr>
+                  <th colspan="4"><span class="label label-lg label-success">Props</span></th>
+                </tr>
                 <tr>
                   <th>Name</th>
                   <th>Type</th>
                   <th>Default</th>
                   <th>Description</th>
                 </tr>
-              </thead>
-              <tbody>
                 <tr>
                   <td>initial-items</td>
                   <td>Array</td>
@@ -359,29 +341,40 @@ Vue.use(VueResource);
                   <td>The name of a hidden input field that will be populated with autocomplete suggestion's id.</td>
                 </tr>
               </tbody>
-            </table>
-            <h3>Events:</h3>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Parameters</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
               <tbody>
                 <tr>
+                  <th colspan="4"><span class="label label-lg label-success">Events</span></th>
+                </tr>
+                <tr>
+                  <th>Name</th>
+                  <th colspan="2">Parameters</th>
+                  <th>Description</th>
+                </tr>
+                <tr>
                   <td>selected</td>
-                  <td>Item (Object)</td>
+                  <td colspan="2">Item (Object)</td>
                   <td>Emitted when an item gets selected.</td>
                 </tr>
                 <tr>
                   <td>error</td>
-                  <td>Response (Object)</td>
+                  <td colspan="2">Response (Object)</td>
                   <td>Emitted when there was an error communicating with the remote source.</td>
                 </tr>
               </tbody>
             </table>
+            <h3>Ajax</h3>
+            <p>
+Using the Typeahead component with Ajax by defining the <code>src</code> prop will require 'vue-resource' peer
+dependency to be installed. Install 'vue-resource' with NPM and hook it to the main Vue instance.
+
+<pre>
+import Vue from 'vue';
+import VueResource from 'vue-resource';
+
+Vue.use(VueResource);
+</pre>
+
+            </p>
           </div>
           <div class="island">
             <h1>Customising templates</h1>

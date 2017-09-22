@@ -11,5 +11,5 @@ export function chunk (input, chunk) {
     chunks.push(array);
   }
 
-  return chunks;   
-}
+  return chunks;
+};

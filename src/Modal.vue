@@ -1,11 +1,7 @@
 <template>
   <div>
-    <transition enter-class=""
-      enter-to-class=""
-      enter-active-class=""
-      leave-class=""
-      leave-active-class=""
-      leave-to-class=""
+    <transition
+      v-bind="transitionClasses"
       @before-enter="onBeforeEnter"
       @enter="onEnter"
       @after-enter="onAfterEnter"
@@ -99,7 +95,15 @@ export default {
   data () {
     return {
       isVisible: false,
-      isIn: false
+      isIn: false,
+      transitionClasses: {
+        'enter-class': '',
+        'enter-to-class': '',
+        'enter-active-class': '',
+        'leave-class': '',
+        'leave-to-class': '',
+        'leave-active-class': ''
+      }
     };
   },
   watch: {

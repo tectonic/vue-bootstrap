@@ -12,7 +12,7 @@
         ref="modal"
         :class="['modal', 'fade', { 'in': isIn }]"
         :id="id"
-        :aria-labelledby="uniqueId()"
+        :aria-labelledby="uniqueTitleId()"
         :aria-hidden="show"
         tabindex="-1"
         role="dialog"
@@ -24,7 +24,7 @@
               <button type="button" class="close" aria-label="Close" @click.prevent="close">
                 <slot name="close"><span aria-hidden="true">&times;</span></slot>
               </button>
-              <h4 class="modal-title" :id="uniqueId()">
+              <h4 class="modal-title" :id="uniqueTitleId()">
                 <slot name="title">{{ title }}</slot>
               </h4>
             </div>
@@ -116,7 +116,7 @@ export default {
     }
   },
   methods: {
-    uniqueId () {
+    uniqueTitleId () {
       return 'v-bs-modal-title-' + this._uid;
     },
     open () {

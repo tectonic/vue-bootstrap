@@ -16,4 +16,12 @@ describe('Modal', () => {
     expect(data.isVisible).to.be.false;
     expect(data.isIn).to.be.false;
   });
+
+  it('returns a unique id for the title element', () => {
+    const vm1 = new Vue(Modal);
+    const vm2 = new Vue(Modal);
+
+    expect(vm1.uniqueTitleId()).to.equal('v-bs-modal-title-0');
+    expect(vm2.uniqueTitleId()).to.equal('v-bs-modal-title-1');
+  });
 });

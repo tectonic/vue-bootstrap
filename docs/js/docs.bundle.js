@@ -58,11 +58,15 @@
 	
 	var _Dropdown2 = _interopRequireDefault(_Dropdown);
 	
-	var _Popover = __webpack_require__(69);
+	var _Modal = __webpack_require__(69);
+	
+	var _Modal2 = _interopRequireDefault(_Modal);
+	
+	var _Popover = __webpack_require__(75);
 	
 	var _Popover2 = _interopRequireDefault(_Popover);
 	
-	var _Typeahead = __webpack_require__(74);
+	var _Typeahead = __webpack_require__(80);
 	
 	var _Typeahead2 = _interopRequireDefault(_Typeahead);
 	
@@ -73,11 +77,13 @@
 	  components: {
 	    Datepicker: _Datepicker2.default,
 	    Dropdown: _Dropdown2.default,
+	    Modal: _Modal2.default,
 	    Popover: _Popover2.default,
 	    Typeahead: _Typeahead2.default
 	  },
 	  data: function data() {
 	    return {
+	      showModal: false,
 	      typeaheadItems: [{ id: 1, value: 'Anne Sullivan' }, { id: 2, value: 'Anne Hathaway' }, { id: 3, value: 'Joan Allen' }, { id: 4, value: 'Joan Collins' }, { id: 5, value: 'Joan Baez' }, { id: 6, value: 'Mark Twain' }, { id: 7, value: 'Robert Redford' }, { id: 8, value: 'Susan Sontag' }, { id: 9, value: 'John Lee Hooker' }, { id: 10, value: 'John Tyler' }, { id: 11, value: 'John Terry' }, { id: 12, value: 'John Cleese' }, { id: 13, value: 'John Malkovich' }, { id: 14, value: 'John Stockton' }, { id: 15, value: 'John Ritter' }, { id: 16, value: 'John McCain' }, { id: 17, value: 'John Goodman' }, { id: 18, value: 'John C. Reilly' }, { id: 19, value: 'John Stamos' }, { id: 20, value: 'John Mayer' }, { id: 21, value: 'John Elway' }, { id: 22, value: 'John Wayne Gacy' }, { id: 23, value: 'John Denver' }, { id: 24, value: 'John Travolta' }, { id: 25, value: 'John Wayne' }, { id: 26, value: 'John Lennon' }, { id: 27, value: 'John F. Kennedy' }]
 	    };
 	  },
@@ -10343,7 +10349,7 @@
 	  }
 	
 	  return chunks;
-	}
+	};
 
 /***/ }),
 /* 63 */
@@ -10735,7 +10741,444 @@
 	__vue_exports__ = __webpack_require__(72)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(73)
+	var __vue_template__ = __webpack_require__(74)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "/Users/kazik/Sites/awardforce.com/vue-bootstrap/src/Modal.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+	__vue_options__._scopeId = "data-v-8239d6a0"
+	
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-8239d6a0", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-8239d6a0", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] Modal.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+	
+	module.exports = __vue_exports__
+
+
+/***/ }),
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(71);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(6)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../node_modules/css-loader/index.js?sourceMap!../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-8239d6a0&scoped=true!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Modal.vue", function() {
+				var newContent = require("!!../node_modules/css-loader/index.js?sourceMap!../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-8239d6a0&scoped=true!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Modal.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(5)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "\n.modal[data-v-8239d6a0] {\n  display: block;\n  transition: all .15s;\n}\n", "", {"version":3,"sources":["/./src/Modal.vue?7df3c468"],"names":[],"mappings":";AAuLA;EACA,eAAA;EACA,qBAAA;CACA","file":"Modal.vue","sourcesContent":["<template>\n  <div>\n    <transition\n      v-bind=\"transitionClasses\"\n      @before-enter=\"onBeforeEnter\"\n      @enter=\"onEnter\"\n      @after-enter=\"onAfterEnter\"\n      @before-leave=\"onBeforeLeave\"\n      @leave=\"onLeave\"\n      @after-leave=\"onAfterLeave\">\n      <div v-show=\"isVisible\"\n        ref=\"modal\"\n        :class=\"['modal', 'fade', { 'in': isIn }]\"\n        :id=\"id\"\n        :aria-labelledby=\"uniqueTitleId()\"\n        :aria-hidden=\"show\"\n        tabindex=\"-1\"\n        role=\"dialog\"\n        @keyup.esc=\"close\"\n        @click=\"onBackdropClick\">\n        <div class=\"modal-dialog\" role=\"document\">\n          <div class=\"modal-content\">\n            <div class=\"modal-header\">\n              <button type=\"button\" class=\"close\" aria-label=\"Close\" @click.prevent=\"close\">\n                <slot name=\"close\"><span aria-hidden=\"true\">&times;</span></slot>\n              </button>\n              <h4 class=\"modal-title\" :id=\"uniqueTitleId()\">\n                <slot name=\"title\">{{ title }}</slot>\n              </h4>\n            </div>\n            <div class=\"modal-body\">\n              <slot>{{ body }}</slot>\n            </div>\n            <div class=\"modal-footer\" v-if=\"footer\">\n              <button type=\"button\" class=\"btn btn-default\" @click.prevent=\"close\" v-if=\"closeButton\">\n                {{ closeButtonLabel }}\n              </button>\n              <button type=\"button\" class=\"btn btn-primary\" @click.prevent=\"confirm\" v-if=\"confirmButton\">\n                {{ confirmButtonLabel }}\n              </button>\n            </div>\n          </div>\n        </div>\n      </div>\n    </transition>\n    <div v-if=\"isVisible\" ref=\"backdrop\" :class=\"['modal-backdrop', 'fade', { 'in': isIn }]\"></div>\n  </div>\n</template>\n\n<script>\nimport { addClass, removeClass, hasScrollbar, scrollbarWidth } from './lib/dom.js';\n\nexport default {\n  props: {\n    value: {\n      type: Boolean,\n      default: false\n    },\n    title: {\n      type: String,\n      default: 'Modal title'\n    },\n    body: {\n      type: String,\n      default: 'One fine body...'\n    },\n    id: {\n      type: String\n    },\n    footer: {\n      type: Boolean,\n      default: true\n    },\n    confirmButton: {\n      type: Boolean,\n      default: true\n    },\n    confirmButtonLabel: {\n      type: String,\n      default: 'Confirm'\n    },\n    closeOnConfirm: {\n      type: Boolean,\n      default: true\n    },\n    closeButton: {\n      type: Boolean,\n      default: true\n    },\n    closeButtonLabel: {\n      type: String,\n      default: 'Close'\n    }\n  },\n  data () {\n    return {\n      isVisible: false,\n      isIn: false,\n      transitionClasses: {\n        'enter-class': '',\n        'enter-to-class': '',\n        'enter-active-class': '',\n        'leave-class': '',\n        'leave-to-class': '',\n        'leave-active-class': ''\n      }\n    };\n  },\n  watch: {\n    value (v) {\n      if (v) {\n        this.open();\n      } else {\n        this.close();\n      }\n    }\n  },\n  methods: {\n    uniqueTitleId () {\n      return 'v-bs-modal-title-' + this._uid;\n    },\n    open () {\n      this.isVisible = true;\n      this.$emit('opened');\n    },\n    close () {\n      this.isVisible = false;\n      this.$emit('closed');\n    },\n    confirm () {\n      if (this.closeOnConfirm) {\n        this.close();\n      }\n\n      this.$emit('confirmed');\n    },\n    onBackdropClick (event) {\n      // This will ignore clicks on any elements inside the modal.\n      if (this.$refs.modal === event.target) {\n        this.close();\n      }\n    },\n    onBeforeEnter () {\n      // Adjust padding on the body accounting for the scrollbar width,\n      // wchich is not going to be visible while the modal is open.\n      if (hasScrollbar(document.documentElement)) {\n        document.body.style.paddingRight = `${scrollbarWidth()}px`;\n      }\n\n      // Add the .modal-open class to the body\n      addClass(document.body, 'modal-open');\n    },\n    onEnter () {\n    },\n    onAfterEnter () {\n      this.isIn = true;\n\n      // Focus on the modal - this allows to react to the Esc button press\n      // from this point on.\n      this.$refs.modal.focus();\n    },\n    onBeforeLeave () {\n    },\n    onLeave () {\n      this.isIn = false;\n    },\n    onAfterLeave () {\n      // Reset padding on the body\n      document.body.style.paddingRight = null;\n\n      // Remove the .modal-open class from the body\n      removeClass(document.body, 'modal-open');\n    }\n  },\n  mounted () {\n    if (this.value) {\n      this.open();\n    }\n  }\n};\n</script>\n\n<style scoped>\n  .modal {\n    display: block;\n    transition: all .15s;\n  }\n</style>\n"],"sourceRoot":"webpack://"}]);
+	
+	// exports
+
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _dom = __webpack_require__(73);
+	
+	exports.default = {
+	  props: {
+	    value: {
+	      type: Boolean,
+	      default: false
+	    },
+	    title: {
+	      type: String,
+	      default: 'Modal title'
+	    },
+	    body: {
+	      type: String,
+	      default: 'One fine body...'
+	    },
+	    id: {
+	      type: String
+	    },
+	    footer: {
+	      type: Boolean,
+	      default: true
+	    },
+	    confirmButton: {
+	      type: Boolean,
+	      default: true
+	    },
+	    confirmButtonLabel: {
+	      type: String,
+	      default: 'Confirm'
+	    },
+	    closeOnConfirm: {
+	      type: Boolean,
+	      default: true
+	    },
+	    closeButton: {
+	      type: Boolean,
+	      default: true
+	    },
+	    closeButtonLabel: {
+	      type: String,
+	      default: 'Close'
+	    }
+	  },
+	  data: function data() {
+	    return {
+	      isVisible: false,
+	      isIn: false,
+	      transitionClasses: {
+	        'enter-class': '',
+	        'enter-to-class': '',
+	        'enter-active-class': '',
+	        'leave-class': '',
+	        'leave-to-class': '',
+	        'leave-active-class': ''
+	      }
+	    };
+	  },
+	
+	  watch: {
+	    value: function value(v) {
+	      if (v) {
+	        this.open();
+	      } else {
+	        this.close();
+	      }
+	    }
+	  },
+	  methods: {
+	    uniqueTitleId: function uniqueTitleId() {
+	      return 'v-bs-modal-title-' + this._uid;
+	    },
+	    open: function open() {
+	      this.isVisible = true;
+	      this.$emit('opened');
+	    },
+	    close: function close() {
+	      this.isVisible = false;
+	      this.$emit('closed');
+	    },
+	    confirm: function confirm() {
+	      if (this.closeOnConfirm) {
+	        this.close();
+	      }
+	
+	      this.$emit('confirmed');
+	    },
+	    onBackdropClick: function onBackdropClick(event) {
+	      // This will ignore clicks on any elements inside the modal.
+	      if (this.$refs.modal === event.target) {
+	        this.close();
+	      }
+	    },
+	    onBeforeEnter: function onBeforeEnter() {
+	      // Adjust padding on the body accounting for the scrollbar width,
+	      // wchich is not going to be visible while the modal is open.
+	      if ((0, _dom.hasScrollbar)(document.documentElement)) {
+	        document.body.style.paddingRight = (0, _dom.scrollbarWidth)() + 'px';
+	      }
+	
+	      // Add the .modal-open class to the body
+	      (0, _dom.addClass)(document.body, 'modal-open');
+	    },
+	    onEnter: function onEnter() {},
+	    onAfterEnter: function onAfterEnter() {
+	      this.isIn = true;
+	
+	      // Focus on the modal - this allows to react to the Esc button press
+	      // from this point on.
+	      this.$refs.modal.focus();
+	    },
+	    onBeforeLeave: function onBeforeLeave() {},
+	    onLeave: function onLeave() {
+	      this.isIn = false;
+	    },
+	    onAfterLeave: function onAfterLeave() {
+	      // Reset padding on the body
+	      document.body.style.paddingRight = null;
+	
+	      // Remove the .modal-open class from the body
+	      (0, _dom.removeClass)(document.body, 'modal-open');
+	    }
+	  },
+	  mounted: function mounted() {
+	    if (this.value) {
+	      this.open();
+	    }
+	  }
+	}; //
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+/***/ }),
+/* 73 */
+/***/ (function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.scrollbarWidth = scrollbarWidth;
+	exports.hasScrollbar = hasScrollbar;
+	exports.addClass = addClass;
+	exports.removeClass = removeClass;
+	/**
+	 * Measure scrollbar width
+	 */
+	function scrollbarWidth() {
+	  var el = document.createElement('div');
+	  var scrollbarWidth = void 0;
+	
+	  // The .modal-scrollbar-measure class is provided by Bootstrap and is used
+	  // here to measure scrollbar width, which differs across browsers and systems.
+	  el.className = 'modal-scrollbar-measure';
+	
+	  document.body.appendChild(el);
+	  scrollbarWidth = el.getBoundingClientRect().width - el.clientWidth;
+	  document.body.removeChild(el);
+	
+	  return scrollbarWidth;
+	};
+	
+	/**
+	 * Check if an element has a scrollbar
+	 */
+	function hasScrollbar(el) {
+	  return el.scrollHeight > el.clientHeight;
+	};
+	
+	/**
+	 * Add a class to an element
+	 */
+	function addClass(el, className) {
+	  el.classList.add(className);
+	};
+	
+	/**
+	 * Remove a class from an element
+	 */
+	function removeClass(el, className) {
+	  el.classList.remove(className);
+	};
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', [_c('transition', _vm._b({
+	    on: {
+	      "before-enter": _vm.onBeforeEnter,
+	      "enter": _vm.onEnter,
+	      "after-enter": _vm.onAfterEnter,
+	      "before-leave": _vm.onBeforeLeave,
+	      "leave": _vm.onLeave,
+	      "after-leave": _vm.onAfterLeave
+	    }
+	  }, 'transition', _vm.transitionClasses), [_c('div', {
+	    directives: [{
+	      name: "show",
+	      rawName: "v-show",
+	      value: (_vm.isVisible),
+	      expression: "isVisible"
+	    }],
+	    ref: "modal",
+	    class: ['modal', 'fade', {
+	      'in': _vm.isIn
+	    }],
+	    attrs: {
+	      "id": _vm.id,
+	      "aria-labelledby": _vm.uniqueTitleId(),
+	      "aria-hidden": _vm.show,
+	      "tabindex": "-1",
+	      "role": "dialog"
+	    },
+	    on: {
+	      "keyup": function($event) {
+	        if (_vm._k($event.keyCode, "esc", 27)) { return; }
+	        _vm.close($event)
+	      },
+	      "click": _vm.onBackdropClick
+	    }
+	  }, [_c('div', {
+	    staticClass: "modal-dialog",
+	    attrs: {
+	      "role": "document"
+	    }
+	  }, [_c('div', {
+	    staticClass: "modal-content"
+	  }, [_c('div', {
+	    staticClass: "modal-header"
+	  }, [_c('button', {
+	    staticClass: "close",
+	    attrs: {
+	      "type": "button",
+	      "aria-label": "Close"
+	    },
+	    on: {
+	      "click": function($event) {
+	        $event.preventDefault();
+	        _vm.close($event)
+	      }
+	    }
+	  }, [_vm._t("close", [_c('span', {
+	    attrs: {
+	      "aria-hidden": "true"
+	    }
+	  }, [_vm._v("×")])])], 2), _vm._v(" "), _c('h4', {
+	    staticClass: "modal-title",
+	    attrs: {
+	      "id": _vm.uniqueTitleId()
+	    }
+	  }, [_vm._t("title", [_vm._v(_vm._s(_vm.title))])], 2)]), _vm._v(" "), _c('div', {
+	    staticClass: "modal-body"
+	  }, [_vm._t("default", [_vm._v(_vm._s(_vm.body))])], 2), _vm._v(" "), (_vm.footer) ? _c('div', {
+	    staticClass: "modal-footer"
+	  }, [(_vm.closeButton) ? _c('button', {
+	    staticClass: "btn btn-default",
+	    attrs: {
+	      "type": "button"
+	    },
+	    on: {
+	      "click": function($event) {
+	        $event.preventDefault();
+	        _vm.close($event)
+	      }
+	    }
+	  }, [_vm._v("\n              " + _vm._s(_vm.closeButtonLabel) + "\n            ")]) : _vm._e(), _vm._v(" "), (_vm.confirmButton) ? _c('button', {
+	    staticClass: "btn btn-primary",
+	    attrs: {
+	      "type": "button"
+	    },
+	    on: {
+	      "click": function($event) {
+	        $event.preventDefault();
+	        _vm.confirm($event)
+	      }
+	    }
+	  }, [_vm._v("\n              " + _vm._s(_vm.confirmButtonLabel) + "\n            ")]) : _vm._e()]) : _vm._e()])])])]), _vm._v(" "), (_vm.isVisible) ? _c('div', {
+	    ref: "backdrop",
+	    class: ['modal-backdrop', 'fade', {
+	      'in': _vm.isIn
+	    }]
+	  }) : _vm._e()], 1)
+	},staticRenderFns: []}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-8239d6a0", module.exports)
+	  }
+	}
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+	
+	/* styles */
+	__webpack_require__(76)
+	
+	/* script */
+	__vue_exports__ = __webpack_require__(78)
+	
+	/* template */
+	var __vue_template__ = __webpack_require__(79)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -10770,13 +11213,13 @@
 
 
 /***/ }),
-/* 70 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(71);
+	var content = __webpack_require__(77);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(6)(content, {});
@@ -10796,7 +11239,7 @@
 	}
 
 /***/ }),
-/* 71 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(5)();
@@ -10810,7 +11253,7 @@
 
 
 /***/ }),
-/* 72 */
+/* 78 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -10995,7 +11438,7 @@
 	};
 
 /***/ }),
-/* 73 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11042,20 +11485,20 @@
 	}
 
 /***/ }),
-/* 74 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
 	/* styles */
-	__webpack_require__(75)
+	__webpack_require__(81)
 	
 	/* script */
-	__vue_exports__ = __webpack_require__(77)
+	__vue_exports__ = __webpack_require__(83)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(79)
+	var __vue_template__ = __webpack_require__(85)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -11090,13 +11533,13 @@
 
 
 /***/ }),
-/* 75 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(76);
+	var content = __webpack_require__(82);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(6)(content, {});
@@ -11116,7 +11559,7 @@
 	}
 
 /***/ }),
-/* 76 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(5)();
@@ -11130,7 +11573,7 @@
 
 
 /***/ }),
-/* 77 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11139,7 +11582,7 @@
 	  value: true
 	});
 	
-	var _debounce = __webpack_require__(78);
+	var _debounce = __webpack_require__(84);
 	
 	var _debounce2 = _interopRequireDefault(_debounce);
 	
@@ -11348,7 +11791,7 @@
 	//
 
 /***/ }),
-/* 78 */
+/* 84 */
 /***/ (function(module, exports) {
 
 	/**
@@ -11410,7 +11853,7 @@
 
 
 /***/ }),
-/* 79 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;

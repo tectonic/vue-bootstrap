@@ -20,7 +20,8 @@
         :aria-hidden="show"
         tabindex="-1"
         role="dialog"
-        @keyup.esc="close">
+        @keyup.esc="close"
+        @click="onBackdropClick">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -128,6 +129,12 @@ export default {
       }
 
       this.$emit('confirmed');
+    },
+    onBackdropClick (event) {
+      // This will ignore clicks on any elements inside the modal.
+      if (this.$refs.modal === event.target) {
+        this.close();
+      }
     },
     onBeforeEnter () {
       // Adjust padding on the body accounting for the scrollbar width,

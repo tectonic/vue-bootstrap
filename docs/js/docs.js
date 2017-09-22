@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Datepicker from '../../src/Datepicker.vue';
 import Dropdown from '../../src/Dropdown.vue';
+import Modal from '../../src/Modal.vue';
 import Popover from '../../src/Popover.vue';
 import Typeahead from '../../src/Typeahead.vue';
 
@@ -9,11 +10,13 @@ new Vue({
   components: {
     Datepicker,
     Dropdown,
+    Modal,
     Popover,
     Typeahead
   },
   data () {
     return {
+      showModal: false,
       typeaheadItems: [
         { id: 1, value: 'Anne Sullivan' },
         { id: 2, value: 'Anne Hathaway' },

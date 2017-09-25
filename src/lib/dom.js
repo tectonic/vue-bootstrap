@@ -17,10 +17,10 @@ export function scrollbarWidth () {
 };
 
 /**
- * Check if an element has a scrollbar
+ * Check if the body is overflowing
  */
-export function hasScrollbar (el) {
-  return el.scrollHeight > el.clientHeight;
+export function bodyIsOverflowing () {
+  return document.body.clientWidth < window.innerWidth;
 };
 
 /**

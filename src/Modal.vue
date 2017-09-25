@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { addClass, removeClass, hasScrollbar, scrollbarWidth } from './lib/dom.js';
+import { addClass, removeClass, bodyIsOverflowing, scrollbarWidth } from './lib/dom.js';
 
 export default {
   props: {
@@ -142,8 +142,8 @@ export default {
     },
     onBeforeEnter () {
       // Adjust padding on the body accounting for the scrollbar width,
-      // wchich is not going to be visible while the modal is open.
-      if (hasScrollbar(document.documentElement)) {
+      // which is not going to be visible while the modal is open.
+      if (bodyIsOverflowing()) {
         document.body.style.paddingRight = `${scrollbarWidth()}px`;
       }
 

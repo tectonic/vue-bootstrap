@@ -20,7 +20,7 @@
         @click="onBackdropClick">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" v-if="header">
               <button type="button" class="close" aria-label="Close" @click.prevent="close">
                 <slot name="close"><span aria-hidden="true">&times;</span></slot>
               </button>
@@ -66,6 +66,10 @@ export default {
     },
     id: {
       type: String
+    },
+    header: {
+      type: Boolean,
+      default: true
     },
     footer: {
       type: Boolean,

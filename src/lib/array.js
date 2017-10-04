@@ -20,17 +20,17 @@ export function chunk (input, chunk) {
  */
 export function shuffle (input) {
   let index, temp;
-  let counter = array.length;
+  let counter = input.length;
 
   while (counter > 0) {
     index = Math.floor(Math.random() * counter);
 
     counter--;
 
-    temp = array[counter];
-    array[counter] = array[index];
-    array[index] = temp;
+    temp = input[counter];
+    input[counter] = input[index];
+    input[index] = temp;
   }
 
-  return array;
+  return input;
 }

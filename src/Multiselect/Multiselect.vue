@@ -10,7 +10,7 @@
           <input :checked="allSelected()" type="checkbox" @click="toggleAll"> {{ selectAllLabel }}
         </label>
         <span class="randomizer-toggle" v-if="randomizer">
-          | <a @click.prevent="randomizerActive = !randomizerActive">{{ randomizerShow }}</a>
+          | <a href="" @click.prevent="randomizerActive = !randomizerActive">{{ randomizerShow }}</a>
           <popover :content="randomizerHelpicon">
             <span class="af-icons af-icons-help"></span>
           </popover>
@@ -90,7 +90,7 @@ export default {
     },
     randomizerShow: {
       type: String,
-      default: 'Random selection&hellip;'
+      default: 'Random selection'
     },
     randomizerHowMany: {
       type: String,

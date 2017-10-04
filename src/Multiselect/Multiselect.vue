@@ -1,5 +1,5 @@
 <template>
-  <div class="multiselect">
+  <div class="vue-multiselect">
     <div class="multiselect-filter" v-if="filter">
       <input type="text" :placeholder="placeholder" class="form-control" v-model="query">
     </div>
@@ -210,7 +210,7 @@ export default {
 </script>
 
 <style scoped>
-  .multiselect {
+  .vue-multiselect {
     position: relative;
   }
 

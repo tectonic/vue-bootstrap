@@ -13,3 +13,24 @@ export function chunk (input, chunk) {
 
   return chunks;
 };
+
+/**
+ * Shuffle an array
+ * https://bost.ocks.org/mike/shuffle/
+ */
+export function shuffle (input) {
+  let index, temp;
+  let counter = array.length;
+
+  while (counter > 0) {
+    index = Math.floor(Math.random() * counter);
+
+    counter--;
+
+    temp = array[counter];
+    array[counter] = array[index];
+    array[index] = temp;
+  }
+
+  return array;
+}

@@ -2,7 +2,7 @@
   <div>
     <template v-if="isParent">
       <div class="checkbox multiselect-option">
-        <label>
+        <label :style="indentStyle()">
           <input type="checkbox" v-model="option.selected" @change="toggleParent">
           <strong>{{ option[valueProperty] }}</strong>
         </label>
@@ -17,7 +17,7 @@
     </template>
     <template v-else>
       <div v-show="option.visible" class="checkbox multiselect-option">
-        <label>
+        <label :style="indentStyle()">
           <input type="checkbox" :name="name" v-model="option.selected" :value="option[idProperty]">
           {{ option[valueProperty] }}
         </label>
@@ -49,6 +49,11 @@ export default {
   methods: {
     hasChildren (option) {
       return option.children && option.children.length;
+    },
+    indentStyle () {
+      return {
+        marginLeft: 20 * this.level + 'px'
+      };
     },
     toggleParent () {
       const state = this.option.selected;

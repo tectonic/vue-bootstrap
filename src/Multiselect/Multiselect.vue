@@ -148,7 +148,7 @@ export default {
     options (options) {
       this.buildTree(options);
     },
-    selected () {
+    selectedIds () {
       this.$emit('selected', this.selectedIds);
     }
   },

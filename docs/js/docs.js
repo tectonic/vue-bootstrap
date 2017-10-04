@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Datepicker from '../../src/Datepicker.vue';
 import Dropdown from '../../src/Dropdown.vue';
 import Modal from '../../src/Modal.vue';
+import Multiselect from '../../src/Multiselect/Multiselect.vue';
 import Popover from '../../src/Popover.vue';
 import Typeahead from '../../src/Typeahead.vue';
 
@@ -11,6 +12,7 @@ new Vue({
     Datepicker,
     Dropdown,
     Modal,
+    Multiselect,
     Popover,
     Typeahead
   },
@@ -45,6 +47,39 @@ new Vue({
         { id: 25, value: 'John Wayne' },
         { id: 26, value: 'John Lennon' },
         { id: 27, value: 'John F. Kennedy' }
+      ],
+      multiselectOptions: [
+        { id: 1, name: 'Action', children: [
+            { id: 2, name: 'Martial Arts' },
+            { id: 3, name: 'Treasure Hunts' },
+            { id: 4, name: 'Adventures', children: [
+                { id: 5, name: 'Sea Adventures' },
+                { id: 6, name: 'Underwater Adventures' }
+              ]
+            }
+          ]
+        },
+        { id: 7, name: 'Comedy', children: [
+            { id: 8, name: 'Parody' },
+            { id: 9, name: 'Spoofs' },
+            { id: 10, name: 'Slapstick' }
+          ]
+        },
+        { id: 11, name: 'Crime & Gangster', children: [
+            { id: 12, name: 'Lovers on the run' },
+            { id: 13, name: 'Mysteries' },
+            { id: 14, name: 'Film Noir' }
+          ]
+        },
+        { id: 15, name: 'Drama', children: [
+            { id: 16, name: 'High School' },
+            { id: 17, name: 'Love Story' },
+            { id: 18, name: 'Soap Opera' },
+            { id: 19, name: 'Medical' }
+          ]
+        },
+        { id: 20, name: 'Horror' },
+        { id: 21, name: 'Science Fiction' }
       ]
     };
   },

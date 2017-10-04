@@ -62,11 +62,15 @@
 	
 	var _Modal2 = _interopRequireDefault(_Modal);
 	
-	var _Popover = __webpack_require__(75);
+	var _Multiselect = __webpack_require__(75);
+	
+	var _Multiselect2 = _interopRequireDefault(_Multiselect);
+	
+	var _Popover = __webpack_require__(96);
 	
 	var _Popover2 = _interopRequireDefault(_Popover);
 	
-	var _Typeahead = __webpack_require__(80);
+	var _Typeahead = __webpack_require__(102);
 	
 	var _Typeahead2 = _interopRequireDefault(_Typeahead);
 	
@@ -78,13 +82,20 @@
 	    Datepicker: _Datepicker2.default,
 	    Dropdown: _Dropdown2.default,
 	    Modal: _Modal2.default,
+	    Multiselect: _Multiselect2.default,
 	    Popover: _Popover2.default,
 	    Typeahead: _Typeahead2.default
 	  },
 	  data: function data() {
 	    return {
 	      showModal: false,
-	      typeaheadItems: [{ id: 1, value: 'Anne Sullivan' }, { id: 2, value: 'Anne Hathaway' }, { id: 3, value: 'Joan Allen' }, { id: 4, value: 'Joan Collins' }, { id: 5, value: 'Joan Baez' }, { id: 6, value: 'Mark Twain' }, { id: 7, value: 'Robert Redford' }, { id: 8, value: 'Susan Sontag' }, { id: 9, value: 'John Lee Hooker' }, { id: 10, value: 'John Tyler' }, { id: 11, value: 'John Terry' }, { id: 12, value: 'John Cleese' }, { id: 13, value: 'John Malkovich' }, { id: 14, value: 'John Stockton' }, { id: 15, value: 'John Ritter' }, { id: 16, value: 'John McCain' }, { id: 17, value: 'John Goodman' }, { id: 18, value: 'John C. Reilly' }, { id: 19, value: 'John Stamos' }, { id: 20, value: 'John Mayer' }, { id: 21, value: 'John Elway' }, { id: 22, value: 'John Wayne Gacy' }, { id: 23, value: 'John Denver' }, { id: 24, value: 'John Travolta' }, { id: 25, value: 'John Wayne' }, { id: 26, value: 'John Lennon' }, { id: 27, value: 'John F. Kennedy' }]
+	      typeaheadItems: [{ id: 1, value: 'Anne Sullivan' }, { id: 2, value: 'Anne Hathaway' }, { id: 3, value: 'Joan Allen' }, { id: 4, value: 'Joan Collins' }, { id: 5, value: 'Joan Baez' }, { id: 6, value: 'Mark Twain' }, { id: 7, value: 'Robert Redford' }, { id: 8, value: 'Susan Sontag' }, { id: 9, value: 'John Lee Hooker' }, { id: 10, value: 'John Tyler' }, { id: 11, value: 'John Terry' }, { id: 12, value: 'John Cleese' }, { id: 13, value: 'John Malkovich' }, { id: 14, value: 'John Stockton' }, { id: 15, value: 'John Ritter' }, { id: 16, value: 'John McCain' }, { id: 17, value: 'John Goodman' }, { id: 18, value: 'John C. Reilly' }, { id: 19, value: 'John Stamos' }, { id: 20, value: 'John Mayer' }, { id: 21, value: 'John Elway' }, { id: 22, value: 'John Wayne Gacy' }, { id: 23, value: 'John Denver' }, { id: 24, value: 'John Travolta' }, { id: 25, value: 'John Wayne' }, { id: 26, value: 'John Lennon' }, { id: 27, value: 'John F. Kennedy' }],
+	      multiselectOptions: [{ id: 1, name: 'Action', children: [{ id: 2, name: 'Martial Arts' }, { id: 3, name: 'Treasure Hunts' }, { id: 4, name: 'Adventures', children: [{ id: 5, name: 'Sea Adventures' }, { id: 6, name: 'Underwater Adventures' }]
+	        }]
+	      }, { id: 7, name: 'Comedy', children: [{ id: 8, name: 'Parody' }, { id: 9, name: 'Spoofs' }, { id: 10, name: 'Slapstick' }]
+	      }, { id: 11, name: 'Crime & Gangster', children: [{ id: 12, name: 'Lovers on the run' }, { id: 13, name: 'Mysteries' }, { id: 14, name: 'Film Noir' }]
+	      }, { id: 15, name: 'Drama', children: [{ id: 16, name: 'High School' }, { id: 17, name: 'Love Story' }, { id: 18, name: 'Soap Opera' }, { id: 19, name: 'Medical' }]
+	      }, { id: 20, name: 'Horror' }, { id: 21, name: 'Science Fiction' }]
 	    };
 	  },
 	
@@ -11949,6 +11960,7 @@
 	  value: true
 	});
 	exports.chunk = chunk;
+	exports.shuffle = shuffle;
 	/**
 	 * Chunk an array
 	 */
@@ -11965,6 +11977,28 @@
 	
 	  return chunks;
 	};
+	
+	/**
+	 * Shuffle an array
+	 * https://bost.ocks.org/mike/shuffle/
+	 */
+	function shuffle(input) {
+	  var index = void 0,
+	      temp = void 0;
+	  var counter = input.length;
+	
+	  while (counter > 0) {
+	    index = Math.floor(Math.random() * counter);
+	
+	    counter--;
+	
+	    temp = input[counter];
+	    input[counter] = input[index];
+	    input[index] = temp;
+	  }
+	
+	  return input;
+	}
 
 /***/ }),
 /* 63 */
@@ -12797,7 +12831,1004 @@
 	__vue_exports__ = __webpack_require__(78)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(79)
+	var __vue_template__ = __webpack_require__(101)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "/Users/kazik/Sites/awardforce.com/vue-bootstrap/src/Multiselect/Multiselect.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+	__vue_options__._scopeId = "data-v-1cd85c04"
+	
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-1cd85c04", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-1cd85c04", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] Multiselect.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+	
+	module.exports = __vue_exports__
+
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(77);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(6)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-1cd85c04&scoped=true!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Multiselect.vue", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-1cd85c04&scoped=true!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Multiselect.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(5)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "\n.multiselect[data-v-1cd85c04] {\n  position: relative;\n}\n.multiselect-filter[data-v-1cd85c04] {\n  margin-bottom: 4px;\n}\n.multiselect-toggles[data-v-1cd85c04] {\n  padding: 0 9px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.multiselect-toggles .multiselect-selectall[data-v-1cd85c04] {\n  width: 45%;\n  float: left;\n}\n.multiselect-toggles .multiselect-subset[data-v-1cd85c04] {\n  width: 45%;\n  float: right;\n  text-align: right;\n  margin-top: 10px;\n  margin-bottom: 10px;\n}\n.multiselect-toggles .checkbox + .checkbox[data-v-1cd85c04] {\n  margin-top: 10px;\n  margin-bottom: 10px;\n}\n.multiselect-counter[data-v-1cd85c04] {\n  float: right;\n  margin: 0 0 5px 0;\n  height: 38px;\n  min-width: 40px;\n  display: inline-block;\n  padding: 5px 10px;\n  background: #666;\n  border-radius: 2px;\n  color: #fff;\n  font-size: 18px;\n  line-height: 26px;\n  text-align: center;\n}\n", "", {"version":3,"sources":["/./src/Multiselect/Multiselect.vue?31870b3d"],"names":[],"mappings":";AAoNA;EACA,mBAAA;CACA;AAEA;EACA,mBAAA;CACA;AAEA;EACA,eAAA;EACA,oBAAA;EACA,iBAAA;EACA,wBAAA;CACA;AAEA;EACA,WAAA;EACA,YAAA;CACA;AAEA;EACA,WAAA;EACA,aAAA;EACA,kBAAA;EACA,iBAAA;EACA,oBAAA;CACA;AAEA;EACA,iBAAA;EACA,oBAAA;CACA;AAEA;EACA,aAAA;EACA,kBAAA;EACA,aAAA;EACA,gBAAA;EACA,sBAAA;EACA,kBAAA;EACA,iBAAA;EACA,mBAAA;EACA,YAAA;EACA,gBAAA;EACA,kBAAA;EACA,mBAAA;CACA","file":"Multiselect.vue","sourcesContent":["<template>\n  <div class=\"multiselect\">\n    <div class=\"multiselect-filter\" v-if=\"filter\">\n      <input type=\"text\" :placeholder=\"placeholder\" class=\"form-control\" v-model=\"query\">\n    </div>\n    <div class=\"multiselect-counter\">{{ selectedIds.length }}</div>\n    <div class=\"multiselect-toggles\">\n      <div class=\"checkbox multiselect-selectall\">\n        <label>\n          <input :checked=\"allSelected()\" type=\"checkbox\" @click=\"toggleAll\"> {{ selectAllLabel }}\n        </label>\n        <span class=\"randomizer-toggle\" v-if=\"randomizer\">\n          | <a href=\"\" @click.prevent=\"randomizerActive = !randomizerActive\">{{ randomizerShow }}</a>\n          <popover :content=\"randomizerHelpicon\">\n            <span class=\"af-icons af-icons-help\"></span>\n          </popover>\n        </span>\n      </div>\n      <randomizer\n        v-if=\"randomizerActive\"\n        :ids=\"allIds\"\n        @randomized=\"applyRandomSelection\"\n        :randomizer-how-many=\"randomizerHowMany\"\n        :randomizer-button=\"randomizerButton\">\n      </randomizer>\n    </div>\n    <multiselect-list\n      :options=\"tree\"\n      :name=\"name\"\n      :id-property=\"idProperty\"\n      :value-property=\"valueProperty\">\n    </multiselect-list>\n  </div>\n</template>\n\n<script>\nimport MultiselectList from './MultiselectList.vue';\nimport Randomizer from './Randomizer.vue';\nimport Popover from '../Popover.vue';\n\nexport default {\n  data () {\n    return {\n      tree: [],\n      randomizerActive: false,\n      query: ''\n    };\n  },\n  components: {\n    MultiselectList,\n    Randomizer,\n    Popover\n  },\n  props: {\n    name: {\n      type: String,\n      default: 'multiselect[]'\n    },\n    filter: {\n      type: Boolean,\n      default: true\n    },\n    placeholder: {\n      type: String,\n      default: 'Filter list'\n    },\n    selectAllLabel: {\n      type: String,\n      default: 'Select all'\n    },\n    options: {\n      type: Array,\n      default: () => []\n    },\n    selectedOptions: {\n      type: Array,\n      default: () => []\n    },\n    randomizer: {\n      type: Boolean,\n      default: false\n    },\n    idProperty: {\n      type: String,\n      default: 'id'\n    },\n    valueProperty: {\n      type: String,\n      default: 'name'\n    },\n    randomizerShow: {\n      type: String,\n      default: 'Random selection'\n    },\n    randomizerHowMany: {\n      type: String,\n      default: 'How many?'\n    },\n    randomizerHelpicon: {\n      type: String\n    },\n    randomizerButton: {\n      type: String,\n      default: 'Go'\n    }\n  },\n  computed: {\n    flatTree () {\n      const options = [];\n\n      const flattenTree = option => {\n        if (this.hasChildren(option)) {\n          option.children.forEach(flattenTree);\n          return;\n        }\n\n        options.push(option);\n      };\n\n      this.tree.forEach(flattenTree);\n\n      return options;\n    },\n    allIds () {\n      return this.flatTree.map(o => o.id);\n    },\n    selectedIds () {\n      return this.flatTree.filter(o => o.selected).map(o => o.id);\n    }\n  },\n  watch: {\n    query () {\n      const mapOptions = option => {\n        if (this.hasChildren(option)) {\n          option.children.map(mapOptions);\n        }\n\n        option.visible = !this.hasChildren(option)\n          ? option[this.valueProperty].toLowerCase().indexOf(this.query.toLowerCase()) !== -1\n          : true;\n\n        return option;\n      };\n\n      // Adjust option visibility based on query\n      this.tree = this.tree.map(mapOptions);\n    },\n    options (options) {\n      this.buildTree(options);\n    },\n    selected () {\n      this.$emit('selected', this.selectedIds);\n    }\n  },\n  methods: {\n    hasChildren (option) {\n      return option.children && option.children.length;\n    },\n    allSelected () {\n      return this.tree.length > 0 && this.allIds.length === this.selectedIds.length;\n    },\n    toggleAll () {\n      const allSelected = this.allSelected();\n\n      const mapOptions = option => {\n        option.selected = !allSelected;\n\n        if (this.hasChildren(option)) {\n          option.children.map(mapOptions);\n        }\n\n        return option;\n      };\n\n      this.tree = this.tree.map(mapOptions);\n    },\n    applyRandomSelection (ids) {\n      const mapOptions = option => {\n        option.selected = ids.includes(option.id);\n\n        if (this.hasChildren(option)) {\n          option.children.map(mapOptions);\n        }\n\n        return option;\n      };\n\n      this.tree = this.tree.map(mapOptions);\n    },\n    buildTree (options, selectedOptions = []) {\n      const mapOptions = option => {\n        option.selected = selectedOptions.includes(option.id);\n        option.visible = true;\n\n        if (this.hasChildren(option)) {\n          option.children.map(mapOptions);\n        }\n\n        return option;\n      };\n\n      // Clone the array first\n      this.tree = JSON.parse(JSON.stringify(options)).map(mapOptions);\n    }\n  },\n  created () {\n    this.buildTree(this.options, this.selectedOptions);\n  }\n};\n</script>\n\n<style scoped>\n  .multiselect {\n    position: relative;\n  }\n\n  .multiselect-filter {\n    margin-bottom: 4px;\n  }\n\n  .multiselect-toggles {\n    padding: 0 9px;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n\n  .multiselect-toggles .multiselect-selectall {\n    width: 45%;\n    float: left;\n  }\n\n  .multiselect-toggles .multiselect-subset {\n    width: 45%;\n    float: right;\n    text-align: right;\n    margin-top: 10px;\n    margin-bottom: 10px;\n  }\n\n  .multiselect-toggles .checkbox + .checkbox {\n    margin-top: 10px;\n    margin-bottom: 10px;\n  }\n\n  .multiselect-counter {\n    float: right;\n    margin: 0 0 5px 0;\n    height: 38px;\n    min-width: 40px;\n    display: inline-block;\n    padding: 5px 10px;\n    background: #666;\n    border-radius: 2px;\n    color: #fff;\n    font-size: 18px;\n    line-height: 26px;\n    text-align: center;\n  }\n</style>\n"],"sourceRoot":"webpack://"}]);
+	
+	// exports
+
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _stringify = __webpack_require__(79);
+	
+	var _stringify2 = _interopRequireDefault(_stringify);
+	
+	var _MultiselectList = __webpack_require__(81);
+	
+	var _MultiselectList2 = _interopRequireDefault(_MultiselectList);
+	
+	var _Randomizer = __webpack_require__(91);
+	
+	var _Randomizer2 = _interopRequireDefault(_Randomizer);
+	
+	var _Popover = __webpack_require__(96);
+	
+	var _Popover2 = _interopRequireDefault(_Popover);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  data: function data() {
+	    return {
+	      tree: [],
+	      randomizerActive: false,
+	      query: ''
+	    };
+	  },
+	
+	  components: {
+	    MultiselectList: _MultiselectList2.default,
+	    Randomizer: _Randomizer2.default,
+	    Popover: _Popover2.default
+	  },
+	  props: {
+	    name: {
+	      type: String,
+	      default: 'multiselect[]'
+	    },
+	    filter: {
+	      type: Boolean,
+	      default: true
+	    },
+	    placeholder: {
+	      type: String,
+	      default: 'Filter list'
+	    },
+	    selectAllLabel: {
+	      type: String,
+	      default: 'Select all'
+	    },
+	    options: {
+	      type: Array,
+	      default: function _default() {
+	        return [];
+	      }
+	    },
+	    selectedOptions: {
+	      type: Array,
+	      default: function _default() {
+	        return [];
+	      }
+	    },
+	    randomizer: {
+	      type: Boolean,
+	      default: false
+	    },
+	    idProperty: {
+	      type: String,
+	      default: 'id'
+	    },
+	    valueProperty: {
+	      type: String,
+	      default: 'name'
+	    },
+	    randomizerShow: {
+	      type: String,
+	      default: 'Random selection'
+	    },
+	    randomizerHowMany: {
+	      type: String,
+	      default: 'How many?'
+	    },
+	    randomizerHelpicon: {
+	      type: String
+	    },
+	    randomizerButton: {
+	      type: String,
+	      default: 'Go'
+	    }
+	  },
+	  computed: {
+	    flatTree: function flatTree() {
+	      var _this = this;
+	
+	      var options = [];
+	
+	      var flattenTree = function flattenTree(option) {
+	        if (_this.hasChildren(option)) {
+	          option.children.forEach(flattenTree);
+	          return;
+	        }
+	
+	        options.push(option);
+	      };
+	
+	      this.tree.forEach(flattenTree);
+	
+	      return options;
+	    },
+	    allIds: function allIds() {
+	      return this.flatTree.map(function (o) {
+	        return o.id;
+	      });
+	    },
+	    selectedIds: function selectedIds() {
+	      return this.flatTree.filter(function (o) {
+	        return o.selected;
+	      }).map(function (o) {
+	        return o.id;
+	      });
+	    }
+	  },
+	  watch: {
+	    query: function query() {
+	      var _this2 = this;
+	
+	      var mapOptions = function mapOptions(option) {
+	        if (_this2.hasChildren(option)) {
+	          option.children.map(mapOptions);
+	        }
+	
+	        option.visible = !_this2.hasChildren(option) ? option[_this2.valueProperty].toLowerCase().indexOf(_this2.query.toLowerCase()) !== -1 : true;
+	
+	        return option;
+	      };
+	
+	      // Adjust option visibility based on query
+	      this.tree = this.tree.map(mapOptions);
+	    },
+	    options: function options(_options) {
+	      this.buildTree(_options);
+	    },
+	    selected: function selected() {
+	      this.$emit('selected', this.selectedIds);
+	    }
+	  },
+	  methods: {
+	    hasChildren: function hasChildren(option) {
+	      return option.children && option.children.length;
+	    },
+	    allSelected: function allSelected() {
+	      return this.tree.length > 0 && this.allIds.length === this.selectedIds.length;
+	    },
+	    toggleAll: function toggleAll() {
+	      var _this3 = this;
+	
+	      var allSelected = this.allSelected();
+	
+	      var mapOptions = function mapOptions(option) {
+	        option.selected = !allSelected;
+	
+	        if (_this3.hasChildren(option)) {
+	          option.children.map(mapOptions);
+	        }
+	
+	        return option;
+	      };
+	
+	      this.tree = this.tree.map(mapOptions);
+	    },
+	    applyRandomSelection: function applyRandomSelection(ids) {
+	      var _this4 = this;
+	
+	      var mapOptions = function mapOptions(option) {
+	        option.selected = ids.includes(option.id);
+	
+	        if (_this4.hasChildren(option)) {
+	          option.children.map(mapOptions);
+	        }
+	
+	        return option;
+	      };
+	
+	      this.tree = this.tree.map(mapOptions);
+	    },
+	    buildTree: function buildTree(options) {
+	      var _this5 = this;
+	
+	      var selectedOptions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+	
+	      var mapOptions = function mapOptions(option) {
+	        option.selected = selectedOptions.includes(option.id);
+	        option.visible = true;
+	
+	        if (_this5.hasChildren(option)) {
+	          option.children.map(mapOptions);
+	        }
+	
+	        return option;
+	      };
+	
+	      // Clone the array first
+	      this.tree = JSON.parse((0, _stringify2.default)(options)).map(mapOptions);
+	    }
+	  },
+	  created: function created() {
+	    this.buildTree(this.options, this.selectedOptions);
+	  }
+	}; //
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(80), __esModule: true };
+
+/***/ }),
+/* 80 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var core = __webpack_require__(19);
+	var $JSON = core.JSON || (core.JSON = { stringify: JSON.stringify });
+	module.exports = function stringify(it) { // eslint-disable-line no-unused-vars
+	  return $JSON.stringify.apply($JSON, arguments);
+	};
+
+
+/***/ }),
+/* 81 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+	
+	/* styles */
+	__webpack_require__(82)
+	
+	/* script */
+	__vue_exports__ = __webpack_require__(84)
+	
+	/* template */
+	var __vue_template__ = __webpack_require__(90)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "/Users/kazik/Sites/awardforce.com/vue-bootstrap/src/Multiselect/MultiselectList.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+	__vue_options__._scopeId = "data-v-0d1d7688"
+	
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-0d1d7688", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-0d1d7688", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] MultiselectList.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+	
+	module.exports = __vue_exports__
+
+
+/***/ }),
+/* 82 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(83);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(6)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-0d1d7688&scoped=true!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MultiselectList.vue", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-0d1d7688&scoped=true!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MultiselectList.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(5)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "\n.multiselect-options[data-v-0d1d7688] {\n  border: 1px solid #ddd;\n  border-radius: 2px;\n  clear: both;\n  height: 202px;\n  overflow-x: hidden;\n  overflow-y: auto;\n  background-color: white;\n}\n", "", {"version":3,"sources":["/./src/Multiselect/MultiselectList.vue?f8411d2e"],"names":[],"mappings":";AAkDA;EACA,uBAAA;EACA,mBAAA;EACA,YAAA;EACA,cAAA;EACA,mBAAA;EACA,iBAAA;EACA,wBAAA;CACA","file":"MultiselectList.vue","sourcesContent":["<template>\n  <div :class=\"className()\">\n    <multiselect-option\n      v-for=\"option in options\"\n      :option=\"option\"\n      :key=\"option[idProperty]\"\n      :level=\"level\"\n      :name=\"name\"\n      :id-property=\"idProperty\"\n      :value-property=\"valueProperty\">\n    </multiselect-option>\n  </div>\n</template>\n\n<script>\nimport MultiselectOption from './MultiselectOption.vue';\n\nexport default {\n  components: {\n    MultiselectOption\n  },\n  props: {\n    options: {\n      type: Array,\n      default: () => []\n    },\n    level: {\n      type: Number,\n      default: 0\n    },\n    name: String,\n    idProperty: String,\n    valueProperty: String\n  },\n  computed: {\n    topLevel () {\n      return this.level === 0;\n    }\n  },\n  methods: {\n    className () {\n      return this.topLevel\n        ? 'multiselect-options'\n        : 'multiselect-options-level-' + this.level;\n    }\n  }\n};\n</script>\n\n<style scoped>\n  .multiselect-options {\n    border: 1px solid #ddd;\n    border-radius: 2px;\n    clear: both;\n    height: 202px;\n    overflow-x: hidden;\n    overflow-y: auto;\n    background-color: white;\n  }\n</style>\n"],"sourceRoot":"webpack://"}]);
+	
+	// exports
+
+
+/***/ }),
+/* 84 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _MultiselectOption = __webpack_require__(85);
+	
+	var _MultiselectOption2 = _interopRequireDefault(_MultiselectOption);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  components: {
+	    MultiselectOption: _MultiselectOption2.default
+	  },
+	  props: {
+	    options: {
+	      type: Array,
+	      default: function _default() {
+	        return [];
+	      }
+	    },
+	    level: {
+	      type: Number,
+	      default: 0
+	    },
+	    name: String,
+	    idProperty: String,
+	    valueProperty: String
+	  },
+	  computed: {
+	    topLevel: function topLevel() {
+	      return this.level === 0;
+	    }
+	  },
+	  methods: {
+	    className: function className() {
+	      return this.topLevel ? 'multiselect-options' : 'multiselect-options-level-' + this.level;
+	    }
+	  }
+	}; //
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+/***/ }),
+/* 85 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+	
+	/* styles */
+	__webpack_require__(86)
+	
+	/* script */
+	__vue_exports__ = __webpack_require__(88)
+	
+	/* template */
+	var __vue_template__ = __webpack_require__(89)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "/Users/kazik/Sites/awardforce.com/vue-bootstrap/src/Multiselect/MultiselectOption.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+	__vue_options__._scopeId = "data-v-457560da"
+	
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-457560da", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-457560da", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] MultiselectOption.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+	
+	module.exports = __vue_exports__
+
+
+/***/ }),
+/* 86 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(87);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(6)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-457560da&scoped=true!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MultiselectOption.vue", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-457560da&scoped=true!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MultiselectOption.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+/* 87 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(5)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "\n.multiselect-option[data-v-457560da] {\n  border-bottom: 1px solid #ddd;\n  padding: 8px;\n  margin: 0;\n}\n.multiselect-option.header[data-v-457560da] {\n  font-weight: bold;\n}\n.multiselect-option .multiselect-subset-control[data-v-457560da] {\n  float: right;\n}\n.multiselect-option label[data-v-457560da] {\n  display: block;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n", "", {"version":3,"sources":["/./src/Multiselect/MultiselectOption.vue?659b81cc"],"names":[],"mappings":";AAgFA;EACA,8BAAA;EACA,aAAA;EACA,UAAA;CACA;AAEA;EACA,kBAAA;CACA;AAEA;EACA,aAAA;CACA;AAEA;EACA,eAAA;EACA,oBAAA;EACA,iBAAA;EACA,wBAAA;CACA","file":"MultiselectOption.vue","sourcesContent":["<template>\n  <div>\n    <template v-if=\"isParent\">\n      <div class=\"checkbox multiselect-option\">\n        <label :style=\"indentStyle()\">\n          <input type=\"checkbox\" v-model=\"option.selected\" @change=\"toggleParent\">\n          <strong>{{ option[valueProperty] }}</strong>\n        </label>\n      </div>\n      <multiselect-list\n        :level=\"level + 1\"\n        :options=\"option.children\"\n        :name=\"name\"\n        :id-property=\"idProperty\"\n        :value-property=\"valueProperty\">\n      </multiselect-list>\n    </template>\n    <template v-else>\n      <div v-show=\"option.visible\" class=\"checkbox multiselect-option\">\n        <label :style=\"indentStyle()\">\n          <input type=\"checkbox\" :name=\"name\" v-model=\"option.selected\" :value=\"option[idProperty]\">\n          {{ option[valueProperty] }}\n        </label>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script>\nexport default {\n  props: {\n    option: {\n      type: Object,\n      required: true\n    },\n    level: {\n      type: Number,\n      required: true\n    },\n    name: String,\n    idProperty: String,\n    valueProperty: String\n  },\n  computed: {\n    isParent () {\n      return this.hasChildren(this.option);\n    }\n  },\n  methods: {\n    hasChildren (option) {\n      return option.children && option.children.length;\n    },\n    indentStyle () {\n      return {\n        marginLeft: 20 * this.level + 'px'\n      };\n    },\n    toggleParent () {\n      const state = this.option.selected;\n\n      const adjustTreeState = option => {\n        if (this.hasChildren(option)) {\n          option.children.map(adjustTreeState);\n        }\n\n        option.selected = state;\n      };\n\n      this.option.children.map(adjustTreeState);\n    }\n  },\n  beforeCreate () {\n    // Load the component in the beforeCreate hook to prevent a circular reference problem\n    // https://vuejs.org/v2/guide/components.html#Circular-References-Between-Components\n    this.$options.components.MultiselectList = require('./MultiselectList.vue');\n  }\n};\n</script>\n\n<style scoped>\n  .multiselect-option {\n    border-bottom: 1px solid #ddd;\n    padding: 8px;\n    margin: 0;\n  }\n\n  .multiselect-option.header {\n    font-weight: bold;\n  }\n\n  .multiselect-option .multiselect-subset-control {\n    float: right;\n  }\n\n  .multiselect-option label {\n    display: block;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n</style>\n"],"sourceRoot":"webpack://"}]);
+	
+	// exports
+
+
+/***/ }),
+/* 88 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	
+	exports.default = {
+	  props: {
+	    option: {
+	      type: Object,
+	      required: true
+	    },
+	    level: {
+	      type: Number,
+	      required: true
+	    },
+	    name: String,
+	    idProperty: String,
+	    valueProperty: String
+	  },
+	  computed: {
+	    isParent: function isParent() {
+	      return this.hasChildren(this.option);
+	    }
+	  },
+	  methods: {
+	    hasChildren: function hasChildren(option) {
+	      return option.children && option.children.length;
+	    },
+	    indentStyle: function indentStyle() {
+	      return {
+	        marginLeft: 20 * this.level + 'px'
+	      };
+	    },
+	    toggleParent: function toggleParent() {
+	      var _this = this;
+	
+	      var state = this.option.selected;
+	
+	      var adjustTreeState = function adjustTreeState(option) {
+	        if (_this.hasChildren(option)) {
+	          option.children.map(adjustTreeState);
+	        }
+	
+	        option.selected = state;
+	      };
+	
+	      this.option.children.map(adjustTreeState);
+	    }
+	  },
+	  beforeCreate: function beforeCreate() {
+	    // Load the component in the beforeCreate hook to prevent a circular reference problem
+	    // https://vuejs.org/v2/guide/components.html#Circular-References-Between-Components
+	    this.$options.components.MultiselectList = __webpack_require__(81);
+	  }
+	};
+
+/***/ }),
+/* 89 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', [(_vm.isParent) ? [_c('div', {
+	    staticClass: "checkbox multiselect-option"
+	  }, [_c('label', {
+	    style: (_vm.indentStyle())
+	  }, [_c('input', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.option.selected),
+	      expression: "option.selected"
+	    }],
+	    attrs: {
+	      "type": "checkbox"
+	    },
+	    domProps: {
+	      "checked": Array.isArray(_vm.option.selected) ? _vm._i(_vm.option.selected, null) > -1 : (_vm.option.selected)
+	    },
+	    on: {
+	      "change": _vm.toggleParent,
+	      "__c": function($event) {
+	        var $$a = _vm.option.selected,
+	          $$el = $event.target,
+	          $$c = $$el.checked ? (true) : (false);
+	        if (Array.isArray($$a)) {
+	          var $$v = null,
+	            $$i = _vm._i($$a, $$v);
+	          if ($$el.checked) {
+	            $$i < 0 && (_vm.option.selected = $$a.concat([$$v]))
+	          } else {
+	            $$i > -1 && (_vm.option.selected = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+	          }
+	        } else {
+	          _vm.option.selected = $$c
+	        }
+	      }
+	    }
+	  }), _vm._v(" "), _c('strong', [_vm._v(_vm._s(_vm.option[_vm.valueProperty]))])])]), _vm._v(" "), _c('multiselect-list', {
+	    attrs: {
+	      "level": _vm.level + 1,
+	      "options": _vm.option.children,
+	      "name": _vm.name,
+	      "id-property": _vm.idProperty,
+	      "value-property": _vm.valueProperty
+	    }
+	  })] : [_c('div', {
+	    directives: [{
+	      name: "show",
+	      rawName: "v-show",
+	      value: (_vm.option.visible),
+	      expression: "option.visible"
+	    }],
+	    staticClass: "checkbox multiselect-option"
+	  }, [_c('label', {
+	    style: (_vm.indentStyle())
+	  }, [_c('input', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.option.selected),
+	      expression: "option.selected"
+	    }],
+	    attrs: {
+	      "type": "checkbox",
+	      "name": _vm.name
+	    },
+	    domProps: {
+	      "value": _vm.option[_vm.idProperty],
+	      "checked": Array.isArray(_vm.option.selected) ? _vm._i(_vm.option.selected, _vm.option[_vm.idProperty]) > -1 : (_vm.option.selected)
+	    },
+	    on: {
+	      "__c": function($event) {
+	        var $$a = _vm.option.selected,
+	          $$el = $event.target,
+	          $$c = $$el.checked ? (true) : (false);
+	        if (Array.isArray($$a)) {
+	          var $$v = _vm.option[_vm.idProperty],
+	            $$i = _vm._i($$a, $$v);
+	          if ($$el.checked) {
+	            $$i < 0 && (_vm.option.selected = $$a.concat([$$v]))
+	          } else {
+	            $$i > -1 && (_vm.option.selected = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+	          }
+	        } else {
+	          _vm.option.selected = $$c
+	        }
+	      }
+	    }
+	  }), _vm._v("\n        " + _vm._s(_vm.option[_vm.valueProperty]) + "\n      ")])])]], 2)
+	},staticRenderFns: []}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-457560da", module.exports)
+	  }
+	}
+
+/***/ }),
+/* 90 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {
+	    class: _vm.className()
+	  }, _vm._l((_vm.options), function(option) {
+	    return _c('multiselect-option', {
+	      key: option[_vm.idProperty],
+	      attrs: {
+	        "option": option,
+	        "level": _vm.level,
+	        "name": _vm.name,
+	        "id-property": _vm.idProperty,
+	        "value-property": _vm.valueProperty
+	      }
+	    })
+	  }))
+	},staticRenderFns: []}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-0d1d7688", module.exports)
+	  }
+	}
+
+/***/ }),
+/* 91 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+	
+	/* styles */
+	__webpack_require__(92)
+	
+	/* script */
+	__vue_exports__ = __webpack_require__(94)
+	
+	/* template */
+	var __vue_template__ = __webpack_require__(95)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "/Users/kazik/Sites/awardforce.com/vue-bootstrap/src/Multiselect/Randomizer.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+	__vue_options__._scopeId = "data-v-656e3e68"
+	
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-656e3e68", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-656e3e68", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] Randomizer.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+	
+	module.exports = __vue_exports__
+
+
+/***/ }),
+/* 92 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(93);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(6)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-656e3e68&scoped=true!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Randomizer.vue", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-656e3e68&scoped=true!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Randomizer.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+/* 93 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(5)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "\n.randomizer-selector[data-v-656e3e68] {\n  clear: both;\n  margin-bottom: 5px;\n}\n.randomizer-selector input[type=\"text\"][data-v-656e3e68] {\n  height: 32px;\n}\n.randomizer-selector .form-control[data-v-656e3e68] {\n  display: inline;\n  width: 50px;\n}\n", "", {"version":3,"sources":["/./src/Multiselect/Randomizer.vue?6023dda6"],"names":[],"mappings":";AA8CA;EACA,YAAA;EACA,mBAAA;CACA;AAEA;EACA,aAAA;CACA;AAEA;EACA,gBAAA;EACA,YAAA;CACA","file":"Randomizer.vue","sourcesContent":["<template>\n  <div class=\"randomizer-selector\">\n    <span>{{ randomizerHowMany }}</span>\n    <input type=\"text\" size=\"3\" class=\"input-sm form-control\" v-model=\"howMany\">\n    <a class=\"btn btn-default\" @click.prevent=\"randomize\">{{ randomizerButton }}</a>\n  </div>\n</template>\n\n<script>\nimport { shuffle } from '../lib/array.js';\n\nexport default {\n  data () {\n    return {\n      howMany: 0,\n      randomIds: []\n    };\n  },\n  props: {\n    ids: {\n      type: Array,\n      required: true\n    },\n    randomizerHowMany: {\n      type: String,\n      default: 'How many?'\n    },\n    randomizerButton: {\n      type: String,\n      default: 'Go'\n    }\n  },\n  watch: {\n    randomIds () {\n      this.$emit('randomized', this.randomIds);\n    }\n  },\n  methods: {\n    randomize () {\n      this.randomIds = shuffle(this.ids).slice(0, this.howMany);\n    }\n  }\n};\n</script>\n\n<style scoped>\n  .randomizer-selector {\n    clear: both;\n    margin-bottom: 5px;\n  }\n\n  .randomizer-selector input[type=\"text\"] {\n    height: 32px;\n  }\n\n  .randomizer-selector .form-control {\n    display: inline;\n    width: 50px;\n  }\n</style>\n"],"sourceRoot":"webpack://"}]);
+	
+	// exports
+
+
+/***/ }),
+/* 94 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _array = __webpack_require__(62);
+	
+	exports.default = {
+	  data: function data() {
+	    return {
+	      howMany: 0,
+	      randomIds: []
+	    };
+	  },
+	
+	  props: {
+	    ids: {
+	      type: Array,
+	      required: true
+	    },
+	    randomizerHowMany: {
+	      type: String,
+	      default: 'How many?'
+	    },
+	    randomizerButton: {
+	      type: String,
+	      default: 'Go'
+	    }
+	  },
+	  watch: {
+	    randomIds: function randomIds() {
+	      this.$emit('randomized', this.randomIds);
+	    }
+	  },
+	  methods: {
+	    randomize: function randomize() {
+	      this.randomIds = (0, _array.shuffle)(this.ids).slice(0, this.howMany);
+	    }
+	  }
+	}; //
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+/***/ }),
+/* 95 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {
+	    staticClass: "randomizer-selector"
+	  }, [_c('span', [_vm._v(_vm._s(_vm.randomizerHowMany))]), _vm._v(" "), _c('input', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.howMany),
+	      expression: "howMany"
+	    }],
+	    staticClass: "input-sm form-control",
+	    attrs: {
+	      "type": "text",
+	      "size": "3"
+	    },
+	    domProps: {
+	      "value": (_vm.howMany)
+	    },
+	    on: {
+	      "input": function($event) {
+	        if ($event.target.composing) { return; }
+	        _vm.howMany = $event.target.value
+	      }
+	    }
+	  }), _vm._v(" "), _c('a', {
+	    staticClass: "btn btn-default",
+	    on: {
+	      "click": function($event) {
+	        $event.preventDefault();
+	        _vm.randomize($event)
+	      }
+	    }
+	  }, [_vm._v(_vm._s(_vm.randomizerButton))])])
+	},staticRenderFns: []}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-656e3e68", module.exports)
+	  }
+	}
+
+/***/ }),
+/* 96 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+	
+	/* styles */
+	__webpack_require__(97)
+	
+	/* script */
+	__vue_exports__ = __webpack_require__(99)
+	
+	/* template */
+	var __vue_template__ = __webpack_require__(100)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -12832,13 +13863,13 @@
 
 
 /***/ }),
-/* 76 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(77);
+	var content = __webpack_require__(98);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(6)(content, {});
@@ -12858,7 +13889,7 @@
 	}
 
 /***/ }),
-/* 77 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(5)();
@@ -12872,7 +13903,7 @@
 
 
 /***/ }),
-/* 78 */
+/* 99 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -13057,7 +14088,7 @@
 	};
 
 /***/ }),
-/* 79 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -13104,20 +14135,109 @@
 	}
 
 /***/ }),
-/* 80 */
+/* 101 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {
+	    staticClass: "multiselect"
+	  }, [(_vm.filter) ? _c('div', {
+	    staticClass: "multiselect-filter"
+	  }, [_c('input', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.query),
+	      expression: "query"
+	    }],
+	    staticClass: "form-control",
+	    attrs: {
+	      "type": "text",
+	      "placeholder": _vm.placeholder
+	    },
+	    domProps: {
+	      "value": (_vm.query)
+	    },
+	    on: {
+	      "input": function($event) {
+	        if ($event.target.composing) { return; }
+	        _vm.query = $event.target.value
+	      }
+	    }
+	  })]) : _vm._e(), _vm._v(" "), _c('div', {
+	    staticClass: "multiselect-counter"
+	  }, [_vm._v(_vm._s(_vm.selectedIds.length))]), _vm._v(" "), _c('div', {
+	    staticClass: "multiselect-toggles"
+	  }, [_c('div', {
+	    staticClass: "checkbox multiselect-selectall"
+	  }, [_c('label', [_c('input', {
+	    attrs: {
+	      "type": "checkbox"
+	    },
+	    domProps: {
+	      "checked": _vm.allSelected()
+	    },
+	    on: {
+	      "click": _vm.toggleAll
+	    }
+	  }), _vm._v(" " + _vm._s(_vm.selectAllLabel) + "\n      ")]), _vm._v(" "), (_vm.randomizer) ? _c('span', {
+	    staticClass: "randomizer-toggle"
+	  }, [_vm._v("\n        | "), _c('a', {
+	    attrs: {
+	      "href": ""
+	    },
+	    on: {
+	      "click": function($event) {
+	        $event.preventDefault();
+	        _vm.randomizerActive = !_vm.randomizerActive
+	      }
+	    }
+	  }, [_vm._v(_vm._s(_vm.randomizerShow))]), _vm._v(" "), _c('popover', {
+	    attrs: {
+	      "content": _vm.randomizerHelpicon
+	    }
+	  }, [_c('span', {
+	    staticClass: "af-icons af-icons-help"
+	  })])], 1) : _vm._e()]), _vm._v(" "), (_vm.randomizerActive) ? _c('randomizer', {
+	    attrs: {
+	      "ids": _vm.allIds,
+	      "randomizer-how-many": _vm.randomizerHowMany,
+	      "randomizer-button": _vm.randomizerButton
+	    },
+	    on: {
+	      "randomized": _vm.applyRandomSelection
+	    }
+	  }) : _vm._e()], 1), _vm._v(" "), _c('multiselect-list', {
+	    attrs: {
+	      "options": _vm.tree,
+	      "name": _vm.name,
+	      "id-property": _vm.idProperty,
+	      "value-property": _vm.valueProperty
+	    }
+	  })], 1)
+	},staticRenderFns: []}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-1cd85c04", module.exports)
+	  }
+	}
+
+/***/ }),
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
 	/* styles */
-	__webpack_require__(81)
+	__webpack_require__(103)
 	
 	/* script */
-	__vue_exports__ = __webpack_require__(83)
+	__vue_exports__ = __webpack_require__(105)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(85)
+	var __vue_template__ = __webpack_require__(107)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -13152,13 +14272,13 @@
 
 
 /***/ }),
-/* 81 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(82);
+	var content = __webpack_require__(104);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(6)(content, {});
@@ -13178,7 +14298,7 @@
 	}
 
 /***/ }),
-/* 82 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(5)();
@@ -13192,7 +14312,7 @@
 
 
 /***/ }),
-/* 83 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13201,7 +14321,7 @@
 	  value: true
 	});
 	
-	var _debounce = __webpack_require__(84);
+	var _debounce = __webpack_require__(106);
 	
 	var _debounce2 = _interopRequireDefault(_debounce);
 	
@@ -13410,7 +14530,7 @@
 	//
 
 /***/ }),
-/* 84 */
+/* 106 */
 /***/ (function(module, exports) {
 
 	/**
@@ -13472,7 +14592,7 @@
 
 
 /***/ }),
-/* 85 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;

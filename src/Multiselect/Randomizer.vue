@@ -2,7 +2,7 @@
   <div class="randomizer-selector">
     <span>{{ randomizerHowMany }}</span>
     <input type="text" size="3" class="input-sm form-control" v-model="howMany">
-    <a class="btn btn-secondary" @click.prevent="randomize">{{ randomizerButton }}</a>
+    <a class="btn btn-default" @click.prevent="randomize">{{ randomizerButton }}</a>
   </div>
 </template>
 

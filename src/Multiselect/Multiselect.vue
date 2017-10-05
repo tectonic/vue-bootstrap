@@ -189,7 +189,9 @@ export default {
     },
     buildTree (options, selectedOptions = []) {
       const mapOptions = option => {
-        option.selected = selectedOptions.includes(option[this.idProperty]);
+        option.selected = selectedOptions.includes(option[this.idProperty]) ||
+          selectedOptions.includes(String(option[this.idProperty]));
+
         option.visible = true;
 
         if (this.hasChildren(option)) {

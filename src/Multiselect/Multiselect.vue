@@ -122,10 +122,10 @@ export default {
       return options;
     },
     allIds () {
-      return this.flatTree.map(o => o.id);
+      return this.flatTree.map(o => o[this.idProperty]);
     },
     selectedIds () {
-      return this.flatTree.filter(o => o.selected).map(o => o.id);
+      return this.flatTree.filter(o => o.selected).map(o => o[this.idProperty]);
     }
   },
   watch: {
@@ -176,7 +176,7 @@ export default {
     },
     applyRandomSelection (ids) {
       const mapOptions = option => {
-        option.selected = ids.includes(option.id);
+        option.selected = ids.includes(option[this.idProperty]);
 
         if (this.hasChildren(option)) {
           option.children.map(mapOptions);
@@ -189,7 +189,7 @@ export default {
     },
     buildTree (options, selectedOptions = []) {
       const mapOptions = option => {
-        option.selected = selectedOptions.includes(option.id);
+        option.selected = selectedOptions.includes(option[this.idProperty]);
         option.visible = true;
 
         if (this.hasChildren(option)) {

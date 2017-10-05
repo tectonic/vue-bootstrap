@@ -90,11 +90,16 @@
 	    return {
 	      showModal: false,
 	      typeaheadItems: [{ id: 1, value: 'Anne Sullivan' }, { id: 2, value: 'Anne Hathaway' }, { id: 3, value: 'Joan Allen' }, { id: 4, value: 'Joan Collins' }, { id: 5, value: 'Joan Baez' }, { id: 6, value: 'Mark Twain' }, { id: 7, value: 'Robert Redford' }, { id: 8, value: 'Susan Sontag' }, { id: 9, value: 'John Lee Hooker' }, { id: 10, value: 'John Tyler' }, { id: 11, value: 'John Terry' }, { id: 12, value: 'John Cleese' }, { id: 13, value: 'John Malkovich' }, { id: 14, value: 'John Stockton' }, { id: 15, value: 'John Ritter' }, { id: 16, value: 'John McCain' }, { id: 17, value: 'John Goodman' }, { id: 18, value: 'John C. Reilly' }, { id: 19, value: 'John Stamos' }, { id: 20, value: 'John Mayer' }, { id: 21, value: 'John Elway' }, { id: 22, value: 'John Wayne Gacy' }, { id: 23, value: 'John Denver' }, { id: 24, value: 'John Travolta' }, { id: 25, value: 'John Wayne' }, { id: 26, value: 'John Lennon' }, { id: 27, value: 'John F. Kennedy' }],
-	      multiselectOptions: [{ id: 1, name: 'Action', children: [{ id: 2, name: 'Martial Arts' }, { id: 3, name: 'Treasure Hunts' }, { id: 4, name: 'Adventures', children: [{ id: 5, name: 'Sea Adventures' }, { id: 6, name: 'Underwater Adventures' }]
+	      multiselectOptions: [{ id: 1, name: 'Action',
+	        children: [{ id: 2, name: 'Martial Arts' }, { id: 3, name: 'Treasure Hunts' }, { id: 4, name: 'Adventures',
+	          children: [{ id: 5, name: 'Sea Adventures' }, { id: 6, name: 'Underwater Adventures' }]
 	        }]
-	      }, { id: 7, name: 'Comedy', children: [{ id: 8, name: 'Parody' }, { id: 9, name: 'Spoofs' }, { id: 10, name: 'Slapstick' }]
-	      }, { id: 11, name: 'Crime & Gangster', children: [{ id: 12, name: 'Lovers on the run' }, { id: 13, name: 'Mysteries' }, { id: 14, name: 'Film Noir' }]
-	      }, { id: 15, name: 'Drama', children: [{ id: 16, name: 'High School' }, { id: 17, name: 'Love Story' }, { id: 18, name: 'Soap Opera' }, { id: 19, name: 'Medical' }]
+	      }, { id: 7, name: 'Comedy',
+	        children: [{ id: 8, name: 'Parody' }, { id: 9, name: 'Spoofs' }, { id: 10, name: 'Slapstick' }]
+	      }, { id: 11, name: 'Crime & Gangster',
+	        children: [{ id: 12, name: 'Lovers on the run' }, { id: 13, name: 'Mysteries' }, { id: 14, name: 'Film Noir' }]
+	      }, { id: 15, name: 'Drama',
+	        children: [{ id: 16, name: 'High School' }, { id: 17, name: 'Love Story' }, { id: 18, name: 'Soap Opera' }, { id: 19, name: 'Medical' }]
 	      }, { id: 20, name: 'Horror' }, { id: 21, name: 'Science Fiction' }]
 	    };
 	  },
@@ -12900,7 +12905,7 @@
 	
 	
 	// module
-	exports.push([module.id, "\n.multiselect[data-v-1cd85c04] {\n  position: relative;\n}\n.multiselect-filter[data-v-1cd85c04] {\n  margin-bottom: 4px;\n}\n.multiselect-toggles[data-v-1cd85c04] {\n  padding: 0 9px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.multiselect-toggles .multiselect-selectall[data-v-1cd85c04] {\n  width: 45%;\n  float: left;\n}\n.multiselect-toggles .multiselect-subset[data-v-1cd85c04] {\n  width: 45%;\n  float: right;\n  text-align: right;\n  margin-top: 10px;\n  margin-bottom: 10px;\n}\n.multiselect-toggles .checkbox + .checkbox[data-v-1cd85c04] {\n  margin-top: 10px;\n  margin-bottom: 10px;\n}\n.multiselect-counter[data-v-1cd85c04] {\n  float: right;\n  margin: 0 0 5px 0;\n  height: 38px;\n  min-width: 40px;\n  display: inline-block;\n  padding: 5px 10px;\n  background: #666;\n  border-radius: 2px;\n  color: #fff;\n  font-size: 18px;\n  line-height: 26px;\n  text-align: center;\n}\n", "", {"version":3,"sources":["/./src/Multiselect/Multiselect.vue?31870b3d"],"names":[],"mappings":";AAoNA;EACA,mBAAA;CACA;AAEA;EACA,mBAAA;CACA;AAEA;EACA,eAAA;EACA,oBAAA;EACA,iBAAA;EACA,wBAAA;CACA;AAEA;EACA,WAAA;EACA,YAAA;CACA;AAEA;EACA,WAAA;EACA,aAAA;EACA,kBAAA;EACA,iBAAA;EACA,oBAAA;CACA;AAEA;EACA,iBAAA;EACA,oBAAA;CACA;AAEA;EACA,aAAA;EACA,kBAAA;EACA,aAAA;EACA,gBAAA;EACA,sBAAA;EACA,kBAAA;EACA,iBAAA;EACA,mBAAA;EACA,YAAA;EACA,gBAAA;EACA,kBAAA;EACA,mBAAA;CACA","file":"Multiselect.vue","sourcesContent":["<template>\n  <div class=\"multiselect\">\n    <div class=\"multiselect-filter\" v-if=\"filter\">\n      <input type=\"text\" :placeholder=\"placeholder\" class=\"form-control\" v-model=\"query\">\n    </div>\n    <div class=\"multiselect-counter\">{{ selectedIds.length }}</div>\n    <div class=\"multiselect-toggles\">\n      <div class=\"checkbox multiselect-selectall\">\n        <label>\n          <input :checked=\"allSelected()\" type=\"checkbox\" @click=\"toggleAll\"> {{ selectAllLabel }}\n        </label>\n        <span class=\"randomizer-toggle\" v-if=\"randomizer\">\n          | <a href=\"\" @click.prevent=\"randomizerActive = !randomizerActive\">{{ randomizerShow }}</a>\n          <popover :content=\"randomizerHelpicon\">\n            <span class=\"af-icons af-icons-help\"></span>\n          </popover>\n        </span>\n      </div>\n      <randomizer\n        v-if=\"randomizerActive\"\n        :ids=\"allIds\"\n        @randomized=\"applyRandomSelection\"\n        :randomizer-how-many=\"randomizerHowMany\"\n        :randomizer-button=\"randomizerButton\">\n      </randomizer>\n    </div>\n    <multiselect-list\n      :options=\"tree\"\n      :name=\"name\"\n      :id-property=\"idProperty\"\n      :value-property=\"valueProperty\">\n    </multiselect-list>\n  </div>\n</template>\n\n<script>\nimport MultiselectList from './MultiselectList.vue';\nimport Randomizer from './Randomizer.vue';\nimport Popover from '../Popover.vue';\n\nexport default {\n  data () {\n    return {\n      tree: [],\n      randomizerActive: false,\n      query: ''\n    };\n  },\n  components: {\n    MultiselectList,\n    Randomizer,\n    Popover\n  },\n  props: {\n    name: {\n      type: String,\n      default: 'multiselect[]'\n    },\n    filter: {\n      type: Boolean,\n      default: true\n    },\n    placeholder: {\n      type: String,\n      default: 'Filter list'\n    },\n    selectAllLabel: {\n      type: String,\n      default: 'Select all'\n    },\n    options: {\n      type: Array,\n      default: () => []\n    },\n    selectedOptions: {\n      type: Array,\n      default: () => []\n    },\n    randomizer: {\n      type: Boolean,\n      default: false\n    },\n    idProperty: {\n      type: String,\n      default: 'id'\n    },\n    valueProperty: {\n      type: String,\n      default: 'name'\n    },\n    randomizerShow: {\n      type: String,\n      default: 'Random selection'\n    },\n    randomizerHowMany: {\n      type: String,\n      default: 'How many?'\n    },\n    randomizerHelpicon: {\n      type: String\n    },\n    randomizerButton: {\n      type: String,\n      default: 'Go'\n    }\n  },\n  computed: {\n    flatTree () {\n      const options = [];\n\n      const flattenTree = option => {\n        if (this.hasChildren(option)) {\n          option.children.forEach(flattenTree);\n          return;\n        }\n\n        options.push(option);\n      };\n\n      this.tree.forEach(flattenTree);\n\n      return options;\n    },\n    allIds () {\n      return this.flatTree.map(o => o.id);\n    },\n    selectedIds () {\n      return this.flatTree.filter(o => o.selected).map(o => o.id);\n    }\n  },\n  watch: {\n    query () {\n      const mapOptions = option => {\n        if (this.hasChildren(option)) {\n          option.children.map(mapOptions);\n        }\n\n        option.visible = !this.hasChildren(option)\n          ? option[this.valueProperty].toLowerCase().indexOf(this.query.toLowerCase()) !== -1\n          : true;\n\n        return option;\n      };\n\n      // Adjust option visibility based on query\n      this.tree = this.tree.map(mapOptions);\n    },\n    options (options) {\n      this.buildTree(options);\n    },\n    selected () {\n      this.$emit('selected', this.selectedIds);\n    }\n  },\n  methods: {\n    hasChildren (option) {\n      return option.children && option.children.length;\n    },\n    allSelected () {\n      return this.tree.length > 0 && this.allIds.length === this.selectedIds.length;\n    },\n    toggleAll () {\n      const allSelected = this.allSelected();\n\n      const mapOptions = option => {\n        option.selected = !allSelected;\n\n        if (this.hasChildren(option)) {\n          option.children.map(mapOptions);\n        }\n\n        return option;\n      };\n\n      this.tree = this.tree.map(mapOptions);\n    },\n    applyRandomSelection (ids) {\n      const mapOptions = option => {\n        option.selected = ids.includes(option.id);\n\n        if (this.hasChildren(option)) {\n          option.children.map(mapOptions);\n        }\n\n        return option;\n      };\n\n      this.tree = this.tree.map(mapOptions);\n    },\n    buildTree (options, selectedOptions = []) {\n      const mapOptions = option => {\n        option.selected = selectedOptions.includes(option.id);\n        option.visible = true;\n\n        if (this.hasChildren(option)) {\n          option.children.map(mapOptions);\n        }\n\n        return option;\n      };\n\n      // Clone the array first\n      this.tree = JSON.parse(JSON.stringify(options)).map(mapOptions);\n    }\n  },\n  created () {\n    this.buildTree(this.options, this.selectedOptions);\n  }\n};\n</script>\n\n<style scoped>\n  .multiselect {\n    position: relative;\n  }\n\n  .multiselect-filter {\n    margin-bottom: 4px;\n  }\n\n  .multiselect-toggles {\n    padding: 0 9px;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n\n  .multiselect-toggles .multiselect-selectall {\n    width: 45%;\n    float: left;\n  }\n\n  .multiselect-toggles .multiselect-subset {\n    width: 45%;\n    float: right;\n    text-align: right;\n    margin-top: 10px;\n    margin-bottom: 10px;\n  }\n\n  .multiselect-toggles .checkbox + .checkbox {\n    margin-top: 10px;\n    margin-bottom: 10px;\n  }\n\n  .multiselect-counter {\n    float: right;\n    margin: 0 0 5px 0;\n    height: 38px;\n    min-width: 40px;\n    display: inline-block;\n    padding: 5px 10px;\n    background: #666;\n    border-radius: 2px;\n    color: #fff;\n    font-size: 18px;\n    line-height: 26px;\n    text-align: center;\n  }\n</style>\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\n.vue-multiselect[data-v-1cd85c04] {\n  position: relative;\n}\n.multiselect-filter[data-v-1cd85c04] {\n  margin-bottom: 4px;\n}\n.multiselect-toggles[data-v-1cd85c04] {\n  padding: 0 9px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.multiselect-toggles .multiselect-selectall[data-v-1cd85c04] {\n  width: 45%;\n  float: left;\n}\n.multiselect-toggles .multiselect-subset[data-v-1cd85c04] {\n  width: 45%;\n  float: right;\n  text-align: right;\n  margin-top: 10px;\n  margin-bottom: 10px;\n}\n.multiselect-toggles .checkbox + .checkbox[data-v-1cd85c04] {\n  margin-top: 10px;\n  margin-bottom: 10px;\n}\n.multiselect-counter[data-v-1cd85c04] {\n  float: right;\n  margin: 0 0 5px 0;\n  height: 38px;\n  min-width: 40px;\n  display: inline-block;\n  padding: 5px 10px;\n  background: #666;\n  border-radius: 2px;\n  color: #fff;\n  font-size: 18px;\n  line-height: 26px;\n  text-align: center;\n}\n", "", {"version":3,"sources":["/./src/Multiselect/Multiselect.vue?180ff62e"],"names":[],"mappings":";AAsNA;EACA,mBAAA;CACA;AAEA;EACA,mBAAA;CACA;AAEA;EACA,eAAA;EACA,oBAAA;EACA,iBAAA;EACA,wBAAA;CACA;AAEA;EACA,WAAA;EACA,YAAA;CACA;AAEA;EACA,WAAA;EACA,aAAA;EACA,kBAAA;EACA,iBAAA;EACA,oBAAA;CACA;AAEA;EACA,iBAAA;EACA,oBAAA;CACA;AAEA;EACA,aAAA;EACA,kBAAA;EACA,aAAA;EACA,gBAAA;EACA,sBAAA;EACA,kBAAA;EACA,iBAAA;EACA,mBAAA;EACA,YAAA;EACA,gBAAA;EACA,kBAAA;EACA,mBAAA;CACA","file":"Multiselect.vue","sourcesContent":["<template>\n  <div class=\"vue-multiselect\">\n    <div class=\"multiselect-filter\" v-if=\"filter\">\n      <input type=\"text\" :placeholder=\"placeholder\" class=\"form-control\" v-model=\"query\">\n    </div>\n    <div class=\"multiselect-counter\">{{ selectedIds.length }}</div>\n    <div class=\"multiselect-toggles\">\n      <div class=\"checkbox multiselect-selectall\">\n        <label>\n          <input :checked=\"allSelected()\" type=\"checkbox\" @click=\"toggleAll\"> {{ selectAllLabel }}\n        </label>\n        <span class=\"randomizer-toggle\" v-if=\"randomizer\">\n          | <a href=\"\" @click.prevent=\"randomizerActive = !randomizerActive\">{{ randomizerShow }}</a>\n          <popover :content=\"randomizerHelpicon\">\n            <span class=\"af-icons af-icons-help\"></span>\n          </popover>\n        </span>\n      </div>\n      <randomizer\n        v-if=\"randomizerActive\"\n        :ids=\"allIds\"\n        @randomized=\"applyRandomSelection\"\n        :randomizer-how-many=\"randomizerHowMany\"\n        :randomizer-button=\"randomizerButton\">\n      </randomizer>\n    </div>\n    <multiselect-list\n      :options=\"tree\"\n      :name=\"name\"\n      :id-property=\"idProperty\"\n      :value-property=\"valueProperty\">\n    </multiselect-list>\n  </div>\n</template>\n\n<script>\nimport MultiselectList from './MultiselectList.vue';\nimport Randomizer from './Randomizer.vue';\nimport Popover from '../Popover.vue';\n\nexport default {\n  data () {\n    return {\n      tree: [],\n      randomizerActive: false,\n      query: ''\n    };\n  },\n  components: {\n    MultiselectList,\n    Randomizer,\n    Popover\n  },\n  props: {\n    name: {\n      type: String,\n      default: 'multiselect[]'\n    },\n    filter: {\n      type: Boolean,\n      default: true\n    },\n    placeholder: {\n      type: String,\n      default: 'Filter list'\n    },\n    selectAllLabel: {\n      type: String,\n      default: 'Select all'\n    },\n    options: {\n      type: Array,\n      default: () => []\n    },\n    selectedOptions: {\n      type: Array,\n      default: () => []\n    },\n    randomizer: {\n      type: Boolean,\n      default: false\n    },\n    idProperty: {\n      type: String,\n      default: 'id'\n    },\n    valueProperty: {\n      type: String,\n      default: 'name'\n    },\n    randomizerShow: {\n      type: String,\n      default: 'Random selection'\n    },\n    randomizerHowMany: {\n      type: String,\n      default: 'How many?'\n    },\n    randomizerHelpicon: {\n      type: String\n    },\n    randomizerButton: {\n      type: String,\n      default: 'Go'\n    }\n  },\n  computed: {\n    flatTree () {\n      const options = [];\n\n      const flattenTree = option => {\n        if (this.hasChildren(option)) {\n          option.children.forEach(flattenTree);\n          return;\n        }\n\n        options.push(option);\n      };\n\n      this.tree.forEach(flattenTree);\n\n      return options;\n    },\n    allIds () {\n      return this.flatTree.map(o => o[this.idProperty]);\n    },\n    selectedIds () {\n      return this.flatTree.filter(o => o.selected).map(o => o[this.idProperty]);\n    }\n  },\n  watch: {\n    query () {\n      const mapOptions = option => {\n        if (this.hasChildren(option)) {\n          option.children.map(mapOptions);\n        }\n\n        option.visible = !this.hasChildren(option)\n          ? option[this.valueProperty].toLowerCase().indexOf(this.query.toLowerCase()) !== -1\n          : true;\n\n        return option;\n      };\n\n      // Adjust option visibility based on query\n      this.tree = this.tree.map(mapOptions);\n    },\n    options (options) {\n      this.buildTree(options);\n    },\n    selectedIds () {\n      this.$emit('selected', this.selectedIds);\n    }\n  },\n  methods: {\n    hasChildren (option) {\n      return option.children && option.children.length;\n    },\n    allSelected () {\n      return this.tree.length > 0 && this.allIds.length === this.selectedIds.length;\n    },\n    toggleAll () {\n      const allSelected = this.allSelected();\n\n      const mapOptions = option => {\n        option.selected = !allSelected;\n\n        if (this.hasChildren(option)) {\n          option.children.map(mapOptions);\n        }\n\n        return option;\n      };\n\n      this.tree = this.tree.map(mapOptions);\n    },\n    applyRandomSelection (ids) {\n      const mapOptions = option => {\n        option.selected = ids.includes(option[this.idProperty]);\n\n        if (this.hasChildren(option)) {\n          option.children.map(mapOptions);\n        }\n\n        return option;\n      };\n\n      this.tree = this.tree.map(mapOptions);\n    },\n    buildTree (options, selectedOptions = []) {\n      const mapOptions = option => {\n        option.selected = selectedOptions.includes(option[this.idProperty]) ||\n          selectedOptions.includes(String(option[this.idProperty]));\n\n        option.visible = true;\n\n        if (this.hasChildren(option)) {\n          option.children.map(mapOptions);\n        }\n\n        return option;\n      };\n\n      // Clone the array first\n      this.tree = JSON.parse(JSON.stringify(options)).map(mapOptions);\n    }\n  },\n  created () {\n    this.buildTree(this.options, this.selectedOptions);\n  }\n};\n</script>\n\n<style scoped>\n  .vue-multiselect {\n    position: relative;\n  }\n\n  .multiselect-filter {\n    margin-bottom: 4px;\n  }\n\n  .multiselect-toggles {\n    padding: 0 9px;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n\n  .multiselect-toggles .multiselect-selectall {\n    width: 45%;\n    float: left;\n  }\n\n  .multiselect-toggles .multiselect-subset {\n    width: 45%;\n    float: right;\n    text-align: right;\n    margin-top: 10px;\n    margin-bottom: 10px;\n  }\n\n  .multiselect-toggles .checkbox + .checkbox {\n    margin-top: 10px;\n    margin-bottom: 10px;\n  }\n\n  .multiselect-counter {\n    float: right;\n    margin: 0 0 5px 0;\n    height: 38px;\n    min-width: 40px;\n    display: inline-block;\n    padding: 5px 10px;\n    background: #666;\n    border-radius: 2px;\n    color: #fff;\n    font-size: 18px;\n    line-height: 26px;\n    text-align: center;\n  }\n</style>\n"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -13024,28 +13029,32 @@
 	      return options;
 	    },
 	    allIds: function allIds() {
+	      var _this2 = this;
+	
 	      return this.flatTree.map(function (o) {
-	        return o.id;
+	        return o[_this2.idProperty];
 	      });
 	    },
 	    selectedIds: function selectedIds() {
+	      var _this3 = this;
+	
 	      return this.flatTree.filter(function (o) {
 	        return o.selected;
 	      }).map(function (o) {
-	        return o.id;
+	        return o[_this3.idProperty];
 	      });
 	    }
 	  },
 	  watch: {
 	    query: function query() {
-	      var _this2 = this;
+	      var _this4 = this;
 	
 	      var mapOptions = function mapOptions(option) {
-	        if (_this2.hasChildren(option)) {
+	        if (_this4.hasChildren(option)) {
 	          option.children.map(mapOptions);
 	        }
 	
-	        option.visible = !_this2.hasChildren(option) ? option[_this2.valueProperty].toLowerCase().indexOf(_this2.query.toLowerCase()) !== -1 : true;
+	        option.visible = !_this4.hasChildren(option) ? option[_this4.valueProperty].toLowerCase().indexOf(_this4.query.toLowerCase()) !== -1 : true;
 	
 	        return option;
 	      };
@@ -13056,7 +13065,7 @@
 	    options: function options(_options) {
 	      this.buildTree(_options);
 	    },
-	    selected: function selected() {
+	    selectedIds: function selectedIds() {
 	      this.$emit('selected', this.selectedIds);
 	    }
 	  },
@@ -13068,14 +13077,14 @@
 	      return this.tree.length > 0 && this.allIds.length === this.selectedIds.length;
 	    },
 	    toggleAll: function toggleAll() {
-	      var _this3 = this;
+	      var _this5 = this;
 	
 	      var allSelected = this.allSelected();
 	
 	      var mapOptions = function mapOptions(option) {
 	        option.selected = !allSelected;
 	
-	        if (_this3.hasChildren(option)) {
+	        if (_this5.hasChildren(option)) {
 	          option.children.map(mapOptions);
 	        }
 	
@@ -13085,12 +13094,12 @@
 	      this.tree = this.tree.map(mapOptions);
 	    },
 	    applyRandomSelection: function applyRandomSelection(ids) {
-	      var _this4 = this;
+	      var _this6 = this;
 	
 	      var mapOptions = function mapOptions(option) {
-	        option.selected = ids.includes(option.id);
+	        option.selected = ids.includes(option[_this6.idProperty]);
 	
-	        if (_this4.hasChildren(option)) {
+	        if (_this6.hasChildren(option)) {
 	          option.children.map(mapOptions);
 	        }
 	
@@ -13100,15 +13109,16 @@
 	      this.tree = this.tree.map(mapOptions);
 	    },
 	    buildTree: function buildTree(options) {
-	      var _this5 = this;
+	      var _this7 = this;
 	
 	      var selectedOptions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
 	
 	      var mapOptions = function mapOptions(option) {
-	        option.selected = selectedOptions.includes(option.id);
+	        option.selected = selectedOptions.includes(option[_this7.idProperty]) || selectedOptions.includes(String(option[_this7.idProperty]));
+	
 	        option.visible = true;
 	
-	        if (_this5.hasChildren(option)) {
+	        if (_this7.hasChildren(option)) {
 	          option.children.map(mapOptions);
 	        }
 	
@@ -14140,7 +14150,7 @@
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('div', {
-	    staticClass: "multiselect"
+	    staticClass: "vue-multiselect"
 	  }, [(_vm.filter) ? _c('div', {
 	    staticClass: "multiselect-filter"
 	  }, [_c('input', {

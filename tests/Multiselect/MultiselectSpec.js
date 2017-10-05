@@ -10,11 +10,12 @@ describe('Multiselect', () => {
     const options = [
       { id: 1, name: 'option A' },
       { id: 2, name: 'option B' },
-      { id: 3, name: 'option C', children: [
+      { id: 3, name: 'option C',
+        children: [
           { id: 4, name: 'option D' },
           { id: 5, name: 'option E' }
         ]
-      },
+      }
     ];
 
     vm = initVM(Multiselect, {
@@ -22,7 +23,7 @@ describe('Multiselect', () => {
       selectedOptions: [1]
     });
   });
-   
+
   afterEach(() => {
     vm.$destroy();
   });
@@ -46,7 +47,7 @@ describe('Multiselect', () => {
           { id: 4, name: 'option D', visible: true, selected: false },
           { id: 5, name: 'option E', visible: true, selected: false }
         ]
-      },
+      }
     ];
 
     expect(vm.tree).that.is.an('array').to.deep.equal(tree);

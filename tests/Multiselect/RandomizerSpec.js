@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import { expect } from 'chai';
 import { initVM } from '../utils.js';
 import Randomizer from '../../src/Multiselect/Randomizer.vue';

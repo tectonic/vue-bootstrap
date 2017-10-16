@@ -7,7 +7,12 @@
       :level="level"
       :name="name"
       :id-property="idProperty"
-      :value-property="valueProperty">
+      :value-property="valueProperty"
+      :subset="subset"
+      :subsetType="subsetType"
+      :subsetName="subsetName"
+      :subsetLabel="subsetLabel"
+      :selectedSubsetOptions="selectedSubsetOptions">
     </multiselect-option>
   </div>
 </template>
@@ -30,7 +35,12 @@ export default {
     },
     name: String,
     idProperty: String,
-    valueProperty: String
+    valueProperty: String,
+    subset: Boolean,
+    subsetType: String,
+    subsetName: String,
+    subsetLabel: String,
+    selectedSubsetOptions: Array
   },
   computed: {
     topLevel () {

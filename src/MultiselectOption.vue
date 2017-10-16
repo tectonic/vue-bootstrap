@@ -1,7 +1,7 @@
 <template>
   <div>
     <template v-if="isParent">
-      <div class="checkbox multiselect-option">
+      <div class="checkbox radio multiselect-option">
         <label :style="indentStyle()">
           <input type="checkbox" v-model="option.selected" @change="toggleParent">
           <strong>{{ option[valueProperty] }}</strong>
@@ -12,11 +12,32 @@
         :options="option.children"
         :name="name"
         :id-property="idProperty"
-        :value-property="valueProperty">
+        :value-property="valueProperty"
+        :subset="subset"
+        :subsetType="subsetType"
+        :subsetName="subsetName"
+        :subsetLabel="subsetLabel"
+        :selectedSubsetOptions="selectedSubsetOptions">
       </multiselect-list>
     </template>
     <template v-else>
-      <div v-show="option.visible" class="checkbox multiselect-option">
+      <div v-show="option.visible" class="checkbox radio multiselect-option">
+        <template v-if="subset && option.selected">
+          <multiselect-subset-radio-control
+            v-if="subsetType === 'radio'"
+            :option="option"
+            :id-property="idProperty"
+            :subsetName="subsetName"
+            :selectedSubsetOptions="selectedSubsetOptions">
+          </multiselect-subset-radio-control>
+          <multiselect-subset-checkbox-control
+            v-else
+            :option="option"
+            :id-property="idProperty"
+            :subsetName="subsetName"
+            :selectedSubsetOptions="selectedSubsetOptions">
+          </multiselect-subset-checkbox-control>
+        </template>
         <label :style="indentStyle()">
           <input type="checkbox" :name="name" v-model="option.selected" :value="option[idProperty]">
           {{ option[valueProperty] }}
@@ -27,7 +48,14 @@
 </template>
 
 <script>
+import MultiselectSubsetCheckboxControl from './MultiselectSubsetCheckboxControl.vue';
+import MultiselectSubsetRadioControl from './MultiselectSubsetRadioControl.vue';
+
 export default {
+  components: {
+    MultiselectSubsetCheckboxControl,
+    MultiselectSubsetRadioControl
+  },
   props: {
     option: {
       type: Object,
@@ -39,7 +67,12 @@ export default {
     },
     name: String,
     idProperty: String,
-    valueProperty: String
+    valueProperty: String,
+    subset: Boolean,
+    subsetType: String,
+    subsetName: String,
+    subsetLabel: String,
+    selectedSubsetOptions: Array
   },
   computed: {
     isParent () {

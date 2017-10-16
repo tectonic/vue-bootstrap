@@ -66,11 +66,11 @@
 	
 	var _Multiselect2 = _interopRequireDefault(_Multiselect);
 	
-	var _Popover = __webpack_require__(96);
+	var _Popover = __webpack_require__(106);
 	
 	var _Popover2 = _interopRequireDefault(_Popover);
 	
-	var _Typeahead = __webpack_require__(102);
+	var _Typeahead = __webpack_require__(112);
 	
 	var _Typeahead2 = _interopRequireDefault(_Typeahead);
 	
@@ -12836,7 +12836,7 @@
 	__vue_exports__ = __webpack_require__(78)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(101)
+	var __vue_template__ = __webpack_require__(111)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -12848,10 +12848,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/kazik/Sites/awardforce.com/vue-bootstrap/src/Multiselect/Multiselect.vue"
+	__vue_options__.__file = "/Users/kazik/Sites/awardforce.com/vue-bootstrap/src/Multiselect.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-1cd85c04"
+	__vue_options__._scopeId = "data-v-83d0d590"
 	
 	/* hot reload */
 	if (false) {(function () {
@@ -12860,9 +12860,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-1cd85c04", __vue_options__)
+	    hotAPI.createRecord("data-v-83d0d590", __vue_options__)
 	  } else {
-	    hotAPI.reload("data-v-1cd85c04", __vue_options__)
+	    hotAPI.reload("data-v-83d0d590", __vue_options__)
 	  }
 	})()}
 	if (__vue_options__.functional) {console.error("[vue-loader] Multiselect.vue: functional components are not supported and should be defined in plain js files using render functions.")}
@@ -12886,8 +12886,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-1cd85c04&scoped=true!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Multiselect.vue", function() {
-				var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-1cd85c04&scoped=true!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Multiselect.vue");
+			module.hot.accept("!!../node_modules/css-loader/index.js?sourceMap!../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-83d0d590&scoped=true!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Multiselect.vue", function() {
+				var newContent = require("!!../node_modules/css-loader/index.js?sourceMap!../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-83d0d590&scoped=true!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Multiselect.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -12905,7 +12905,7 @@
 	
 	
 	// module
-	exports.push([module.id, "\n.vue-multiselect[data-v-1cd85c04] {\n  position: relative;\n}\n.multiselect-filter[data-v-1cd85c04] {\n  margin-bottom: 4px;\n}\n.multiselect-toggles[data-v-1cd85c04] {\n  padding: 0 9px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.multiselect-toggles .multiselect-selectall[data-v-1cd85c04] {\n  width: 45%;\n  float: left;\n}\n.multiselect-toggles .multiselect-subset[data-v-1cd85c04] {\n  width: 45%;\n  float: right;\n  text-align: right;\n  margin-top: 10px;\n  margin-bottom: 10px;\n}\n.multiselect-toggles .checkbox + .checkbox[data-v-1cd85c04] {\n  margin-top: 10px;\n  margin-bottom: 10px;\n}\n.multiselect-counter[data-v-1cd85c04] {\n  float: right;\n  margin: 0 0 5px 0;\n  height: 38px;\n  min-width: 40px;\n  display: inline-block;\n  padding: 5px 10px;\n  background: #666;\n  border-radius: 2px;\n  color: #fff;\n  font-size: 18px;\n  line-height: 26px;\n  text-align: center;\n}\n", "", {"version":3,"sources":["/./src/Multiselect/Multiselect.vue?180ff62e"],"names":[],"mappings":";AAsNA;EACA,mBAAA;CACA;AAEA;EACA,mBAAA;CACA;AAEA;EACA,eAAA;EACA,oBAAA;EACA,iBAAA;EACA,wBAAA;CACA;AAEA;EACA,WAAA;EACA,YAAA;CACA;AAEA;EACA,WAAA;EACA,aAAA;EACA,kBAAA;EACA,iBAAA;EACA,oBAAA;CACA;AAEA;EACA,iBAAA;EACA,oBAAA;CACA;AAEA;EACA,aAAA;EACA,kBAAA;EACA,aAAA;EACA,gBAAA;EACA,sBAAA;EACA,kBAAA;EACA,iBAAA;EACA,mBAAA;EACA,YAAA;EACA,gBAAA;EACA,kBAAA;EACA,mBAAA;CACA","file":"Multiselect.vue","sourcesContent":["<template>\n  <div class=\"vue-multiselect\">\n    <div class=\"multiselect-filter\" v-if=\"filter\">\n      <input type=\"text\" :placeholder=\"placeholder\" class=\"form-control\" v-model=\"query\">\n    </div>\n    <div class=\"multiselect-counter\">{{ selectedIds.length }}</div>\n    <div class=\"multiselect-toggles\">\n      <div class=\"checkbox multiselect-selectall\">\n        <label>\n          <input :checked=\"allSelected()\" type=\"checkbox\" @click=\"toggleAll\"> {{ selectAllLabel }}\n        </label>\n        <span class=\"randomizer-toggle\" v-if=\"randomizer\">\n          | <a href=\"\" @click.prevent=\"randomizerActive = !randomizerActive\">{{ randomizerShow }}</a>\n          <popover :content=\"randomizerHelpicon\">\n            <span class=\"af-icons af-icons-help\"></span>\n          </popover>\n        </span>\n      </div>\n      <randomizer\n        v-if=\"randomizerActive\"\n        :ids=\"allIds\"\n        @randomized=\"applyRandomSelection\"\n        :randomizer-how-many=\"randomizerHowMany\"\n        :randomizer-button=\"randomizerButton\">\n      </randomizer>\n    </div>\n    <multiselect-list\n      :options=\"tree\"\n      :name=\"name\"\n      :id-property=\"idProperty\"\n      :value-property=\"valueProperty\">\n    </multiselect-list>\n  </div>\n</template>\n\n<script>\nimport MultiselectList from './MultiselectList.vue';\nimport Randomizer from './Randomizer.vue';\nimport Popover from '../Popover.vue';\n\nexport default {\n  data () {\n    return {\n      tree: [],\n      randomizerActive: false,\n      query: ''\n    };\n  },\n  components: {\n    MultiselectList,\n    Randomizer,\n    Popover\n  },\n  props: {\n    name: {\n      type: String,\n      default: 'multiselect[]'\n    },\n    filter: {\n      type: Boolean,\n      default: true\n    },\n    placeholder: {\n      type: String,\n      default: 'Filter list'\n    },\n    selectAllLabel: {\n      type: String,\n      default: 'Select all'\n    },\n    options: {\n      type: Array,\n      default: () => []\n    },\n    selectedOptions: {\n      type: Array,\n      default: () => []\n    },\n    randomizer: {\n      type: Boolean,\n      default: false\n    },\n    idProperty: {\n      type: String,\n      default: 'id'\n    },\n    valueProperty: {\n      type: String,\n      default: 'name'\n    },\n    randomizerShow: {\n      type: String,\n      default: 'Random selection'\n    },\n    randomizerHowMany: {\n      type: String,\n      default: 'How many?'\n    },\n    randomizerHelpicon: {\n      type: String\n    },\n    randomizerButton: {\n      type: String,\n      default: 'Go'\n    }\n  },\n  computed: {\n    flatTree () {\n      const options = [];\n\n      const flattenTree = option => {\n        if (this.hasChildren(option)) {\n          option.children.forEach(flattenTree);\n          return;\n        }\n\n        options.push(option);\n      };\n\n      this.tree.forEach(flattenTree);\n\n      return options;\n    },\n    allIds () {\n      return this.flatTree.map(o => o[this.idProperty]);\n    },\n    selectedIds () {\n      return this.flatTree.filter(o => o.selected).map(o => o[this.idProperty]);\n    }\n  },\n  watch: {\n    query () {\n      const mapOptions = option => {\n        if (this.hasChildren(option)) {\n          option.children.map(mapOptions);\n        }\n\n        option.visible = !this.hasChildren(option)\n          ? option[this.valueProperty].toLowerCase().indexOf(this.query.toLowerCase()) !== -1\n          : true;\n\n        return option;\n      };\n\n      // Adjust option visibility based on query\n      this.tree = this.tree.map(mapOptions);\n    },\n    options (options) {\n      this.buildTree(options);\n    },\n    selectedIds () {\n      this.$emit('selected', this.selectedIds);\n    }\n  },\n  methods: {\n    hasChildren (option) {\n      return option.children && option.children.length;\n    },\n    allSelected () {\n      return this.tree.length > 0 && this.allIds.length === this.selectedIds.length;\n    },\n    toggleAll () {\n      const allSelected = this.allSelected();\n\n      const mapOptions = option => {\n        option.selected = !allSelected;\n\n        if (this.hasChildren(option)) {\n          option.children.map(mapOptions);\n        }\n\n        return option;\n      };\n\n      this.tree = this.tree.map(mapOptions);\n    },\n    applyRandomSelection (ids) {\n      const mapOptions = option => {\n        option.selected = ids.includes(option[this.idProperty]);\n\n        if (this.hasChildren(option)) {\n          option.children.map(mapOptions);\n        }\n\n        return option;\n      };\n\n      this.tree = this.tree.map(mapOptions);\n    },\n    buildTree (options, selectedOptions = []) {\n      const mapOptions = option => {\n        option.selected = selectedOptions.includes(option[this.idProperty]) ||\n          selectedOptions.includes(String(option[this.idProperty]));\n\n        option.visible = true;\n\n        if (this.hasChildren(option)) {\n          option.children.map(mapOptions);\n        }\n\n        return option;\n      };\n\n      // Clone the array first\n      this.tree = JSON.parse(JSON.stringify(options)).map(mapOptions);\n    }\n  },\n  created () {\n    this.buildTree(this.options, this.selectedOptions);\n  }\n};\n</script>\n\n<style scoped>\n  .vue-multiselect {\n    position: relative;\n  }\n\n  .multiselect-filter {\n    margin-bottom: 4px;\n  }\n\n  .multiselect-toggles {\n    padding: 0 9px;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n\n  .multiselect-toggles .multiselect-selectall {\n    width: 45%;\n    float: left;\n  }\n\n  .multiselect-toggles .multiselect-subset {\n    width: 45%;\n    float: right;\n    text-align: right;\n    margin-top: 10px;\n    margin-bottom: 10px;\n  }\n\n  .multiselect-toggles .checkbox + .checkbox {\n    margin-top: 10px;\n    margin-bottom: 10px;\n  }\n\n  .multiselect-counter {\n    float: right;\n    margin: 0 0 5px 0;\n    height: 38px;\n    min-width: 40px;\n    display: inline-block;\n    padding: 5px 10px;\n    background: #666;\n    border-radius: 2px;\n    color: #fff;\n    font-size: 18px;\n    line-height: 26px;\n    text-align: center;\n  }\n</style>\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\n.vue-multiselect[data-v-83d0d590] {\n  position: relative;\n}\n.multiselect-filter[data-v-83d0d590] {\n  margin-bottom: 4px;\n}\n.multiselect-toggles[data-v-83d0d590] {\n  padding: 0 9px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.multiselect-toggles .multiselect-selectall[data-v-83d0d590] {\n  width: 45%;\n  float: left;\n}\n.multiselect-toggles .multiselect-subset[data-v-83d0d590] {\n  width: 45%;\n  float: right;\n  text-align: right;\n  margin-top: 10px;\n  margin-bottom: 10px;\n}\n.multiselect-toggles .checkbox + .checkbox[data-v-83d0d590] {\n  margin-top: 10px;\n  margin-bottom: 10px;\n}\n.multiselect-counter[data-v-83d0d590] {\n  float: right;\n  margin: 0 0 5px 0;\n  height: 38px;\n  min-width: 40px;\n  display: inline-block;\n  padding: 5px 10px;\n  background: #666;\n  border-radius: 2px;\n  color: #fff;\n  font-size: 18px;\n  line-height: 26px;\n  text-align: center;\n}\n", "", {"version":3,"sources":["/./src/Multiselect.vue?6700b846"],"names":[],"mappings":";AAoPA;EACA,mBAAA;CACA;AAEA;EACA,mBAAA;CACA;AAEA;EACA,eAAA;EACA,oBAAA;EACA,iBAAA;EACA,wBAAA;CACA;AAEA;EACA,WAAA;EACA,YAAA;CACA;AAEA;EACA,WAAA;EACA,aAAA;EACA,kBAAA;EACA,iBAAA;EACA,oBAAA;CACA;AAEA;EACA,iBAAA;EACA,oBAAA;CACA;AAEA;EACA,aAAA;EACA,kBAAA;EACA,aAAA;EACA,gBAAA;EACA,sBAAA;EACA,kBAAA;EACA,iBAAA;EACA,mBAAA;EACA,YAAA;EACA,gBAAA;EACA,kBAAA;EACA,mBAAA;CACA","file":"Multiselect.vue","sourcesContent":["<template>\n  <div class=\"vue-multiselect\">\n    <div class=\"multiselect-filter\" v-if=\"filter\">\n      <input type=\"text\" :placeholder=\"placeholder\" class=\"form-control\" v-model=\"query\">\n    </div>\n    <div class=\"multiselect-counter\">{{ selectedIds.length }}</div>\n    <div class=\"multiselect-toggles\">\n      <div class=\"multiselect-subset\" v-if=\"subset\">\n        {{ subsetLabel }}\n      </div>\n      <div class=\"checkbox multiselect-selectall\">\n        <label>\n          <input :checked=\"allSelected()\" type=\"checkbox\" @click=\"toggleAll\"> {{ selectAllLabel }}\n        </label>\n        <span class=\"randomizer-toggle\" v-if=\"randomizer\">\n          | <a href=\"\" @click.prevent=\"randomizerActive = !randomizerActive\">{{ randomizerShow }}</a>\n          <popover :content=\"randomizerHelpicon\">\n            <span class=\"af-icons af-icons-help\"></span>\n          </popover>\n        </span>\n      </div>\n      <multiselect-randomizer\n        v-if=\"randomizerActive\"\n        :ids=\"allIds\"\n        @randomized=\"applyRandomSelection\"\n        :randomizer-how-many=\"randomizerHowMany\"\n        :randomizer-button=\"randomizerButton\">\n      </multiselect-randomizer>\n    </div>\n    <multiselect-list\n      :options=\"tree\"\n      :name=\"name\"\n      :id-property=\"idProperty\"\n      :value-property=\"valueProperty\"\n      :subset=\"subset\"\n      :subsetType=\"subsetType\"\n      :subsetName=\"subsetName\"\n      :selectedSubsetOptions=\"selectedSubsetOptions\">\n    </multiselect-list>\n  </div>\n</template>\n\n<script>\nimport MultiselectList from './MultiselectList.vue';\nimport MultiselectRandomizer from './MultiselectRandomizer.vue';\nimport Popover from './Popover.vue';\n\nexport default {\n  data () {\n    return {\n      tree: [],\n      randomizerActive: false,\n      query: ''\n    };\n  },\n  components: {\n    MultiselectList,\n    MultiselectRandomizer,\n    Popover\n  },\n  props: {\n    name: {\n      type: String,\n      default: 'multiselect[]'\n    },\n    filter: {\n      type: Boolean,\n      default: true\n    },\n    placeholder: {\n      type: String,\n      default: 'Filter list'\n    },\n    selectAllLabel: {\n      type: String,\n      default: 'Select all'\n    },\n    options: {\n      type: Array,\n      default: () => []\n    },\n    selectedOptions: {\n      type: Array,\n      default: () => []\n    },\n    idProperty: {\n      type: String,\n      default: 'id'\n    },\n    valueProperty: {\n      type: String,\n      default: 'name'\n    },\n    randomizer: {\n      type: Boolean,\n      default: false\n    },\n    randomizerShow: {\n      type: String,\n      default: 'Random selection'\n    },\n    randomizerHowMany: {\n      type: String,\n      default: 'How many?'\n    },\n    randomizerHelpicon: {\n      type: String\n    },\n    randomizerButton: {\n      type: String,\n      default: 'Go'\n    },\n    subset: {\n      type: Boolean,\n      default: false\n    },\n    subsetType: {\n      type: String,\n      default: 'radio',\n      validator: (value) => {\n        return value === 'radio' || value === 'checkbox';\n      }\n    },\n    subsetName: {\n      type: String,\n      default: 'subset'\n    },\n    subsetLabel: {\n      type: String,\n      default: 'Default'\n    },\n    selectedSubsetOptions: {\n      type: Array,\n      default: () => []\n    }\n  },\n  computed: {\n    flatTree () {\n      const options = [];\n\n      const flattenTree = option => {\n        if (this.hasChildren(option)) {\n          option.children.forEach(flattenTree);\n          return;\n        }\n\n        options.push(option);\n      };\n\n      this.tree.forEach(flattenTree);\n\n      return options;\n    },\n    allIds () {\n      return this.flatTree.map(o => o[this.idProperty]);\n    },\n    selectedIds () {\n      return this.flatTree.filter(o => o.selected).map(o => o[this.idProperty]);\n    }\n  },\n  watch: {\n    query () {\n      const mapOptions = option => {\n        if (this.hasChildren(option)) {\n          option.children.map(mapOptions);\n        }\n\n        option.visible = !this.hasChildren(option)\n          ? option[this.valueProperty].toLowerCase().indexOf(this.query.toLowerCase()) !== -1\n          : true;\n\n        return option;\n      };\n\n      // Adjust option visibility based on query\n      this.tree = this.tree.map(mapOptions);\n    },\n    options (options) {\n      this.buildTree(options);\n    },\n    selectedIds () {\n      this.$emit('selected', this.selectedIds);\n    }\n  },\n  methods: {\n    hasChildren (option) {\n      return option.children && option.children.length;\n    },\n    allSelected () {\n      return this.tree.length > 0 && this.allIds.length === this.selectedIds.length;\n    },\n    toggleAll () {\n      const allSelected = this.allSelected();\n\n      const mapOptions = option => {\n        option.selected = !allSelected;\n\n        if (this.hasChildren(option)) {\n          option.children.map(mapOptions);\n        }\n\n        return option;\n      };\n\n      this.tree = this.tree.map(mapOptions);\n    },\n    applyRandomSelection (ids) {\n      const mapOptions = option => {\n        option.selected = ids.includes(option[this.idProperty]);\n\n        if (this.hasChildren(option)) {\n          option.children.map(mapOptions);\n        }\n\n        return option;\n      };\n\n      this.tree = this.tree.map(mapOptions);\n    },\n    buildTree (options, selectedOptions = []) {\n      const mapOptions = option => {\n        option.selected = selectedOptions.includes(option[this.idProperty]) ||\n          selectedOptions.includes(String(option[this.idProperty]));\n\n        option.visible = true;\n\n        if (this.hasChildren(option)) {\n          option.children.map(mapOptions);\n        }\n\n        return option;\n      };\n\n      // Clone the array first\n      this.tree = JSON.parse(JSON.stringify(options)).map(mapOptions);\n    }\n  },\n  created () {\n    this.buildTree(this.options, this.selectedOptions);\n  }\n};\n</script>\n\n<style scoped>\n  .vue-multiselect {\n    position: relative;\n  }\n\n  .multiselect-filter {\n    margin-bottom: 4px;\n  }\n\n  .multiselect-toggles {\n    padding: 0 9px;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n\n  .multiselect-toggles .multiselect-selectall {\n    width: 45%;\n    float: left;\n  }\n\n  .multiselect-toggles .multiselect-subset {\n    width: 45%;\n    float: right;\n    text-align: right;\n    margin-top: 10px;\n    margin-bottom: 10px;\n  }\n\n  .multiselect-toggles .checkbox + .checkbox {\n    margin-top: 10px;\n    margin-bottom: 10px;\n  }\n\n  .multiselect-counter {\n    float: right;\n    margin: 0 0 5px 0;\n    height: 38px;\n    min-width: 40px;\n    display: inline-block;\n    padding: 5px 10px;\n    background: #666;\n    border-radius: 2px;\n    color: #fff;\n    font-size: 18px;\n    line-height: 26px;\n    text-align: center;\n  }\n</style>\n"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -12928,11 +12928,11 @@
 	
 	var _MultiselectList2 = _interopRequireDefault(_MultiselectList);
 	
-	var _Randomizer = __webpack_require__(91);
+	var _MultiselectRandomizer = __webpack_require__(101);
 	
-	var _Randomizer2 = _interopRequireDefault(_Randomizer);
+	var _MultiselectRandomizer2 = _interopRequireDefault(_MultiselectRandomizer);
 	
-	var _Popover = __webpack_require__(96);
+	var _Popover = __webpack_require__(106);
 	
 	var _Popover2 = _interopRequireDefault(_Popover);
 	
@@ -12949,7 +12949,7 @@
 	
 	  components: {
 	    MultiselectList: _MultiselectList2.default,
-	    Randomizer: _Randomizer2.default,
+	    MultiselectRandomizer: _MultiselectRandomizer2.default,
 	    Popover: _Popover2.default
 	  },
 	  props: {
@@ -12981,10 +12981,6 @@
 	        return [];
 	      }
 	    },
-	    randomizer: {
-	      type: Boolean,
-	      default: false
-	    },
 	    idProperty: {
 	      type: String,
 	      default: 'id'
@@ -12992,6 +12988,10 @@
 	    valueProperty: {
 	      type: String,
 	      default: 'name'
+	    },
+	    randomizer: {
+	      type: Boolean,
+	      default: false
 	    },
 	    randomizerShow: {
 	      type: String,
@@ -13007,6 +13007,31 @@
 	    randomizerButton: {
 	      type: String,
 	      default: 'Go'
+	    },
+	    subset: {
+	      type: Boolean,
+	      default: false
+	    },
+	    subsetType: {
+	      type: String,
+	      default: 'radio',
+	      validator: function validator(value) {
+	        return value === 'radio' || value === 'checkbox';
+	      }
+	    },
+	    subsetName: {
+	      type: String,
+	      default: 'subset'
+	    },
+	    subsetLabel: {
+	      type: String,
+	      default: 'Default'
+	    },
+	    selectedSubsetOptions: {
+	      type: Array,
+	      default: function _default() {
+	        return [];
+	      }
 	    }
 	  },
 	  computed: {
@@ -13167,6 +13192,13 @@
 	//
 	//
 	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 
 /***/ }),
 /* 79 */
@@ -13199,7 +13231,7 @@
 	__vue_exports__ = __webpack_require__(84)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(90)
+	var __vue_template__ = __webpack_require__(100)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -13211,10 +13243,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/kazik/Sites/awardforce.com/vue-bootstrap/src/Multiselect/MultiselectList.vue"
+	__vue_options__.__file = "/Users/kazik/Sites/awardforce.com/vue-bootstrap/src/MultiselectList.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-0d1d7688"
+	__vue_options__._scopeId = "data-v-e8e64a14"
 	
 	/* hot reload */
 	if (false) {(function () {
@@ -13223,9 +13255,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-0d1d7688", __vue_options__)
+	    hotAPI.createRecord("data-v-e8e64a14", __vue_options__)
 	  } else {
-	    hotAPI.reload("data-v-0d1d7688", __vue_options__)
+	    hotAPI.reload("data-v-e8e64a14", __vue_options__)
 	  }
 	})()}
 	if (__vue_options__.functional) {console.error("[vue-loader] MultiselectList.vue: functional components are not supported and should be defined in plain js files using render functions.")}
@@ -13249,8 +13281,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-0d1d7688&scoped=true!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MultiselectList.vue", function() {
-				var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-0d1d7688&scoped=true!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MultiselectList.vue");
+			module.hot.accept("!!../node_modules/css-loader/index.js?sourceMap!../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-e8e64a14&scoped=true!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MultiselectList.vue", function() {
+				var newContent = require("!!../node_modules/css-loader/index.js?sourceMap!../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-e8e64a14&scoped=true!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MultiselectList.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -13268,7 +13300,7 @@
 	
 	
 	// module
-	exports.push([module.id, "\n.multiselect-options[data-v-0d1d7688] {\n  border: 1px solid #ddd;\n  border-radius: 2px;\n  clear: both;\n  height: 202px;\n  overflow-x: hidden;\n  overflow-y: auto;\n  background-color: white;\n}\n", "", {"version":3,"sources":["/./src/Multiselect/MultiselectList.vue?f8411d2e"],"names":[],"mappings":";AAkDA;EACA,uBAAA;EACA,mBAAA;EACA,YAAA;EACA,cAAA;EACA,mBAAA;EACA,iBAAA;EACA,wBAAA;CACA","file":"MultiselectList.vue","sourcesContent":["<template>\n  <div :class=\"className()\">\n    <multiselect-option\n      v-for=\"option in options\"\n      :option=\"option\"\n      :key=\"option[idProperty]\"\n      :level=\"level\"\n      :name=\"name\"\n      :id-property=\"idProperty\"\n      :value-property=\"valueProperty\">\n    </multiselect-option>\n  </div>\n</template>\n\n<script>\nimport MultiselectOption from './MultiselectOption.vue';\n\nexport default {\n  components: {\n    MultiselectOption\n  },\n  props: {\n    options: {\n      type: Array,\n      default: () => []\n    },\n    level: {\n      type: Number,\n      default: 0\n    },\n    name: String,\n    idProperty: String,\n    valueProperty: String\n  },\n  computed: {\n    topLevel () {\n      return this.level === 0;\n    }\n  },\n  methods: {\n    className () {\n      return this.topLevel\n        ? 'multiselect-options'\n        : 'multiselect-options-level-' + this.level;\n    }\n  }\n};\n</script>\n\n<style scoped>\n  .multiselect-options {\n    border: 1px solid #ddd;\n    border-radius: 2px;\n    clear: both;\n    height: 202px;\n    overflow-x: hidden;\n    overflow-y: auto;\n    background-color: white;\n  }\n</style>\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\n.multiselect-options[data-v-e8e64a14] {\n  border: 1px solid #ddd;\n  border-radius: 2px;\n  clear: both;\n  height: 202px;\n  overflow-x: hidden;\n  overflow-y: auto;\n  background-color: white;\n}\n", "", {"version":3,"sources":["/./src/MultiselectList.vue?11a6d302"],"names":[],"mappings":";AAoDA;EACA,uBAAA;EACA,mBAAA;EACA,YAAA;EACA,cAAA;EACA,mBAAA;EACA,iBAAA;EACA,wBAAA;CACA","file":"MultiselectList.vue","sourcesContent":["<template>\n  <div :class=\"className()\">\n    <multiselect-option\n      v-for=\"option in options\"\n      :option=\"option\"\n      :key=\"option[idProperty]\"\n      :level=\"level\"\n      :name=\"name\"\n      :id-property=\"idProperty\"\n      :value-property=\"valueProperty\"\n      v-bind=\"$attrs\">\n    </multiselect-option>\n  </div>\n</template>\n\n<script>\nimport MultiselectOption from './MultiselectOption.vue';\n\nexport default {\n  inheritAttrs: false,\n  components: {\n    MultiselectOption\n  },\n  props: {\n    options: {\n      type: Array,\n      default: () => []\n    },\n    level: {\n      type: Number,\n      default: 0\n    },\n    name: String,\n    idProperty: String,\n    valueProperty: String\n  },\n  computed: {\n    topLevel () {\n      return this.level === 0;\n    }\n  },\n  methods: {\n    className () {\n      return this.topLevel\n        ? 'multiselect-options'\n        : 'multiselect-options-level-' + this.level;\n    }\n  }\n};\n</script>\n\n<style scoped>\n  .multiselect-options {\n    border: 1px solid #ddd;\n    border-radius: 2px;\n    clear: both;\n    height: 202px;\n    overflow-x: hidden;\n    overflow-y: auto;\n    background-color: white;\n  }\n</style>\n"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -13290,6 +13322,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = {
+	  inheritAttrs: false,
 	  components: {
 	    MultiselectOption: _MultiselectOption2.default
 	  },
@@ -13332,6 +13365,7 @@
 	//
 	//
 	//
+	//
 
 /***/ }),
 /* 85 */
@@ -13347,7 +13381,7 @@
 	__vue_exports__ = __webpack_require__(88)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(89)
+	var __vue_template__ = __webpack_require__(99)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -13359,10 +13393,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/kazik/Sites/awardforce.com/vue-bootstrap/src/Multiselect/MultiselectOption.vue"
+	__vue_options__.__file = "/Users/kazik/Sites/awardforce.com/vue-bootstrap/src/MultiselectOption.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-457560da"
+	__vue_options__._scopeId = "data-v-56d43f4d"
 	
 	/* hot reload */
 	if (false) {(function () {
@@ -13371,9 +13405,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-457560da", __vue_options__)
+	    hotAPI.createRecord("data-v-56d43f4d", __vue_options__)
 	  } else {
-	    hotAPI.reload("data-v-457560da", __vue_options__)
+	    hotAPI.reload("data-v-56d43f4d", __vue_options__)
 	  }
 	})()}
 	if (__vue_options__.functional) {console.error("[vue-loader] MultiselectOption.vue: functional components are not supported and should be defined in plain js files using render functions.")}
@@ -13397,8 +13431,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-457560da&scoped=true!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MultiselectOption.vue", function() {
-				var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-457560da&scoped=true!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MultiselectOption.vue");
+			module.hot.accept("!!../node_modules/css-loader/index.js?sourceMap!../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-56d43f4d&scoped=true!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MultiselectOption.vue", function() {
+				var newContent = require("!!../node_modules/css-loader/index.js?sourceMap!../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-56d43f4d&scoped=true!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MultiselectOption.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -13416,7 +13450,7 @@
 	
 	
 	// module
-	exports.push([module.id, "\n.multiselect-option[data-v-457560da] {\n  border-bottom: 1px solid #ddd;\n  padding: 8px;\n  margin: 0;\n}\n.multiselect-option.header[data-v-457560da] {\n  font-weight: bold;\n}\n.multiselect-option .multiselect-subset-control[data-v-457560da] {\n  float: right;\n}\n.multiselect-option label[data-v-457560da] {\n  display: block;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n", "", {"version":3,"sources":["/./src/Multiselect/MultiselectOption.vue?659b81cc"],"names":[],"mappings":";AAgFA;EACA,8BAAA;EACA,aAAA;EACA,UAAA;CACA;AAEA;EACA,kBAAA;CACA;AAEA;EACA,aAAA;CACA;AAEA;EACA,eAAA;EACA,oBAAA;EACA,iBAAA;EACA,wBAAA;CACA","file":"MultiselectOption.vue","sourcesContent":["<template>\n  <div>\n    <template v-if=\"isParent\">\n      <div class=\"checkbox multiselect-option\">\n        <label :style=\"indentStyle()\">\n          <input type=\"checkbox\" v-model=\"option.selected\" @change=\"toggleParent\">\n          <strong>{{ option[valueProperty] }}</strong>\n        </label>\n      </div>\n      <multiselect-list\n        :level=\"level + 1\"\n        :options=\"option.children\"\n        :name=\"name\"\n        :id-property=\"idProperty\"\n        :value-property=\"valueProperty\">\n      </multiselect-list>\n    </template>\n    <template v-else>\n      <div v-show=\"option.visible\" class=\"checkbox multiselect-option\">\n        <label :style=\"indentStyle()\">\n          <input type=\"checkbox\" :name=\"name\" v-model=\"option.selected\" :value=\"option[idProperty]\">\n          {{ option[valueProperty] }}\n        </label>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script>\nexport default {\n  props: {\n    option: {\n      type: Object,\n      required: true\n    },\n    level: {\n      type: Number,\n      required: true\n    },\n    name: String,\n    idProperty: String,\n    valueProperty: String\n  },\n  computed: {\n    isParent () {\n      return this.hasChildren(this.option);\n    }\n  },\n  methods: {\n    hasChildren (option) {\n      return option.children && option.children.length;\n    },\n    indentStyle () {\n      return {\n        marginLeft: 20 * this.level + 'px'\n      };\n    },\n    toggleParent () {\n      const state = this.option.selected;\n\n      const adjustTreeState = option => {\n        if (this.hasChildren(option)) {\n          option.children.map(adjustTreeState);\n        }\n\n        option.selected = state;\n      };\n\n      this.option.children.map(adjustTreeState);\n    }\n  },\n  beforeCreate () {\n    // Load the component in the beforeCreate hook to prevent a circular reference problem\n    // https://vuejs.org/v2/guide/components.html#Circular-References-Between-Components\n    this.$options.components.MultiselectList = require('./MultiselectList.vue');\n  }\n};\n</script>\n\n<style scoped>\n  .multiselect-option {\n    border-bottom: 1px solid #ddd;\n    padding: 8px;\n    margin: 0;\n  }\n\n  .multiselect-option.header {\n    font-weight: bold;\n  }\n\n  .multiselect-option .multiselect-subset-control {\n    float: right;\n  }\n\n  .multiselect-option label {\n    display: block;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n</style>\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\n.multiselect-option[data-v-56d43f4d] {\n  border-bottom: 1px solid #ddd;\n  padding: 8px;\n  margin: 0;\n}\n.multiselect-option.header[data-v-56d43f4d] {\n  font-weight: bold;\n}\n.multiselect-option label[data-v-56d43f4d] {\n  display: block;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n", "", {"version":3,"sources":["/./src/MultiselectOption.vue?c9bc1ae4"],"names":[],"mappings":";AA8GA;EACA,8BAAA;EACA,aAAA;EACA,UAAA;CACA;AAEA;EACA,kBAAA;CACA;AAEA;EACA,eAAA;EACA,oBAAA;EACA,iBAAA;EACA,wBAAA;CACA","file":"MultiselectOption.vue","sourcesContent":["<template>\n  <div>\n    <template v-if=\"isParent\">\n      <div class=\"checkbox radio multiselect-option\">\n        <label :style=\"indentStyle()\">\n          <input type=\"checkbox\" v-model=\"option.selected\" @change=\"toggleParent\">\n          <strong>{{ option[valueProperty] }}</strong>\n        </label>\n      </div>\n      <multiselect-list\n        :level=\"level + 1\"\n        :options=\"option.children\"\n        :name=\"name\"\n        :id-property=\"idProperty\"\n        :value-property=\"valueProperty\"\n        :subset=\"subset\"\n        :subsetType=\"subsetType\"\n        :subsetName=\"$attrs.subsetName\"\n        :selectedSubsetOptions=\"$attrs.selectedSubsetOptions\">\n      </multiselect-list>\n    </template>\n    <template v-else>\n      <div v-show=\"option.visible\" class=\"checkbox radio multiselect-option\">\n        <template v-if=\"subset && option.selected\">\n          <multiselect-subset-radio-control\n            v-if=\"subsetType === 'radio'\"\n            :option=\"option\"\n            :id-property=\"idProperty\"\n            :subsetName=\"$attrs.subsetName\"\n            :selectedSubsetOptions=\"$attrs.selectedSubsetOptions\">\n          </multiselect-subset-radio-control>\n          <multiselect-subset-checkbox-control\n            v-else\n            :option=\"option\"\n            :id-property=\"idProperty\"\n            :subsetName=\"$attrs.subsetName\"\n            :selectedSubsetOptions=\"$attrs.selectedSubsetOptions\">\n          </multiselect-subset-checkbox-control>\n        </template>\n        <label :style=\"indentStyle()\">\n          <input type=\"checkbox\" :name=\"name\" v-model=\"option.selected\" :value=\"option[idProperty]\">\n          {{ option[valueProperty] }}\n        </label>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script>\nimport MultiselectSubsetCheckboxControl from './MultiselectSubsetCheckboxControl.vue';\nimport MultiselectSubsetRadioControl from './MultiselectSubsetRadioControl.vue';\n\nexport default {\n  inheritAttrs: false,\n  components: {\n    MultiselectSubsetCheckboxControl,\n    MultiselectSubsetRadioControl\n  },\n  props: {\n    option: {\n      type: Object,\n      required: true\n    },\n    level: {\n      type: Number,\n      required: true\n    },\n    name: String,\n    idProperty: String,\n    valueProperty: String,\n    subset: Boolean,\n    subsetType: String\n  },\n  computed: {\n    isParent () {\n      return this.hasChildren(this.option);\n    }\n  },\n  methods: {\n    hasChildren (option) {\n      return option.children && option.children.length;\n    },\n    indentStyle () {\n      return {\n        marginLeft: 20 * this.level + 'px'\n      };\n    },\n    toggleParent () {\n      const state = this.option.selected;\n\n      const adjustTreeState = option => {\n        if (this.hasChildren(option)) {\n          option.children.map(adjustTreeState);\n        }\n\n        option.selected = state;\n      };\n\n      this.option.children.map(adjustTreeState);\n    }\n  },\n  beforeCreate () {\n    // Load the component in the beforeCreate hook to prevent a circular reference problem\n    // https://vuejs.org/v2/guide/components.html#Circular-References-Between-Components\n    this.$options.components.MultiselectList = require('./MultiselectList.vue');\n  }\n};\n</script>\n\n<style scoped>\n  .multiselect-option {\n    border-bottom: 1px solid #ddd;\n    padding: 8px;\n    margin: 0;\n  }\n\n  .multiselect-option.header {\n    font-weight: bold;\n  }\n\n  .multiselect-option label {\n    display: block;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n</style>\n"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -13430,6 +13464,37 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	
+	var _MultiselectSubsetCheckboxControl = __webpack_require__(89);
+	
+	var _MultiselectSubsetCheckboxControl2 = _interopRequireDefault(_MultiselectSubsetCheckboxControl);
+	
+	var _MultiselectSubsetRadioControl = __webpack_require__(94);
+	
+	var _MultiselectSubsetRadioControl2 = _interopRequireDefault(_MultiselectSubsetRadioControl);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 	//
 	//
 	//
@@ -13460,6 +13525,11 @@
 	//
 	
 	exports.default = {
+	  inheritAttrs: false,
+	  components: {
+	    MultiselectSubsetCheckboxControl: _MultiselectSubsetCheckboxControl2.default,
+	    MultiselectSubsetRadioControl: _MultiselectSubsetRadioControl2.default
+	  },
 	  props: {
 	    option: {
 	      type: Object,
@@ -13471,7 +13541,9 @@
 	    },
 	    name: String,
 	    idProperty: String,
-	    valueProperty: String
+	    valueProperty: String,
+	    subset: Boolean,
+	    subsetType: String
 	  },
 	  computed: {
 	    isParent: function isParent() {
@@ -13514,9 +13586,350 @@
 /* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+	
+	/* styles */
+	__webpack_require__(90)
+	
+	/* script */
+	__vue_exports__ = __webpack_require__(92)
+	
+	/* template */
+	var __vue_template__ = __webpack_require__(93)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "/Users/kazik/Sites/awardforce.com/vue-bootstrap/src/MultiselectSubsetCheckboxControl.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+	__vue_options__._scopeId = "data-v-94ef5d20"
+	
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-94ef5d20", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-94ef5d20", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] MultiselectSubsetCheckboxControl.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+	
+	module.exports = __vue_exports__
+
+
+/***/ }),
+/* 90 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(91);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(6)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../node_modules/css-loader/index.js?sourceMap!../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-94ef5d20&scoped=true!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MultiselectSubsetCheckboxControl.vue", function() {
+				var newContent = require("!!../node_modules/css-loader/index.js?sourceMap!../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-94ef5d20&scoped=true!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MultiselectSubsetCheckboxControl.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+/* 91 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(5)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "\n.multiselect-subset-control[data-v-94ef5d20] {\n  float: right;\n}\n", "", {"version":3,"sources":["/./src/MultiselectSubsetCheckboxControl.vue?71a77973"],"names":[],"mappings":";AAgCA;EACA,aAAA;CACA","file":"MultiselectSubsetCheckboxControl.vue","sourcesContent":["<template>\n  <div class=\"multiselect-subset-control\">\n    <input type=\"checkbox\" :name=\"subsetName + '[]'\" v-model=\"checked\" :value=\"option[idProperty]\">\n  </div>\n</template>\n\n<script>\nexport default {\n  data () {\n    return {\n      checked: false\n    };\n  },\n  props: {\n    option: {\n      type: Object,\n      required: true\n    },\n    selectedSubsetOptions: {\n      type: Array,\n      required: true\n    },\n    idProperty: String,\n    subsetName: String\n  },\n  created () {\n    this.checked = this.selectedSubsetOptions.includes(this.option[this.idProperty]);\n  }\n};\n</script>\n\n<style scoped>\n  .multiselect-subset-control {\n    float: right;\n  }\n</style>\n"],"sourceRoot":"webpack://"}]);
+	
+	// exports
+
+
+/***/ }),
+/* 92 */
+/***/ (function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	//
+	//
+	//
+	//
+	//
+	//
+	
+	exports.default = {
+	  data: function data() {
+	    return {
+	      checked: false
+	    };
+	  },
+	
+	  props: {
+	    option: {
+	      type: Object,
+	      required: true
+	    },
+	    selectedSubsetOptions: {
+	      type: Array,
+	      required: true
+	    },
+	    idProperty: String,
+	    subsetName: String
+	  },
+	  created: function created() {
+	    this.checked = this.selectedSubsetOptions.includes(this.option[this.idProperty]);
+	  }
+	};
+
+/***/ }),
+/* 93 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {
+	    staticClass: "multiselect-subset-control"
+	  }, [_c('input', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.checked),
+	      expression: "checked"
+	    }],
+	    attrs: {
+	      "type": "checkbox",
+	      "name": _vm.subsetName + '[]'
+	    },
+	    domProps: {
+	      "value": _vm.option[_vm.idProperty],
+	      "checked": Array.isArray(_vm.checked) ? _vm._i(_vm.checked, _vm.option[_vm.idProperty]) > -1 : (_vm.checked)
+	    },
+	    on: {
+	      "__c": function($event) {
+	        var $$a = _vm.checked,
+	          $$el = $event.target,
+	          $$c = $$el.checked ? (true) : (false);
+	        if (Array.isArray($$a)) {
+	          var $$v = _vm.option[_vm.idProperty],
+	            $$i = _vm._i($$a, $$v);
+	          if ($$el.checked) {
+	            $$i < 0 && (_vm.checked = $$a.concat([$$v]))
+	          } else {
+	            $$i > -1 && (_vm.checked = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+	          }
+	        } else {
+	          _vm.checked = $$c
+	        }
+	      }
+	    }
+	  })])
+	},staticRenderFns: []}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-94ef5d20", module.exports)
+	  }
+	}
+
+/***/ }),
+/* 94 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+	
+	/* styles */
+	__webpack_require__(95)
+	
+	/* script */
+	__vue_exports__ = __webpack_require__(97)
+	
+	/* template */
+	var __vue_template__ = __webpack_require__(98)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "/Users/kazik/Sites/awardforce.com/vue-bootstrap/src/MultiselectSubsetRadioControl.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+	__vue_options__._scopeId = "data-v-6a71377c"
+	
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-6a71377c", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-6a71377c", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] MultiselectSubsetRadioControl.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+	
+	module.exports = __vue_exports__
+
+
+/***/ }),
+/* 95 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(96);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(6)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../node_modules/css-loader/index.js?sourceMap!../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-6a71377c&scoped=true!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MultiselectSubsetRadioControl.vue", function() {
+				var newContent = require("!!../node_modules/css-loader/index.js?sourceMap!../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-6a71377c&scoped=true!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MultiselectSubsetRadioControl.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+/* 96 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(5)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "\n.multiselect-subset-control[data-v-6a71377c] {\n  float: right;\n}\n", "", {"version":3,"sources":["/./src/MultiselectSubsetRadioControl.vue?270110a1"],"names":[],"mappings":";AAgCA;EACA,aAAA;CACA","file":"MultiselectSubsetRadioControl.vue","sourcesContent":["<template>\n  <div class=\"multiselect-subset-control\">\n    <input type=\"radio\" :name=\"subsetName\" v-model=\"selectedOption\" :value=\"option[idProperty]\">\n  </div>\n</template>\n\n<script>\nexport default {\n  data () {\n    return {\n      selectedOption: ''\n    };\n  },\n  props: {\n    option: {\n      type: Object,\n      required: true\n    },\n    selectedSubsetOptions: {\n      type: Array,\n      required: true\n    },\n    idProperty: String,\n    subsetName: String\n  },\n  created () {\n    this.selectedOption = this.selectedSubsetOptions.length > 0 ? this.selectedSubsetOptions[0] : '';\n  }\n};\n</script>\n\n<style scoped>\n  .multiselect-subset-control {\n    float: right;\n  }\n</style>\n"],"sourceRoot":"webpack://"}]);
+	
+	// exports
+
+
+/***/ }),
+/* 97 */
+/***/ (function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	//
+	//
+	//
+	//
+	//
+	//
+	
+	exports.default = {
+	  data: function data() {
+	    return {
+	      selectedOption: ''
+	    };
+	  },
+	
+	  props: {
+	    option: {
+	      type: Object,
+	      required: true
+	    },
+	    selectedSubsetOptions: {
+	      type: Array,
+	      required: true
+	    },
+	    idProperty: String,
+	    subsetName: String
+	  },
+	  created: function created() {
+	    this.selectedOption = this.selectedSubsetOptions.length > 0 ? this.selectedSubsetOptions[0] : '';
+	  }
+	};
+
+/***/ }),
+/* 98 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {
+	    staticClass: "multiselect-subset-control"
+	  }, [_c('input', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.selectedOption),
+	      expression: "selectedOption"
+	    }],
+	    attrs: {
+	      "type": "radio",
+	      "name": _vm.subsetName
+	    },
+	    domProps: {
+	      "value": _vm.option[_vm.idProperty],
+	      "checked": _vm._q(_vm.selectedOption, _vm.option[_vm.idProperty])
+	    },
+	    on: {
+	      "__c": function($event) {
+	        _vm.selectedOption = _vm.option[_vm.idProperty]
+	      }
+	    }
+	  })])
+	},staticRenderFns: []}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-6a71377c", module.exports)
+	  }
+	}
+
+/***/ }),
+/* 99 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('div', [(_vm.isParent) ? [_c('div', {
-	    staticClass: "checkbox multiselect-option"
+	    staticClass: "checkbox radio multiselect-option"
 	  }, [_c('label', {
 	    style: (_vm.indentStyle())
 	  }, [_c('input', {
@@ -13557,7 +13970,11 @@
 	      "options": _vm.option.children,
 	      "name": _vm.name,
 	      "id-property": _vm.idProperty,
-	      "value-property": _vm.valueProperty
+	      "value-property": _vm.valueProperty,
+	      "subset": _vm.subset,
+	      "subsetType": _vm.subsetType,
+	      "subsetName": _vm.$attrs.subsetName,
+	      "selectedSubsetOptions": _vm.$attrs.selectedSubsetOptions
 	    }
 	  })] : [_c('div', {
 	    directives: [{
@@ -13566,8 +13983,22 @@
 	      value: (_vm.option.visible),
 	      expression: "option.visible"
 	    }],
-	    staticClass: "checkbox multiselect-option"
-	  }, [_c('label', {
+	    staticClass: "checkbox radio multiselect-option"
+	  }, [(_vm.subset && _vm.option.selected) ? [(_vm.subsetType === 'radio') ? _c('multiselect-subset-radio-control', {
+	    attrs: {
+	      "option": _vm.option,
+	      "id-property": _vm.idProperty,
+	      "subsetName": _vm.$attrs.subsetName,
+	      "selectedSubsetOptions": _vm.$attrs.selectedSubsetOptions
+	    }
+	  }) : _c('multiselect-subset-checkbox-control', {
+	    attrs: {
+	      "option": _vm.option,
+	      "id-property": _vm.idProperty,
+	      "subsetName": _vm.$attrs.subsetName,
+	      "selectedSubsetOptions": _vm.$attrs.selectedSubsetOptions
+	    }
+	  })] : _vm._e(), _vm._v(" "), _c('label', {
 	    style: (_vm.indentStyle())
 	  }, [_c('input', {
 	    directives: [{
@@ -13602,24 +14033,24 @@
 	        }
 	      }
 	    }
-	  }), _vm._v("\n        " + _vm._s(_vm.option[_vm.valueProperty]) + "\n      ")])])]], 2)
+	  }), _vm._v("\n        " + _vm._s(_vm.option[_vm.valueProperty]) + "\n      ")])], 2)]], 2)
 	},staticRenderFns: []}
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-457560da", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-56d43f4d", module.exports)
 	  }
 	}
 
 /***/ }),
-/* 90 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('div', {
 	    class: _vm.className()
 	  }, _vm._l((_vm.options), function(option) {
-	    return _c('multiselect-option', {
+	    return _c('multiselect-option', _vm._b({
 	      key: option[_vm.idProperty],
 	      attrs: {
 	        "option": option,
@@ -13628,31 +14059,31 @@
 	        "id-property": _vm.idProperty,
 	        "value-property": _vm.valueProperty
 	      }
-	    })
+	    }, 'multiselect-option', _vm.$attrs, false))
 	  }))
 	},staticRenderFns: []}
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-0d1d7688", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-e8e64a14", module.exports)
 	  }
 	}
 
 /***/ }),
-/* 91 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
 	/* styles */
-	__webpack_require__(92)
+	__webpack_require__(102)
 	
 	/* script */
-	__vue_exports__ = __webpack_require__(94)
+	__vue_exports__ = __webpack_require__(104)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(95)
+	var __vue_template__ = __webpack_require__(105)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -13664,10 +14095,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/kazik/Sites/awardforce.com/vue-bootstrap/src/Multiselect/Randomizer.vue"
+	__vue_options__.__file = "/Users/kazik/Sites/awardforce.com/vue-bootstrap/src/MultiselectRandomizer.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-656e3e68"
+	__vue_options__._scopeId = "data-v-1842c48e"
 	
 	/* hot reload */
 	if (false) {(function () {
@@ -13676,24 +14107,24 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-656e3e68", __vue_options__)
+	    hotAPI.createRecord("data-v-1842c48e", __vue_options__)
 	  } else {
-	    hotAPI.reload("data-v-656e3e68", __vue_options__)
+	    hotAPI.reload("data-v-1842c48e", __vue_options__)
 	  }
 	})()}
-	if (__vue_options__.functional) {console.error("[vue-loader] Randomizer.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+	if (__vue_options__.functional) {console.error("[vue-loader] MultiselectRandomizer.vue: functional components are not supported and should be defined in plain js files using render functions.")}
 	
 	module.exports = __vue_exports__
 
 
 /***/ }),
-/* 92 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(93);
+	var content = __webpack_require__(103);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(6)(content, {});
@@ -13702,8 +14133,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-656e3e68&scoped=true!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Randomizer.vue", function() {
-				var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-656e3e68&scoped=true!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Randomizer.vue");
+			module.hot.accept("!!../node_modules/css-loader/index.js?sourceMap!../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-1842c48e&scoped=true!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MultiselectRandomizer.vue", function() {
+				var newContent = require("!!../node_modules/css-loader/index.js?sourceMap!../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-1842c48e&scoped=true!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MultiselectRandomizer.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -13713,7 +14144,7 @@
 	}
 
 /***/ }),
-/* 93 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(5)();
@@ -13721,13 +14152,13 @@
 	
 	
 	// module
-	exports.push([module.id, "\n.randomizer-selector[data-v-656e3e68] {\n  clear: both;\n  margin-bottom: 5px;\n}\n.randomizer-selector input[type=\"text\"][data-v-656e3e68] {\n  height: 32px;\n}\n.randomizer-selector .form-control[data-v-656e3e68] {\n  display: inline;\n  width: 50px;\n}\n", "", {"version":3,"sources":["/./src/Multiselect/Randomizer.vue?6023dda6"],"names":[],"mappings":";AA8CA;EACA,YAAA;EACA,mBAAA;CACA;AAEA;EACA,aAAA;CACA;AAEA;EACA,gBAAA;EACA,YAAA;CACA","file":"Randomizer.vue","sourcesContent":["<template>\n  <div class=\"randomizer-selector\">\n    <span>{{ randomizerHowMany }}</span>\n    <input type=\"text\" size=\"3\" class=\"input-sm form-control\" v-model=\"howMany\">\n    <a class=\"btn btn-default\" @click.prevent=\"randomize\">{{ randomizerButton }}</a>\n  </div>\n</template>\n\n<script>\nimport { shuffle } from '../lib/array.js';\n\nexport default {\n  data () {\n    return {\n      howMany: 0,\n      randomIds: []\n    };\n  },\n  props: {\n    ids: {\n      type: Array,\n      required: true\n    },\n    randomizerHowMany: {\n      type: String,\n      default: 'How many?'\n    },\n    randomizerButton: {\n      type: String,\n      default: 'Go'\n    }\n  },\n  watch: {\n    randomIds () {\n      this.$emit('randomized', this.randomIds);\n    }\n  },\n  methods: {\n    randomize () {\n      this.randomIds = shuffle(this.ids).slice(0, this.howMany);\n    }\n  }\n};\n</script>\n\n<style scoped>\n  .randomizer-selector {\n    clear: both;\n    margin-bottom: 5px;\n  }\n\n  .randomizer-selector input[type=\"text\"] {\n    height: 32px;\n  }\n\n  .randomizer-selector .form-control {\n    display: inline;\n    width: 50px;\n  }\n</style>\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\n.randomizer-selector[data-v-1842c48e] {\n  clear: both;\n  margin-bottom: 5px;\n}\n.randomizer-selector input[type=\"text\"][data-v-1842c48e] {\n  height: 32px;\n}\n.randomizer-selector .form-control[data-v-1842c48e] {\n  display: inline;\n  width: 50px;\n}\n", "", {"version":3,"sources":["/./src/MultiselectRandomizer.vue?b3987c48"],"names":[],"mappings":";AA8CA;EACA,YAAA;EACA,mBAAA;CACA;AAEA;EACA,aAAA;CACA;AAEA;EACA,gBAAA;EACA,YAAA;CACA","file":"MultiselectRandomizer.vue","sourcesContent":["<template>\n  <div class=\"randomizer-selector\">\n    <span>{{ randomizerHowMany }}</span>\n    <input type=\"text\" size=\"3\" class=\"input-sm form-control\" v-model=\"howMany\">\n    <a class=\"btn btn-default\" @click.prevent=\"randomize\">{{ randomizerButton }}</a>\n  </div>\n</template>\n\n<script>\nimport { shuffle } from './lib/array.js';\n\nexport default {\n  data () {\n    return {\n      howMany: 0,\n      randomIds: []\n    };\n  },\n  props: {\n    ids: {\n      type: Array,\n      required: true\n    },\n    randomizerHowMany: {\n      type: String,\n      default: 'How many?'\n    },\n    randomizerButton: {\n      type: String,\n      default: 'Go'\n    }\n  },\n  watch: {\n    randomIds () {\n      this.$emit('randomized', this.randomIds);\n    }\n  },\n  methods: {\n    randomize () {\n      this.randomIds = shuffle(this.ids).slice(0, this.howMany);\n    }\n  }\n};\n</script>\n\n<style scoped>\n  .randomizer-selector {\n    clear: both;\n    margin-bottom: 5px;\n  }\n\n  .randomizer-selector input[type=\"text\"] {\n    height: 32px;\n  }\n\n  .randomizer-selector .form-control {\n    display: inline;\n    width: 50px;\n  }\n</style>\n"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
 
 /***/ }),
-/* 94 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13780,7 +14211,7 @@
 	//
 
 /***/ }),
-/* 95 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -13820,25 +14251,25 @@
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-656e3e68", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-1842c48e", module.exports)
 	  }
 	}
 
 /***/ }),
-/* 96 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
 	/* styles */
-	__webpack_require__(97)
+	__webpack_require__(107)
 	
 	/* script */
-	__vue_exports__ = __webpack_require__(99)
+	__vue_exports__ = __webpack_require__(109)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(100)
+	var __vue_template__ = __webpack_require__(110)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -13873,13 +14304,13 @@
 
 
 /***/ }),
-/* 97 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(98);
+	var content = __webpack_require__(108);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(6)(content, {});
@@ -13899,7 +14330,7 @@
 	}
 
 /***/ }),
-/* 98 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(5)();
@@ -13913,7 +14344,7 @@
 
 
 /***/ }),
-/* 99 */
+/* 109 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -14098,7 +14529,7 @@
 	};
 
 /***/ }),
-/* 100 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -14145,7 +14576,7 @@
 	}
 
 /***/ }),
-/* 101 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -14178,7 +14609,9 @@
 	    staticClass: "multiselect-counter"
 	  }, [_vm._v(_vm._s(_vm.selectedIds.length))]), _vm._v(" "), _c('div', {
 	    staticClass: "multiselect-toggles"
-	  }, [_c('div', {
+	  }, [(_vm.subset) ? _c('div', {
+	    staticClass: "multiselect-subset"
+	  }, [_vm._v("\n      " + _vm._s(_vm.subsetLabel) + "\n    ")]) : _vm._e(), _vm._v(" "), _c('div', {
 	    staticClass: "checkbox multiselect-selectall"
 	  }, [_c('label', [_c('input', {
 	    attrs: {
@@ -14208,7 +14641,7 @@
 	    }
 	  }, [_c('span', {
 	    staticClass: "af-icons af-icons-help"
-	  })])], 1) : _vm._e()]), _vm._v(" "), (_vm.randomizerActive) ? _c('randomizer', {
+	  })])], 1) : _vm._e()]), _vm._v(" "), (_vm.randomizerActive) ? _c('multiselect-randomizer', {
 	    attrs: {
 	      "ids": _vm.allIds,
 	      "randomizer-how-many": _vm.randomizerHowMany,
@@ -14222,32 +14655,36 @@
 	      "options": _vm.tree,
 	      "name": _vm.name,
 	      "id-property": _vm.idProperty,
-	      "value-property": _vm.valueProperty
+	      "value-property": _vm.valueProperty,
+	      "subset": _vm.subset,
+	      "subsetType": _vm.subsetType,
+	      "subsetName": _vm.subsetName,
+	      "selectedSubsetOptions": _vm.selectedSubsetOptions
 	    }
 	  })], 1)
 	},staticRenderFns: []}
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-1cd85c04", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-83d0d590", module.exports)
 	  }
 	}
 
 /***/ }),
-/* 102 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
 	/* styles */
-	__webpack_require__(103)
+	__webpack_require__(113)
 	
 	/* script */
-	__vue_exports__ = __webpack_require__(105)
+	__vue_exports__ = __webpack_require__(115)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(107)
+	var __vue_template__ = __webpack_require__(117)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -14282,13 +14719,13 @@
 
 
 /***/ }),
-/* 103 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(104);
+	var content = __webpack_require__(114);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(6)(content, {});
@@ -14308,7 +14745,7 @@
 	}
 
 /***/ }),
-/* 104 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(5)();
@@ -14322,7 +14759,7 @@
 
 
 /***/ }),
-/* 105 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14331,7 +14768,7 @@
 	  value: true
 	});
 	
-	var _debounce = __webpack_require__(106);
+	var _debounce = __webpack_require__(116);
 	
 	var _debounce2 = _interopRequireDefault(_debounce);
 	
@@ -14540,7 +14977,7 @@
 	//
 
 /***/ }),
-/* 106 */
+/* 116 */
 /***/ (function(module, exports) {
 
 	/**
@@ -14602,7 +15039,7 @@
 
 
 /***/ }),
-/* 107 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;

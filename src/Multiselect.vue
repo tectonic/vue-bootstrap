@@ -5,6 +5,9 @@
     </div>
     <div class="multiselect-counter">{{ selectedIds.length }}</div>
     <div class="multiselect-toggles">
+      <div class="multiselect-subset" v-if="subset">
+        {{ subsetLabel }}
+      </div>
       <div class="checkbox multiselect-selectall">
         <label>
           <input :checked="allSelected()" type="checkbox" @click="toggleAll"> {{ selectAllLabel }}
@@ -28,7 +31,11 @@
       :options="tree"
       :name="name"
       :id-property="idProperty"
-      :value-property="valueProperty">
+      :value-property="valueProperty"
+      :subset="subset"
+      :subsetType="subsetType"
+      :subsetName="subsetName"
+      :selectedSubsetOptions="selectedSubsetOptions">
     </multiselect-list>
   </div>
 </template>
@@ -102,6 +109,29 @@ export default {
     randomizerButton: {
       type: String,
       default: 'Go'
+    },
+    subset: {
+      type: Boolean,
+      default: false
+    },
+    subsetType: {
+      type: String,
+      default: 'radio',
+      validator: (value) => {
+        return value === 'radio' || value === 'checkbox';
+      }
+    },
+    subsetName: {
+      type: String,
+      default: 'subset'
+    },
+    subsetLabel: {
+      type: String,
+      default: 'Default'
+    },
+    selectedSubsetOptions: {
+      type: Array,
+      default: () => []
     }
   },
   computed: {

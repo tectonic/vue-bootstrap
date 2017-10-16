@@ -7,7 +7,8 @@
       :level="level"
       :name="name"
       :id-property="idProperty"
-      :value-property="valueProperty">
+      :value-property="valueProperty"
+      v-bind="$attrs">
     </multiselect-option>
   </div>
 </template>
@@ -16,6 +17,7 @@
 import MultiselectOption from './MultiselectOption.vue';
 
 export default {
+  inheritAttrs: false,
   components: {
     MultiselectOption
   },

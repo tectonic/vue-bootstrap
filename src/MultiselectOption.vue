@@ -15,9 +15,8 @@
         :value-property="valueProperty"
         :subset="subset"
         :subsetType="subsetType"
-        :subsetName="subsetName"
-        :subsetLabel="subsetLabel"
-        :selectedSubsetOptions="selectedSubsetOptions">
+        :subsetName="$attrs.subsetName"
+        :selectedSubsetOptions="$attrs.selectedSubsetOptions">
       </multiselect-list>
     </template>
     <template v-else>
@@ -27,15 +26,15 @@
             v-if="subsetType === 'radio'"
             :option="option"
             :id-property="idProperty"
-            :subsetName="subsetName"
-            :selectedSubsetOptions="selectedSubsetOptions">
+            :subsetName="$attrs.subsetName"
+            :selectedSubsetOptions="$attrs.selectedSubsetOptions">
           </multiselect-subset-radio-control>
           <multiselect-subset-checkbox-control
             v-else
             :option="option"
             :id-property="idProperty"
-            :subsetName="subsetName"
-            :selectedSubsetOptions="selectedSubsetOptions">
+            :subsetName="$attrs.subsetName"
+            :selectedSubsetOptions="$attrs.selectedSubsetOptions">
           </multiselect-subset-checkbox-control>
         </template>
         <label :style="indentStyle()">
@@ -52,6 +51,7 @@ import MultiselectSubsetCheckboxControl from './MultiselectSubsetCheckboxControl
 import MultiselectSubsetRadioControl from './MultiselectSubsetRadioControl.vue';
 
 export default {
+  inheritAttrs: false,
   components: {
     MultiselectSubsetCheckboxControl,
     MultiselectSubsetRadioControl
@@ -69,10 +69,7 @@ export default {
     idProperty: String,
     valueProperty: String,
     subset: Boolean,
-    subsetType: String,
-    subsetName: String,
-    subsetLabel: String,
-    selectedSubsetOptions: Array
+    subsetType: String
   },
   computed: {
     isParent () {

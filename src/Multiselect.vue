@@ -35,7 +35,6 @@
       :subset="subset"
       :subsetType="subsetType"
       :subsetName="subsetName"
-      :subsetLabel="subsetLabel"
       :selectedSubsetOptions="selectedSubsetOptions">
     </multiselect-list>
   </div>

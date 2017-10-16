@@ -8,11 +8,7 @@
       :name="name"
       :id-property="idProperty"
       :value-property="valueProperty"
-      :subset="subset"
-      :subsetType="subsetType"
-      :subsetName="subsetName"
-      :subsetLabel="subsetLabel"
-      :selectedSubsetOptions="selectedSubsetOptions">
+      v-bind="$attrs">
     </multiselect-option>
   </div>
 </template>
@@ -21,6 +17,7 @@
 import MultiselectOption from './MultiselectOption.vue';
 
 export default {
+  inheritAttrs: false,
   components: {
     MultiselectOption
   },
@@ -35,12 +32,7 @@ export default {
     },
     name: String,
     idProperty: String,
-    valueProperty: String,
-    subset: Boolean,
-    subsetType: String,
-    subsetName: String,
-    subsetLabel: String,
-    selectedSubsetOptions: Array
+    valueProperty: String
   },
   computed: {
     topLevel () {

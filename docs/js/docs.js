@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Datepicker from '../../src/Datepicker.vue';
 import Dropdown from '../../src/Dropdown.vue';
 import Modal from '../../src/Modal.vue';
-import Multiselect from '../../src/Multiselect/Multiselect.vue';
+import Multiselect from '../../src/Multiselect.vue';
 import Popover from '../../src/Popover.vue';
 import Typeahead from '../../src/Typeahead.vue';
 

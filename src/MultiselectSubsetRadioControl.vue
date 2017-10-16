@@ -28,3 +28,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+  .multiselect-subset-control {
+    float: right;
+  }
+</style>

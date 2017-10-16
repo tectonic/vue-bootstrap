@@ -118,10 +118,6 @@ export default {
     font-weight: bold;
   }
 
-  .multiselect-option .multiselect-subset-control {
-    float: right;
-  }
-
   .multiselect-option label {
     display: block;
     white-space: nowrap;

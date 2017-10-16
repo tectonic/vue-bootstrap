@@ -1,5 +1,7 @@
 import Vue from 'vue';
 
+Vue.config.productionTip = false;
+
 /**
  * Initialise and mount a component for testing purposes
  */

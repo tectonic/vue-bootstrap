@@ -76,10 +76,6 @@ export default {
       type: Array,
       default: () => []
     },
-    randomizer: {
-      type: Boolean,
-      default: false
-    },
     idProperty: {
       type: String,
       default: 'id'
@@ -87,6 +83,10 @@ export default {
     valueProperty: {
       type: String,
       default: 'name'
+    },
+    randomizer: {
+      type: Boolean,
+      default: false
     },
     randomizerShow: {
       type: String,

@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { shuffle } from '../lib/array.js';
+import { shuffle } from './lib/array.js';
 
 export default {
   data () {

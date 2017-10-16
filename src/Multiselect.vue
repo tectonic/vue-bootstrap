@@ -16,13 +16,13 @@
           </popover>
         </span>
       </div>
-      <randomizer
+      <multiselect-randomizer
         v-if="randomizerActive"
         :ids="allIds"
         @randomized="applyRandomSelection"
         :randomizer-how-many="randomizerHowMany"
         :randomizer-button="randomizerButton">
-      </randomizer>
+      </multiselect-randomizer>
     </div>
     <multiselect-list
       :options="tree"
@@ -35,8 +35,8 @@
 
 <script>
 import MultiselectList from './MultiselectList.vue';
-import Randomizer from './Randomizer.vue';
-import Popover from '../Popover.vue';
+import MultiselectRandomizer from './MultiselectRandomizer.vue';
+import Popover from './Popover.vue';
 
 export default {
   data () {
@@ -48,7 +48,7 @@ export default {
   },
   components: {
     MultiselectList,
-    Randomizer,
+    MultiselectRandomizer,
     Popover
   },
   props: {

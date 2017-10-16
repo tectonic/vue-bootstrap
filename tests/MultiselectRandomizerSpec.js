@@ -1,12 +1,12 @@
 import { expect } from 'chai';
-import { initVM } from '../utils.js';
-import Randomizer from '../../src/Multiselect/Randomizer.vue';
+import { initVM } from './utils.js';
+import MultiselectRandomizer from '../src/MultiselectRandomizer.vue';
 
-describe('Randomizer', () => {
+describe('MultiselectRandomizer', () => {
   it('randomizes ids', () => {
     const ids = [1, 2, 3, 4, 5];
 
-    const vm = initVM(Randomizer, {
+    const vm = initVM(MultiselectRandomizer, {
       ids: ids
     });
 

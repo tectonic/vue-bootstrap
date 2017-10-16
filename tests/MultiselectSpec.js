@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { expect } from 'chai';
-import { initVM } from '../utils.js';
-import Multiselect from '../../src/Multiselect/Multiselect.vue';
+import { initVM } from './utils.js';
+import Multiselect from '../src/Multiselect.vue';
 
 let vm;
 

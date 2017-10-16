@@ -314,11 +314,11 @@
               <div class="panel-body">
                 <div class="form-group">
                   <div>
-                    <multiselect :options="multiselectOptions" :randomizer="true"></multiselect>
+                    <multiselect :options="multiselectOptions" :subset="true" subset-label="" :randomizer="true"></multiselect>
                   </div>
                 </div>
 <pre>
-&lt;multiselect :options="multiselectOptions" :randomizer="true"&gt;&lt;/multiselect&gt;
+&lt;multiselect :options="multiselectOptions" :subset="true" subset-label="" :randomizer="true"&gt;&lt;/multiselect&gt;
 </pre>
               </div>
             </div>
@@ -409,6 +409,36 @@
                   <td>randomizer-button</td>
                   <td>String</td>
                   <td>Go</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>subset</td>
+                  <td>Boolean</td>
+                  <td>false</td>
+                  <td>Enable subset selection?</td>
+                </tr>
+                <tr>
+                  <td>subset-type</td>
+                  <td>String</td>
+                  <td>radio</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>subset-name</td>
+                  <td>String</td>
+                  <td>subset</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>subset-label</td>
+                  <td>String</td>
+                  <td>Default</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>selected-subset-options</td>
+                  <td>Array</td>
+                  <td>[]</td>
                   <td></td>
                 </tr>
               </tbody>

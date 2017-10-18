@@ -32,6 +32,9 @@
     "vue-template-compiler": "~2.4.0",
     "webpack": "^1.13.2"
   },
+  "browser": {
+    "vue": "vue/dist/vue.common.js"
+  },
   "scripts": {
     "docs:build": "./node_modules/webpack/bin/webpack.js --progress --config webpack.docs.js",
     "docs:watch": "./node_modules/webpack/bin/webpack.js --progress --watch --config webpack.docs.js",

@@ -26,6 +26,6 @@ module.exports = {
     sourceMapFilename: '[file].map',
   },
   resolve: {
-    alias: { vue: 'vue/dist/vue.js' }
+    alias: { vue: 'vue/dist/vue.common.js' }
   }
 }

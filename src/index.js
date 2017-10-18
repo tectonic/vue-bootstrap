@@ -1,3 +1,11 @@
+// Mixins
+import { mixin as clickOutside } from './mixins/clickOutside.js';
+
+const mixins = {
+  clickOutside
+};
+
+// Components
 import Datepicker from './Datepicker.vue';
 import Dropdown from './Dropdown.vue';
 import Modal from './Modal.vue';
@@ -5,7 +13,7 @@ import Multiselect from './Multiselect.vue';
 import Popover from './Popover.vue';
 import Typeahead from './Typeahead.vue';
 
-const VueBootstrap = {
+const components = {
   Datepicker,
   Dropdown,
   Modal,
@@ -14,4 +22,4 @@ const VueBootstrap = {
   Typeahead
 };
 
-module.exports = VueBootstrap;
+module.exports = Object.assign(mixins, components);

@@ -1,5 +1,5 @@
 <template>
-  <div :class="[{ 'open': isOpen }, 'dropdown', containerClass]">
+  <div :class="[{ 'open': isOpen }, 'dropdown', containerClass]" v-on-click-outside="close">
     <input type="text"
       v-model="dateInput"
       :name="name"
@@ -77,8 +77,12 @@
 
 <script>
 import { chunk } from './lib/array.js';
+import { mixin as clickOutside } from './mixins/clickOutside.js';
 
 export default {
+  mixins: [
+    clickOutside
+  ],
   props: {
     name: {
       type: String,
@@ -322,18 +326,6 @@ export default {
   created () {
     this.dateInput = this.value;
     this.getDateFromInput();
-  },
-  mounted () {
-    this.onClickOutside = (event) => {
-      if (this.$el !== null && !this.$el.contains(event.target)) {
-        this.close();
-      }
-    };
-
-    document.addEventListener('click', this.onClickOutside);
-  },
-  beforeDestroy () {
-    document.removeEventListener('click', this.onClickOutside);
   }
 };
 </script>

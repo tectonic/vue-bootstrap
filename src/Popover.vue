@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <span v-on-click-outside="close">
     <span ref="trigger" @click="onClick" @mouseover="onMouseover" @mouseout="onMouseout" :aria-describedby="id">
       <slot></slot>
     </span>
@@ -20,7 +20,12 @@
 </template>
 
 <script>
+import { mixin as clickOutside } from './mixins/clickOutside.js';
+
 export default {
+  mixins: [
+    clickOutside
+  ],
   props: {
     title: {
       type: String
@@ -152,18 +157,6 @@ export default {
         this.setPosition();
       });
     }
-  },
-  mounted () {
-    this.onClickOutside = (event) => {
-      if (this.$el !== null && !this.$el.contains(event.target)) {
-        this.close();
-      }
-    };
-
-    document.addEventListener('click', this.onClickOutside);
-  },
-  beforeDestroy () {
-    document.removeEventListener('click', this.onClickOutside);
   }
 };
 </script>

@@ -55,10 +55,7 @@ module.exports = function(config) {
         ]
       },
       devtool: 'inline-source-map',
-      debug: true,
-      resolve: {
-        alias: { vue: 'vue/dist/vue.js' }
-      }
+      debug: true
     },
 
 

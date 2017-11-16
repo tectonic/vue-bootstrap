@@ -4,10 +4,6 @@ import { initVM } from './utils.js';
 import Datepicker from '../src/Datepicker.vue';
 
 describe('Datepicker', () => {
-  it('has a mounted hook', () => {
-    expect(typeof Datepicker.mounted).to.equal('function');
-  });
-
   it('has a created hook', () => {
     expect(typeof Datepicker.created).to.equal('function');
   });

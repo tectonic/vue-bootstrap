@@ -3,7 +3,7 @@
     <div class="multiselect-filter" v-if="filter">
       <input type="text" :placeholder="placeholder" class="form-control" v-model="query">
     </div>
-    <div class="multiselect-counter">{{ selectedIds.length }}</div>
+    <div class="multiselect-counter" v-if="counter">{{ selectedIds.length }}</div>
     <div class="multiselect-toggles">
       <div class="multiselect-subset" v-if="subset">
         {{ subsetLabel }}
@@ -64,6 +64,10 @@ export default {
       default: 'multiselect[]'
     },
     filter: {
+      type: Boolean,
+      default: true
+    },
+    counter: {
       type: Boolean,
       default: true
     },

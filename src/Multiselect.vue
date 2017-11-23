@@ -175,8 +175,12 @@ export default {
       // Adjust option visibility based on query
       this.tree = this.tree.map(mapOptions);
     },
-    options (options) {
-      this.buildTree(options);
+    options (newOptions, oldOptions) {
+      if (JSON.stringify(newOptions) === JSON.stringify(oldOptions)) {
+        return;
+      }
+
+      this.buildTree(newOptions);
     },
     selectedIds () {
       this.$emit('selected', this.selectedIds);

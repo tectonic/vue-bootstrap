@@ -16,7 +16,8 @@
         :aria-hidden="show"
         tabindex="-1"
         role="dialog"
-        @keyup.esc="close"
+        @keydown.enter.prevent="confirm"
+        @keydown.esc.prevent="close"
         @click="onBackdropClick">
         <div class="modal-dialog" role="document">
           <div class="modal-content">

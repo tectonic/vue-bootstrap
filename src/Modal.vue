@@ -13,7 +13,7 @@
         :class="['modal', 'fade', { 'in': isIn }]"
         :id="id"
         :aria-labelledby="uniqueTitleId()"
-        :aria-hidden="show"
+        :aria-hidden="!isVisible"
         tabindex="-1"
         role="dialog"
         @keydown.enter.prevent="confirm"

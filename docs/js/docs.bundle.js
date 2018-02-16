@@ -11336,7 +11336,7 @@
 	  var VALUES_BUG = false;
 	  var proto = Base.prototype;
 	  var $native = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT];
-	  var $default = $native || getMethod(DEFAULT);
+	  var $default = (!BUGGY && $native) || getMethod(DEFAULT);
 	  var $entries = DEFAULT ? !DEF_VALUES ? $default : getMethod('entries') : undefined;
 	  var $anyNative = NAME == 'Array' ? proto.entries || $native : $native;
 	  var methods, key, IteratorPrototype;
@@ -11466,7 +11466,7 @@
 /* 20 */
 /***/ (function(module, exports) {
 
-	var core = module.exports = { version: '2.5.0' };
+	var core = module.exports = { version: '2.5.3' };
 	if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 
@@ -12711,7 +12711,7 @@
 	
 	
 	// module
-	exports.push([module.id, "\n.modal[data-v-8239d6a0] {\n  display: block;\n  transition: all .15s;\n}\n", "", {"version":3,"sources":["/./src/Modal.vue?daa3abfe"],"names":[],"mappings":";AA2LA;EACA,eAAA;EACA,qBAAA;CACA","file":"Modal.vue","sourcesContent":["<template>\n  <div>\n    <transition\n      v-bind=\"transitionClasses\"\n      @before-enter=\"onBeforeEnter\"\n      @enter=\"onEnter\"\n      @after-enter=\"onAfterEnter\"\n      @before-leave=\"onBeforeLeave\"\n      @leave=\"onLeave\"\n      @after-leave=\"onAfterLeave\">\n      <div v-show=\"isVisible\"\n        ref=\"modal\"\n        :class=\"['modal', 'fade', { 'in': isIn }]\"\n        :id=\"id\"\n        :aria-labelledby=\"uniqueTitleId()\"\n        :aria-hidden=\"show\"\n        tabindex=\"-1\"\n        role=\"dialog\"\n        @keyup.esc=\"close\"\n        @click=\"onBackdropClick\">\n        <div class=\"modal-dialog\" role=\"document\">\n          <div class=\"modal-content\">\n            <div class=\"modal-header\" v-if=\"header\">\n              <button type=\"button\" class=\"close\" aria-label=\"Close\" @click.prevent=\"close\">\n                <slot name=\"close\"><span aria-hidden=\"true\">&times;</span></slot>\n              </button>\n              <h4 class=\"modal-title\" :id=\"uniqueTitleId()\">\n                <slot name=\"title\">{{ title }}</slot>\n              </h4>\n            </div>\n            <div class=\"modal-body\">\n              <slot>{{ body }}</slot>\n            </div>\n            <div class=\"modal-footer\" v-if=\"footer\">\n              <button type=\"button\" class=\"btn btn-default\" @click.prevent=\"close\" v-if=\"closeButton\">\n                {{ closeButtonLabel }}\n              </button>\n              <button type=\"button\" class=\"btn btn-primary\" @click.prevent=\"confirm\" v-if=\"confirmButton\">\n                {{ confirmButtonLabel }}\n              </button>\n            </div>\n          </div>\n        </div>\n      </div>\n    </transition>\n    <div v-if=\"isVisible\" ref=\"backdrop\" :class=\"['modal-backdrop', 'fade', { 'in': isIn }]\"></div>\n  </div>\n</template>\n\n<script>\nimport { addClass, removeClass, bodyIsOverflowing, scrollbarWidth } from './lib/dom.js';\n\nexport default {\n  props: {\n    value: {\n      type: Boolean,\n      default: false\n    },\n    title: {\n      type: String,\n      default: 'Modal title'\n    },\n    body: {\n      type: String,\n      default: 'One fine body...'\n    },\n    id: {\n      type: String\n    },\n    header: {\n      type: Boolean,\n      default: true\n    },\n    footer: {\n      type: Boolean,\n      default: true\n    },\n    confirmButton: {\n      type: Boolean,\n      default: true\n    },\n    confirmButtonLabel: {\n      type: String,\n      default: 'Confirm'\n    },\n    closeOnConfirm: {\n      type: Boolean,\n      default: true\n    },\n    closeButton: {\n      type: Boolean,\n      default: true\n    },\n    closeButtonLabel: {\n      type: String,\n      default: 'Close'\n    }\n  },\n  data () {\n    return {\n      isVisible: false,\n      isIn: false,\n      transitionClasses: {\n        'enter-class': '',\n        'enter-to-class': '',\n        'enter-active-class': '',\n        'leave-class': '',\n        'leave-to-class': '',\n        'leave-active-class': ''\n      }\n    };\n  },\n  watch: {\n    value (v) {\n      if (v) {\n        this.open();\n      } else {\n        this.close();\n      }\n    }\n  },\n  methods: {\n    uniqueTitleId () {\n      return 'v-bs-modal-title-' + this._uid;\n    },\n    open () {\n      this.isVisible = true;\n      this.$emit('opened');\n    },\n    close () {\n      this.isVisible = false;\n      this.$emit('closed');\n    },\n    confirm () {\n      if (this.closeOnConfirm) {\n        this.close();\n      }\n\n      this.$emit('confirmed');\n    },\n    onBackdropClick (event) {\n      // This will ignore clicks on any elements inside the modal.\n      if (this.$refs.modal === event.target) {\n        this.close();\n      }\n    },\n    onBeforeEnter () {\n      // Adjust padding on the body accounting for the scrollbar width,\n      // which is not going to be visible while the modal is open.\n      if (bodyIsOverflowing()) {\n        document.body.style.paddingRight = `${scrollbarWidth()}px`;\n      }\n\n      // Add the .modal-open class to the body\n      addClass(document.body, 'modal-open');\n    },\n    onEnter () {\n    },\n    onAfterEnter () {\n      this.isIn = true;\n\n      // Focus on the modal - this allows to react to the Esc button press\n      // from this point on.\n      this.$refs.modal.focus();\n    },\n    onBeforeLeave () {\n    },\n    onLeave () {\n      this.isIn = false;\n    },\n    onAfterLeave () {\n      // Reset padding on the body\n      document.body.style.paddingRight = null;\n\n      // Remove the .modal-open class from the body\n      removeClass(document.body, 'modal-open');\n    }\n  },\n  mounted () {\n    if (this.value) {\n      this.open();\n    }\n  }\n};\n</script>\n\n<style scoped>\n  .modal {\n    display: block;\n    transition: all .15s;\n  }\n</style>\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\n.modal[data-v-8239d6a0] {\n  display: block;\n  transition: all .15s;\n}\n", "", {"version":3,"sources":["/./src/Modal.vue?ed839188"],"names":[],"mappings":";AA4LA;EACA,eAAA;EACA,qBAAA;CACA","file":"Modal.vue","sourcesContent":["<template>\n  <div>\n    <transition\n      v-bind=\"transitionClasses\"\n      @before-enter=\"onBeforeEnter\"\n      @enter=\"onEnter\"\n      @after-enter=\"onAfterEnter\"\n      @before-leave=\"onBeforeLeave\"\n      @leave=\"onLeave\"\n      @after-leave=\"onAfterLeave\">\n      <div v-show=\"isVisible\"\n        ref=\"modal\"\n        :class=\"['modal', 'fade', { 'in': isIn }]\"\n        :id=\"id\"\n        :aria-labelledby=\"uniqueTitleId()\"\n        :aria-hidden=\"!isVisible\"\n        tabindex=\"-1\"\n        role=\"dialog\"\n        @keydown.enter.prevent=\"confirm\"\n        @keydown.esc.prevent=\"close\"\n        @click=\"onBackdropClick\">\n        <div class=\"modal-dialog\" role=\"document\">\n          <div class=\"modal-content\">\n            <div class=\"modal-header\" v-if=\"header\">\n              <button type=\"button\" class=\"close\" aria-label=\"Close\" @click.prevent=\"close\">\n                <slot name=\"close\"><span aria-hidden=\"true\">&times;</span></slot>\n              </button>\n              <h4 class=\"modal-title\" :id=\"uniqueTitleId()\">\n                <slot name=\"title\">{{ title }}</slot>\n              </h4>\n            </div>\n            <div class=\"modal-body\">\n              <slot>{{ body }}</slot>\n            </div>\n            <div class=\"modal-footer\" v-if=\"footer\">\n              <button type=\"button\" class=\"btn btn-default\" @click.prevent=\"close\" v-if=\"closeButton\">\n                {{ closeButtonLabel }}\n              </button>\n              <button type=\"button\" class=\"btn btn-primary\" @click.prevent=\"confirm\" v-if=\"confirmButton\">\n                {{ confirmButtonLabel }}\n              </button>\n            </div>\n          </div>\n        </div>\n      </div>\n    </transition>\n    <div v-if=\"isVisible\" ref=\"backdrop\" :class=\"['modal-backdrop', 'fade', { 'in': isIn }]\"></div>\n  </div>\n</template>\n\n<script>\nimport { addClass, removeClass, bodyIsOverflowing, scrollbarWidth } from './lib/dom.js';\n\nexport default {\n  props: {\n    value: {\n      type: Boolean,\n      default: false\n    },\n    title: {\n      type: String,\n      default: 'Modal title'\n    },\n    body: {\n      type: String,\n      default: 'One fine body...'\n    },\n    id: {\n      type: String\n    },\n    header: {\n      type: Boolean,\n      default: true\n    },\n    footer: {\n      type: Boolean,\n      default: true\n    },\n    confirmButton: {\n      type: Boolean,\n      default: true\n    },\n    confirmButtonLabel: {\n      type: String,\n      default: 'Confirm'\n    },\n    closeOnConfirm: {\n      type: Boolean,\n      default: true\n    },\n    closeButton: {\n      type: Boolean,\n      default: true\n    },\n    closeButtonLabel: {\n      type: String,\n      default: 'Close'\n    }\n  },\n  data () {\n    return {\n      isVisible: false,\n      isIn: false,\n      transitionClasses: {\n        'enter-class': '',\n        'enter-to-class': '',\n        'enter-active-class': '',\n        'leave-class': '',\n        'leave-to-class': '',\n        'leave-active-class': ''\n      }\n    };\n  },\n  watch: {\n    value (v) {\n      if (v) {\n        this.open();\n      } else {\n        this.close();\n      }\n    }\n  },\n  methods: {\n    uniqueTitleId () {\n      return 'v-bs-modal-title-' + this._uid;\n    },\n    open () {\n      this.isVisible = true;\n      this.$emit('opened');\n    },\n    close () {\n      this.isVisible = false;\n      this.$emit('closed');\n    },\n    confirm () {\n      if (this.closeOnConfirm) {\n        this.close();\n      }\n\n      this.$emit('confirmed');\n    },\n    onBackdropClick (event) {\n      // This will ignore clicks on any elements inside the modal.\n      if (this.$refs.modal === event.target) {\n        this.close();\n      }\n    },\n    onBeforeEnter () {\n      // Adjust padding on the body accounting for the scrollbar width,\n      // which is not going to be visible while the modal is open.\n      if (bodyIsOverflowing()) {\n        document.body.style.paddingRight = `${scrollbarWidth()}px`;\n      }\n\n      // Add the .modal-open class to the body\n      addClass(document.body, 'modal-open');\n    },\n    onEnter () {\n    },\n    onAfterEnter () {\n      this.isIn = true;\n\n      // Focus on the modal - this allows to react to the Esc button press\n      // from this point on.\n      this.$refs.modal.focus();\n    },\n    onBeforeLeave () {\n    },\n    onLeave () {\n      this.isIn = false;\n    },\n    onAfterLeave () {\n      // Reset padding on the body\n      document.body.style.paddingRight = null;\n\n      // Remove the .modal-open class from the body\n      removeClass(document.body, 'modal-open');\n    }\n  },\n  mounted () {\n    if (this.value) {\n      this.open();\n    }\n  }\n};\n</script>\n\n<style scoped>\n  .modal {\n    display: block;\n    transition: all .15s;\n  }\n</style>\n"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -12907,6 +12907,7 @@
 	//
 	//
 	//
+	//
 
 /***/ }),
 /* 75 */
@@ -12988,15 +12989,20 @@
 	    attrs: {
 	      "id": _vm.id,
 	      "aria-labelledby": _vm.uniqueTitleId(),
-	      "aria-hidden": _vm.show,
+	      "aria-hidden": !_vm.isVisible,
 	      "tabindex": "-1",
 	      "role": "dialog"
 	    },
 	    on: {
-	      "keyup": function($event) {
+	      "keydown": [function($event) {
+	        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
+	        $event.preventDefault();
+	        _vm.confirm($event)
+	      }, function($event) {
 	        if (!('button' in $event) && _vm._k($event.keyCode, "esc", 27)) { return null; }
+	        $event.preventDefault();
 	        _vm.close($event)
-	      },
+	      }],
 	      "click": _vm.onBackdropClick
 	    }
 	  }, [_c('div', {
@@ -15279,6 +15285,16 @@
 	
 	  debounced.clear = function() {
 	    if (timeout) {
+	      clearTimeout(timeout);
+	      timeout = null;
+	    }
+	  };
+	  
+	  debounced.flush = function() {
+	    if (timeout) {
+	      result = func.apply(context, args);
+	      context = args = null;
+	      
 	      clearTimeout(timeout);
 	      timeout = null;
 	    }

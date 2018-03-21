@@ -12488,7 +12488,7 @@
 	
 	
 	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"Dropdown.vue","sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"Dropdown.vue","sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -12549,6 +12549,10 @@
 	    menuClass: {
 	      type: String,
 	      default: ''
+	    },
+	    manual: {
+	      type: Boolean,
+	      default: false
 	    }
 	  },
 	  data: function data() {
@@ -12559,8 +12563,18 @@
 	  },
 	
 	  methods: {
+	    handleClick: function handleClick() {
+	      if (this.manual) {
+	        return;
+	      }
+	
+	      this.toggle();
+	    },
 	    toggle: function toggle() {
 	      this.isOpen = !this.isOpen;
+	    },
+	    open: function open() {
+	      this.isOpen = true;
 	    },
 	    close: function close() {
 	      this.isOpen = false;
@@ -12604,7 +12618,7 @@
 	    on: {
 	      "click": function($event) {
 	        $event.preventDefault();
-	        _vm.toggle($event)
+	        _vm.handleClick($event)
 	      },
 	      "keyup": function($event) {
 	        if (!('button' in $event) && _vm._k($event.keyCode, "esc", 27)) { return null; }

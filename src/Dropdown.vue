@@ -6,7 +6,7 @@
         :id="id"
         aria-haspopup="true"
         :aria-expanded="isOpen"
-        @click.prevent="toggle"
+        @click.prevent="handleClick"
         @keyup.esc="close"
         role="button"
         ref="button">
@@ -45,6 +45,10 @@ export default {
     menuClass: {
       type: String,
       default: ''
+    },
+    manual: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -54,8 +58,18 @@ export default {
     };
   },
   methods: {
+    handleClick () {
+      if (this.manual) {
+        return;
+      }
+
+      this.toggle();
+    },
     toggle () {
       this.isOpen = !this.isOpen;
+    },
+    open () {
+      this.isOpen = true;
     },
     close () {
       this.isOpen = false;

@@ -66,11 +66,15 @@
 	
 	var _Multiselect2 = _interopRequireDefault(_Multiselect);
 	
+	var _Panel = __webpack_require__(114);
+	
+	var _Panel2 = _interopRequireDefault(_Panel);
+	
 	var _Popover = __webpack_require__(108);
 	
 	var _Popover2 = _interopRequireDefault(_Popover);
 	
-	var _Typeahead = __webpack_require__(114);
+	var _Typeahead = __webpack_require__(117);
 	
 	var _Typeahead2 = _interopRequireDefault(_Typeahead);
 	
@@ -83,6 +87,7 @@
 	    Dropdown: _Dropdown2.default,
 	    Modal: _Modal2.default,
 	    Multiselect: _Multiselect2.default,
+	    Panel: _Panel2.default,
 	    Popover: _Popover2.default,
 	    Typeahead: _Typeahead2.default
 	  },
@@ -14947,14 +14952,122 @@
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
-	/* styles */
-	__webpack_require__(115)
-	
 	/* script */
-	__vue_exports__ = __webpack_require__(117)
+	__vue_exports__ = __webpack_require__(115)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(119)
+	var __vue_template__ = __webpack_require__(116)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "/Users/kazik/Sites/awardforce.com/vue-bootstrap/src/Panel.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+	
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-359cbef2", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-359cbef2", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] Panel.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+	
+	module.exports = __vue_exports__
+
+
+/***/ }),
+/* 115 */
+/***/ (function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	
+	exports.default = {
+	  props: {
+	    type: {
+	      type: String,
+	      default: 'default'
+	    },
+	    panelClass: String
+	  },
+	  computed: {
+	    hasHeading: function hasHeading() {
+	      return this.$slots['heading'] !== undefined;
+	    },
+	    hasFooter: function hasFooter() {
+	      return this.$slots['footer'] !== undefined;
+	    }
+	  }
+	};
+
+/***/ }),
+/* 116 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {
+	    class: ['panel', 'panel-' + _vm.type, _vm.panelClass]
+	  }, [(_vm.hasHeading) ? _c('div', {
+	    staticClass: "panel-heading"
+	  }, [_vm._t("heading")], 2) : _vm._e(), _vm._v(" "), _c('div', {
+	    staticClass: "panel-body"
+	  }, [_vm._t("default")], 2), _vm._v(" "), (_vm.hasFooter) ? _c('div', {
+	    staticClass: "panel-footer"
+	  }, [_vm._t("footer")], 2) : _vm._e()])
+	},staticRenderFns: []}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-359cbef2", module.exports)
+	  }
+	}
+
+/***/ }),
+/* 117 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+	
+	/* styles */
+	__webpack_require__(118)
+	
+	/* script */
+	__vue_exports__ = __webpack_require__(120)
+	
+	/* template */
+	var __vue_template__ = __webpack_require__(122)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -14989,13 +15102,13 @@
 
 
 /***/ }),
-/* 115 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(116);
+	var content = __webpack_require__(119);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(7)(content, {});
@@ -15015,7 +15128,7 @@
 	}
 
 /***/ }),
-/* 116 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(6)();
@@ -15029,7 +15142,7 @@
 
 
 /***/ }),
-/* 117 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15038,7 +15151,7 @@
 	  value: true
 	});
 	
-	var _debounce = __webpack_require__(118);
+	var _debounce = __webpack_require__(121);
 	
 	var _debounce2 = _interopRequireDefault(_debounce);
 	
@@ -15247,7 +15360,7 @@
 	//
 
 /***/ }),
-/* 118 */
+/* 121 */
 /***/ (function(module, exports) {
 
 	/**
@@ -15319,7 +15432,7 @@
 
 
 /***/ }),
-/* 119 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;

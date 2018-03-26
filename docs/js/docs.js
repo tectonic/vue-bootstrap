@@ -3,6 +3,7 @@ import Datepicker from '../../src/Datepicker.vue';
 import Dropdown from '../../src/Dropdown.vue';
 import Modal from '../../src/Modal.vue';
 import Multiselect from '../../src/Multiselect.vue';
+import Panel from '../../src/Panel.vue';
 import Popover from '../../src/Popover.vue';
 import Typeahead from '../../src/Typeahead.vue';
 
@@ -13,6 +14,7 @@ new Vue({
     Dropdown,
     Modal,
     Multiselect,
+    Panel,
     Popover,
     Typeahead
   },

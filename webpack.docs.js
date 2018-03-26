@@ -1,4 +1,5 @@
 var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
   entry: {
@@ -25,6 +26,12 @@ module.exports = {
     filename: '[name].bundle.js',
     sourceMapFilename: '[file].map',
   },
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      include: /\.bundle\.js$/,
+      compress: false
+    })
+  ],
   resolve: {
     alias: { vue: 'vue/dist/vue.common.js' }
   }

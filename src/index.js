@@ -10,6 +10,7 @@ import Datepicker from './Datepicker.vue';
 import Dropdown from './Dropdown.vue';
 import Modal from './Modal.vue';
 import Multiselect from './Multiselect.vue';
+import Panel from './Panel.vue';
 import Popover from './Popover.vue';
 import Typeahead from './Typeahead.vue';
 
@@ -18,6 +19,7 @@ const components = {
   Dropdown,
   Modal,
   Multiselect,
+  Panel,
   Popover,
   Typeahead
 };

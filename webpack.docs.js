@@ -1,38 +1,46 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
+  mode: 'development',
   entry: {
     'docs': path.join(__dirname, 'docs/js/docs.js')
   },
-  module: {
-    loaders: [
-      {
-        test: /\.vue$/,
-        loader: 'vue',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel',
-        exclude: /node_modules/
-      },
-    ]
-  },
-  devtool: 'sourcemap',
-  debug: true,
   output: {
     path: path.join(__dirname, 'docs/js'),
     filename: '[name].bundle.js',
     sourceMapFilename: '[file].map',
   },
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      include: /\.bundle\.js$/,
-      compress: false
-    })
-  ],
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'vue-style-loader',
+          'css-loader'
+        ]
+      }
+    ]
+  },
   resolve: {
     alias: { vue: 'vue/dist/vue.common.js' }
-  }
+  },
+  devtool: 'source-map',
+  optimization: {
+    minimize: true
+  },
+  plugins: [
+    new VueLoaderPlugin()
+  ]
 }

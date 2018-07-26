@@ -1,5 +1,4 @@
-// Karma configuration
-// Generated on Mon Oct 31 2016 13:38:30 GMT+0100 (CET)
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = function(config) {
   config.set({
@@ -40,29 +39,43 @@ module.exports = function(config) {
 
     // webpack configuration
     webpack: {
+      mode: 'development',
       module: {
-        loaders: [
+        rules: [
           {
             test: /\.vue$/,
-            loader: 'vue',
+            loader: 'vue-loader',
             exclude: /node_modules/
           },
           {
             test: /\.js$/,
-            loader: 'babel',
+            loader: 'babel-loader',
             exclude: /node_modules/
           },
+          {
+            test: /\.css$/,
+            use: [
+              'vue-style-loader',
+              'css-loader'
+            ]
+          }
         ]
       },
-      devtool: 'inline-source-map',
-      debug: true
+      devtool: 'source-map',
+      performance: {
+        maxEntrypointSize: 512000,
+        maxAssetSize: 512000
+      },
+      plugins: [
+        new VueLoaderPlugin()
+      ]
     },
 
 
     // webpack middleware configuration
     webpackMiddleware: {
       stats: 'errors-only',
-      noInfo: true
+      logLevel: 'warn'
     },
 
 

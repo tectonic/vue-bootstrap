@@ -35,4 +35,14 @@ describe('Dropdown', () => {
       expect(vm.isOpen).to.be.false;
     }, vm.closeTimeout + 100);
   });
+
+  it('positions the dropdown', () => {
+    const vm = initVM(Dropdown, {
+      horizontalPosition: 'right',
+      verticalPosition: 'top'
+    });
+
+    expect(vm.horizontalPositionClass).to.equal('dropdown-menu-right');
+    expect(vm.verticalPositionClass).to.equal('dropup');
+  });
 });

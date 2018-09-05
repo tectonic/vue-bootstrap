@@ -36,3 +36,11 @@ export function addClass (el, className) {
 export function removeClass (el, className) {
   el.classList.remove(className);
 };
+
+/**
+ * Check if the directionality of the text is rtl
+ * https://developer.mozilla.org/en-US/docs/Web/API/Document/dir
+ */
+export function isRtl () {
+  return document.dir === 'rtl';
+};

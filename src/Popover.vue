@@ -21,6 +21,7 @@
 
 <script>
 import { mixin as clickOutside } from './mixins/clickOutside.js';
+import { isRtl } from './lib/dom.js';
 
 export default {
   mixins: [
@@ -151,6 +152,10 @@ export default {
 
       popover.style.top = top + 'px';
       popover.style.left = left + 'px';
+
+      if (isRtl()) {
+        popover.style.right = 'auto';
+      }
     },
     position () {
       this.$nextTick(() => {

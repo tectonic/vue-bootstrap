@@ -200,6 +200,13 @@ export default {
 
       this.buildTree(newOptions);
     },
+    selectedOptions (newOptions, oldOptions) {
+      if (JSON.stringify(newOptions) === JSON.stringify(oldOptions)) {
+        return;
+      }
+
+      this.buildTree(this.options, newOptions);
+    },
     selectedIds () {
       this.$emit('selected', this.selectedIds);
     }

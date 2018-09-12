@@ -53,11 +53,11 @@ new Vue({
       multiselectOptions: [
         { id: 1, name: 'Action',
           children: [
-            { id: 2, name: 'Martial Arts' },
+            { id: 2, name: 'Martial Arts', extra: 'Extra information.' },
             { id: 3, name: 'Treasure Hunts' },
             { id: 4, name: 'Adventures',
               children: [
-                { id: 5, name: 'Sea Adventures' },
+                { id: 5, name: 'Sea Adventures', extra: 'Extra information.' },
                 { id: 6, name: 'Underwater Adventures' }
               ]
             }

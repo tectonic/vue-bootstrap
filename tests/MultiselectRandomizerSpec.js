@@ -13,7 +13,7 @@ describe('MultiselectRandomizer', () => {
     vm.howMany = 2;
     vm.randomize();
 
-    expect(vm.randomIds).to.be.an.array;
+    expect(vm.randomIds).to.be.an('array');
     expect(vm.randomIds.length).to.equal(2);
 
     expect(ids.includes(vm.randomIds[0])).to.be.true;

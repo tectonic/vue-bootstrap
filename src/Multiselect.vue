@@ -14,8 +14,8 @@
         </label>
         <span class="randomizer-toggle" v-if="randomizer">
           | <a href="" @click.prevent="randomizerActive = !randomizerActive">{{ randomizerShow }}</a>
-          <popover :content="randomizerHelpicon">
-            <span class="af-icons af-icons-help"></span>
+          <popover v-if="randomizerHelpText" :content="randomizerHelpText">
+            <span :class="helpIconClass"></span>
           </popover>
         </span>
       </div>
@@ -32,10 +32,12 @@
       :name="name"
       :id-property="idProperty"
       :value-property="valueProperty"
+      :extra-property="extraProperty"
       :subset="subset"
       :subsetType="subsetType"
       :subsetName="subsetName"
-      :selectedSubsetOptions="selectedSubsetOptions">
+      :selectedSubsetOptions="selectedSubsetOptions"
+      :infoIconClass="infoIconClass">
     </multiselect-list>
   </div>
 </template>
@@ -95,6 +97,10 @@ export default {
       type: String,
       default: 'name'
     },
+    extraProperty: {
+      type: String,
+      default: 'extra'
+    },
     randomizer: {
       type: Boolean,
       default: false
@@ -107,7 +113,7 @@ export default {
       type: String,
       default: 'How many?'
     },
-    randomizerHelpicon: {
+    randomizerHelpText: {
       type: String
     },
     randomizerButton: {
@@ -136,6 +142,14 @@ export default {
     selectedSubsetOptions: {
       type: Array,
       default: () => []
+    },
+    infoIconClass: {
+      type: String,
+      default: 'glyphicon glyphicon-info-sign'
+    },
+    helpIconClass: {
+      type: String,
+      default: 'glyphicon glyphicon-question-sign'
     }
   },
   computed: {
@@ -185,6 +199,13 @@ export default {
       }
 
       this.buildTree(newOptions);
+    },
+    selectedOptions (newOptions, oldOptions) {
+      if (JSON.stringify(newOptions) === JSON.stringify(oldOptions)) {
+        return;
+      }
+
+      this.buildTree(this.options, newOptions);
     },
     selectedIds () {
       this.$emit('selected', this.selectedIds);

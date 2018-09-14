@@ -13,10 +13,12 @@
         :name="name"
         :id-property="idProperty"
         :value-property="valueProperty"
+        :extra-property="extraProperty"
         :subset="subset"
         :subsetType="subsetType"
         :subsetName="$attrs.subsetName"
-        :selectedSubsetOptions="$attrs.selectedSubsetOptions">
+        :selectedSubsetOptions="$attrs.selectedSubsetOptions"
+        :infoIconClass="infoIconClass">
       </multiselect-list>
     </template>
     <template v-else>
@@ -40,6 +42,9 @@
         <label :style="indentStyle()">
           <input type="checkbox" :name="name" v-model="option.selected" :value="option[idProperty]">
           {{ option[valueProperty] }}
+          <popover v-if="option[extraProperty]" :content="option[extraProperty]" trigger="hover">
+            <span :class="infoIconClass"></span>
+          </popover>
         </label>
       </div>
     </template>
@@ -49,12 +54,14 @@
 <script>
 import MultiselectSubsetCheckboxControl from './MultiselectSubsetCheckboxControl.vue';
 import MultiselectSubsetRadioControl from './MultiselectSubsetRadioControl.vue';
+import Popover from './Popover.vue';
 
 export default {
   inheritAttrs: false,
   components: {
     MultiselectSubsetCheckboxControl,
-    MultiselectSubsetRadioControl
+    MultiselectSubsetRadioControl,
+    Popover
   },
   props: {
     option: {
@@ -68,8 +75,10 @@ export default {
     name: String,
     idProperty: String,
     valueProperty: String,
+    extraProperty: String,
     subset: Boolean,
-    subsetType: String
+    subsetType: String,
+    infoIconClass: String
   },
   computed: {
     isParent () {

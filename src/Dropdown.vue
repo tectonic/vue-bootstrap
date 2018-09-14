@@ -1,5 +1,5 @@
 <template>
-  <div :class="[{ 'open': isOpen }, 'dropdown', containerClass]">
+  <div :class="[{ 'open': isOpen }, verticalPositionClass, containerClass]" ref="container">
     <slot name="button">
       <a href=""
         :class="buttonClass"
@@ -16,7 +16,7 @@
       </a>
     </slot>
     <slot name="items">
-      <ul :class="['dropdown-menu', menuClass]" :aria-labelledby="id" ref="ul">
+      <ul :class="['dropdown-menu', horizontalPositionClass, menuClass]" :aria-labelledby="id" ref="ul">
         <slot></slot>
       </ul>
     </slot>
@@ -46,6 +46,20 @@ export default {
       type: String,
       default: ''
     },
+    horizontalPosition: {
+      type: String,
+      default: 'left',
+      validator: (value) => {
+        return value === 'left' || value === 'right';
+      }
+    },
+    verticalPosition: {
+      type: String,
+      default: 'bottom',
+      validator: (value) => {
+        return value === 'bottom' || value === 'top';
+      }
+    },
     manual: {
       type: Boolean,
       default: false
@@ -56,6 +70,14 @@ export default {
       closeTimeout: 200,
       isOpen: false
     };
+  },
+  computed: {
+    horizontalPositionClass () {
+      return this.horizontalPosition === 'left' ? '' : 'dropdown-menu-right';
+    },
+    verticalPositionClass () {
+      return this.verticalPosition === 'bottom' ? 'dropdown' : 'dropup';
+    }
   },
   methods: {
     handleClick () {

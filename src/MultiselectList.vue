@@ -8,6 +8,7 @@
       :name="name"
       :id-property="idProperty"
       :value-property="valueProperty"
+      :extra-property="extraProperty"
       v-bind="$attrs">
     </multiselect-option>
   </div>
@@ -32,7 +33,8 @@ export default {
     },
     name: String,
     idProperty: String,
-    valueProperty: String
+    valueProperty: String,
+    extraProperty: String
   },
   computed: {
     topLevel () {

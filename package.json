@@ -2,7 +2,7 @@
   "name": "vue-bootstrap",
   "version": "1.1.0",
   "description": "Bootstrap components in Vue.js",
-  "main": "src/index.js",
+  "main": "dist/vue-bootstrap.js",
   "dependencies": {
     "debounce": "^1.0.0"
   },
@@ -40,6 +40,7 @@
   "scripts": {
     "docs:build": "./node_modules/webpack/bin/webpack.js --progress --config webpack.docs.js",
     "docs:watch": "./node_modules/webpack/bin/webpack.js --progress --watch --config webpack.docs.js",
+    "build": "./node_modules/webpack/bin/webpack.js --progress --config webpack.dist.js",
     "test": "./node_modules/karma/bin/karma start",
     "test:watch": "./node_modules/karma/bin/karma start --auto-watch --no-single-run",
     "lint": "./node_modules/.bin/eslint src/**/*.vue tests/**/*.js docs/js/docs.js; exit 0"

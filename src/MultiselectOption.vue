@@ -111,7 +111,7 @@ export default {
   beforeCreate () {
     // Load the component in the beforeCreate hook to prevent a circular reference problem
     // https://vuejs.org/v2/guide/components.html#Circular-References-Between-Components
-    this.$options.components.MultiselectList = require('./MultiselectList.vue');
+    this.$options.components.MultiselectList = require('./MultiselectList.vue').default;
   }
 };
 </script>

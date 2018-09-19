@@ -495,16 +495,18 @@
               <div class="panel-body">
                 <div class="form-group">
                   <panel>
-                    <div slot="heading">Heading</div>
-                    This is the content.
-                    <div slot="footer">Footer</div>
+                    <template slot="heading">Heading</template>
+                    <template slot="extra">Extra content</template>
+                    This is the body.
+                    <template slot="footer">Footer</template>
                   </panel>
                 </div>
 <pre>
 &lt;panel&gt;
-  &lt;div slot="heading"&gt;Heading&lt;/div&gt;
-  This is the content.
-  &lt;div slot="footer"&gt;Footer&lt;/div&gt;
+  &lt;template slot="heading"&gt;Heading&lt;/template&gt;
+  &lt;template slot="extra"&gt;Extra content&lt;/template&gt;
+  This is the body.
+  &lt;template slot="footer"&gt;Footer&lt;/template&gt;
 &lt;/panel&gt;
 </pre>
               </div>

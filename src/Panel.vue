@@ -1,7 +1,13 @@
 <template>
   <div :class="['panel', 'panel-'+type, panelClass]">
-    <div class="panel-heading" v-if="hasHeading">
-      <slot name="heading"></slot>
+    <div :class="['panel-heading', { 'clearfix': hasExtra }]" v-if="hasHeading || hasExtra">
+      <span class="pull-left" v-if="hasHeading && hasExtra">
+        <slot name="heading"></slot>
+      </span>
+      <slot name="heading" v-else></slot>
+      <span class="pull-right" v-if="hasExtra">
+        <slot name="extra"></slot>
+      </span>
     </div>
     <div class="panel-body">
       <slot></slot>
@@ -27,6 +33,9 @@ export default {
     },
     hasFooter () {
       return this.$slots['footer'] !== undefined;
+    },
+    hasExtra () {
+      return this.$slots['extra'] !== undefined;
     }
   }
 };

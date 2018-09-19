@@ -7,9 +7,9 @@ describe('Panel', () => {
   it('renders a panel with heading and footer', (done) => {
     const vm = new Vue({
       template:  `<panel ref="panel">
-                    <template slot="heading">Heading</template>
+                    <div slot="heading">Heading</div>
                     This is the content.
-                    <template slot="footer">Footer</template>
+                    <div slot="footer">Footer</div>
                   </panel>`,
       components: {
         Panel
@@ -20,12 +20,11 @@ describe('Panel', () => {
 
     expect(panel.hasHeading).to.be.true;
     expect(panel.hasFooter).to.be.true;
-    expect(panel.hasExtra).to.be.false;
 
     Vue.nextTick(() => {
-      expect(panel.$el.querySelector('.panel-heading').textContent).contains('Heading');
+      expect(panel.$el.querySelector('.panel-heading').textContent).to.equal('Heading');
       expect(panel.$el.querySelector('.panel-body').textContent).contains('This is the content.');
-      expect(panel.$el.querySelector('.panel-footer').textContent).contains('Footer');
+      expect(panel.$el.querySelector('.panel-footer').textContent).to.equal('Footer');
 
       done();
     });

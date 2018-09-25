@@ -611,6 +611,74 @@
             </table>
           </div>
           <div class="island">
+            <h1>Select field</h1>
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <div class="form-group">
+                  <select-field :items="selectFieldItems" value="1" :empty-option="true"></select-field>
+                </div>
+<pre>
+&lt;select-field items="selectFieldItems" value="1" :empty-option="true"&gt;&lt;/select-field&gt;
+</pre>
+              </div>
+            </div>
+            <table class="table table-bordered">
+              <tbody>
+                <tr>
+                  <th colspan="4"><span class="label label-lg label-success">Props</span></th>
+                </tr>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>Description</th>
+                </tr>
+                <tr>
+                  <td>id</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>The <code>id</code> attribute of the select field.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>The <code>name</code> attribute of the select field.</td>
+                </tr>
+                <tr>
+                  <td>empty-option</td>
+                  <td>Boolean</td>
+                  <td>false</td>
+                  <td>Prepend an empty option to the select field?</td>
+                </tr>
+                <tr>
+                  <td>items</td>
+                  <td>Array</td>
+                  <td>[]</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>id-property</td>
+                  <td>String</td>
+                  <td>id</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>value-property</td>
+                  <td>String</td>
+                  <td>name</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>[String, Number]</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="island">
             <h1>Typeahead</h1>
             <div class="panel panel-default">
               <div class="panel-body">

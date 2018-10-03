@@ -12,6 +12,7 @@ import Modal from './Modal.vue';
 import Multiselect from './Multiselect.vue';
 import Panel from './Panel.vue';
 import Popover from './Popover.vue';
+import SelectField from './SelectField.vue';
 import Typeahead from './Typeahead.vue';
 
 const components = {
@@ -21,6 +22,7 @@ const components = {
   Multiselect,
   Panel,
   Popover,
+  SelectField,
   Typeahead
 };
 

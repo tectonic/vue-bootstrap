@@ -62,7 +62,7 @@ describe('SelectField', () => {
 
     const item = vm.getItem(4);
 
-    expect(item).to.be.an.object;
+    expect(item).to.be.an('object');
     expect(item.name).to.equal('Item C');
   });
 
@@ -71,7 +71,7 @@ describe('SelectField', () => {
       items: items
     });
 
-    expect(vm.flatItems).to.be.an.array;
+    expect(vm.flatItems).to.be.an('array');
     expect(vm.flatItems.length).to.equal(3);
     expect(vm.flatItems.map(item => item.name)).to.deep.equal(['Item A', 'Item B', 'Item C']);
   });

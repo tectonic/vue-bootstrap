@@ -2,7 +2,7 @@
   <div>
     <template v-if="isParent">
       <div class="checkbox radio multiselect-option">
-        <label :style="indentStyle()">
+        <label :style="indentStyle()" :title="option[valueProperty]">
           <input type="checkbox" v-model="option.selected" @change="toggleParent">
           <strong>{{ option[valueProperty] }}</strong>
         </label>
@@ -39,7 +39,7 @@
             :selectedSubsetOptions="$attrs.selectedSubsetOptions">
           </multiselect-subset-checkbox-control>
         </template>
-        <label :style="indentStyle()">
+        <label :style="indentStyle()" :title="option[valueProperty]">
           <input type="checkbox" :name="name" v-model="option.selected" :value="option[idProperty]">
           {{ option[valueProperty] }}
           <popover v-if="option[extraProperty]" :content="option[extraProperty]" trigger="hover">

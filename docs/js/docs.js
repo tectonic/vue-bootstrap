@@ -5,6 +5,7 @@ import Modal from '../../src/Modal.vue';
 import Multiselect from '../../src/Multiselect.vue';
 import Panel from '../../src/Panel.vue';
 import Popover from '../../src/Popover.vue';
+import SelectField from '../../src/SelectField.vue';
 import Typeahead from '../../src/Typeahead.vue';
 
 new Vue({
@@ -16,11 +17,21 @@ new Vue({
     Multiselect,
     Panel,
     Popover,
+    SelectField,
     Typeahead
   },
   data () {
     return {
       showModal: false,
+      selectFieldItems: [
+        { id: 1, name: 'Item A' },
+        { id: 2, name: 'Item B' },
+        { id: 3, name: 'Parent item',
+          children: [
+            { id: 4, name: 'Item C' }
+          ]
+        }
+      ],
       typeaheadItems: [
         { id: 1, value: 'Anne Sullivan' },
         { id: 2, value: 'Anne Hathaway' },

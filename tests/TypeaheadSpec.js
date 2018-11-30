@@ -13,10 +13,9 @@ describe('Typeahead', () => {
 
     const data = Typeahead.data();
 
-    expect(data.query).to.equal('');
-    expect(data.isOpen).to.be.false;
-    expect(data.items).to.deep.equal([]);
-    expect(data.currentItem).to.equal(0);
+    expect(data.selectedItem).to.be.an('object');
+    expect(data.selectedItem.id).to.equal('');
+    expect(data.selectedItem.value).to.equal('');
   });
 
   it('sets query on mount', () => {

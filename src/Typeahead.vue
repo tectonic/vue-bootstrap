@@ -1,6 +1,19 @@
 <template>
   <div :class="[{ 'open': isOpen }, 'dropdown']">
+    <div class="tags form-control" v-if="tagInput">
+      <div class="tag" v-for="tag in tags">
+        <span class="name">{{ tag }}</span><a class="close" tabindex="-1">×</a>
+      </div>
+      <input type="text"
+        v-model="query"
+        @input="onInput"
+        class="tag-input"
+        autocomplete="off"
+        tabindex="0"
+      />
+    </div>
     <input type="text"
+      v-else
       v-model="query"
       :name="name"
       :id="id"
@@ -66,6 +79,14 @@ export default {
     hiddenInputName: {
       type: String,
       default: ''
+    },
+    tagInput: {
+      type: Boolean,
+      default: false
+    },
+    initialTags: {
+      type: Array,
+      default: []
     }
   },
   data () {
@@ -77,7 +98,8 @@ export default {
       selectedItem: {
         id: '',
         value: ''
-      }
+      },
+      tags: []
     };
   },
   computed: {
@@ -185,13 +207,17 @@ export default {
     }
   },
   mounted () {
-    this.query = this.initialValue;
     this.items = this.initialItems;
+    this.tags = this.initialTags;
 
-    this.selectedItem = {
-      id: this.initialId,
-      value: this.initialValue
-    };
+    if (!this.tagInput) {
+      this.query = this.initialValue;
+
+      this.selectedItem = {
+        id: this.initialId,
+        value: this.initialValue
+      };
+    }
 
     this.fetchItems = debounce(this.fetchItems, 200);
   }
@@ -229,5 +255,54 @@ export default {
 
   .dropdown-menu::-webkit-scrollbar-corner {
     background-color: transparent;
+  }
+
+  .tags {
+    padding: 8px 8px 0 8px;
+    height: auto;
+    min-height: 37px;
+  }
+
+  .tag {
+    border-radius: 2px;
+    display: inline-block;
+    border: 1px solid #d9d9d9;
+    background-color: #ededed;
+    white-space: nowrap;
+    margin: -2px 5px 5px 0;
+    height: 22px;
+    vertical-align: top;
+    cursor: default;
+  }
+
+  .tag:hover {
+    border-color: #b9b9b9;
+  }
+
+  .tag .name {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 4px;
+    vertical-align: top;
+  }
+
+  .tag .close {
+    font-family: Arial;
+    display: inline-block;
+    font-size: 1.1em;
+    line-height: 1.4em;
+    margin-left: 5px;
+    float: none;
+    height: 100%;
+    vertical-align: top;
+    padding-right: 4px;
+    outline: none;
+  }
+
+  .tag-input {
+    border: 0;
+    padding: 0;
+    outline: none;
   }
 </style>

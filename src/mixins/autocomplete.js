@@ -21,21 +21,21 @@ export default {
     };
   },
   computed: {
-    filteredItems () {
+    autocompleteItems () {
       if (!this.query) {
         return [];
       }
 
       // Filter items by query
-      let filteredItems = this.src ? this.items : this.items.filter(item => {
+      let autocompleteItems = this.src ? this.items : this.items.filter(item => {
         return item.value.toLowerCase().indexOf(this.query.toLowerCase()) !== -1;
       });
 
       if (this.limit !== 0) {
-        filteredItems = filteredItems.slice(0, this.limit);
+        autocompleteItems = autocompleteItems.slice(0, this.limit);
       }
 
-      return filteredItems;
+      return autocompleteItems;
     }
   },
   methods: {
@@ -57,7 +57,7 @@ export default {
       });
     },
     autocomplete () {
-      this.autocompleting = this.filteredItems.length > 0;
+      this.autocompleting = this.autocompleteItems.length > 0;
     },
     stopAutocomplete () {
       this.autocompleting = false;
@@ -68,13 +68,13 @@ export default {
     },
     markPreviousItem () {
       if (this.currentItem === 0) {
-        this.currentItem = this.filteredItems.length - 1;
+        this.currentItem = this.autocompleteItems.length - 1;
       } else {
         this.currentItem--;
       }
     },
     markNextItem () {
-      if (this.currentItem < this.filteredItems.length - 1) {
+      if (this.currentItem < this.autocompleteItems.length - 1) {
         this.currentItem++;
       } else {
         this.currentItem = 0;

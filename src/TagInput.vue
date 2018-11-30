@@ -19,7 +19,7 @@
       />
     </div>
     <ul class="dropdown-menu">
-      <li v-for="(item, index) in filteredItems" v-bind:class="{ 'active': isMarked(index) }">
+      <li v-for="(item, index) in autocompleteItems" v-bind:class="{ 'active': isMarked(index) }">
         <a href="#" v-on:mousedown.prevent="selectTag" v-on:mousemove="markItem(index)">{{ item.value }}</a>
       </li>
     </ul>
@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     selectTag () {
-      const selectedTag = this.filteredItems[this.currentItem];
+      const selectedTag = this.autocompleteItems[this.currentItem];
 
       this.tags.push(selectedTag.value);
       this.query = '';

@@ -59,7 +59,7 @@ describe('Typeahead', () => {
     expect(vm.items).that.is.an('array')
       .to.deep.equal([{ id: 1, value: 'Jane' }, { id: 2, value: 'Jack' }]);
 
-    expect(vm.filteredItems).that.is.an('array')
+    expect(vm.autocompleteItems).that.is.an('array')
       .to.deep.equal([{ id: 2, value: 'Jack' }]);
   });
 
@@ -75,7 +75,7 @@ describe('Typeahead', () => {
     vm.query = 'above';
     vm.limit = 1;
 
-    expect(vm.filteredItems).that.is.an('array')
+    expect(vm.autocompleteItems).that.is.an('array')
       .to.deep.equal([{ id: 1, value: 'above' }]);
   });
 

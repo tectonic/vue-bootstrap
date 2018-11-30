@@ -15,7 +15,7 @@ export default {
   data () {
     return {
       query: '',
-      isOpen: false,
+      autocompleting: false,
       items: [],
       currentItem: 0
     };
@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     onInput () {
-      this.open();
+      this.autocomplete();
 
       if (this.src && this.query) {
         this.fetchItems();
@@ -50,17 +50,17 @@ export default {
       this.$http.get(this.src + this.query).then((response) => {
         this.items = response.data;
 
-        // New items arrived - open drop-down menu
-        this.open();
+        // New items arrived - trigger autocomplete
+        this.autocomplete();
       }, (response) => {
         this.$emit('error', response);
       });
     },
-    open () {
-      this.isOpen = this.filteredItems.length > 0;
+    autocomplete () {
+      this.autocompleting = this.filteredItems.length > 0;
     },
-    close () {
-      this.isOpen = false;
+    stopAutocomplete () {
+      this.autocompleting = false;
       this.currentItem = 0;
     },
     isMarked (index) {

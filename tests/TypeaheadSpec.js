@@ -35,7 +35,7 @@ describe('Typeahead', () => {
     expect(vm.selectedItem).to.deep.equal({ id: '1', value: 'abc' });
   });
 
-  it('opens drop-down menu when query is entered', (done) => {
+  it('triggers autocomplete when query is entered', (done) => {
     const vm = initVM(Typeahead, {
       initialItems: [{ id: 1, value: 'hello'}, { id: 2, value: 'world' }]
     });
@@ -44,7 +44,7 @@ describe('Typeahead', () => {
     vm.onInput();
 
     Vue.nextTick(() => {
-      expect(vm.isOpen).to.be.true;
+      expect(vm.autocompleting).to.be.true;
       done();
     });
   });

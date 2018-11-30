@@ -1,5 +1,5 @@
 <template>
-  <div :class="[{ 'open': isOpen }, 'dropdown']">
+  <div :class="[{ 'open': autocompleting }, 'dropdown']">
     <input type="text"
       v-model="query"
       :name="name"
@@ -10,7 +10,7 @@
       @keydown.up="markPreviousItem"
       @keydown.down="markNextItem"
       @keydown.enter.prevent="selectItem"
-      @keydown.esc="close"
+      @keydown.esc="stopAutocomplete"
       class="form-control"
       autocomplete="off"
       ref="input"
@@ -75,12 +75,12 @@ export default {
       this.selectedItem = this.filteredItems[this.currentItem];
       this.query = this.selectedItem.value;
 
-      this.close();
+      this.stopAutocomplete();
 
       this.$emit('selected', this.selectedItem);
     },
     onBlur () {
-      this.close();
+      this.stopAutocomplete();
 
       // If the input field contains initial value, reset selected
       // item to initial state.

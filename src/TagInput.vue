@@ -1,5 +1,5 @@
 <template>
-  <div :class="[{ 'open': isOpen }, 'dropdown']">
+  <div :class="[{ 'open': autocompleting }, 'dropdown']">
     <div class="tags form-control">
       <div class="tag" v-for="tag in tags">
         <span class="name">{{ tag }}</span><a class="close" tabindex="-1">×</a>
@@ -12,7 +12,7 @@
         @keydown.up="markPreviousItem"
         @keydown.down="markNextItem"
         @keydown.enter.prevent="selectItem"
-        @keydown.esc="close"
+        @keydown.esc="stopAutocomplete"
         class="tag-input"
         autocomplete="off"
         tabindex="0"

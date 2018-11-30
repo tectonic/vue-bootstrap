@@ -2,7 +2,7 @@
   <div :class="[{ 'open': autocompleting }, 'dropdown']">
     <div class="tags form-control">
       <div class="tag" v-for="tag in tags">
-        <span class="name">{{ tag }}</span><a class="close" tabindex="-1">×</a>
+        <span class="name">{{ tag }}</span><a class="close" tabindex="-1" @click.prevent="deselectTag(tag)">×</a>
       </div>
       <input type="text"
         v-model="query"
@@ -61,14 +61,19 @@ export default {
   },
   methods: {
     selectTag () {
-      const selectedTag = this.autocompleteItems[this.currentItem];
+      const tag = this.autocompleteItems[this.currentItem];
 
-      this.tags.push(selectedTag.value);
+      this.tags.push(tag.value);
       this.query = '';
 
       this.stopAutocomplete();
 
-      this.$emit('selected', selectedTag);
+      this.$emit('selected', tag.value);
+    },
+    deselectTag (tag) {
+      this.tags = this.tags.filter(t => t !== tag);
+
+      this.$emit('deselected', tag);
     }
   },
   mounted () {

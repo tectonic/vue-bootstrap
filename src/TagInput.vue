@@ -11,7 +11,7 @@
         @input="onInput"
         @keydown.up="markPreviousItem"
         @keydown.down="markNextItem"
-        @keydown.enter.prevent="selectItem"
+        @keydown.enter.prevent="selectTag"
         @keydown.esc="stopAutocomplete"
         class="tag-input"
         autocomplete="off"
@@ -20,7 +20,7 @@
     </div>
     <ul class="dropdown-menu">
       <li v-for="(item, index) in filteredItems" v-bind:class="{ 'active': isMarked(index) }">
-        <a href="#" v-on:mousedown.prevent="selectItem" v-on:mousemove="markItem(index)">{{ item.value }}</a>
+        <a href="#" v-on:mousedown.prevent="selectTag" v-on:mousemove="markItem(index)">{{ item.value }}</a>
       </li>
     </ul>
   </div>
@@ -60,9 +60,16 @@ export default {
     };
   },
   methods: {
-    selectItem () {
-      console.log('Tag selected!');
-    }    
+    selectTag () {
+      const selectedTag = this.filteredItems[this.currentItem];
+
+      this.tags.push(selectedTag.value);
+      this.query = '';
+
+      this.stopAutocomplete();
+
+      this.$emit('selected', selectedTag);
+    }
   },
   mounted () {
     this.items = this.availableTags;

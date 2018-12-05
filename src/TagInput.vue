@@ -4,13 +4,14 @@
     :src="src"
     :limit="limit"
     :clear-on-select="true"
-    @autocomplete="handleAutocomplete"
+    :partial-input="true"
+    @autocomplete="addTag"
     @error="$emit('error', response)"
   >
     <template scope="{ autocompleteBindings, autocompleteHandlers }">
       <div class="tags form-control">
         <div class="tag" v-for="tag in tags">
-          <span class="name">{{ tag }}</span><a class="close" tabindex="-1" @click.prevent="deselectTag(tag)">&times;</a>
+          <span class="name">{{ tag }}</span><a class="close" tabindex="-1" @click.prevent="removeTag(tag)">&times;</a>
         </div>
         <input type="text"
           v-bind="autocompleteBindings"
@@ -65,13 +66,15 @@ export default {
     };
   },
   methods: {
-    handleAutocomplete (tag) {
-      this.tags.push(tag.value);
-      this.$emit('selected', tag.value);
+    addTag (tag) {
+      const value = typeof tag === 'object' ? tag.value : tag;
+
+      this.tags.push(value);
+      this.$emit('added', value);
     },
-    deselectTag (tag) {
+    removeTag (tag) {
       this.tags = this.tags.filter(t => t !== tag);
-      this.$emit('deselected', tag);
+      this.$emit('removed', tag);
     }
   }
 };

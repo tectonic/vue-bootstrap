@@ -42,6 +42,10 @@ export default {
     clearOnSelect: {
       type: Boolean,
       default: false
+    },
+    partialInput: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -150,10 +154,19 @@ export default {
     selectItem () {
       const item = this.autocompleteItems[this.currentItem];
 
-      this.$emit('autocomplete', item);
+      if (item && this.autocompleting) {
+        this.$emit('autocomplete', item);
+        this.query = this.clearOnSelect ? '' : item.value;
+        this.stopAutocomplete();
 
-      this.query = this.clearOnSelect ? '' : item.value;
-      this.stopAutocomplete();
+        return;
+      }
+
+      if (this.partialInput) {
+        this.$emit('autocomplete', this.query);
+        this.query = this.clearOnSelect ? '' : this.query;
+        this.stopAutocomplete();
+      }
     }
   },
   mounted () {

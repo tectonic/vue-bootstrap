@@ -1,49 +1,46 @@
 <template>
-  <div :class="[{ 'open': autocompleting }, 'dropdown']">
-    <div class="tags form-control">
-      <div class="tag" v-for="tag in tags">
-        <span class="name">{{ tag }}</span><a class="close" tabindex="-1" @click.prevent="deselectTag(tag)">×</a>
+  <autocomplete
+    :initial-items="availableTags"
+    :src="src"
+    :limit="limit"
+    :clear-on-select="true"
+    @autocomplete="handleAutocomplete"
+    @error="$emit('error', response)"
+  >
+    <template scope="{ autocompleteBindings, autocompleteHandlers }">
+      <div class="tags form-control">
+        <div class="tag" v-for="tag in tags">
+          <span class="name">{{ tag }}</span><a class="close" tabindex="-1" @click.prevent="deselectTag(tag)">&times;</a>
+        </div>
+        <input type="text"
+          v-bind="autocompleteBindings"
+          v-on="autocompleteHandlers"
+          :id="id"
+          :placeholder="placeholder"
+          class="tag-input"
+          autocomplete="off"
+          tabindex="0"
+        />
       </div>
-      <input type="text"
-        v-model="query"
-        :id="id"
-        :placeholder="placeholder"
-        @input="onInput"
-        @keydown.up="markPreviousItem"
-        @keydown.down="markNextItem"
-        @keydown.enter.prevent="selectTag"
-        @keydown.esc="stopAutocomplete"
-        class="tag-input"
-        autocomplete="off"
-        tabindex="0"
-      />
-    </div>
-    <ul class="dropdown-menu">
-      <li v-for="(item, index) in autocompleteItems" v-bind:class="{ 'active': isMarked(index) }">
-        <a href="#" v-on:mousedown.prevent="selectTag" v-on:mousemove="markItem(index)">{{ item.value }}</a>
-      </li>
-    </ul>
-  </div>
+    </template>
+  </autocomplete>
 </template>
 
 <script>
-import debounce from 'debounce';
-import autocomplete from './mixins/autocomplete.js';
+import Autocomplete from './Autocomplete.vue';
 
 export default {
-  mixins: [autocomplete],
+  components: {
+    Autocomplete
+  },
   props: {
     availableTags: {
       type: Array,
-      default: () => {
-        return [];
-      }
+      default: () => []
     },
     value: {
       type: Array,
-      default: () => {
-        return [];
-      }
+      default: () => []
     },
     id: {
       type: String,
@@ -52,35 +49,30 @@ export default {
     placeholder: {
       type: String,
       default: ''
+    },
+    src: {
+      type: String,
+      default: ''
+    },
+    limit: {
+      type: Number,
+      default: 0
     }
   },
   data () {
     return {
-      tags: []
+      tags: this.value
     };
   },
   methods: {
-    selectTag () {
-      const tag = this.autocompleteItems[this.currentItem];
-
+    handleAutocomplete (tag) {
       this.tags.push(tag.value);
-      this.query = '';
-
-      this.stopAutocomplete();
-
       this.$emit('selected', tag.value);
     },
     deselectTag (tag) {
       this.tags = this.tags.filter(t => t !== tag);
-
       this.$emit('deselected', tag);
     }
-  },
-  mounted () {
-    this.items = this.availableTags;
-    this.tags = this.value;
-
-    this.fetchItems = debounce(this.fetchItems, 200);
   }
 };
 </script>

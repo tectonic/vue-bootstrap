@@ -1,47 +1,49 @@
 <template>
-  <div :class="[{ 'open': autocompleting }, 'dropdown']">
-    <input type="text"
-      v-model="query"
-      :name="name"
-      :id="id"
-      :placeholder="placeholder"
-      @input="onInput"
-      @blur="onBlur"
-      @keydown.up="markPreviousItem"
-      @keydown.down="markNextItem"
-      @keydown.enter.prevent="selectItem"
-      @keydown.esc="stopAutocomplete"
-      class="form-control"
-      autocomplete="off"
-      ref="input"
-    />
-    <ul class="dropdown-menu">
-      <li v-for="(item, index) in autocompleteItems" v-bind:class="{ 'active': isMarked(index) }">
-        <a href="#" v-on:mousedown.prevent="selectItem" v-on:mousemove="markItem(index)">{{ item.value }}</a>
-      </li>
-    </ul>
-    <input type="hidden" :value="selectedItem.id" v-if="hiddenInputName" :name="hiddenInputName">
-  </div>
+  <autocomplete
+    :initial-items="initialItems"
+    :initial-query="initialValue"
+    :src="src"
+    :limit="limit"
+    @autocomplete="handleAutocomplete"
+    @reset="handleReset"
+    @error="$emit('error', response)"
+  >
+    <template scope="{ autocompleteBindings, autocompleteHandlers }">
+      <input type="text"
+        v-bind="autocompleteBindings"
+        v-on="autocompleteHandlers"
+        :name="name"
+        :id="id"
+        :placeholder="placeholder"
+        class="form-control"
+        autocomplete="off"
+      />
+      <input type="hidden" :value="selectedItem.id" v-if="hiddenInputName" :name="hiddenInputName">
+    </template>
+  </autocomplete>
 </template>
 
 <script>
-import debounce from 'debounce';
-import autocomplete from './mixins/autocomplete.js';
+import Autocomplete from './Autocomplete.vue';
 
 export default {
-  mixins: [autocomplete],
+  components: {
+    Autocomplete
+  },
   props: {
     initialItems: {
       type: Array,
-      default: () => {
-        return [];
-      }
+      default: () => []
     },
     initialValue: {
       type: String,
       default: ''
     },
     initialId: {
+      type: String,
+      default: ''
+    },
+    src: {
       type: String,
       default: ''
     },
@@ -52,6 +54,10 @@ export default {
     placeholder: {
       type: String,
       default: ''
+    },
+    limit: {
+      type: Number,
+      default: 0
     },
     name: {
       type: String,
@@ -71,57 +77,23 @@ export default {
     };
   },
   methods: {
-    selectItem () {
-      this.selectedItem = this.autocompleteItems[this.currentItem];
-      this.query = this.selectedItem.value;
-
-      this.stopAutocomplete();
+    handleAutocomplete (item) {
+      this.select(item.id, item.value);
 
       this.$emit('selected', this.selectedItem);
     },
-    onBlur () {
-      this.stopAutocomplete();
-
-      // If the input field contains initial value, reset selected
-      // item to initial state.
-      if (this.$refs.input.value === this.initialValue) {
-        this.resetSelectedItem(this.initialId, this.initialValue);
-
-        return;
-      }
-
-      // Otherwise, check whether input field contains a valid value.
-      // The 'selectedItem' needs to hold the correct data for
-      // the hidden field to be populated correctly on blur.
-      const validItem = this.items.find(item => {
-        return this.$refs.input.value.toLowerCase() === item.value.toLowerCase();
-      });
-
-      if (validItem) {
-        this.selectedItem = validItem;
-      } else {
-        this.resetSelectedItem('', '');
-      }
+    handleReset () {
+      this.select('', '');
     },
-    resetSelectedItem (id, value) {
+    select (id, value) {
       this.selectedItem = {
         id: id,
         value: value
       };
-
-      this.query = value;
     }
   },
   mounted () {
-    this.query = this.initialValue;
-    this.items = this.initialItems;
-
-    this.selectedItem = {
-      id: this.initialId,
-      value: this.initialValue
-    };
-
-    this.fetchItems = debounce(this.fetchItems, 200);
+    this.select(this.initialId, this.initialValue);
   }
 };
 </script>

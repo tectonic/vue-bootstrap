@@ -18,14 +18,6 @@ describe('Typeahead', () => {
     expect(data.selectedItem.value).to.equal('');
   });
 
-  it('sets query on mount', () => {
-    const vm = initVM(Typeahead, {
-      initialValue: 'abc'
-    });
-
-    expect(vm.query).to.equal('abc');
-  });
-
   it('sets selectedItem on mount', () => {
     const vm = initVM(Typeahead, {
       initialValue: 'abc',
@@ -33,97 +25,6 @@ describe('Typeahead', () => {
     });
 
     expect(vm.selectedItem).to.deep.equal({ id: '1', value: 'abc' });
-  });
-
-  it('triggers autocomplete when query is entered', (done) => {
-    const vm = initVM(Typeahead, {
-      initialItems: [{ id: 1, value: 'hello'}, { id: 2, value: 'world' }]
-    });
-
-    vm.query = 'hello';
-    vm.onInput();
-
-    Vue.nextTick(() => {
-      expect(vm.autocompleting).to.be.true;
-      done();
-    });
-  });
-
-  it('filters items', () => {
-    const vm = initVM(Typeahead, {
-      initialItems: [{ id: 1, value: 'Jane' }, { id: 2, value: 'Jack' }]
-    });
-
-    vm.query = 'Jac';
-
-    expect(vm.items).that.is.an('array')
-      .to.deep.equal([{ id: 1, value: 'Jane' }, { id: 2, value: 'Jack' }]);
-
-    expect(vm.autocompleteItems).that.is.an('array')
-      .to.deep.equal([{ id: 2, value: 'Jack' }]);
-  });
-
-  it('filters items with limit', () => {
-    const vm = initVM(Typeahead, {
-      initialItems: [
-        { id: 1, value: 'above' },
-        { id: 2, value: 'above all' },
-        { id: 3, value: 'above the fold' }
-      ]
-    });
-
-    vm.query = 'above';
-    vm.limit = 1;
-
-    expect(vm.autocompleteItems).that.is.an('array')
-      .to.deep.equal([{ id: 1, value: 'above' }]);
-  });
-
-  it('marks next item', () => {
-    const vm = initVM(Typeahead, {
-      initialItems: [
-        { id: 1, value: 'Aaaa' },
-        { id: 2, value: 'Aaa' },
-        { id: 3, value: 'Aa' }
-      ]
-    });
-
-    vm.query = 'A';
-    vm.currentItem = 1;
-    vm.markNextItem();
-
-    expect(vm.currentItem).to.equal(2);
-  });
-
-  it('marks previous item', () => {
-    const vm = initVM(Typeahead, {
-      initialItems: [
-        { id: 1, value: 'Aaaa' },
-        { id: 2, value: 'Aaa' },
-        { id: 3, value: 'Aa' }
-      ]
-    });
-
-    vm.query = 'A';
-    vm.currentItem = 1;
-    vm.markPreviousItem();
-
-    expect(vm.currentItem).to.equal(0);
-  });
-
-  it('knows current item', () => {
-    const vm = initVM(Typeahead, {
-      initialItems: [
-        { id: 1, value: 'Aaaa' },
-        { id: 2, value: 'Aaa' },
-        { id: 3, value: 'Aa' }
-      ]
-    });
-
-    vm.query = 'A';
-    vm.currentItem = 1;
-
-    expect(vm.isMarked(1)).to.be.true;
   });
 
   it('populates the hidden field', (done) => {

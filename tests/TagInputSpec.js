@@ -34,4 +34,32 @@ describe('TagInput', () => {
 
     expect(vm.tags).to.deep.equal(['Yellow']);
   });
+
+  it('should format tags', () => {
+    const vm = initVM(TagInput, {
+      value: ['Pink', 'Blue', 'Green']
+    });
+
+    expect(vm.formattedTags).to.equal('Pink, Blue, Green');
+  });
+
+  it('should populate the hidden field', (done) => {
+    const vm = initVM(TagInput, {
+      value: ['Black', 'Blue'],
+      hiddenInputName: 'tags'
+    });
+
+    Vue.nextTick(() => {
+      let inputFields, hiddenField;
+
+      inputFields = vm.$el.getElementsByTagName('input');
+      hiddenField = inputFields[1];
+
+      expect(inputFields.length).to.equal(2);
+      expect(hiddenField.name).to.equal('tags');
+      expect(hiddenField.value).to.equal('Black, Blue');
+
+      done();
+    });
+  });
 });

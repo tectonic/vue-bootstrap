@@ -23,6 +23,7 @@
           tabindex="0"
         />
       </div>
+      <input type="hidden" :value="formattedTags" v-if="hiddenInputName" :name="hiddenInputName">
     </template>
   </autocomplete>
 </template>
@@ -58,12 +59,21 @@ export default {
     limit: {
       type: Number,
       default: 0
+    },
+    hiddenInputName: {
+      type: String,
+      default: ''
     }
   },
   data () {
     return {
       tags: this.value
     };
+  },
+  computed: {
+    formattedTags () {
+      return this.tags.join(', ');
+    }
   },
   methods: {
     addTag (tag) {

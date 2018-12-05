@@ -69,6 +69,10 @@ export default {
     addTag (tag) {
       const value = typeof tag === 'object' ? tag.value : tag;
 
+      if (this.tags.includes(value)) {
+        return;
+      }
+
       this.tags.push(value);
       this.$emit('added', value);
     },

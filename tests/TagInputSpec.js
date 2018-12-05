@@ -24,4 +24,14 @@ describe('TagInput', () => {
 
     expect(vm.tags).to.deep.equal([]);
   });
+
+  it('should ignore duplicate tags', () => {
+    const vm = initVM(TagInput);
+
+    vm.addTag('Yellow');
+    vm.addTag('Yellow');
+    vm.addTag('Yellow');
+
+    expect(vm.tags).to.deep.equal(['Yellow']);
+  });
 });

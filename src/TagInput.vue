@@ -84,11 +84,15 @@ export default {
       }
 
       this.tags.push(value);
+
       this.$emit('added', value);
+      this.$emit('tagged', this.tags);
     },
     removeTag (tag) {
       this.tags = this.tags.filter(t => t !== tag);
+
       this.$emit('removed', tag);
+      this.$emit('tagged', this.tags);
     }
   }
 };

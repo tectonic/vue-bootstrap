@@ -96,7 +96,7 @@ export default {
       this.stopAutocomplete();
       this.query = '';
 
-      if (this.autocompleteOnBlur && value) {
+      if (this.autocompleteOnBlur && this.partialInput && value) {
         this.$emit('autocompleted', value);
         return;
       }
@@ -192,3 +192,12 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+  .dropdown-menu {
+    width: 100%;
+    max-height: 300px;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+</style>

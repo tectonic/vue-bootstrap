@@ -118,13 +118,9 @@ export default {
 </script>
 
 <style scoped>
-  .dropdown-menu {
-    max-height: 300px;
-    overflow: hidden;
-    overflow-y: auto;
-  }
-
   .tags {
+    display: flex;
+    flex-wrap: wrap;
     padding: 8px 8px 0 8px;
     height: auto;
     min-height: 37px;
@@ -169,6 +165,7 @@ export default {
   }
 
   .tag-input {
+    flex-grow: 1;
     border: 0;
     padding: 0;
     outline: none;

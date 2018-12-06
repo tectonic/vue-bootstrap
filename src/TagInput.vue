@@ -164,6 +164,7 @@ export default {
     vertical-align: top;
     padding-right: 4px;
     outline: none;
+    text-decoration: none;
   }
 
   .tag-input {

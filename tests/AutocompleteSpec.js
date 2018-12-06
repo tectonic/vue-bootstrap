@@ -9,7 +9,6 @@ describe('Autocomplete', () => {
       initialItems: [{ id: 1, value: 'hello'}, { id: 2, value: 'world' }]
     });
 
-    vm.query = 'hello';
     vm.onInput('h');
 
     Vue.nextTick(() => {

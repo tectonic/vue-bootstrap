@@ -5,6 +5,7 @@
     :limit="limit"
     :clear-on-select="true"
     :partial-input="true"
+    :autocomplete-on-blur="true"
     dropdown-class="dropdown-tags"
     @autocompleted="addTag"
     @deleted="onDelete"

@@ -47,6 +47,10 @@ export default {
       type: Boolean,
       default: false
     },
+    autocompleteOnBlur: {
+      type: Boolean,
+      default: false
+    },
     dropdownClass: {
       type: String,
       default: ''
@@ -89,13 +93,19 @@ export default {
       }
     },
     onBlur (value) {
+      this.stopAutocomplete();
+      this.query = '';
+
+      if (this.autocompleteOnBlur && value) {
+        this.$emit('autocompleted', value);
+        return;
+      }
+
       const validSelection = this.availableItems.find(item => {
         return value.toLowerCase() === item.value.toLowerCase();
       });
 
       if (!validSelection) {
-        this.stopAutocomplete();
-        this.query = '';
         this.$emit('reset');
       }
     },

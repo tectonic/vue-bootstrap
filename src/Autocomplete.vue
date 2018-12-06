@@ -119,7 +119,7 @@ export default {
       }
       // backspace
       if (e.keyCode === 8) {
-        this.$emit('delete', e.target.value);
+        this.$emit('deleted', e.target.value);
       }
     },
     fetchItems () {
@@ -163,7 +163,7 @@ export default {
       const item = this.autocompleteItems[this.currentItem];
 
       if (item && this.autocompleting) {
-        this.$emit('autocomplete', item);
+        this.$emit('autocompleted', item);
         this.query = this.clearOnSelect ? '' : item.value;
         this.stopAutocomplete();
 
@@ -171,7 +171,7 @@ export default {
       }
 
       if (this.partialInput) {
-        this.$emit('autocomplete', this.query);
+        this.$emit('autocompleted', this.query);
         this.query = this.clearOnSelect ? '' : this.query;
         this.stopAutocomplete();
       }

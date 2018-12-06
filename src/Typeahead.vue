@@ -5,7 +5,7 @@
     :src="src"
     :limit="limit"
     dropdown-class="dropdown-typeahead"
-    @autocomplete="handleAutocomplete"
+    @autocompleted="handleAutocomplete"
     @reset="handleReset"
     @error="$emit('error', response)"
   >

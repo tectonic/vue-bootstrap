@@ -6,8 +6,8 @@
     :clear-on-select="true"
     :partial-input="true"
     dropdown-class="dropdown-tags"
-    @autocomplete="addTag"
-    @delete="onDelete"
+    @autocompleted="addTag"
+    @deleted="onDelete"
     @error="$emit('error', response)"
   >
     <template scope="{ autocompleteBindings, autocompleteHandlers }">

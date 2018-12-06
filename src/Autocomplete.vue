@@ -117,6 +117,10 @@ export default {
       if (e.keyCode === 27) {
         this.stopAutocomplete();
       }
+      // backspace
+      if (e.keyCode === 8) {
+        this.$emit('delete', e.target.value);
+      }
     },
     fetchItems () {
       this.$http.get(this.src + this.query).then((response) => {

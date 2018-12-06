@@ -7,6 +7,7 @@
     :partial-input="true"
     dropdown-class="dropdown-tags"
     @autocomplete="addTag"
+    @delete="onDelete"
     @error="$emit('error', response)"
   >
     <template scope="{ autocompleteBindings, autocompleteHandlers }">
@@ -94,6 +95,13 @@ export default {
 
       this.$emit('removed', tag);
       this.$emit('tagged', this.tags);
+    },
+    onDelete (value) {
+      const tag = this.tags.slice(-1).pop();
+
+      if (!value && tag) {
+        this.removeTag(tag);
+      }
     }
   },
   created () {

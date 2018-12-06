@@ -43,6 +43,18 @@ describe('TagInput', () => {
     expect(vm.tags).to.deep.equal(['Yellow']);
   });
 
+  it('handles backspace key', () => {
+    const vm = initVM(TagInput, {
+      value: ['Purple', 'Black']
+    });
+
+    vm.onDelete('Yellow');
+    expect(vm.tags).to.deep.equal(['Purple', 'Black']);
+
+    vm.onDelete('');
+    expect(vm.tags).to.deep.equal(['Purple']);
+  });
+
   it('formats tags', () => {
     const vm = initVM(TagInput, {
       value: ['Pink', 'Blue', 'Green']

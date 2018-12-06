@@ -5,6 +5,7 @@
     :limit="limit"
     :clear-on-select="true"
     :partial-input="true"
+    dropdown-class="dropdown-tags"
     @autocomplete="addTag"
     @error="$emit('error', response)"
   >

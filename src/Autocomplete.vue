@@ -1,5 +1,5 @@
 <template>
-  <div :class="[{ 'open': autocompleting }, 'dropdown']">
+  <div :class="[{ 'open': autocompleting }, 'dropdown', dropdownClass]">
     <slot
       :autocomplete-bindings="{ value: query }"
       :autocomplete-handlers="{
@@ -46,6 +46,10 @@ export default {
     partialInput: {
       type: Boolean,
       default: false
+    },
+    dropdownClass: {
+      type: String,
+      default: ''
     }
   },
   data () {

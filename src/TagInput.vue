@@ -159,5 +159,6 @@ export default {
     border: 0;
     padding: 0;
     outline: none;
+    margin: -2px 5px 5px 0;
   }
 </style>

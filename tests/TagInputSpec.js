@@ -4,7 +4,15 @@ import { initVM } from './utils.js';
 import TagInput from '../src/TagInput.vue';
 
 describe('TagInput', () => {
-  it('should add a tag', () => {
+  it('accepts a string with tags as value', () => {
+    const vm = initVM(TagInput, {
+      value: 'Magenta, Pink, Yellow'
+    });
+
+    expect(vm.tags).to.deep.equal(['Magenta', 'Pink', 'Yellow']);
+  });
+
+  it('adds a tag', () => {
     const vm = initVM(TagInput, {
       value: ['Black']
     });
@@ -15,7 +23,7 @@ describe('TagInput', () => {
     expect(vm.tags).to.deep.equal(['Black', 'Orange', 'Blue']);
   });
 
-  it('should remove a tag', () => {
+  it('removes a tag', () => {
     const vm = initVM(TagInput, {
       value: ['Black']
     });
@@ -25,7 +33,7 @@ describe('TagInput', () => {
     expect(vm.tags).to.deep.equal([]);
   });
 
-  it('should ignore duplicate tags', () => {
+  it('ignores duplicate tags', () => {
     const vm = initVM(TagInput);
 
     vm.addTag('Yellow');
@@ -35,7 +43,7 @@ describe('TagInput', () => {
     expect(vm.tags).to.deep.equal(['Yellow']);
   });
 
-  it('should format tags', () => {
+  it('formats tags', () => {
     const vm = initVM(TagInput, {
       value: ['Pink', 'Blue', 'Green']
     });
@@ -43,7 +51,7 @@ describe('TagInput', () => {
     expect(vm.formattedTags).to.equal('Pink, Blue, Green');
   });
 
-  it('should populate the hidden field', (done) => {
+  it('populates the hidden field', (done) => {
     const vm = initVM(TagInput, {
       value: ['Black', 'Blue'],
       hiddenInputName: 'tags'

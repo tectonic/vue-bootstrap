@@ -41,7 +41,7 @@ export default {
       default: () => []
     },
     value: {
-      type: Array,
+      type: [Array, String],
       default: () => []
     },
     id: {
@@ -67,7 +67,7 @@ export default {
   },
   data () {
     return {
-      tags: this.value
+      tags: []
     };
   },
   computed: {
@@ -93,6 +93,13 @@ export default {
 
       this.$emit('removed', tag);
       this.$emit('tagged', this.tags);
+    }
+  },
+  created () {
+    if (this.value instanceof Array) {
+      this.tags = this.value;
+    } else {
+      this.tags = this.value.split(', ');
     }
   }
 };

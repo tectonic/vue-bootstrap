@@ -48,6 +48,8 @@ describe('TagInput', () => {
       value: ['Black']
     });
 
+    vm.addTag('');
+    vm.addTag(' ');
     vm.addTag('Orange   ');
     vm.addTag({ id: 1, value: '     Purple   ' });
 

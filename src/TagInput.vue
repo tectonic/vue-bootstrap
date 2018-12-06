@@ -84,7 +84,7 @@ export default {
 
       value = value.trim();
 
-      if (this.tags.includes(value)) {
+      if (!value || this.tags.includes(value)) {
         return;
       }
 

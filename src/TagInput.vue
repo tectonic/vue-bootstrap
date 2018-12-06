@@ -110,7 +110,7 @@ export default {
     if (this.value instanceof Array) {
       this.tags = this.value;
     } else {
-      this.tags = this.value.split(', ');
+      this.tags = this.value ? this.value.split(', ') : [];
     }
   }
 };

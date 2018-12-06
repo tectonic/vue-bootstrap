@@ -79,7 +79,9 @@ export default {
   },
   methods: {
     addTag (tag) {
-      const value = typeof tag === 'object' ? tag.value : tag;
+      let value = typeof tag === 'object' ? tag.value : tag;
+
+      value = value.trim();
 
       if (this.tags.includes(value)) {
         return;

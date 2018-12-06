@@ -9,6 +9,7 @@ import Multiselect from './Multiselect.vue';
 import Panel from './Panel.vue';
 import Popover from './Popover.vue';
 import SelectField from './SelectField.vue';
+import TagInput from './TagInput.vue';
 import Typeahead from './Typeahead.vue';
 
 export {
@@ -20,5 +21,6 @@ export {
   Panel,
   Popover,
   SelectField,
+  TagInput,
   Typeahead
 };

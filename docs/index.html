@@ -694,15 +694,106 @@
             </table>
           </div>
           <div class="island">
+            <h1>Tag input</h1>
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <div class="form-group">
+                  <label for="tag-input">Tag input with autocomplete</label>
+                  <tag-input value="Orange, Black" id="tag-input" placeholder="Add tag" :available-tags="availableTags" hidden-input-name="tags"></tag-input>
+                </div>
+<pre>
+&lt;tag-input value="Orange, Black" id="tag-input" placeholder="Add tag" :available-tags="availableTags" hidden-input-name="tags"&gt;&lt;/tag-input&gt;
+</pre>
+              </div>
+            </div>
+            <table class="table table-bordered">
+              <tbody>
+                <tr>
+                  <th colspan="4"><span class="label label-lg label-success">Props</span></th>
+                </tr>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>Description</th>
+                </tr>
+                <tr>
+                  <td>available-tags</td>
+                  <td>Array</td>
+                  <td></td>
+                  <td>An array with available tags (<code>[{ id: 1, value: 'hey' }]</code>).</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>[Array, String]</td>
+                  <td></td>
+                  <td>An array or comma separated string with tags (<code>['hey', 'there']</code> or <code>hey, there</code>).</td>
+                </tr>
+                <tr>
+                  <td>src</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>URL that will be used to fetch autocomplete suggestions (such as: /tag/search?q=).<br>
+                    A query will be appended to this URL.<br>
+                    There is no need to define <code>available-tags</code> when a remote source is defined.</td>
+                </tr>
+                <tr>
+                  <td>id</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>The <code>id</code> attribute of the input element.</td>
+                </tr>
+                <tr>
+                  <td>placeholder</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>The <code>placeholder</code> attribute of the input element.</td>
+                </tr>
+                <tr>
+                  <td>limit</td>
+                  <td>Number</td>
+                  <td>0</td>
+                  <td>Limit the number of autocomplete suggestions. No limit is applied by default.</td>
+                </tr>
+                <tr>
+                  <td>hidden-input-name</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>The name of a hidden input field that will be populated with tags (<code>hey, there</code>).</td>
+                </tr>
+              </tbody>
+              <tbody>
+                <tr>
+                  <th colspan="4"><span class="label label-lg label-success">Events</span></th>
+                </tr>
+                <tr>
+                  <th>Name</th>
+                  <th colspan="2">Parameters</th>
+                  <th>Description</th>
+                </tr>
+                <tr>
+                  <td>input</td>
+                  <td colspan="2">Tags (Array)</td>
+                  <td>Emitted on user input. Provides support for <code>v-model</code>.</td>
+                </tr>
+                <tr>
+                  <td>error</td>
+                  <td colspan="2">Response (Object)</td>
+                  <td>Emitted when there was an error communicating with the remote source.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="island">
             <h1>Typeahead</h1>
             <div class="panel panel-default">
               <div class="panel-body">
                 <div class="form-group">
                   <label for="typeahead-input">Text input with autocomplete</label>
-                  <typeahead id="typeahead-input" placeholder="Type a name" :initial-items="typeaheadItems" :on-select="onSelect"></typeahead>
+                  <typeahead initial-id="14" initial-value="John Stockton" id="typeahead-input" placeholder="Type a name" :initial-items="typeaheadItems" hidden-input-name="typeaheadId" @selected="onSelect"></typeahead>
                 </div>
 <pre>
-&lt;typeahead id="typeahead-input" placeholder="Type a name" :initial-items="typeaheadItems" :on-select="onSelect"&gt;&lt;/typeahead&gt;
+&lt;typeahead initial-id="14" initial-value="John Stockton" id="typeahead-input" placeholder="Type a name" :initial-items="typeaheadItems" hidden-input-name="typeaheadId" @selected="onSelect"&gt;&lt;/typeahead&gt;
 </pre>
               </div>
             </div>

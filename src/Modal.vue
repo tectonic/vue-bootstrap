@@ -20,6 +20,7 @@
         @keydown.esc.prevent="close"
         @click="onBackdropClick">
         <div class="modal-dialog" role="document">
+          <slot name="before-content"></slot>
           <div class="modal-content">
             <div class="modal-header" v-if="header">
               <button type="button" class="close" aria-label="Close" @click.prevent="close">
@@ -41,6 +42,7 @@
               </button>
             </div>
           </div>
+          <slot name="after-content"></slot>
         </div>
       </div>
     </transition>

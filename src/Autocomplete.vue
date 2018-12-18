@@ -54,6 +54,10 @@ export default {
     dropdownClass: {
       type: String,
       default: ''
+    },
+    autocompleteKeys: {
+      type: Array,
+      default: () => [13]
     }
   },
   data () {
@@ -118,8 +122,8 @@ export default {
       if (e.keyCode === 40) {
         this.markNextItem();
       }
-      // enter
-      if (e.keyCode === 13) {
+      // enter (or any defined autocomplete keys)
+      if (this.autocompleteKeys.includes(e.keyCode)) {
         e.preventDefault();
         this.selectItem();
       }

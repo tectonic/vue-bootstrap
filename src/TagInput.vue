@@ -6,6 +6,7 @@
     :clear-on-select="true"
     :partial-input="true"
     :autocomplete-on-blur="true"
+    :autocomplete-keys="[13, 188, 9]"
     dropdown-class="dropdown-tags"
     @autocompleted="addTag"
     @deleted="onDelete"

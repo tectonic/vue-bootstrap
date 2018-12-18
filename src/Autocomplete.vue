@@ -98,9 +98,9 @@ export default {
     },
     onBlur (value) {
       this.stopAutocomplete();
-      this.query = '';
 
       if (this.autocompleteOnBlur && this.partialInput && value) {
+        this.query = '';
         this.$emit('autocompleted', value);
         return;
       }
@@ -110,6 +110,7 @@ export default {
       });
 
       if (!validSelection) {
+        this.query = '';
         this.$emit('reset');
       }
     },

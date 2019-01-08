@@ -23,7 +23,7 @@
           <slot name="before-content"></slot>
           <div class="modal-content">
             <div class="modal-header" v-if="header">
-              <button type="button" class="close" aria-label="Close" @click.prevent="close">
+              <button type="button" class="close" aria-label="Close" @click.prevent="close" v-if="headerCloseButton">
                 <slot name="close"><span aria-hidden="true">&times;</span></slot>
               </button>
               <h4 class="modal-title" :id="uniqueTitleId()">
@@ -71,6 +71,10 @@ export default {
       type: String
     },
     header: {
+      type: Boolean,
+      default: true
+    },
+    headerCloseButton: {
       type: Boolean,
       default: true
     },

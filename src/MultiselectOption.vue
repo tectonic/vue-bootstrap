@@ -41,7 +41,7 @@
         </template>
         <label :style="indentStyle()" :title="option[valueProperty]">
           <input type="checkbox" :name="name" v-model="option.selected" :value="option[idProperty]">
-          {{ option[valueProperty] }}
+          <slot>{{option[valueProperty]}}</slot>
           <popover v-if="option[extraProperty]" :content="option[extraProperty]" trigger="hover">
             <span :class="infoIconClass"></span>
           </popover>

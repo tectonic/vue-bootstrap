@@ -104,8 +104,25 @@ new Vue({
       multiselectOptionsFlat: [
         { id: 20, name: 'Horror' },
         { id: 21, name: 'Science Fiction' }
+      ],
+      availableTags: [
+        { id: 1, value: 'Red' },
+        { id: 2, value: 'Orange' },
+        { id: 3, value: 'Yellow' },
+        { id: 4, value: 'Green' },
+        { id: 5, value: 'Cyan' },
+        { id: 6, value: 'Blue' },
+        { id: 7, value: 'Indigo' },
+        { id: 8, value: 'Violet' },
+        { id: 9, value: 'Purple' },
+        { id: 10, value: 'Magenta' },
+        { id: 11, value: 'Pink' },
+        { id: 12, value: 'Brown' },
+        { id: 13, value: 'White' },
+        { id: 14, value: 'Gray' },
+        { id: 15, value: 'Black' }
       ]
-    };
+    }
   },
   methods: {
     onSelect (item) {

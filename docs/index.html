@@ -50,7 +50,7 @@
                 <div class="form-group">
                   <datepicker value="2017-03-01 12:10" mode="datetime"></datepicker>
                 </div>
-<pre>
+<pre v-pre>
 &lt;datepicker value="2017-03-01 12:10" mode="datetime"&gt;&lt;/datepicker&gt;
 </pre>
               </div>
@@ -133,7 +133,7 @@
                     <li><a href="javascript:;">Another action</a></li>
                   </dropdown>
                 </div>
-<pre>
+<pre v-pre>
 &lt;dropdown label="Dropdown" id="menu"&gt;
   &lt;li&gt;&lt;a href="">Action&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href="">Another action&lt;/a&gt;&lt;/li&gt;
@@ -215,7 +215,7 @@
                     </modal>
                   </div>
                 </div>
-<pre>
+<pre v-pre>
 &lt;button class="btn btn-primary" @click="showModal = true">Show modal&lt;/button&gt;
 &lt;modal title="Hello world!" v-model="showModal" @closed="showModal = false"&gt;
   This is the body.
@@ -341,7 +341,7 @@
                     <multiselect :options="multiselectOptions" :subset="true" subset-label="" :randomizer="true" randomizer-help-text="Help text."></multiselect>
                   </div>
                 </div>
-<pre>
+<pre v-pre>
 &lt;multiselect :options="multiselectOptions" :subset="true" subset-label="" :randomizer="true" randomizer-help-text="Help text."&gt;&lt;/multiselect&gt;
 </pre>
               </div>
@@ -527,7 +527,7 @@
                     <div slot="footer">Footer</div>
                   </panel>
                 </div>
-<pre>
+<pre v-pre>
 &lt;panel&gt;
   &lt;div slot="heading"&gt;Heading&lt;/div&gt;
   This is the content.
@@ -574,7 +574,7 @@
                     </div>
                   </popover>
                 </div>
-<pre>
+<pre v-pre>
 &lt;popover title="Hello world!" placement="right"&gt;
   &lt;a class="btn btn-primary">Click me&lt;/a&gt;
   &lt;div slot="content"&gt;
@@ -644,7 +644,7 @@
                 <div class="form-group">
                   <select-field :items="selectFieldItems" value="1" :empty-option="true"></select-field>
                 </div>
-<pre>
+<pre v-pre>
 &lt;select-field items="selectFieldItems" value="1" :empty-option="true"&gt;&lt;/select-field&gt;
 </pre>
               </div>
@@ -728,7 +728,7 @@
                   <label for="tag-input">Tag input with autocomplete</label>
                   <tag-input value="Orange, Black" id="tag-input" placeholder="Add tag" :available-tags="availableTags" hidden-input-name="tags"></tag-input>
                 </div>
-<pre>
+<pre v-pre>
 &lt;tag-input value="Orange, Black" id="tag-input" placeholder="Add tag" :available-tags="availableTags" hidden-input-name="tags"&gt;&lt;/tag-input&gt;
 </pre>
               </div>
@@ -819,7 +819,7 @@
                   <label for="typeahead-input">Text input with autocomplete</label>
                   <typeahead initial-id="14" initial-value="John Stockton" id="typeahead-input" placeholder="Type a name" :initial-items="typeaheadItems" hidden-input-name="typeaheadId" @selected="onSelect"></typeahead>
                 </div>
-<pre>
+<pre v-pre>
 &lt;typeahead initial-id="14" initial-value="John Stockton" id="typeahead-input" placeholder="Type a name" :initial-items="typeaheadItems" hidden-input-name="typeaheadId" @selected="onSelect"&gt;&lt;/typeahead&gt;
 </pre>
               </div>
@@ -918,7 +918,7 @@
 Using the Typeahead component with Ajax by defining the <code>src</code> prop will require 'vue-resource' peer
 dependency to be installed. Install 'vue-resource' with NPM and hook it to the main Vue instance.
 
-<pre>
+<pre v-pre>
 import Vue from 'vue';
 import VueResource from 'vue-resource';
 
@@ -934,7 +934,7 @@ Vue.use(VueResource);
               <a href="https://vuejs.org/v2/guide/components.html#Content-Distribution-with-Slots">slots</a>.
             </p>
             <p>Alternatively, you can use an inline template to fully replace the default template of any of the components.</p>
-<pre>
+<pre v-pre>
 &lt;component inline-template&gt;
   &lt;div&gt;...your custom template goes here...&lt;/div&gt;
 &lt;/component&gt;

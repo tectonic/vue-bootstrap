@@ -101,6 +101,10 @@ new Vue({
         { id: 20, name: 'Horror' },
         { id: 21, name: 'Science Fiction' }
       ],
+      multiselectOptionsFlat: [
+        { id: 20, name: 'Horror' },
+        { id: 21, name: 'Science Fiction' }
+      ],
       availableTags: [
         { id: 1, value: 'Red' },
         { id: 2, value: 'Orange' },
@@ -118,7 +122,7 @@ new Vue({
         { id: 14, value: 'Gray' },
         { id: 15, value: 'Black' }
       ]
-    };
+    }
   },
   methods: {
     onSelect (item) {

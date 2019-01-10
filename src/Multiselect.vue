@@ -38,6 +38,9 @@
       :subsetName="subsetName"
       :selectedSubsetOptions="selectedSubsetOptions"
       :infoIconClass="infoIconClass">
+      <template scope="{item}">
+          <slot :item="item"></slot>
+      </template>
     </multiselect-list>
   </div>
 </template>

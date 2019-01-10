@@ -10,6 +10,9 @@
       :value-property="valueProperty"
       :extra-property="extraProperty"
       v-bind="$attrs">
+      <template>
+        <slot :item="option"></slot>
+      </template>
     </multiselect-option>
   </div>
 </template>

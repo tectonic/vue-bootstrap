@@ -346,6 +346,27 @@
 </pre>
               </div>
             </div>
+            <h3>the below templated version works only for single level elements</h4>
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <div class="form-group">
+                  <div>
+                    <multiselect :options="multiselectOptionsFlat" :filter="false">
+                      <template scope="{ item }">
+                        <span style="color:red">templated: {{ item.name }}!</span>
+                      </template>
+                    </multiselect>
+                  </div>
+                </div>
+                <pre v-pre>
+&lt;multiselect :options="multiselectOptionsFlat" :filter="false"&gt;
+&lt;template scope="{ item }"&gt;
+  &lt;span style="color:red"&gt;templated: {{ item.name }}!&lt;/span&gt;
+&lt;/template&gt;
+&lt;/multiselect&gt;
+</pre>
+              </div>
+            </div>
             <table class="table table-bordered">
               <tbody>
                 <tr>
@@ -492,177 +513,6 @@
                   <td>glyphicon glyphicon-question-sign</td>
                   <td></td>
                 </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="island">
-            <h1>Multiselect with template</h1>
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <div class="form-group">
-                  <div>
-                    <multiselect :options="multiselectOptions" :subset="true" subset-label="" :randomizer="true" randomizer-help-text="Help text.">
-                      <template scope="{ item }">
-                        <span style="color:red">templated: {{ item.name }}!</span>
-                      </template>
-                    </multiselect>
-                  </div>
-                </div>
-                <pre v-pre>
-&lt;multiselect :options="multiselectOptions" :subset="true" subset-label="" :randomizer="true" randomizer-help-text="Help text."&gt;
-&lt;template scope="{ item }"&gt;
-  &lt;span style="color:red"&gt;templated: {{ item.name }}!&lt;/span&gt;
-&lt;/template&gt;
-&lt;/multiselect&gt;
-</pre>
-              </div>
-            </div>
-            <table class="table table-bordered">
-              <tbody>
-              <tr>
-                <th colspan="4"><span class="label label-lg label-success">Props</span></th>
-              </tr>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-              <tr>
-                <td>name</td>
-                <td>String</td>
-                <td>multiselect[]</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>filter</td>
-                <td>Boolean</td>
-                <td>true</td>
-                <td>Show the keyword filter?</td>
-              </tr>
-              <tr>
-                <td>counter</td>
-                <td>Boolean</td>
-                <td>true</td>
-                <td>Show the counter?</td>
-              </tr>
-              <tr>
-                <td>placeholder</td>
-                <td>String</td>
-                <td>Filter list</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>select-all-label</td>
-                <td>String</td>
-                <td>Select all</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>options</td>
-                <td>Array</td>
-                <td>[]</td>
-                <td>Options.</td>
-              </tr>
-              <tr>
-                <td>selected-options</td>
-                <td>Array</td>
-                <td>[]</td>
-                <td>Selected options.</td>
-              </tr>
-              <tr>
-                <td>id-property</td>
-                <td>String</td>
-                <td>id</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>value-property</td>
-                <td>String</td>
-                <td>name</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>extra-property</td>
-                <td>String</td>
-                <td>extra</td>
-                <td>
-                  Property name which can be used to access extra information. When available
-                  the extra information will be displayed in a popover next to the option value.
-                </td>
-              </tr>
-              <tr>
-                <td>randomizer</td>
-                <td>Boolean</td>
-                <td>false</td>
-                <td>Show the randomizer?</td>
-              </tr>
-              <tr>
-                <td>randomizer-show</td>
-                <td>String</td>
-                <td>Random selection</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>randomizer-how-many</td>
-                <td>String</td>
-                <td>How many?</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>randomizer-help-text</td>
-                <td>String</td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>randomizer-button</td>
-                <td>String</td>
-                <td>Go</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>subset</td>
-                <td>Boolean</td>
-                <td>false</td>
-                <td>Enable subset selection?</td>
-              </tr>
-              <tr>
-                <td>subset-type</td>
-                <td>String</td>
-                <td>radio</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>subset-name</td>
-                <td>String</td>
-                <td>subset</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>subset-label</td>
-                <td>String</td>
-                <td>Default</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>selected-subset-options</td>
-                <td>Array</td>
-                <td>[]</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>info-icon-class</td>
-                <td>String</td>
-                <td>glyphicon glyphicon-info-sign</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>help-icon-class</td>
-                <td>String</td>
-                <td>glyphicon glyphicon-question-sign</td>
-                <td></td>
-              </tr>
               </tbody>
             </table>
           </div>

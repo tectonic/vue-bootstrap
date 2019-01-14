@@ -346,23 +346,23 @@
 </pre>
               </div>
             </div>
-            <h4>the below templated version works only for single level elements</h4>
+            <h2 class="h4">Optionally provide a custom template for the first level of Multiselect options:</h2>
             <div class="panel panel-default">
               <div class="panel-body">
                 <div class="form-group">
                   <div>
                     <multiselect :options="multiselectOptionsFlat" :filter="false">
                       <template scope="{ item }">
-                        <span style="color:red">templated: {{ item.name }}!</span>
+                        <span style="color:red">{{ item.name }}!</span>
                       </template>
                     </multiselect>
                   </div>
                 </div>
                 <pre v-pre>
 &lt;multiselect :options="multiselectOptionsFlat" :filter="false"&gt;
-&lt;template scope="{ item }"&gt;
-  &lt;span style="color:red"&gt;templated: {{ item.name }}!&lt;/span&gt;
-&lt;/template&gt;
+  &lt;template scope="{ item }"&gt;
+    &lt;span style="color:red"&gt;{{ item.name }}!&lt;/span&gt;
+  &lt;/template&gt;
 &lt;/multiselect&gt;
 </pre>
               </div>

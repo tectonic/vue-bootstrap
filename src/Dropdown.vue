@@ -1,5 +1,5 @@
 <template>
-  <div :class="[{ 'open': isOpen }, verticalPositionClass, containerClass]" ref="container">
+  <div :class="[{ 'open': isOpen }, verticalPositionClass, containerClass]" ref="container" v-on-click-outside="close">
     <slot name="button">
       <a href=""
         :class="buttonClass"
@@ -24,7 +24,12 @@
 </template>
 
 <script>
+import { mixin as clickOutside } from './mixins/clickOutside.js';
+
 export default {
+  mixins: [
+    clickOutside
+  ],
   props: {
     id: {
       type: String,
@@ -96,18 +101,6 @@ export default {
     close () {
       this.isOpen = false;
     }
-  },
-  mounted () {
-    this.onClickOutside = (event) => {
-      if (!this.$refs.ul.contains(event.target) && !this.$refs.button.contains(event.target)) {
-        this.close();
-      }
-    };
-
-    document.addEventListener('click', this.onClickOutside);
-  },
-  beforeDestroy () {
-    document.removeEventListener('click', this.onClickOutside);
   }
 };
 </script>

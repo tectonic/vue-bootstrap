@@ -4,10 +4,6 @@ import { initVM } from './utils.js';
 import Dropdown from '../src/Dropdown.vue';
 
 describe('Dropdown', () => {
-  it('has a mounted hook', () => {
-    expect(typeof Dropdown.mounted).to.equal('function');
-  });
-
   it('initialises with default data', () => {
     expect(typeof Dropdown.data).to.equal('function');
 

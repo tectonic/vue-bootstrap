@@ -41,4 +41,12 @@ describe('Dropdown', () => {
     expect(vm.horizontalPositionClass).to.equal('dropdown-menu-right');
     expect(vm.verticalPositionClass).to.equal('dropup');
   });
+
+  it('uses a custom menu element', () => {
+    const vm = initVM(Dropdown, {
+      menuElement: 'div'
+    });
+
+    expect(vm.$refs.ul.nodeName.toLowerCase()).to.equal('div');
+  });
 });

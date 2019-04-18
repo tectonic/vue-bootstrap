@@ -16,9 +16,14 @@
       </a>
     </slot>
     <slot name="items">
-      <ul :class="['dropdown-menu', horizontalPositionClass, menuClass]" :aria-labelledby="id" ref="ul">
+      <component
+        :is="menuElement"
+        :class="['dropdown-menu', horizontalPositionClass, menuClass]"
+        :aria-labelledby="id"
+        ref="ul"
+      >
         <slot></slot>
-      </ul>
+      </component>
     </slot>
   </div>
 </template>
@@ -50,6 +55,10 @@ export default {
     menuClass: {
       type: String,
       default: ''
+    },
+    menuElement: {
+      type: String,
+      default: 'ul'
     },
     horizontalPosition: {
       type: String,

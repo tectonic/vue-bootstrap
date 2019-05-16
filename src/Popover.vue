@@ -1,11 +1,18 @@
 <template>
-  <span v-on-click-outside="close">
+  <span>
     <span ref="trigger" @click="onClick" @mouseover="onMouseover" @mouseout="onMouseout" :aria-describedby="id">
       <slot></slot>
     </span>
     <transition :name="effect">
-      <div ref="popover" v-if="isOpen" :class="['popover', { 'in': isOpen }, placement]" role="tooltip" :id="id">
-        <div class="arrow"></div>
+      <div
+        ref="popover"
+        v-if="isOpen"
+        :class="['popover', { 'in': isOpen }, placement, popoverClass]"
+        role="tooltip"
+        :id="id"
+        v-on-click-outside="close"
+      >
+        <div class="arrow" ref="arrow"></div>
         <h3 class="popover-title" v-if="title">
           <slot name="title">{{ title }}</slot>
         </h3>
@@ -41,6 +48,13 @@ export default {
         return ['top', 'bottom', 'right', 'left'].indexOf(value) >= 0;
       }
     },
+    origin: {
+      type: String,
+      default: 'center',
+      validator: (value) => {
+        return ['top', 'bottom', 'right', 'left', 'center'].indexOf(value) >= 0;
+      }
+    },
     effect: {
       type: String,
       default: 'fade'
@@ -55,6 +69,10 @@ export default {
     appendTo: {
       type: String,
       default: 'body'
+    },
+    popoverClass: {
+      type: String,
+      default: ''
     }
   },
   data () {
@@ -108,9 +126,11 @@ export default {
     },
     setPosition () {
       const popover = this.$refs.popover;
+      const arrow = this.$refs.arrow;
+      const arrowOffset = 20;
       const trigger = this.triggerElement();
 
-      let top, left;
+      let top, left, arrowTop, arrowLeft;
       let documentElement;
       let containerScrollLeft, containerScrollTop;
 
@@ -128,30 +148,70 @@ export default {
 
       container.appendChild(popover);
 
+      const arrowRect = arrow.getBoundingClientRect();
       const triggerRect = trigger.getBoundingClientRect();
       const popoverRect = popover.getBoundingClientRect();
 
+      // Calculate top position
+      switch (this.placement) {
+        case 'left':
+        case 'right':
+          switch (this.origin) {
+            case 'top':
+              top = containerScrollTop + triggerRect.top;
+              arrowTop = arrowOffset;
+              break;
+            case 'bottom':
+              top = containerScrollTop + triggerRect.top - (popoverRect.height - triggerRect.height);
+              arrowTop = popoverRect.height - arrowOffset;
+              break;
+            default:
+              top = containerScrollTop + triggerRect.top + triggerRect.height / 2 - popoverRect.height / 2;
+          }
+          break;
+        case 'top':
+          top = containerScrollTop + triggerRect.top - popoverRect.height;
+          break;
+        case 'bottom':
+          top = containerScrollTop + triggerRect.top + triggerRect.height;
+          break;
+      }
+
+      // Calculate left position
       switch (this.placement) {
         case 'top':
-          left = containerScrollLeft + triggerRect.left + triggerRect.width / 2 - popoverRect.width / 2;
-          top = containerScrollTop + triggerRect.top - popoverRect.height;
+        case 'bottom':
+          switch (this.origin) {
+            case 'left':
+              left = containerScrollLeft + triggerRect.left;
+              arrowLeft = arrowOffset;
+              break;
+            case 'right':
+              left = containerScrollLeft + triggerRect.left - (popoverRect.width - triggerRect.width);
+              arrowLeft = popoverRect.width - arrowOffset;
+              break;
+            default:
+              left = containerScrollLeft + triggerRect.left + triggerRect.width / 2 - popoverRect.width / 2;
+          }
           break;
         case 'left':
           left = containerScrollLeft + triggerRect.left - popoverRect.width;
-          top = containerScrollTop + triggerRect.top + triggerRect.height / 2 - popoverRect.height / 2;
           break;
         case 'right':
           left = containerScrollLeft + triggerRect.left + triggerRect.width;
-          top = containerScrollTop + triggerRect.top + triggerRect.height / 2 - popoverRect.height / 2;
-          break;
-        case 'bottom':
-          left = containerScrollLeft + triggerRect.left + triggerRect.width / 2 - popoverRect.width / 2;
-          top = containerScrollTop + triggerRect.top + triggerRect.height;
           break;
       }
 
       popover.style.top = top + 'px';
       popover.style.left = left + 'px';
+
+      if (arrowTop) {
+        arrow.style.top = arrowTop + 'px';
+      }
+
+      if (arrowLeft) {
+        arrow.style.left = arrowLeft + 'px';
+      }
 
       if (isRtl()) {
         popover.style.right = 'auto';

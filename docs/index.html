@@ -573,7 +573,7 @@
             <div class="panel panel-default">
               <div class="panel-body">
                 <div class="form-group">
-                  <popover title="Hello world!" placement="right">
+                  <popover title="Hello world!" placement="top" origin="left">
                     <a class="btn btn-primary">Click me</a>
                     <div slot="content">
                       This is the content.
@@ -581,7 +581,7 @@
                   </popover>
                 </div>
 <pre v-pre>
-&lt;popover title="Hello world!" placement="right"&gt;
+&lt;popover title="Hello world!" placement="top" origin="left"&gt;
   &lt;a class="btn btn-primary">Click me&lt;/a&gt;
   &lt;div slot="content"&gt;
     This is the content.
@@ -623,6 +623,12 @@
                   <td>Placement (<code>top</code>, <code>bottom</code>, <code>left</code> or <code>right</code>).</td>
                 </tr>
                 <tr>
+                  <td>origin</td>
+                  <td>String</td>
+                  <td>center</td>
+                  <td>Origin (<code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code> or <code>center</code>).</td>
+                </tr>
+                <tr>
                   <td>effect</td>
                   <td>String</td>
                   <td>fade</td>
@@ -639,6 +645,12 @@
                   <td>String</td>
                   <td>body</td>
                   <td>The element to which to append the popover.</td>
+                </tr>
+                <tr>
+                  <td>popover-class</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>Additional class for the popover.</td>
                 </tr>
               </tbody>
             </table>

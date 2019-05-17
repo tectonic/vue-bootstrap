@@ -8,12 +8,13 @@
       <div class="multiselect-subset" v-if="subset">
         {{ subsetLabel }}
       </div>
-      <div class="checkbox multiselect-selectall">
-        <label>
+      <div class="checkbox multiselect-selectall" v-if="selectAll || randomizer">
+        <label v-if="selectAll">
           <input :checked="allSelected()" type="checkbox" @click="toggleAll"> {{ selectAllLabel }}
         </label>
+        <span v-if="selectAll && randomizer"> | </span>
         <span class="randomizer-toggle" v-if="randomizer">
-          | <a href="" @click.prevent="randomizerActive = !randomizerActive">{{ randomizerShow }}</a>
+          <a href="" @click.prevent="randomizerActive = !randomizerActive">{{ randomizerShow }}</a>
           <popover v-if="randomizerHelpText" :content="randomizerHelpText">
             <span :class="helpIconClass"></span>
           </popover>
@@ -39,7 +40,7 @@
       :selectedSubsetOptions="selectedSubsetOptions"
       :infoIconClass="infoIconClass">
       <template scope="{item}">
-          <slot :item="item"></slot>
+        <slot :item="item"></slot>
       </template>
     </multiselect-list>
   </div>
@@ -73,6 +74,10 @@ export default {
       default: true
     },
     counter: {
+      type: Boolean,
+      default: true
+    },
+    selectAll: {
       type: Boolean,
       default: true
     },

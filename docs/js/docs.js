@@ -122,7 +122,7 @@ new Vue({
         { id: 14, value: 'Gray' },
         { id: 15, value: 'Black' }
       ]
-    }
+    };
   },
   methods: {
     onSelect (item) {

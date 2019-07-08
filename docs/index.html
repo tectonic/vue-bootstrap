@@ -403,6 +403,12 @@
                   <td>Show the counter?</td>
                 </tr>
                 <tr>
+                  <td>select-all</td>
+                  <td>Boolean</td>
+                  <td>true</td>
+                  <td>Show the "Select all" checkbox?</td>
+                </tr>
+                <tr>
                   <td>placeholder</td>
                   <td>String</td>
                   <td>Filter list</td>
@@ -573,7 +579,7 @@
             <div class="panel panel-default">
               <div class="panel-body">
                 <div class="form-group">
-                  <popover title="Hello world!" placement="right">
+                  <popover title="Hello world!" placement="top" origin="left">
                     <a class="btn btn-primary">Click me</a>
                     <div slot="content">
                       This is the content.
@@ -581,7 +587,7 @@
                   </popover>
                 </div>
 <pre v-pre>
-&lt;popover title="Hello world!" placement="right"&gt;
+&lt;popover title="Hello world!" placement="top" origin="left"&gt;
   &lt;a class="btn btn-primary">Click me&lt;/a&gt;
   &lt;div slot="content"&gt;
     This is the content.
@@ -623,6 +629,20 @@
                   <td>Placement (<code>top</code>, <code>bottom</code>, <code>left</code> or <code>right</code>).</td>
                 </tr>
                 <tr>
+                  <td>origin</td>
+                  <td>String</td>
+                  <td>center</td>
+                  <td>
+                    <p>Origin (<code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code> or <code>center</code>).</p>
+                    <p>It only makes sense to use certain combinations of placement and origin:</p>
+                    <ul>
+                      <li>If the placement is <code>top</code> or <code>bottom</code>, the origin can be <code>left</code>, <code>right</code> or <code>center</code>.</li>
+                      <li>If the placement is <code>left</code> or <code>right</code>, the origing can be <code>top</code>, <code>bottom</code> or <code>center</code>.</li>
+                    </ul>
+                    <p>In all other cases the origin will default to <code>center</code>.</p>
+                  </td>
+                </tr>
+                <tr>
                   <td>effect</td>
                   <td>String</td>
                   <td>fade</td>
@@ -639,6 +659,12 @@
                   <td>String</td>
                   <td>body</td>
                   <td>The element to which to append the popover.</td>
+                </tr>
+                <tr>
+                  <td>popover-class</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>Additional class for the popover.</td>
                 </tr>
               </tbody>
             </table>

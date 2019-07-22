@@ -28,7 +28,7 @@
             </thead>
             <tbody>
               <tr v-for="week in visibleWeeks">
-                <td v-for="day in week" :class="['day', { 'muted': !isWithinCurrentMonth(day), 'selected': isSelected(day) }]" @click="select(day)">
+                <td v-for="day in week" :class="['day', { 'muted': !isWithinCurrentMonth(day), 'selected': (preselectDay && isSelected(day)) }]" @click="select(day)">
                   {{ day.getDate() }}
                 </td>
               </tr>
@@ -99,6 +99,10 @@ export default {
     placeholder: {
       type: String,
       default: ''
+    },
+    preselectDay: {
+      type: Boolean,
+      default: true
     },
     mode: {
       type: String,

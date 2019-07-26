@@ -1,16 +1,18 @@
 <template>
   <div :class="[{ 'open': isOpen }, 'dropdown', containerClass]" v-on-click-outside="close">
     <input type="text"
-      v-model="dateInput"
+      :value="dateInput"
       :name="name"
       :id="id"
       :placeholder="placeholder"
       aria-haspopup="true"
       :aria-expanded="isOpen"
+      @input="$emit('date-changed', dateInput)"
       @focus="open"
       @keyup.esc="close"
       class="form-control"
       autocomplete="off"
+      readonly
     />
     <div class="datepicker dropdown-menu">
       <ul class="list-unstyled">
@@ -235,6 +237,8 @@
         if (this.mode !== 'datetime') {
           this.isOpen = false;
         }
+
+        this.$emit('date-changed', this.dateInput);
       },
       formatDateTime (date) {
         let formattedDate = this.formatDate(date);
@@ -345,6 +349,10 @@
 </script>
 
 <style scoped>
+  .form-control[readonly], input {
+    background-color: inherit;
+  }
+
   ul {
     margin-bottom: 0;
   }

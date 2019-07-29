@@ -1,18 +1,19 @@
 <template>
   <div :class="[{ 'open': isOpen }, 'dropdown', containerClass]" v-on-click-outside="close">
     <input type="text"
-      :value="dateInput"
-      :name="name"
-      :id="id"
-      :placeholder="placeholder"
-      aria-haspopup="true"
-      :aria-expanded="isOpen"
-      @input="$emit('date-changed', dateInput)"
-      @focus="open"
-      @keyup.esc="close"
-      class="form-control"
-      autocomplete="off"
-      readonly
+           :value="dateInput"
+           :name="name"
+           :id="id"
+           :placeholder="placeholder"
+           aria-haspopup="true"
+           :aria-expanded="isOpen"
+           @input="$emit('changed', dateInput)"
+           @focus="open"
+           @keyup.esc="close"
+           @keyup.delete="flushDateInput"
+           class="form-control"
+           autocomplete="off"
+           readonly
     />
     <div class="datepicker dropdown-menu">
       <ul class="list-unstyled">
@@ -64,7 +65,7 @@
             </tbody>
           </table>
           <div class="switcher" v-if="mode === 'datetime'">
-            <span @click="toggleView" v-if="view === 'clock'">
+            <span @click="toggleView" v-if="view === 'clock' && mode !== 'time'">
               <i :class="icons.calendar"></i> {{ formatDate(date) }}
             </span>
             <span @click="toggleView" v-else>
@@ -110,7 +111,7 @@
         type: String,
         default: 'date',
         validator: (value) => {
-          return value === 'date' || value === 'datetime';
+          return value === 'date' || value === 'datetime' || value === 'time';
         }
       },
       containerClass: {
@@ -148,7 +149,7 @@
     },
     data () {
       return {
-        view: 'calendar',
+        view: this.mode === 'time' ? 'clock' : 'calendar',
         date: null,
         dateInput: '',
         month: new Date().getMonth(),
@@ -238,7 +239,12 @@
           this.isOpen = false;
         }
 
-        this.$emit('date-changed', this.dateInput);
+        this.$emit('changed', this.dateInput);
+      },
+      flushDateInput () {
+        this.dateInput = '';
+
+        this.$emit('changed', this.dateInput);
       },
       formatDateTime (date) {
         let formattedDate = this.formatDate(date);
@@ -261,14 +267,24 @@
         return ('0' + value).slice(-2);
       },
       validFormat (date) {
-        // Accept dates in the format of '2017-03-01' or '2017-03-01 12:10'.
+        // Accept dates in the format of '2017-03-01' or '2017-03-01 12:10' or '23:09'.
         return (date.length === 10 && /^[0-9-]+$/.test(date)) ||
-                (date.length === 16 && /^[0-9-\s:]+$/.test(date));
+                (date.length === 16 && /^[0-9-\s:]+$/.test(date)) ||
+                (date.length === 5 && /^\d{2}:\d{2}$/.test(date));
       },
       parseDate (date) {
         let parsedDate;
 
         if (date && this.validFormat(date)) {
+          if (this.mode === 'time') {
+            parsedDate = new Date();
+            parsedDate.setHours(date.substring(0, 2));
+            parsedDate.setMinutes(date.substring(3, 5));
+            parsedDate.setSeconds(0);
+
+            return parsedDate;
+          }
+
           parsedDate = new Date(
                   date.substring(0, 4),
                   date.substring(5, 7) - 1,
@@ -338,7 +354,14 @@
                 type === 'minutes' ? (operation === 'increment' ? minutes + 5 : minutes - 5) : minutes
         );
 
-        this.dateInput = this.formatDateTime(this.date);
+        if (this.mode === 'time') {
+          this.dateInput = this.formatTime(this.date);
+        }
+        else {
+          this.dateInput = this.formatDateTime(this.date);
+        }
+
+        this.$emit('changed', this.dateInput);
       }
     },
     created () {

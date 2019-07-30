@@ -62,13 +62,29 @@
                 <span :class="icons.down"></span>
               </td>
             </tr>
+            <tr>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+            </tr>
+            <tr>
+              <td class="set-now" @click="setNow()">
+                <span :class="icons.now"></span>
+              </td>
+              <td class="clear-selection" @click="flushDateInput()">
+                <span :class="icons.trash"></span>
+              </td>
+              <td class="close-picker" @click="close()">
+                <span :class="icons.close"></span>
+              </td>
+            </tr>
             </tbody>
           </table>
           <div class="switcher" v-if="mode === 'datetime'">
             <span @click="toggleView" v-if="view === 'clock' && mode !== 'time'">
               <i :class="icons.calendar"></i> {{ formatDate(date) }}
             </span>
-            <span @click="toggleView" v-else>
+            <span class="time" @click="toggleView" v-else>
               <i :class="icons.time"></i> {{ formatTime(date) }}
             </span>
           </div>
@@ -142,7 +158,9 @@
             up: 'glyphicon glyphicon-chevron-up',
             down: 'glyphicon glyphicon-chevron-down',
             calendar: 'glyphicon glyphicon-calendar',
-            time: 'glyphicon glyphicon-time'
+            close: 'glyphicon glyphicon-remove',
+            now: 'glyphicon glyphicon-screenshot',
+            trash: 'glyphicon glyphicon-trash',
           };
         }
       }
@@ -183,7 +201,7 @@
       getDateFromInput () {
         const date = this.parseDate(this.dateInput);
 
-        this.date = date || new Date();
+        this.date = date || this.dateNow();
       },
       toggleView () {
         this.view = this.view === 'calendar' ? 'clock' : 'calendar';
@@ -362,7 +380,30 @@
         }
 
         this.$emit('changed', this.dateInput);
-      }
+      },
+      dateNow() {
+        let now = new Date();
+
+        return new Date(
+                now.getFullYear(),
+                now.getMonth(),
+                now.getDate(),
+                now.getHours(),
+                Math.round(this.date.getMinutes() / 5) * 5
+        );
+      },
+      setNow () {
+        this.date = this.dateNow();
+
+        if (this.mode === 'time') {
+          this.dateInput = this.formatTime(this.date);
+        }
+        else {
+          this.dateInput = this.formatDateTime(this.date);
+        }
+
+        this.$emit('changed', this.dateInput);
+      },
     },
     created () {
       this.dateInput = this.value;
@@ -404,6 +445,9 @@
   }
 
   .set-clock:hover,
+  .set-now:hover,
+  .clear-selection:hover,
+  .close-picker:hover,
   .next-month:hover,
   .previous-month:hover,
   .day:hover {
@@ -454,5 +498,9 @@
 
   .switcher i {
     margin-right: 3px;
+  }
+
+  .switcher .time {
+    font-size: 1.2em;
   }
 </style>

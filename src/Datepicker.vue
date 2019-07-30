@@ -160,6 +160,7 @@
             calendar: 'glyphicon glyphicon-calendar',
             close: 'glyphicon glyphicon-remove',
             now: 'glyphicon glyphicon-screenshot',
+            time: 'glyphicon glyphicon-time',
             trash: 'glyphicon glyphicon-trash',
           };
         }

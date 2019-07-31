@@ -366,11 +366,11 @@
         const minutes = Math.round(this.date.getMinutes() / 5) * 5;
 
         this.date = new Date(
-                this.date.getFullYear(),
-                this.date.getMonth(),
-                this.date.getDate(),
-                type === 'hours' ? (operation === 'increment' ? hours + 1 : hours - 1) : hours,
-                type === 'minutes' ? (operation === 'increment' ? minutes + 5 : minutes - 5) : minutes
+          this.date.getFullYear(),
+          this.date.getMonth(),
+          this.date.getDate(),
+          type === 'hours' ? (operation === 'increment' ? hours + 1 : hours - 1) : hours,
+          type === 'minutes' ? (operation === 'increment' ? minutes + 5 : minutes - 5) : minutes
         );
 
         if (this.mode === 'time') {
@@ -382,15 +382,15 @@
 
         this.$emit('changed', this.dateInput);
       },
-      dateNow() {
-        let now = new Date();
+      dateNow () {
+        const now = new Date();
 
         return new Date(
-                now.getFullYear(),
-                now.getMonth(),
-                now.getDate(),
-                now.getHours(),
-                Math.round(this.date.getMinutes() / 5) * 5
+          now.getFullYear(),
+          now.getMonth(),
+          now.getDate(),
+          now.getHours(),
+          Math.round(now.getMinutes() / 5) * 5
         );
       },
       setNow () {

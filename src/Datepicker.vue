@@ -37,9 +37,9 @@
             </tr>
             </tbody>
           </table>
-          <table :class="[{ 'hidden': view !== 'clock' }, 'clock', 'table-condensed']">
+          <table :class="['clock', 'table-condensed']">
             <tbody>
-            <tr>
+            <tr :class="{ 'hidden': view !== 'clock' }">
               <td class="set-clock" @click="setClock('hours', 'increment')">
                 <span :class="icons.up"></span>
               </td>
@@ -48,12 +48,12 @@
                 <span :class="icons.up"></span>
               </td>
             </tr>
-            <tr>
+            <tr :class="{ 'hidden': view !== 'clock' }">
               <td class="hours">{{ pad(date.getHours()) }}</td>
               <td class="colon">:</td>
               <td class="minutes">{{ pad(date.getMinutes()) }}</td>
             </tr>
-            <tr>
+            <tr :class="{ 'hidden': view !== 'clock' }">
               <td class="set-clock" @click="setClock('hours', 'decrement')">
                 <span :class="icons.down"></span>
               </td>
@@ -84,7 +84,7 @@
             <span @click="toggleView" v-if="view === 'clock' && mode !== 'time'">
               <i :class="icons.calendar"></i> {{ formatDate(date) }}
             </span>
-            <span class="time" @click="toggleView" v-else>
+            <span @click="toggleView" v-else>
               <i :class="icons.time"></i> {{ formatTime(date) }}
             </span>
           </div>
@@ -501,7 +501,7 @@
     margin-right: 3px;
   }
 
-  .switcher .time {
+  .switcher span {
     font-size: 1.2em;
   }
 </style>

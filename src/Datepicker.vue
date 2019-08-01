@@ -62,7 +62,7 @@
                   <span :class="icons.down"></span>
                 </td>
               </tr>
-              <tr>
+              <tr class="separators">
                 <td><hr></td>
                 <td><hr></td>
                 <td><hr></td>
@@ -503,5 +503,10 @@ export default {
 
   .switcher span {
     font-size: 1.2em;
+  }
+
+  .separators hr {
+      margin-top: 0;
+      margin-bottom: 0;
   }
 </style>

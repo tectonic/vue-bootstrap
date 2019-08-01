@@ -28,8 +28,8 @@
               <tr>
                 <th class="day-of-week" v-for="dayOfWeek in daysOfWeek">{{ dayOfWeek }}</th>
               </tr>
-              </thead>
-              <tbody>
+            </thead>
+            <tbody>
               <tr v-for="week in visibleWeeks">
                 <td v-for="day in week" :class="['day', { 'muted': !isWithinCurrentMonth(day), 'selected': isSelected(day), 'today': (highlightToday && isToday(day))}]" @click="select(day)">
                   {{ day.getDate() }}

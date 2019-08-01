@@ -20,64 +20,64 @@
         <li>
           <table :class="[{ 'hidden': view !== 'calendar' }, 'calendar', 'table-condensed']">
             <thead>
-            <tr>
-              <th class="previous-month" @click="previousMonth"><span :class="icons.left"></span></th>
-              <th class="current-month" colspan="5">{{ months[month] }} {{ year }}</th>
-              <th class="next-month" @click="nextMonth"><span :class="icons.right"></span></th>
-            </tr>
-            <tr>
-              <th class="day-of-week" v-for="dayOfWeek in daysOfWeek">{{ dayOfWeek }}</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="week in visibleWeeks">
-              <td v-for="day in week" :class="['day', { 'muted': !isWithinCurrentMonth(day), 'selected': isSelected(day), 'today': (highlightToday && isToday(day))}]" @click="select(day)">
-                {{ day.getDate() }}
-              </td>
-            </tr>
+              <tr>
+                <th class="previous-month" @click="previousMonth"><span :class="icons.left"></span></th>
+                <th class="current-month" colspan="5">{{ months[month] }} {{ year }}</th>
+                <th class="next-month" @click="nextMonth"><span :class="icons.right"></span></th>
+              </tr>
+              <tr>
+                <th class="day-of-week" v-for="dayOfWeek in daysOfWeek">{{ dayOfWeek }}</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr v-for="week in visibleWeeks">
+                <td v-for="day in week" :class="['day', { 'muted': !isWithinCurrentMonth(day), 'selected': isSelected(day), 'today': (highlightToday && isToday(day))}]" @click="select(day)">
+                  {{ day.getDate() }}
+                </td>
+              </tr>
             </tbody>
           </table>
           <table :class="['clock', 'table-condensed']">
             <tbody>
-            <tr :class="{ 'hidden': view !== 'clock' }">
-              <td class="set-clock" @click="setClock('hours', 'increment')">
-                <span :class="icons.up"></span>
-              </td>
-              <td></td>
-              <td class="set-clock" @click="setClock('minutes', 'increment')">
-                <span :class="icons.up"></span>
-              </td>
-            </tr>
-            <tr :class="{ 'hidden': view !== 'clock' }">
-              <td class="hours">{{ pad(date.getHours()) }}</td>
-              <td class="colon">:</td>
-              <td class="minutes">{{ pad(date.getMinutes()) }}</td>
-            </tr>
-            <tr :class="{ 'hidden': view !== 'clock' }">
-              <td class="set-clock" @click="setClock('hours', 'decrement')">
-                <span :class="icons.down"></span>
-              </td>
-              <td></td>
-              <td class="set-clock" @click="setClock('minutes', 'decrement')">
-                <span :class="icons.down"></span>
-              </td>
-            </tr>
-            <tr>
-              <td><hr></td>
-              <td><hr></td>
-              <td><hr></td>
-            </tr>
-            <tr>
-              <td class="set-now" @click="setNow()">
-                <span :class="icons.now"></span>
-              </td>
-              <td class="clear-selection" @click="flushDateInput()">
-                <span :class="icons.trash"></span>
-              </td>
-              <td class="close-picker" @click="close()">
-                <span :class="icons.close"></span>
-              </td>
-            </tr>
+              <tr :class="{ 'hidden': view !== 'clock' }">
+                <td class="set-clock" @click="setClock('hours', 'increment')">
+                  <span :class="icons.up"></span>
+                </td>
+                <td></td>
+                <td class="set-clock" @click="setClock('minutes', 'increment')">
+                  <span :class="icons.up"></span>
+                </td>
+              </tr>
+              <tr :class="{ 'hidden': view !== 'clock' }">
+                <td class="hours">{{ pad(date.getHours()) }}</td>
+                <td class="colon">:</td>
+                <td class="minutes">{{ pad(date.getMinutes()) }}</td>
+              </tr>
+              <tr :class="{ 'hidden': view !== 'clock' }">
+                <td class="set-clock" @click="setClock('hours', 'decrement')">
+                  <span :class="icons.down"></span>
+                </td>
+                <td></td>
+                <td class="set-clock" @click="setClock('minutes', 'decrement')">
+                  <span :class="icons.down"></span>
+                </td>
+              </tr>
+              <tr>
+                <td><hr></td>
+                <td><hr></td>
+                <td><hr></td>
+              </tr>
+              <tr>
+                <td class="set-now" @click="setNow()">
+                  <span :class="icons.now"></span>
+                </td>
+                <td class="clear-selection" @click="flushDateInput()">
+                  <span :class="icons.trash"></span>
+                </td>
+                <td class="close-picker" @click="close()">
+                  <span :class="icons.close"></span>
+                </td>
+              </tr>
             </tbody>
           </table>
           <div class="switcher" v-if="mode === 'datetime'">

@@ -91,10 +91,16 @@
                   <td>The <code>placeholder</code> attribute of the input element.</td>
                 </tr>
                 <tr>
+                  <td>highlight-today</td>
+                  <td>Boolean</td>
+                  <td>true</td>
+                  <td>Highlights today in the calendar.</td>
+                </tr>
+                <tr>
                   <td>mode</td>
                   <td>String</td>
                   <td>date</td>
-                  <td>Mode can be set to <code>date</code> or <code>datetime</code>.</td>
+                  <td>Mode can be set to <code>date</code>, <code>datetime</code> or <code>time</code>.</td>
                 </tr>
                 <tr>
                   <td>container-class</td>
@@ -119,6 +125,19 @@
                   <td>Object</td>
                   <td>{ left: 'glyphicon glyphicon-chevron-left', ... }</td>
                   <td>Icons.</td>
+                </tr>
+                <tr>
+                  <th colspan="4"><span class="label label-lg label-success">Events</span></th>
+                </tr>
+                <tr>
+                  <th>Name</th>
+                  <th colspan="2">Parameters</th>
+                  <th>Description</th>
+                </tr>
+                <tr>
+                  <td>changed</td>
+                  <td colspan="2">New date (String)</td>
+                  <td>Emitted when the date is changed.</td>
                 </tr>
               </tbody>
             </table>

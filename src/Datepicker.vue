@@ -1,19 +1,19 @@
 <template>
   <div :class="[{ 'open': isOpen }, 'dropdown', containerClass]" v-on-click-outside="close">
     <input type="text"
-           :value="dateInput"
-           :name="name"
-           :id="id"
-           :placeholder="placeholder"
-           aria-haspopup="true"
-           :aria-expanded="isOpen"
-           @input="$emit('changed', dateInput)"
-           @focus="open"
-           @keyup.esc="close"
-           @keyup.delete="flushDateInput"
-           class="form-control"
-           autocomplete="off"
-           readonly
+      :value="dateInput"
+      :name="name"
+      :id="id"
+      :placeholder="placeholder"
+      aria-haspopup="true"
+      :aria-expanded="isOpen"
+      @input="$emit('changed', dateInput)"
+      @focus="open"
+      @keyup.esc="close"
+      @keyup.delete="flushDateInput"
+      class="form-control"
+      autocomplete="off"
+      readonly
     />
     <div class="datepicker dropdown-menu">
       <ul class="list-unstyled">

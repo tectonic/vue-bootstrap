@@ -95,322 +95,322 @@
 </template>
 
 <script>
-  import { chunk } from './lib/array.js';
-  import { mixin as clickOutside } from './mixins/clickOutside.js';
+import { chunk } from './lib/array.js';
+import { mixin as clickOutside } from './mixins/clickOutside.js';
 
-  export default {
-    mixins: [
-      clickOutside
-    ],
-    props: {
-      name: {
-        type: String,
-        default: ''
-      },
-      value: {
-        type: String,
-        default: ''
-      },
-      id: {
-        type: String,
-        default: ''
-      },
-      placeholder: {
-        type: String,
-        default: ''
-      },
-      highlightToday: {
-        type: Boolean,
-        default: true
-      },
-      mode: {
-        type: String,
-        default: 'date',
-        validator: (value) => {
-          return value === 'date' || value === 'datetime' || value === 'time';
-        }
-      },
-      containerClass: {
-        type: String,
-        default: ''
-      },
-      daysOfWeek: {
-        type: Array,
-        default: () => {
-          return ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
-        }
-      },
-      months: {
-        type: Array,
-        default: () => {
-          return [
-            'January', 'February', 'March', 'April', 'May', 'June',
-            'July', 'August', 'September', 'October', 'November', 'December'
-          ];
-        }
-      },
-      icons: {
-        type: Object,
-        default: () => {
-          return {
-            left: 'glyphicon glyphicon-chevron-left',
-            right: 'glyphicon glyphicon-chevron-right',
-            up: 'glyphicon glyphicon-chevron-up',
-            down: 'glyphicon glyphicon-chevron-down',
-            calendar: 'glyphicon glyphicon-calendar',
-            close: 'glyphicon glyphicon-remove',
-            now: 'glyphicon glyphicon-screenshot',
-            time: 'glyphicon glyphicon-time',
-            trash: 'glyphicon glyphicon-trash',
-          };
-        }
+export default {
+  mixins: [
+    clickOutside
+  ],
+  props: {
+    name: {
+      type: String,
+      default: ''
+    },
+    value: {
+      type: String,
+      default: ''
+    },
+    id: {
+      type: String,
+      default: ''
+    },
+    placeholder: {
+      type: String,
+      default: ''
+    },
+    highlightToday: {
+      type: Boolean,
+      default: true
+    },
+    mode: {
+      type: String,
+      default: 'date',
+      validator: (value) => {
+        return value === 'date' || value === 'datetime' || value === 'time';
       }
     },
-    data () {
-      return {
-        view: this.mode === 'time' ? 'clock' : 'calendar',
-        date: null,
-        dateInput: '',
-        month: new Date().getMonth(),
-        year: new Date().getFullYear(),
-        isOpen: false
-      };
+    containerClass: {
+      type: String,
+      default: ''
     },
-    computed: {
-      visibleWeeks () {
-        const days = this.daysInMonth(this.month, this.year);
-
-        const pastDays = this.pastDays(days);
-        const futureDays = this.futureDays(days);
-
-        // Chunk days into weeks
-        return chunk([...pastDays, ...days, ...futureDays], 7);
+    daysOfWeek: {
+      type: Array,
+      default: () => {
+        return ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
       }
     },
-    methods: {
-      open () {
-        this.getDateFromInput();
-
-        this.month = this.date.getMonth();
-        this.year = this.date.getFullYear();
-
-        this.isOpen = true;
-      },
-      close () {
-        this.isOpen = false;
-      },
-      getDateFromInput () {
-        const date = this.parseDate(this.dateInput);
-
-        this.date = date || this.dateNow();
-      },
-      toggleView () {
-        this.view = this.view === 'calendar' ? 'clock' : 'calendar';
-      },
-      nextMonth () {
-        if (this.month < 11) {
-          this.month++;
-        } else {
-          this.month = 0;
-          this.year++;
-        }
-      },
-      previousMonth () {
-        if (this.month > 0) {
-          this.month--;
-        } else {
-          this.month = 11;
-          this.year--;
-        }
-      },
-      isWithinCurrentMonth (date) {
-        return date.getMonth() === this.month && date.getFullYear() === this.year;
-      },
-      isSelected (date) {
-        if (!this.dateInput) {
-          return false;
-        }
-
-        return date.getDate() === this.date.getDate() &&
-                date.getMonth() === this.date.getMonth() &&
-                date.getFullYear() === this.date.getFullYear();
-      },
-      isToday (date) {
-        var today = new Date();
-        return date.getDate() === today.getDate() &&
-                date.getMonth() === today.getMonth() &&
-                date.getFullYear() === today.getFullYear();
-      },
-      select (date) {
-        this.date = new Date(
-                date.getFullYear(),
-                date.getMonth(),
-                date.getDate(),
-                this.date.getHours(),
-                this.date.getMinutes()
-        );
-
-        this.dateInput = this.formatDateTime(this.date);
-
-        // Don't close the datepicker in datetime mode as someone may
-        // want to select time after selecting the date.
-        if (this.mode !== 'datetime') {
-          this.isOpen = false;
-        }
-
-        this.$emit('changed', this.dateInput);
-      },
-      flushDateInput () {
-        this.dateInput = '';
-
-        this.$emit('changed', this.dateInput);
-      },
-      formatDateTime (date) {
-        let formattedDate = this.formatDate(date);
-
-        if (this.mode === 'datetime') {
-          formattedDate = formattedDate + ' ' + this.formatTime(date);
-        }
-
-        return formattedDate;
-      },
-      formatDate (date) {
-        return date.getFullYear() +
-                '-' + this.pad(date.getMonth() + 1) +
-                '-' + this.pad(date.getDate());
-      },
-      formatTime (date) {
-        return this.pad(date.getHours()) + ':' + this.pad(date.getMinutes());
-      },
-      pad (value) {
-        return ('0' + value).slice(-2);
-      },
-      validFormat (date) {
-        // Accept dates in the format of '2017-03-01' or '2017-03-01 12:10' or '23:09'.
-        return (date.length === 10 && /^[0-9-]+$/.test(date)) ||
-                (date.length === 16 && /^[0-9-\s:]+$/.test(date)) ||
-                (date.length === 5 && /^\d{2}:\d{2}$/.test(date));
-      },
-      parseDate (date) {
-        let parsedDate;
-
-        if (date && this.validFormat(date)) {
-          if (this.mode === 'time') {
-            parsedDate = new Date();
-            parsedDate.setHours(date.substring(0, 2));
-            parsedDate.setMinutes(date.substring(3, 5));
-            parsedDate.setSeconds(0);
-
-            return parsedDate;
-          }
-
-          parsedDate = new Date(
-                  date.substring(0, 4),
-                  date.substring(5, 7) - 1,
-                  date.substring(8, 10)
-          );
-
-          if (date.length === 16) {
-            parsedDate.setHours(date.substring(11, 13));
-            parsedDate.setMinutes(date.substring(14, 16));
-          }
-        }
-
-        return parsedDate;
-      },
-      daysInMonth (month, year) {
-        const date = new Date(year, month, 1);
-        const days = [];
-
-        while (date.getMonth() === month) {
-          days.push(new Date(date));
-          date.setDate(date.getDate() + 1);
-        }
-
-        return days;
-      },
-      pastDays (daysInMonth) {
-        const fromDate = daysInMonth[0];
-
-        let i = 1;
-        let day;
-        const days = [];
-
-        do {
-          day = new Date(fromDate);
-          day.setDate(fromDate.getDate() - i);
-          days.unshift(day);
-          i++;
-        } while (day.getDay() !== 0); // Sunday
-
-        return days;
-      },
-      futureDays (daysInMonth) {
-        const fromDate = daysInMonth[daysInMonth.length - 1];
-
-        let i = 1;
-        let day;
-        const days = [];
-
-        do {
-          day = new Date(fromDate);
-          day.setDate(fromDate.getDate() + i);
-          days.push(day);
-          i++;
-        } while (day.getDay() !== 6); // Saturday
-
-        return days;
-      },
-      setClock (type, operation) {
-        const hours = this.date.getHours();
-        const minutes = Math.round(this.date.getMinutes() / 5) * 5;
-
-        this.date = new Date(
-          this.date.getFullYear(),
-          this.date.getMonth(),
-          this.date.getDate(),
-          type === 'hours' ? (operation === 'increment' ? hours + 1 : hours - 1) : hours,
-          type === 'minutes' ? (operation === 'increment' ? minutes + 5 : minutes - 5) : minutes
-        );
-
-        if (this.mode === 'time') {
-          this.dateInput = this.formatTime(this.date);
-        }
-        else {
-          this.dateInput = this.formatDateTime(this.date);
-        }
-
-        this.$emit('changed', this.dateInput);
-      },
-      dateNow () {
-        const now = new Date();
-
-        return new Date(
-          now.getFullYear(),
-          now.getMonth(),
-          now.getDate(),
-          now.getHours(),
-          Math.round(now.getMinutes() / 5) * 5
-        );
-      },
-      setNow () {
-        this.date = this.dateNow();
-
-        if (this.mode === 'time') {
-          this.dateInput = this.formatTime(this.date);
-        }
-        else {
-          this.dateInput = this.formatDateTime(this.date);
-        }
-
-        this.$emit('changed', this.dateInput);
-      },
+    months: {
+      type: Array,
+      default: () => {
+        return [
+          'January', 'February', 'March', 'April', 'May', 'June',
+          'July', 'August', 'September', 'October', 'November', 'December'
+        ];
+      }
     },
-    created () {
-      this.dateInput = this.value;
-      this.getDateFromInput();
+    icons: {
+      type: Object,
+      default: () => {
+        return {
+          left: 'glyphicon glyphicon-chevron-left',
+          right: 'glyphicon glyphicon-chevron-right',
+          up: 'glyphicon glyphicon-chevron-up',
+          down: 'glyphicon glyphicon-chevron-down',
+          calendar: 'glyphicon glyphicon-calendar',
+          close: 'glyphicon glyphicon-remove',
+          now: 'glyphicon glyphicon-screenshot',
+          time: 'glyphicon glyphicon-time',
+          trash: 'glyphicon glyphicon-trash',
+        };
+      }
     }
-  };
+  },
+  data () {
+    return {
+      view: this.mode === 'time' ? 'clock' : 'calendar',
+      date: null,
+      dateInput: '',
+      month: new Date().getMonth(),
+      year: new Date().getFullYear(),
+      isOpen: false
+    };
+  },
+  computed: {
+    visibleWeeks () {
+      const days = this.daysInMonth(this.month, this.year);
+
+      const pastDays = this.pastDays(days);
+      const futureDays = this.futureDays(days);
+
+      // Chunk days into weeks
+      return chunk([...pastDays, ...days, ...futureDays], 7);
+    }
+  },
+  methods: {
+    open () {
+      this.getDateFromInput();
+
+      this.month = this.date.getMonth();
+      this.year = this.date.getFullYear();
+
+      this.isOpen = true;
+    },
+    close () {
+      this.isOpen = false;
+    },
+    getDateFromInput () {
+      const date = this.parseDate(this.dateInput);
+
+      this.date = date || this.dateNow();
+    },
+    toggleView () {
+      this.view = this.view === 'calendar' ? 'clock' : 'calendar';
+    },
+    nextMonth () {
+      if (this.month < 11) {
+        this.month++;
+      } else {
+        this.month = 0;
+        this.year++;
+      }
+    },
+    previousMonth () {
+      if (this.month > 0) {
+        this.month--;
+      } else {
+        this.month = 11;
+        this.year--;
+      }
+    },
+    isWithinCurrentMonth (date) {
+      return date.getMonth() === this.month && date.getFullYear() === this.year;
+    },
+    isSelected (date) {
+      if (!this.dateInput) {
+        return false;
+      }
+
+      return date.getDate() === this.date.getDate() &&
+             date.getMonth() === this.date.getMonth() &&
+             date.getFullYear() === this.date.getFullYear();
+    },
+    isToday (date) {
+      var today = new Date();
+      return date.getDate() === today.getDate() &&
+             date.getMonth() === today.getMonth() &&
+             date.getFullYear() === today.getFullYear();
+    },
+    select (date) {
+      this.date = new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate(),
+        this.date.getHours(),
+        this.date.getMinutes()
+      );
+
+      this.dateInput = this.formatDateTime(this.date);
+
+      // Don't close the datepicker in datetime mode as someone may
+      // want to select time after selecting the date.
+      if (this.mode !== 'datetime') {
+        this.isOpen = false;
+      }
+
+      this.$emit('changed', this.dateInput);
+    },
+    flushDateInput () {
+      this.dateInput = '';
+
+      this.$emit('changed', this.dateInput);
+    },
+    formatDateTime (date) {
+      let formattedDate = this.formatDate(date);
+
+      if (this.mode === 'datetime') {
+        formattedDate = formattedDate + ' ' + this.formatTime(date);
+      }
+
+      return formattedDate;
+    },
+    formatDate (date) {
+      return date.getFullYear() +
+              '-' + this.pad(date.getMonth() + 1) +
+              '-' + this.pad(date.getDate());
+    },
+    formatTime (date) {
+      return this.pad(date.getHours()) + ':' + this.pad(date.getMinutes());
+    },
+    pad (value) {
+      return ('0' + value).slice(-2);
+    },
+    validFormat (date) {
+      // Accept dates in the format of '2017-03-01' or '2017-03-01 12:10' or '23:09'.
+      return (date.length === 10 && /^[0-9-]+$/.test(date)) ||
+             (date.length === 16 && /^[0-9-\s:]+$/.test(date)) ||
+             (date.length === 5 && /^\d{2}:\d{2}$/.test(date));
+    },
+    parseDate (date) {
+      let parsedDate;
+
+      if (date && this.validFormat(date)) {
+        if (this.mode === 'time') {
+          parsedDate = new Date();
+          parsedDate.setHours(date.substring(0, 2));
+          parsedDate.setMinutes(date.substring(3, 5));
+          parsedDate.setSeconds(0);
+
+          return parsedDate;
+        }
+
+        parsedDate = new Date(
+          date.substring(0, 4),
+          date.substring(5, 7) - 1,
+          date.substring(8, 10)
+        );
+
+        if (date.length === 16) {
+          parsedDate.setHours(date.substring(11, 13));
+          parsedDate.setMinutes(date.substring(14, 16));
+        }
+      }
+
+      return parsedDate;
+    },
+    daysInMonth (month, year) {
+      const date = new Date(year, month, 1);
+      const days = [];
+
+      while (date.getMonth() === month) {
+        days.push(new Date(date));
+        date.setDate(date.getDate() + 1);
+      }
+
+      return days;
+    },
+    pastDays (daysInMonth) {
+      const fromDate = daysInMonth[0];
+
+      let i = 1;
+      let day;
+      const days = [];
+
+      do {
+        day = new Date(fromDate);
+        day.setDate(fromDate.getDate() - i);
+        days.unshift(day);
+        i++;
+      } while (day.getDay() !== 0); // Sunday
+
+      return days;
+    },
+    futureDays (daysInMonth) {
+      const fromDate = daysInMonth[daysInMonth.length - 1];
+
+      let i = 1;
+      let day;
+      const days = [];
+
+      do {
+        day = new Date(fromDate);
+        day.setDate(fromDate.getDate() + i);
+        days.push(day);
+        i++;
+      } while (day.getDay() !== 6); // Saturday
+
+      return days;
+    },
+    setClock (type, operation) {
+      const hours = this.date.getHours();
+      const minutes = Math.round(this.date.getMinutes() / 5) * 5;
+
+      this.date = new Date(
+        this.date.getFullYear(),
+        this.date.getMonth(),
+        this.date.getDate(),
+        type === 'hours' ? (operation === 'increment' ? hours + 1 : hours - 1) : hours,
+        type === 'minutes' ? (operation === 'increment' ? minutes + 5 : minutes - 5) : minutes
+      );
+
+      if (this.mode === 'time') {
+        this.dateInput = this.formatTime(this.date);
+      }
+      else {
+        this.dateInput = this.formatDateTime(this.date);
+      }
+
+      this.$emit('changed', this.dateInput);
+    },
+    dateNow () {
+      const now = new Date();
+
+      return new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate(),
+        now.getHours(),
+        Math.round(now.getMinutes() / 5) * 5
+      );
+    },
+    setNow () {
+      this.date = this.dateNow();
+
+      if (this.mode === 'time') {
+        this.dateInput = this.formatTime(this.date);
+      }
+      else {
+        this.dateInput = this.formatDateTime(this.date);
+      }
+
+      this.$emit('changed', this.dateInput);
+    },
+  },
+  created () {
+    this.dateInput = this.value;
+    this.getDateFromInput();
+  }
+};
 </script>
 
 <style scoped>

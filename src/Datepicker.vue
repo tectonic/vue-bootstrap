@@ -460,18 +460,8 @@ export default {
     color: #d9d9d9;
   }
 
-  .day.today {
-    background-color: #999;
-    color: #fff;
-  }
-
   .day.selected {
-    background-color: #333;
-    color: #fff;
-  }
-
-  .day.selected:hover {
-    background-color: #333;
+    background: #333;
     color: #fff;
   }
 
@@ -506,7 +496,7 @@ export default {
   }
 
   .separators hr {
-      margin-top: 0;
-      margin-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
   }
 </style>

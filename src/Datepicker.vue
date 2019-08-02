@@ -1,5 +1,5 @@
 <template>
-  <div :class="[{ 'open': isOpen }, 'dropdown', containerClass]" v-on-click-outside="close">
+  <div :class="['datetimepicker-widget', { 'open': isOpen }, 'dropdown', containerClass]" v-on-click-outside="close">
     <input type="text"
       :value="dateInput"
       :name="name"
@@ -21,9 +21,9 @@
           <table :class="[{ 'hidden': view !== 'calendar' }, 'calendar', 'table-condensed']">
             <thead>
               <tr>
-                <th class="previous-month" @click="previousMonth"><span :class="icons.left"></span></th>
+                <th class="previous-month control-button" @click="previousMonth"><span :class="icons.left"></span></th>
                 <th class="current-month" colspan="5">{{ months[month] }} {{ year }}</th>
-                <th class="next-month" @click="nextMonth"><span :class="icons.right"></span></th>
+                <th class="next-month control-button" @click="nextMonth"><span :class="icons.right"></span></th>
               </tr>
               <tr>
                 <th class="day-of-week" v-for="dayOfWeek in daysOfWeek">{{ dayOfWeek }}</th>
@@ -37,39 +37,18 @@
               </tr>
             </tbody>
           </table>
-          <table :class="['clock', 'table-condensed']">
+          <hr :class="[{ 'hidden': view === 'clock' }, 'separator']">
+          <table>
             <tbody>
-              <tr :class="{ 'hidden': view !== 'clock' }">
-                <td class="set-clock" @click="setClock('hours', 'increment')">
-                  <span :class="icons.up"></span>
-                </td>
-                <td></td>
-                <td class="set-clock" @click="setClock('minutes', 'increment')">
-                  <span :class="icons.up"></span>
-                </td>
-              </tr>
-              <tr :class="{ 'hidden': view !== 'clock' }">
-                <td class="hours">{{ pad(date.getHours()) }}</td>
-                <td class="colon">:</td>
-                <td class="minutes">{{ pad(date.getMinutes()) }}</td>
-              </tr>
-              <tr :class="{ 'hidden': view !== 'clock' }">
-                <td class="set-clock" @click="setClock('hours', 'decrement')">
-                  <span :class="icons.down"></span>
-                </td>
-                <td></td>
-                <td class="set-clock" @click="setClock('minutes', 'decrement')">
-                  <span :class="icons.down"></span>
-                </td>
-              </tr>
-              <tr class="separators">
-                <td><hr></td>
-                <td><hr></td>
-                <td><hr></td>
-              </tr>
-              <tr>
+              <tr class="control-buttons">
                 <td class="set-now" @click="setNow()">
                   <span :class="icons.now"></span>
+                </td>
+                <td class="show-calendar" v-if="mode === 'datetime' && view === 'clock'" @click="toggleView">
+                  <span :class="icons.calendar"></span>
+                </td>
+                <td class="show-clock" v-if="mode === 'datetime' && view !== 'clock'" @click="toggleView">
+                  <span :class="icons.time"></span>
                 </td>
                 <td class="clear-selection" @click="flushDateInput()">
                   <span :class="icons.trash"></span>
@@ -80,13 +59,35 @@
               </tr>
             </tbody>
           </table>
-          <div class="switcher" v-if="mode === 'datetime'">
-            <span @click="toggleView" v-if="view === 'clock' && mode !== 'time'">
-              <i :class="icons.calendar"></i> {{ formatDate(date) }}
-            </span>
-            <span @click="toggleView" v-else>
-              <i :class="icons.time"></i> {{ formatTime(date) }}
-            </span>
+          <div :class="{ 'hidden': view !== 'clock' }">
+            <hr class="separator">
+            <table :class="['clock', 'table-condensed']">
+              <tbody>
+              <tr>
+                <td class="control-button" @click="setClock('hours', 'increment')">
+                  <span :class="icons.up"></span>
+                </td>
+                <td></td>
+                <td class="control-button" @click="setClock('minutes', 'increment')">
+                  <span :class="icons.up"></span>
+                </td>
+              </tr>
+              <tr>
+                <td class="hours">{{ pad(date.getHours()) }}</td>
+                <td class="colon">:</td>
+                <td class="minutes">{{ pad(date.getMinutes()) }}</td>
+              </tr>
+              <tr>
+                <td class="control-button" @click="setClock('hours', 'decrement')">
+                  <span :class="icons.down"></span>
+                </td>
+                <td></td>
+                <td class="control-button" @click="setClock('minutes', 'decrement')">
+                  <span :class="icons.down"></span>
+                </td>
+              </tr>
+              </tbody>
+            </table>
           </div>
         </li>
       </ul>
@@ -438,20 +439,19 @@ export default {
     width: 14.2857%;
   }
 
-  .set-clock,
-  .next-month,
-  .previous-month,
+  .control-buttons td,
   .day {
+    cursor: pointer;
     border-radius: 2px;
   }
 
-  .set-clock:hover,
-  .set-now:hover,
-  .clear-selection:hover,
-  .close-picker:hover,
-  .next-month:hover,
-  .previous-month:hover,
-  .day:hover {
+  .control-buttons td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .control-buttons td:hover,
+  .control-button:hover {
     background-color: #f2f2f2;
     cursor: pointer;
   }
@@ -469,34 +469,11 @@ export default {
   .clock .minutes,
   .clock .colon {
     font-size: 1.25em;
+    user-select: none;
   }
 
-  .switcher {
-    width: 100%;
-    text-align: center;
-    padding: 5px 5px 0 5px;
-  }
-
-  .switcher span {
-    display: block;
-    padding: 5px;
-  }
-
-  .switcher span:hover {
-    background-color: #f2f2f2;
-    cursor: pointer;
-  }
-
-  .switcher i {
-    margin-right: 3px;
-  }
-
-  .switcher span {
-    font-size: 1.2em;
-  }
-
-  .separators hr {
-    margin-top: 0;
-    margin-bottom: 0;
+  .separator {
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 </style>

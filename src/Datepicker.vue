@@ -106,6 +106,72 @@
               </tr>
               </tbody>
             </table>
+
+            <!-- Hours selection -->
+            <table>
+              <tbody>
+                <tr class="control-buttons">
+                  <td @click="setHour(0)">00</td>
+                  <td @click="setHour(1)">01</td>
+                  <td @click="setHour(2)">02</td>
+                  <td @click="setHour(3)">03</td>
+                </tr>
+                <tr class="control-buttons">
+                  <td @click="setHour(4)">04</td>
+                  <td @click="setHour(5)">05</td>
+                  <td @click="setHour(6)">06</td>
+                  <td @click="setHour(7)">07</td>
+                </tr>
+                <tr class="control-buttons">
+                  <td @click="setHour(8)">08</td>
+                  <td @click="setHour(9)">09</td>
+                  <td @click="setHour(10)">10</td>
+                  <td @click="setHour(11)">11</td>
+                </tr>
+                <tr class="control-buttons">
+                  <td @click="setHour(12)">12</td>
+                  <td @click="setHour(13)">13</td>
+                  <td @click="setHour(14)">14</td>
+                  <td @click="setHour(15)">15</td>
+                </tr>
+                <tr class="control-buttons">
+                  <td @click="setHour(16)">16</td>
+                  <td @click="setHour(17)">17</td>
+                  <td @click="setHour(18)">18</td>
+                  <td @click="setHour(19)">19</td>
+                </tr>
+                <tr class="control-buttons">
+                  <td @click="setHour(20)">20</td>
+                  <td @click="setHour(21)">21</td>
+                  <td @click="setHour(22)">22</td>
+                  <td @click="setHour(23)">23</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- Minutes selection -->
+            <table>
+              <tbody>
+                <tr class="control-buttons">
+                  <td @click="setMinutes(0)">00</td>
+                  <td @click="setMinutes(5)">05</td>
+                  <td @click="setMinutes(10)">10</td>
+                  <td @click="setMinutes(15)">15</td>
+                </tr>
+                <tr class="control-buttons">
+                  <td @click="setMinutes(20)">20</td>
+                  <td @click="setMinutes(25)">25</td>
+                  <td @click="setMinutes(30)">30</td>
+                  <td @click="setMinutes(35)">35</td>
+                </tr>
+                <tr class="control-buttons">
+                  <td @click="setMinutes(40)">40</td>
+                  <td @click="setMinutes(45)">45</td>
+                  <td @click="setMinutes(50)">50</td>
+                  <td @click="setMinutes(55)">55</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </li>
       </ul>
@@ -394,8 +460,7 @@ export default {
 
       if (this.mode === 'time') {
         this.dateInput = this.formatTime(this.date);
-      }
-      else {
+      } else {
         this.dateInput = this.formatDateTime(this.date);
       }
 
@@ -417,13 +482,42 @@ export default {
 
       if (this.mode === 'time') {
         this.dateInput = this.formatTime(this.date);
-      }
-      else {
+      } else {
         this.dateInput = this.formatDateTime(this.date);
       }
 
       this.$emit('changed', this.dateInput);
     },
+    setHour (hour) {
+      this.date = new Date(
+        this.date.getFullYear(),
+        this.date.getMonth(),
+        this.date.getDate(),
+        hour,
+        this.date.getMinutes()
+      );
+
+      if (this.mode === 'time') {
+        this.dateInput = this.formatTime(this.date);
+      } else {
+        this.dateInput = this.formatDateTime(this.date);
+      }
+    },
+    setMinutes (minutes) {
+      this.date = new Date(
+        this.date.getFullYear(),
+        this.date.getMonth(),
+        this.date.getDate(),
+        this.date.getHours(),
+        minutes
+      );
+
+      if (this.mode === 'time') {
+        this.dateInput = this.formatTime(this.date);
+      } else {
+        this.dateInput = this.formatDateTime(this.date);
+      }
+    }
   },
   created () {
     this.dateInput = this.value;
@@ -468,6 +562,15 @@ export default {
     padding-bottom: 10px;
   }
 
+  .hours,
+  .colon,
+  .minutes {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  .hours:hover,
+  .minutes:hover,
   .control-buttons td:hover,
   .control-button:hover {
     background-color: #f2f2f2;

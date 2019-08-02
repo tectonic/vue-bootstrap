@@ -1,5 +1,5 @@
 <template>
-  <div :class="['datetimepicker-widget', { 'open': isOpen }, 'dropdown', containerClass]" v-on-click-outside="close">
+  <div :class="['bootstrap-datetimepicker-widget', { 'open': isOpen }, 'dropdown', containerClass]" v-on-click-outside="close">
     <input type="text"
       :value="dateInput"
       :name="name"
@@ -31,7 +31,7 @@
             </thead>
             <tbody>
               <tr v-for="week in visibleWeeks">
-                <td v-for="day in week" :class="['day', { 'muted': !isWithinCurrentMonth(day), 'selected': isSelected(day), 'today': (highlightToday && isToday(day))}]" @click="select(day)">
+                <td v-for="day in week" :class="['day', { 'muted': !isWithinCurrentMonth(day), 'selected active': isSelected(day), 'today': (highlightToday && isToday(day))}]" @click="select(day)">
                   {{ day.getDate() }}
                 </td>
               </tr>
@@ -42,19 +42,29 @@
             <tbody>
               <tr class="control-buttons">
                 <td class="set-now" @click="setNow()">
-                  <span :class="icons.now"></span>
+                  <a data-action>
+                    <span :class="icons.now"></span>
+                  </a>
                 </td>
                 <td class="show-calendar" v-if="mode === 'datetime' && view === 'clock'" @click="toggleView">
-                  <span :class="icons.calendar"></span>
+                  <a data-action>
+                    <span :class="icons.calendar"></span>
+                  </a>
                 </td>
                 <td class="show-clock" v-if="mode === 'datetime' && view !== 'clock'" @click="toggleView">
-                  <span :class="icons.time"></span>
+                  <a data-action>
+                    <span :class="icons.time"></span>
+                  </a>
                 </td>
                 <td class="clear-selection" @click="flushDateInput()">
-                  <span :class="icons.trash"></span>
+                  <a data-action>
+                    <span :class="icons.trash"></span>
+                  </a>
                 </td>
                 <td class="close-picker" @click="close()">
-                  <span :class="icons.close"></span>
+                  <a data-action>
+                    <span :class="icons.close"></span>
+                  </a>
                 </td>
               </tr>
             </tbody>
@@ -65,11 +75,15 @@
               <tbody>
               <tr>
                 <td class="control-button" @click="setClock('hours', 'increment')">
-                  <span :class="icons.up"></span>
+                  <a data-action>
+                    <span :class="icons.up"></span>
+                  </a>
                 </td>
                 <td></td>
                 <td class="control-button" @click="setClock('minutes', 'increment')">
-                  <span :class="icons.up"></span>
+                  <a data-action>
+                    <span :class="icons.up"></span>
+                  </a>
                 </td>
               </tr>
               <tr>
@@ -79,11 +93,15 @@
               </tr>
               <tr>
                 <td class="control-button" @click="setClock('hours', 'decrement')">
-                  <span :class="icons.down"></span>
+                  <a data-action>
+                    <span :class="icons.down"></span>
+                  </a>
                 </td>
                 <td></td>
                 <td class="control-button" @click="setClock('minutes', 'decrement')">
-                  <span :class="icons.down"></span>
+                  <a data-action>
+                    <span :class="icons.down"></span>
+                  </a>
                 </td>
               </tr>
               </tbody>

@@ -186,20 +186,7 @@ export default {
   },
   watch: {
     query () {
-      const mapOptions = option => {
-        if (this.hasChildren(option)) {
-          option.children.map(mapOptions);
-        }
-
-        option.visible = !this.hasChildren(option)
-          ? option[this.valueProperty].toLowerCase().indexOf(this.query.toLowerCase()) !== -1
-          : true;
-
-        return option;
-      };
-
-      // Adjust option visibility based on query
-      this.tree = this.tree.map(mapOptions);
+      this.filterTree();
     },
     options (newOptions, oldOptions) {
       if (JSON.stringify(newOptions) === JSON.stringify(oldOptions)) {
@@ -207,6 +194,7 @@ export default {
       }
 
       this.buildTree(newOptions);
+      this.filterTree();
     },
     selectedOptions (newOptions, oldOptions) {
       if (JSON.stringify(newOptions) === JSON.stringify(oldOptions)) {
@@ -214,6 +202,7 @@ export default {
       }
 
       this.buildTree(this.options, newOptions);
+      this.filterTree();
     },
     selectedIds () {
       this.$emit('selected', this.selectedIds);
@@ -270,6 +259,22 @@ export default {
 
       // Clone the array first
       this.tree = JSON.parse(JSON.stringify(options)).map(mapOptions);
+    },
+    filterTree () {
+      const mapOptions = option => {
+        if (this.hasChildren(option)) {
+          option.children.map(mapOptions);
+        }
+
+        option.visible = !this.hasChildren(option)
+          ? option[this.valueProperty].toLowerCase().indexOf(this.query.toLowerCase()) !== -1
+          : true;
+
+        return option;
+      };
+
+      // Adjust option visibility based on query
+      this.tree = this.tree.map(mapOptions);
     }
   },
   created () {

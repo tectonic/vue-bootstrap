@@ -46,12 +46,12 @@
                     <span :class="icons.now"></span>
                   </a>
                 </td>
-                <td class="show-calendar" v-if="mode === 'datetime' && view === 'clock'" @click="toggleView">
+                <td class="show-calendar" v-if="mode === 'datetime' && view === 'clock'" @click="changeView('calendar')">
                   <a data-action>
                     <span :class="icons.calendar"></span>
                   </a>
                 </td>
-                <td class="show-clock" v-if="mode === 'datetime' && view !== 'clock'" @click="toggleView">
+                <td class="show-clock" v-if="mode === 'datetime' && view !== 'clock'" @click="changeView('clock')">
                   <a data-action>
                     <span :class="icons.time"></span>
                   </a>
@@ -87,9 +87,9 @@
                 </td>
               </tr>
               <tr>
-                <td class="hours">{{ pad(date.getHours()) }}</td>
+                <td class="hours" @click="changeView('hours')">{{ pad(date.getHours()) }}</td>
                 <td class="colon">:</td>
-                <td class="minutes">{{ pad(date.getMinutes()) }}</td>
+                <td class="minutes" @click="changeView('minutes')">{{ pad(date.getMinutes()) }}</td>
               </tr>
               <tr>
                 <td class="control-button" @click="setClock('hours', 'decrement')">
@@ -106,73 +106,73 @@
               </tr>
               </tbody>
             </table>
-
-            <!-- Hours selection -->
-            <table>
-              <tbody>
-                <tr class="control-buttons">
-                  <td @click="setHour(0)">00</td>
-                  <td @click="setHour(1)">01</td>
-                  <td @click="setHour(2)">02</td>
-                  <td @click="setHour(3)">03</td>
-                </tr>
-                <tr class="control-buttons">
-                  <td @click="setHour(4)">04</td>
-                  <td @click="setHour(5)">05</td>
-                  <td @click="setHour(6)">06</td>
-                  <td @click="setHour(7)">07</td>
-                </tr>
-                <tr class="control-buttons">
-                  <td @click="setHour(8)">08</td>
-                  <td @click="setHour(9)">09</td>
-                  <td @click="setHour(10)">10</td>
-                  <td @click="setHour(11)">11</td>
-                </tr>
-                <tr class="control-buttons">
-                  <td @click="setHour(12)">12</td>
-                  <td @click="setHour(13)">13</td>
-                  <td @click="setHour(14)">14</td>
-                  <td @click="setHour(15)">15</td>
-                </tr>
-                <tr class="control-buttons">
-                  <td @click="setHour(16)">16</td>
-                  <td @click="setHour(17)">17</td>
-                  <td @click="setHour(18)">18</td>
-                  <td @click="setHour(19)">19</td>
-                </tr>
-                <tr class="control-buttons">
-                  <td @click="setHour(20)">20</td>
-                  <td @click="setHour(21)">21</td>
-                  <td @click="setHour(22)">22</td>
-                  <td @click="setHour(23)">23</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <!-- Minutes selection -->
-            <table>
-              <tbody>
-                <tr class="control-buttons">
-                  <td @click="setMinutes(0)">00</td>
-                  <td @click="setMinutes(5)">05</td>
-                  <td @click="setMinutes(10)">10</td>
-                  <td @click="setMinutes(15)">15</td>
-                </tr>
-                <tr class="control-buttons">
-                  <td @click="setMinutes(20)">20</td>
-                  <td @click="setMinutes(25)">25</td>
-                  <td @click="setMinutes(30)">30</td>
-                  <td @click="setMinutes(35)">35</td>
-                </tr>
-                <tr class="control-buttons">
-                  <td @click="setMinutes(40)">40</td>
-                  <td @click="setMinutes(45)">45</td>
-                  <td @click="setMinutes(50)">50</td>
-                  <td @click="setMinutes(55)">55</td>
-                </tr>
-              </tbody>
-            </table>
           </div>
+
+          <!-- Hours selector -->
+          <table :class="{ 'hidden': view !== 'hours' }">
+            <tbody>
+              <tr class="control-buttons">
+                <td @click="setHour(0)">00</td>
+                <td @click="setHour(1)">01</td>
+                <td @click="setHour(2)">02</td>
+                <td @click="setHour(3)">03</td>
+              </tr>
+              <tr class="control-buttons">
+                <td @click="setHour(4)">04</td>
+                <td @click="setHour(5)">05</td>
+                <td @click="setHour(6)">06</td>
+                <td @click="setHour(7)">07</td>
+              </tr>
+              <tr class="control-buttons">
+                <td @click="setHour(8)">08</td>
+                <td @click="setHour(9)">09</td>
+                <td @click="setHour(10)">10</td>
+                <td @click="setHour(11)">11</td>
+              </tr>
+              <tr class="control-buttons">
+                <td @click="setHour(12)">12</td>
+                <td @click="setHour(13)">13</td>
+                <td @click="setHour(14)">14</td>
+                <td @click="setHour(15)">15</td>
+              </tr>
+              <tr class="control-buttons">
+                <td @click="setHour(16)">16</td>
+                <td @click="setHour(17)">17</td>
+                <td @click="setHour(18)">18</td>
+                <td @click="setHour(19)">19</td>
+              </tr>
+              <tr class="control-buttons">
+                <td @click="setHour(20)">20</td>
+                <td @click="setHour(21)">21</td>
+                <td @click="setHour(22)">22</td>
+                <td @click="setHour(23)">23</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Minutes selector -->
+          <table :class="{ 'hidden': view !== 'minutes' }">
+            <tbody>
+              <tr class="control-buttons">
+                <td @click="setMinutes(0)">00</td>
+                <td @click="setMinutes(5)">05</td>
+                <td @click="setMinutes(10)">10</td>
+                <td @click="setMinutes(15)">15</td>
+              </tr>
+              <tr class="control-buttons">
+                <td @click="setMinutes(20)">20</td>
+                <td @click="setMinutes(25)">25</td>
+                <td @click="setMinutes(30)">30</td>
+                <td @click="setMinutes(35)">35</td>
+              </tr>
+              <tr class="control-buttons">
+                <td @click="setMinutes(40)">40</td>
+                <td @click="setMinutes(45)">45</td>
+                <td @click="setMinutes(50)">50</td>
+                <td @click="setMinutes(55)">55</td>
+              </tr>
+            </tbody>
+          </table>
         </li>
       </ul>
     </div>
@@ -289,8 +289,8 @@ export default {
 
       this.date = date || this.dateNow();
     },
-    toggleView () {
-      this.view = this.view === 'calendar' ? 'clock' : 'calendar';
+    changeView (newView) {
+      this.view = newView;
     },
     nextMonth () {
       if (this.month < 11) {
@@ -502,6 +502,8 @@ export default {
       } else {
         this.dateInput = this.formatDateTime(this.date);
       }
+
+      this.view = 'clock';
     },
     setMinutes (minutes) {
       this.date = new Date(
@@ -517,6 +519,8 @@ export default {
       } else {
         this.dateInput = this.formatDateTime(this.date);
       }
+
+      this.view = 'clock';
     }
   },
   created () {

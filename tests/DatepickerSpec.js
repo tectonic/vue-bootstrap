@@ -112,4 +112,61 @@ describe('Datepicker', () => {
 
     expect(paddedValue).to.equal('01');
   });
+
+  it('should detect today', () => {
+    const vm = initVM(Datepicker, {
+      value: '2019-08-01'
+    });
+
+    expect(vm.isToday(new Date(2012, 10, 1))).to.equal(false);
+    expect(vm.isToday(new Date())).to.equal(true);
+  });
+
+  it('should flush the input', () => {
+    const vm = initVM(Datepicker, {
+      value: '2019-08-01'
+    });
+
+    vm.flushDateInput();
+
+    expect(vm.dateInput).to.equal('');
+  });
+
+  it('formats date', () => {
+    const vm = initVM(Datepicker, {
+      value: '2019-08-01 14:05'
+    });
+
+    expect(vm.formatDate(vm.date)).to.equal('2019-08-01');
+  });
+
+  it('formats time', () => {
+    const vm = initVM(Datepicker, {
+      value: '2019-08-01 14:05'
+    });
+
+    expect(vm.formatTime(vm.date)).to.equal('14:05');
+  });
+
+  it('set hour', () => {
+    const vm = initVM(Datepicker, {
+      value: '2019-08-01 14:30',
+      mode: 'datetime'
+    });
+
+    vm.setHour('08');
+
+    expect(vm.dateInput).to.equal('2019-08-01 08:30');
+  });
+
+  it('set minutes', () => {
+    const vm = initVM(Datepicker, {
+      value: '2019-08-01 14:30',
+      mode: 'datetime'
+    });
+
+    vm.setMinutes('05');
+
+    expect(vm.dateInput).to.equal('2019-08-01 14:05');
+  });
 });

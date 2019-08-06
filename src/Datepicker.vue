@@ -246,7 +246,7 @@ export default {
           close: 'glyphicon glyphicon-remove',
           now: 'glyphicon glyphicon-screenshot',
           time: 'glyphicon glyphicon-time',
-          trash: 'glyphicon glyphicon-trash',
+          trash: 'glyphicon glyphicon-trash'
         };
       }
     }

@@ -37,7 +37,7 @@
               </tr>
             </tbody>
           </table>
-          <hr :class="[{ 'hidden': view === 'clock' }, 'separator']">
+          <hr :class="[{ 'hidden': ['clock', 'hour', 'minutes'].indexOf(view) > -1 }, 'separator']">
           <table>
             <tbody>
               <tr class="control-buttons">
@@ -69,6 +69,7 @@
               </tr>
             </tbody>
           </table>
+          <hr :class="[{ 'hidden': ['hour', 'minutes'].indexOf(view) === -1 }, 'separator']">
           <div :class="{ 'hidden': view !== 'clock' }">
             <hr class="separator">
             <table :class="['clock', 'table-condensed']">
@@ -111,41 +112,11 @@
           <!-- Hours selector -->
           <table :class="{ 'hidden': view !== 'hours' }">
             <tbody>
-              <tr class="control-buttons">
-                <td @click="setHour(0)">00</td>
-                <td @click="setHour(1)">01</td>
-                <td @click="setHour(2)">02</td>
-                <td @click="setHour(3)">03</td>
-              </tr>
-              <tr class="control-buttons">
-                <td @click="setHour(4)">04</td>
-                <td @click="setHour(5)">05</td>
-                <td @click="setHour(6)">06</td>
-                <td @click="setHour(7)">07</td>
-              </tr>
-              <tr class="control-buttons">
-                <td @click="setHour(8)">08</td>
-                <td @click="setHour(9)">09</td>
-                <td @click="setHour(10)">10</td>
-                <td @click="setHour(11)">11</td>
-              </tr>
-              <tr class="control-buttons">
-                <td @click="setHour(12)">12</td>
-                <td @click="setHour(13)">13</td>
-                <td @click="setHour(14)">14</td>
-                <td @click="setHour(15)">15</td>
-              </tr>
-              <tr class="control-buttons">
-                <td @click="setHour(16)">16</td>
-                <td @click="setHour(17)">17</td>
-                <td @click="setHour(18)">18</td>
-                <td @click="setHour(19)">19</td>
-              </tr>
-              <tr class="control-buttons">
-                <td @click="setHour(20)">20</td>
-                <td @click="setHour(21)">21</td>
-                <td @click="setHour(22)">22</td>
-                <td @click="setHour(23)">23</td>
+              <tr v-for="(hourRow, index) in hours()" :key="hourRow[index]" class="control-buttons">
+                <td @click="setHour(hourRow[0])">{{ hourRow[0] }}</td>
+                <td @click="setHour(hourRow[1])">{{ hourRow[1] }}</td>
+                <td @click="setHour(hourRow[2])">{{ hourRow[2] }}</td>
+                <td @click="setHour(hourRow[3])">{{ hourRow[3] }}</td>
               </tr>
             </tbody>
           </table>
@@ -153,23 +124,11 @@
           <!-- Minutes selector -->
           <table :class="{ 'hidden': view !== 'minutes' }">
             <tbody>
-              <tr class="control-buttons">
-                <td @click="setMinutes(0)">00</td>
-                <td @click="setMinutes(5)">05</td>
-                <td @click="setMinutes(10)">10</td>
-                <td @click="setMinutes(15)">15</td>
-              </tr>
-              <tr class="control-buttons">
-                <td @click="setMinutes(20)">20</td>
-                <td @click="setMinutes(25)">25</td>
-                <td @click="setMinutes(30)">30</td>
-                <td @click="setMinutes(35)">35</td>
-              </tr>
-              <tr class="control-buttons">
-                <td @click="setMinutes(40)">40</td>
-                <td @click="setMinutes(45)">45</td>
-                <td @click="setMinutes(50)">50</td>
-                <td @click="setMinutes(55)">55</td>
+              <tr v-for="(minutesRow, index) in minutes()" :key="minutesRow[index]" class="control-buttons">
+                <td @click="setMinutes(minutesRow[0])">{{ minutesRow[0] }}</td>
+                <td @click="setMinutes(minutesRow[1])">{{ minutesRow[1] }}</td>
+                <td @click="setMinutes(minutesRow[2])">{{ minutesRow[2] }}</td>
+                <td @click="setMinutes(minutesRow[3])">{{ minutesRow[3] }}</td>
               </tr>
             </tbody>
           </table>
@@ -521,6 +480,16 @@ export default {
       }
 
       this.view = 'clock';
+    },
+    hours () {
+      const hours = (new Array(24)).fill(0, 0, 24).map((value, index) => (index < 10 ? ('0' + index) : ('' + index)));
+
+      return chunk(hours, 4);
+    },
+    minutes () {
+      const minutes = (new Array(12)).fill(0, 0, 12).map((value, index) => (5 * index < 10 ? ('0' + 5 * index) : ('' + 5 * index)));
+
+      return chunk(minutes, 4);
     }
   },
   created () {
@@ -531,6 +500,10 @@ export default {
 </script>
 
 <style scoped>
+  .open > .dropdown-menu {
+    margin-bottom: 15px;
+  }
+
   .form-control[readonly], input {
     background-color: inherit;
   }

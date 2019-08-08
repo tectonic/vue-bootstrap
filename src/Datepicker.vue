@@ -1,16 +1,19 @@
 <template>
-  <div :class="[{ 'open': isOpen }, 'dropdown', containerClass]" v-on-click-outside="close">
+  <div :class="['bootstrap-datetimepicker-widget', { 'open': isOpen }, 'dropdown', containerClass]" v-on-click-outside="close">
     <input type="text"
-      v-model="dateInput"
+      :value="dateInput"
       :name="name"
       :id="id"
       :placeholder="placeholder"
       aria-haspopup="true"
       :aria-expanded="isOpen"
+      @input="$emit('changed', dateInput)"
       @focus="open"
       @keyup.esc="close"
+      @keyup.delete="flushDateInput"
       class="form-control"
       autocomplete="off"
+      readonly
     />
     <div class="datepicker dropdown-menu">
       <ul class="list-unstyled">
@@ -18,9 +21,9 @@
           <table :class="[{ 'hidden': view !== 'calendar' }, 'calendar', 'table-condensed']">
             <thead>
               <tr>
-                <th class="previous-month" @click="previousMonth"><span :class="icons.left"></span></th>
+                <th class="previous-month control-button" @click="previousMonth"><span :class="icons.left"></span></th>
                 <th class="current-month" colspan="5">{{ months[month] }} {{ year }}</th>
-                <th class="next-month" @click="nextMonth"><span :class="icons.right"></span></th>
+                <th class="next-month control-button" @click="nextMonth"><span :class="icons.right"></span></th>
               </tr>
               <tr>
                 <th class="day-of-week" v-for="dayOfWeek in daysOfWeek">{{ dayOfWeek }}</th>
@@ -28,47 +31,107 @@
             </thead>
             <tbody>
               <tr v-for="week in visibleWeeks">
-                <td v-for="day in week" :class="['day', { 'muted': !isWithinCurrentMonth(day), 'selected': isSelected(day) }]" @click="select(day)">
+                <td v-for="day in week" :class="['day', { 'muted': !isWithinCurrentMonth(day), 'selected active': isSelected(day), 'today': (highlightToday && isToday(day))}]" @click="select(day)">
                   {{ day.getDate() }}
                 </td>
               </tr>
             </tbody>
           </table>
-          <table :class="[{ 'hidden': view !== 'clock' }, 'clock', 'table-condensed']">
+          <hr :class="[{ 'hidden': ['clock', 'hour', 'minutes'].indexOf(view) > -1 }, 'separator']">
+          <table>
             <tbody>
-              <tr>
-                <td class="set-clock" @click="setClock('hours', 'increment')">
-                  <span :class="icons.up"></span>
+              <tr class="control-buttons">
+                <td class="set-now" @click="setNow()">
+                  <a data-action>
+                    <span :class="icons.now"></span>
+                  </a>
                 </td>
-                <td></td>
-                <td class="set-clock" @click="setClock('minutes', 'increment')">
-                  <span :class="icons.up"></span>
+                <td class="show-calendar" v-if="mode === 'datetime' && view === 'clock'" @click="changeView('calendar')">
+                  <a data-action>
+                    <span :class="icons.calendar"></span>
+                  </a>
                 </td>
-              </tr>
-              <tr>
-                <td class="hours">{{ pad(date.getHours()) }}</td>
-                <td class="colon">:</td>
-                <td class="minutes">{{ pad(date.getMinutes()) }}</td>
-              </tr>
-              <tr>
-                <td class="set-clock" @click="setClock('hours', 'decrement')">
-                  <span :class="icons.down"></span>
+                <td class="show-clock" v-if="mode === 'datetime' && view !== 'clock'" @click="changeView('clock')">
+                  <a data-action>
+                    <span :class="icons.time"></span>
+                  </a>
                 </td>
-                <td></td>
-                <td class="set-clock" @click="setClock('minutes', 'decrement')">
-                  <span :class="icons.down"></span>
+                <td class="clear-selection" @click="flushDateInput()">
+                  <a data-action>
+                    <span :class="icons.trash"></span>
+                  </a>
+                </td>
+                <td class="close-picker" @click="close()">
+                  <a data-action>
+                    <span :class="icons.close"></span>
+                  </a>
                 </td>
               </tr>
             </tbody>
           </table>
-          <div class="switcher" v-if="mode === 'datetime'">
-            <span @click="toggleView" v-if="view === 'clock'">
-              <i :class="icons.calendar"></i> {{ formatDate(date) }}
-            </span>
-            <span @click="toggleView" v-else>
-              <i :class="icons.time"></i> {{ formatTime(date) }}
-            </span>
+          <hr :class="[{ 'hidden': ['hour', 'minutes'].indexOf(view) === -1 }, 'separator']">
+          <div :class="{ 'hidden': view !== 'clock' }">
+            <hr class="separator">
+            <table :class="['clock', 'table-condensed']">
+              <tbody>
+              <tr>
+                <td class="control-button" @click="setClock('hours', 'increment')">
+                  <a data-action>
+                    <span :class="icons.up"></span>
+                  </a>
+                </td>
+                <td></td>
+                <td class="control-button" @click="setClock('minutes', 'increment')">
+                  <a data-action>
+                    <span :class="icons.up"></span>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="hours" @click="changeView('hours')">{{ pad(date.getHours()) }}</td>
+                <td class="colon">:</td>
+                <td class="minutes" @click="changeView('minutes')">{{ pad(date.getMinutes()) }}</td>
+              </tr>
+              <tr>
+                <td class="control-button" @click="setClock('hours', 'decrement')">
+                  <a data-action>
+                    <span :class="icons.down"></span>
+                  </a>
+                </td>
+                <td></td>
+                <td class="control-button" @click="setClock('minutes', 'decrement')">
+                  <a data-action>
+                    <span :class="icons.down"></span>
+                  </a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
           </div>
+
+          <!-- Hours selector -->
+          <table :class="{ 'hidden': view !== 'hours' }">
+            <tbody>
+              <tr v-for="(hourRow, index) in hours()" :key="hourRow[index]" class="control-buttons">
+                <td @click="setHour(hourRow[0])">{{ hourRow[0] }}</td>
+                <td @click="setHour(hourRow[1])">{{ hourRow[1] }}</td>
+                <td @click="setHour(hourRow[2])">{{ hourRow[2] }}</td>
+                <td @click="setHour(hourRow[3])">{{ hourRow[3] }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Minutes selector -->
+          <table :class="{ 'hidden': view !== 'minutes' }">
+            <tbody>
+              <tr v-for="(minutesRow, index) in minutes()" :key="minutesRow[index]" class="control-buttons">
+                <td @click="setMinutes(minutesRow[0])">{{ minutesRow[0] }}</td>
+                <td @click="setMinutes(minutesRow[1])">{{ minutesRow[1] }}</td>
+                <td @click="setMinutes(minutesRow[2])">{{ minutesRow[2] }}</td>
+                <td @click="setMinutes(minutesRow[3])">{{ minutesRow[3] }}</td>
+              </tr>
+            </tbody>
+          </table>
         </li>
       </ul>
     </div>
@@ -100,11 +163,15 @@ export default {
       type: String,
       default: ''
     },
+    highlightToday: {
+      type: Boolean,
+      default: true
+    },
     mode: {
       type: String,
       default: 'date',
       validator: (value) => {
-        return value === 'date' || value === 'datetime';
+        return value === 'date' || value === 'datetime' || value === 'time';
       }
     },
     containerClass: {
@@ -135,14 +202,17 @@ export default {
           up: 'glyphicon glyphicon-chevron-up',
           down: 'glyphicon glyphicon-chevron-down',
           calendar: 'glyphicon glyphicon-calendar',
-          time: 'glyphicon glyphicon-time'
+          close: 'glyphicon glyphicon-remove',
+          now: 'glyphicon glyphicon-screenshot',
+          time: 'glyphicon glyphicon-time',
+          trash: 'glyphicon glyphicon-trash'
         };
       }
     }
   },
   data () {
     return {
-      view: 'calendar',
+      view: this.mode === 'time' ? 'clock' : 'calendar',
       date: null,
       dateInput: '',
       month: new Date().getMonth(),
@@ -176,10 +246,10 @@ export default {
     getDateFromInput () {
       const date = this.parseDate(this.dateInput);
 
-      this.date = date || new Date();
+      this.date = date || this.dateNow();
     },
-    toggleView () {
-      this.view = this.view === 'calendar' ? 'clock' : 'calendar';
+    changeView (newView) {
+      this.view = newView;
     },
     nextMonth () {
       if (this.month < 11) {
@@ -201,9 +271,19 @@ export default {
       return date.getMonth() === this.month && date.getFullYear() === this.year;
     },
     isSelected (date) {
+      if (!this.dateInput) {
+        return false;
+      }
+
       return date.getDate() === this.date.getDate() &&
-        date.getMonth() === this.date.getMonth() &&
-        date.getFullYear() === this.date.getFullYear();
+             date.getMonth() === this.date.getMonth() &&
+             date.getFullYear() === this.date.getFullYear();
+    },
+    isToday (date) {
+      var today = new Date();
+      return date.getDate() === today.getDate() &&
+             date.getMonth() === today.getMonth() &&
+             date.getFullYear() === today.getFullYear();
     },
     select (date) {
       this.date = new Date(
@@ -221,6 +301,13 @@ export default {
       if (this.mode !== 'datetime') {
         this.isOpen = false;
       }
+
+      this.$emit('changed', this.dateInput);
+    },
+    flushDateInput () {
+      this.dateInput = '';
+
+      this.$emit('changed', this.dateInput);
     },
     formatDateTime (date) {
       let formattedDate = this.formatDate(date);
@@ -233,8 +320,8 @@ export default {
     },
     formatDate (date) {
       return date.getFullYear() +
-        '-' + this.pad(date.getMonth() + 1) +
-        '-' + this.pad(date.getDate());
+              '-' + this.pad(date.getMonth() + 1) +
+              '-' + this.pad(date.getDate());
     },
     formatTime (date) {
       return this.pad(date.getHours()) + ':' + this.pad(date.getMinutes());
@@ -243,14 +330,24 @@ export default {
       return ('0' + value).slice(-2);
     },
     validFormat (date) {
-      // Accept dates in the format of '2017-03-01' or '2017-03-01 12:10'.
+      // Accept dates in the format of '2017-03-01' or '2017-03-01 12:10' or '23:09'.
       return (date.length === 10 && /^[0-9-]+$/.test(date)) ||
-        (date.length === 16 && /^[0-9-\s:]+$/.test(date));
+             (date.length === 16 && /^[0-9-\s:]+$/.test(date)) ||
+             (date.length === 5 && /^\d{2}:\d{2}$/.test(date));
     },
     parseDate (date) {
       let parsedDate;
 
       if (date && this.validFormat(date)) {
+        if (this.mode === 'time') {
+          parsedDate = new Date();
+          parsedDate.setHours(date.substring(0, 2));
+          parsedDate.setMinutes(date.substring(3, 5));
+          parsedDate.setSeconds(0);
+
+          return parsedDate;
+        }
+
         parsedDate = new Date(
           date.substring(0, 4),
           date.substring(5, 7) - 1,
@@ -320,7 +417,79 @@ export default {
         type === 'minutes' ? (operation === 'increment' ? minutes + 5 : minutes - 5) : minutes
       );
 
-      this.dateInput = this.formatDateTime(this.date);
+      if (this.mode === 'time') {
+        this.dateInput = this.formatTime(this.date);
+      } else {
+        this.dateInput = this.formatDateTime(this.date);
+      }
+
+      this.$emit('changed', this.dateInput);
+    },
+    dateNow () {
+      const now = new Date();
+
+      return new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate(),
+        now.getHours(),
+        Math.round(now.getMinutes() / 5) * 5
+      );
+    },
+    setNow () {
+      this.date = this.dateNow();
+
+      if (this.mode === 'time') {
+        this.dateInput = this.formatTime(this.date);
+      } else {
+        this.dateInput = this.formatDateTime(this.date);
+      }
+
+      this.$emit('changed', this.dateInput);
+    },
+    setHour (hour) {
+      this.date = new Date(
+        this.date.getFullYear(),
+        this.date.getMonth(),
+        this.date.getDate(),
+        hour,
+        this.date.getMinutes()
+      );
+
+      if (this.mode === 'time') {
+        this.dateInput = this.formatTime(this.date);
+      } else {
+        this.dateInput = this.formatDateTime(this.date);
+      }
+
+      this.view = 'clock';
+    },
+    setMinutes (minutes) {
+      this.date = new Date(
+        this.date.getFullYear(),
+        this.date.getMonth(),
+        this.date.getDate(),
+        this.date.getHours(),
+        minutes
+      );
+
+      if (this.mode === 'time') {
+        this.dateInput = this.formatTime(this.date);
+      } else {
+        this.dateInput = this.formatDateTime(this.date);
+      }
+
+      this.view = 'clock';
+    },
+    hours () {
+      const hours = (new Array(24)).fill(0, 0, 24).map((value, index) => (index < 10 ? ('0' + index) : ('' + index)));
+
+      return chunk(hours, 4);
+    },
+    minutes () {
+      const minutes = (new Array(12)).fill(0, 0, 12).map((value, index) => (5 * index < 10 ? ('0' + 5 * index) : ('' + 5 * index)));
+
+      return chunk(minutes, 4);
     }
   },
   created () {
@@ -331,6 +500,14 @@ export default {
 </script>
 
 <style scoped>
+  .open > .dropdown-menu {
+    margin-bottom: 15px;
+  }
+
+  .form-control[readonly], input {
+    background-color: inherit;
+  }
+
   ul {
     margin-bottom: 0;
   }
@@ -351,17 +528,28 @@ export default {
     width: 14.2857%;
   }
 
-  .set-clock,
-  .next-month,
-  .previous-month,
+  .control-buttons td,
   .day {
+    cursor: pointer;
     border-radius: 2px;
   }
 
-  .set-clock:hover,
-  .next-month:hover,
-  .previous-month:hover,
-  .day:hover {
+  .control-buttons td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .hours,
+  .colon,
+  .minutes {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  .hours:hover,
+  .minutes:hover,
+  .control-buttons td:hover,
+  .control-button:hover {
     background-color: #f2f2f2;
     cursor: pointer;
   }
@@ -371,12 +559,7 @@ export default {
   }
 
   .day.selected {
-    background-color: #333;
-    color: #fff;
-  }
-
-  .day.selected:hover {
-    background-color: #333;
+    background: #333;
     color: #fff;
   }
 
@@ -384,25 +567,11 @@ export default {
   .clock .minutes,
   .clock .colon {
     font-size: 1.25em;
+    user-select: none;
   }
 
-  .switcher {
-    width: 100%;
-    text-align: center;
-    padding: 5px 5px 0 5px;
-  }
-
-  .switcher span {
-    display: block;
-    padding: 5px;
-  }
-
-  .switcher span:hover {
-    background-color: #f2f2f2;
-    cursor: pointer;
-  }
-
-  .switcher i {
-    margin-right: 3px;
+  .separator {
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 </style>

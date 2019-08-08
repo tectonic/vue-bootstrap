@@ -1,5 +1,5 @@
 <template>
-  <div :class="['bootstrap-datetimepicker-widget', { 'open': isOpen }, 'dropdown', containerClass]" v-on-click-outside="close">
+  <div :class="['vue-datetimepicker-widget', { 'open': isOpen }, 'dropdown', containerClass]" v-on-click-outside="close">
     <input type="text"
       :value="dateInput"
       :name="name"

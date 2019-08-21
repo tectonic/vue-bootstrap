@@ -536,6 +536,7 @@ export default {
   table th,
   table td {
     text-align: center;
+    vertical-align: middle;
     padding: 5px;
   }
 
@@ -543,13 +544,18 @@ export default {
     width: 14.2857%;
   }
 
-  .control-buttons td,
+  .control-button,
+  .control-buttons > td {
+    padding: 10px !important;
+  }
+
+  .control-buttons > td,
   .day {
     cursor: pointer;
     border-radius: 2px;
   }
 
-  .control-buttons td {
+  .control-buttons > td {
     padding-top: 10px;
     padding-bottom: 10px;
   }
@@ -586,7 +592,7 @@ export default {
   }
 
   .separator {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 8px;
+    margin-bottom: 8px;
   }
 </style>

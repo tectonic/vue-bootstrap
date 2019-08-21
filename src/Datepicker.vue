@@ -21,7 +21,7 @@
           <table :class="[{ 'hidden': view !== 'calendar' }, 'calendar', 'table-condensed']">
             <thead>
               <tr>
-                <th class="previous-month control-button" @click="previousMonth"><span :class="icons.left"></span></th>
+                <th class="previous-month control-button" :title="tooltip('Previous month')" @click="previousMonth"><span :class="icons.left"></span></th>
                 <th class="current-month" colspan="5">{{ months[month] }} {{ year }}</th>
                 <th class="next-month control-button" @click="nextMonth"><span :class="icons.right"></span></th>
               </tr>
@@ -159,24 +159,13 @@ export default {
       type: String,
       default: ''
     },
-    placeholder: {
-      type: String,
-      default: ''
-    },
-    highlightToday: {
-      type: Boolean,
-      default: true
-    },
-    mode: {
-      type: String,
-      default: 'date',
-      validator: (value) => {
-        return value === 'date' || value === 'datetime' || value === 'time';
-      }
-    },
     containerClass: {
       type: String,
       default: ''
+    },
+    formatter: {
+      type: Function,
+      default: null
     },
     daysOfWeek: {
       type: Array,
@@ -184,14 +173,9 @@ export default {
         return ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
       }
     },
-    months: {
-      type: Array,
-      default: () => {
-        return [
-          'January', 'February', 'March', 'April', 'May', 'June',
-          'July', 'August', 'September', 'October', 'November', 'December'
-        ];
-      }
+    highlightToday: {
+      type: Boolean,
+      default: true
     },
     icons: {
       type: Object,
@@ -208,6 +192,26 @@ export default {
           trash: 'glyphicon glyphicon-trash'
         };
       }
+    },
+    mode: {
+      type: String,
+      default: 'date',
+      validator: (value) => {
+        return value === 'date' || value === 'datetime' || value === 'time';
+      }
+    },
+    months: {
+      type: Array,
+      default: () => {
+        return [
+          'January', 'February', 'March', 'April', 'May', 'June',
+          'July', 'August', 'September', 'October', 'November', 'December'
+        ];
+      }
+    },
+    placeholder: {
+      type: String,
+      default: ''
     }
   },
   data () {
@@ -233,8 +237,6 @@ export default {
   },
   methods: {
     open () {
-      this.getDateFromInput();
-
       this.month = this.date.getMonth();
       this.year = this.date.getFullYear();
 
@@ -242,11 +244,6 @@ export default {
     },
     close () {
       this.isOpen = false;
-    },
-    getDateFromInput () {
-      const date = this.parseDate(this.dateInput);
-
-      this.date = date || this.dateNow();
     },
     changeView (newView) {
       this.view = newView;
@@ -276,14 +273,14 @@ export default {
       }
 
       return date.getDate() === this.date.getDate() &&
-             date.getMonth() === this.date.getMonth() &&
-             date.getFullYear() === this.date.getFullYear();
+        date.getMonth() === this.date.getMonth() &&
+        date.getFullYear() === this.date.getFullYear();
     },
     isToday (date) {
       var today = new Date();
       return date.getDate() === today.getDate() &&
-             date.getMonth() === today.getMonth() &&
-             date.getFullYear() === today.getFullYear();
+        date.getMonth() === today.getMonth() &&
+        date.getFullYear() === today.getFullYear();
     },
     select (date) {
       this.date = new Date(
@@ -310,18 +307,28 @@ export default {
       this.$emit('changed', this.dateInput);
     },
     formatDateTime (date) {
-      let formattedDate = this.formatDate(date);
+      if (this.formatter) {
+        return this.formatter(date);
+      }
 
-      if (this.mode === 'datetime') {
-        formattedDate = formattedDate + ' ' + this.formatTime(date);
+      let formattedDate = '';
+      if (this.mode === 'date' || this.mode === 'datetime') {
+        formattedDate = this.formatDate(date);
+      }
+      if (this.mode === 'datetime' || this.mode === 'time') {
+        formattedDate += ' ' + this.formatTime(date);
       }
 
       return formattedDate;
     },
     formatDate (date) {
+      if (this.formatter) {
+        return this.formatter(date);
+      }
+
       return date.getFullYear() +
-              '-' + this.pad(date.getMonth() + 1) +
-              '-' + this.pad(date.getDate());
+        '-' + this.pad(date.getMonth() + 1) +
+        '-' + this.pad(date.getDate());
     },
     formatTime (date) {
       return this.pad(date.getHours()) + ':' + this.pad(date.getMinutes());
@@ -332,8 +339,8 @@ export default {
     validFormat (date) {
       // Accept dates in the format of '2017-03-01' or '2017-03-01 12:10' or '23:09'.
       return (date.length === 10 && /^[0-9-]+$/.test(date)) ||
-             (date.length === 16 && /^[0-9-\s:]+$/.test(date)) ||
-             (date.length === 5 && /^\d{2}:\d{2}$/.test(date));
+        (date.length === 16 && /^[0-9-\s:]+$/.test(date)) ||
+        (date.length === 5 && /^\d{2}:\d{2}$/.test(date));
     },
     parseDate (date) {
       let parsedDate;
@@ -417,11 +424,7 @@ export default {
         type === 'minutes' ? (operation === 'increment' ? minutes + 5 : minutes - 5) : minutes
       );
 
-      if (this.mode === 'time') {
-        this.dateInput = this.formatTime(this.date);
-      } else {
-        this.dateInput = this.formatDateTime(this.date);
-      }
+      this.dateInput = this.formatDateTime(this.date);
 
       this.$emit('changed', this.dateInput);
     },
@@ -438,12 +441,7 @@ export default {
     },
     setNow () {
       this.date = this.dateNow();
-
-      if (this.mode === 'time') {
-        this.dateInput = this.formatTime(this.date);
-      } else {
-        this.dateInput = this.formatDateTime(this.date);
-      }
+      this.dateInput = this.formatDateTime(this.date);
 
       this.$emit('changed', this.dateInput);
     },
@@ -490,11 +488,14 @@ export default {
       const minutes = (new Array(12)).fill(0, 0, 12).map((value, index) => (5 * index < 10 ? ('0' + 5 * index) : ('' + 5 * index)));
 
       return chunk(minutes, 4);
+    },
+    tooltip (tooltipKey) {
+
     }
   },
   created () {
-    this.dateInput = this.value;
-    this.getDateFromInput();
+    this.date = this.parseDate(this.value);
+    this.dateInput = this.formatDateTime(this.date);
   }
 };
 </script>

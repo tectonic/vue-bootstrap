@@ -21,9 +21,9 @@
           <table :class="[{ 'hidden': view !== 'calendar' }, 'calendar', 'table-condensed']">
             <thead>
               <tr>
-                <th class="previous-month control-button" :title="tooltip('prevMonth')" @click="previousMonth"><span :class="icons.left"></span></th>
+                <th class="previous-month control-button" :title="tooltip('prev_month')" @click="previousMonth"><span :class="icons.left"></span></th>
                 <th class="current-month" colspan="5">{{ months[month] }} {{ year }}</th>
-                <th class="next-month control-button" :title="tooltip('nextMonth')" @click="nextMonth"><span :class="icons.right"></span></th>
+                <th class="next-month control-button" :title="tooltip('next_month')" @click="nextMonth"><span :class="icons.right"></span></th>
               </tr>
               <tr>
                 <th class="day-of-week" v-for="dayOfWeek in daysOfWeek">{{ dayOfWeek }}</th>
@@ -51,7 +51,7 @@
                     <span :class="icons.calendar"></span>
                   </a>
                 </td>
-                <td class="show-clock" v-if="mode === 'datetime' && view !== 'clock'" :title="tooltip('selectTime')" @click="changeView('clock')">
+                <td class="show-clock" v-if="mode === 'datetime' && view !== 'clock'" :title="tooltip('select_time')" @click="changeView('clock')">
                   <a data-action>
                     <span :class="icons.time"></span>
                   </a>
@@ -75,31 +75,31 @@
             <table :class="['clock', 'table-condensed']">
               <tbody>
               <tr>
-                <td class="control-button" :title="tooltip('incrementHour')" @click="setClock('hours', 'increment')">
+                <td class="control-button" :title="tooltip('increment_hour')" @click="setClock('hours', 'increment')">
                   <a data-action>
                     <span :class="icons.up"></span>
                   </a>
                 </td>
                 <td></td>
-                <td class="control-button" :title="tooltip('incrementMinute')" @click="setClock('minutes', 'increment')">
+                <td class="control-button" :title="tooltip('increment_minute')" @click="setClock('minutes', 'increment')">
                   <a data-action>
                     <span :class="icons.up"></span>
                   </a>
                 </td>
               </tr>
               <tr>
-                <td class="hours" :title="tooltip('pickHour')" @click="changeView('hours')">{{ pad(date.getHours()) }}</td>
+                <td class="hours" :title="tooltip('pick_hour')" @click="changeView('hours')">{{ pad(date.getHours()) }}</td>
                 <td class="colon">:</td>
-                <td class="minutes" :title="tooltip('pickMinute')" @click="changeView('minutes')">{{ pad(date.getMinutes()) }}</td>
+                <td class="minutes" :title="tooltip('pick_minute')" @click="changeView('minutes')">{{ pad(date.getMinutes()) }}</td>
               </tr>
               <tr>
-                <td class="control-button" :title="tooltip('decrementHour')" @click="setClock('hours', 'decrement')">
+                <td class="control-button" :title="tooltip('decrement_hour')" @click="setClock('hours', 'decrement')">
                   <a data-action>
                     <span :class="icons.down"></span>
                   </a>
                 </td>
                 <td></td>
-                <td class="control-button" :title="tooltip('decrementMinute')" @click="setClock('minutes', 'decrement')">
+                <td class="control-button" :title="tooltip('decrement_minute')" @click="setClock('minutes', 'decrement')">
                   <a data-action>
                     <span :class="icons.down"></span>
                   </a>
@@ -217,7 +217,20 @@ export default {
     translations: {
       type: Object,
       default: () => {
-        return {};
+        return {
+          today: 'Go to today',
+          clear: 'Clear selection',
+          close: 'Close the picker',
+          prev_month: 'Previous Month',
+          next_month: 'Next Month',
+          pick_hour: 'Pick Hour',
+          increment_hour: 'Increment Hour',
+          decrement_hour: 'Decrement Hour',
+          pick_minute: 'Pick Minute',
+          increment_minute: 'Increment Minute',
+          decrement_minute: 'Decrement Minute',
+          select_time: 'Select Time'
+        };
       }
     }
   },
@@ -497,10 +510,7 @@ export default {
       return chunk(minutes, 4);
     },
     tooltip (key) {
-      console.log(this.translations);
-      console.log('---');
       if (key in this.translations) {
-        console.log(key + " // " + this.translations[key]);
         return this.translations[key];
       }
 

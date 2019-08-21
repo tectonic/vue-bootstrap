@@ -21,9 +21,9 @@
           <table :class="[{ 'hidden': view !== 'calendar' }, 'calendar', 'table-condensed']">
             <thead>
               <tr>
-                <th class="previous-month control-button" :title="tooltip('Previous month')" @click="previousMonth"><span :class="icons.left"></span></th>
+                <th class="previous-month control-button" :title="tooltip('prevMonth')" @click="previousMonth"><span :class="icons.left"></span></th>
                 <th class="current-month" colspan="5">{{ months[month] }} {{ year }}</th>
-                <th class="next-month control-button" @click="nextMonth"><span :class="icons.right"></span></th>
+                <th class="next-month control-button" :title="tooltip('nextMonth')" @click="nextMonth"><span :class="icons.right"></span></th>
               </tr>
               <tr>
                 <th class="day-of-week" v-for="dayOfWeek in daysOfWeek">{{ dayOfWeek }}</th>
@@ -41,7 +41,7 @@
           <table>
             <tbody>
               <tr class="control-buttons">
-                <td class="set-now" @click="setNow()">
+                <td class="set-now" :title="tooltip('today')" @click="setNow()">
                   <a data-action>
                     <span :class="icons.now"></span>
                   </a>
@@ -51,17 +51,17 @@
                     <span :class="icons.calendar"></span>
                   </a>
                 </td>
-                <td class="show-clock" v-if="mode === 'datetime' && view !== 'clock'" @click="changeView('clock')">
+                <td class="show-clock" v-if="mode === 'datetime' && view !== 'clock'" :title="tooltip('selectTime')" @click="changeView('clock')">
                   <a data-action>
                     <span :class="icons.time"></span>
                   </a>
                 </td>
-                <td class="clear-selection" @click="flushDateInput()">
+                <td class="clear-selection" :title="tooltip('clear')" @click="flushDateInput()">
                   <a data-action>
                     <span :class="icons.trash"></span>
                   </a>
                 </td>
-                <td class="close-picker" @click="close()">
+                <td class="close-picker" :title="tooltip('close')" @click="close()">
                   <a data-action>
                     <span :class="icons.close"></span>
                   </a>
@@ -75,31 +75,31 @@
             <table :class="['clock', 'table-condensed']">
               <tbody>
               <tr>
-                <td class="control-button" @click="setClock('hours', 'increment')">
+                <td class="control-button" :title="tooltip('incrementHour')" @click="setClock('hours', 'increment')">
                   <a data-action>
                     <span :class="icons.up"></span>
                   </a>
                 </td>
                 <td></td>
-                <td class="control-button" @click="setClock('minutes', 'increment')">
+                <td class="control-button" :title="tooltip('incrementMinute')" @click="setClock('minutes', 'increment')">
                   <a data-action>
                     <span :class="icons.up"></span>
                   </a>
                 </td>
               </tr>
               <tr>
-                <td class="hours" @click="changeView('hours')">{{ pad(date.getHours()) }}</td>
+                <td class="hours" :title="tooltip('pickHour')" @click="changeView('hours')">{{ pad(date.getHours()) }}</td>
                 <td class="colon">:</td>
-                <td class="minutes" @click="changeView('minutes')">{{ pad(date.getMinutes()) }}</td>
+                <td class="minutes" :title="tooltip('pickMinute')" @click="changeView('minutes')">{{ pad(date.getMinutes()) }}</td>
               </tr>
               <tr>
-                <td class="control-button" @click="setClock('hours', 'decrement')">
+                <td class="control-button" :title="tooltip('decrementHour')" @click="setClock('hours', 'decrement')">
                   <a data-action>
                     <span :class="icons.down"></span>
                   </a>
                 </td>
                 <td></td>
-                <td class="control-button" @click="setClock('minutes', 'decrement')">
+                <td class="control-button" :title="tooltip('decrementMinute')" @click="setClock('minutes', 'decrement')">
                   <a data-action>
                     <span :class="icons.down"></span>
                   </a>
@@ -212,6 +212,13 @@ export default {
     placeholder: {
       type: String,
       default: ''
+    },
+    // Key-values translations to be used for tooltips
+    translations: {
+      type: Object,
+      default: () => {
+        return {};
+      }
     }
   },
   data () {
@@ -489,8 +496,15 @@ export default {
 
       return chunk(minutes, 4);
     },
-    tooltip (tooltipKey) {
+    tooltip (key) {
+      console.log(this.translations);
+      console.log('---');
+      if (key in this.translations) {
+        console.log(key + " // " + this.translations[key]);
+        return this.translations[key];
+      }
 
+      return null;
     }
   },
   created () {

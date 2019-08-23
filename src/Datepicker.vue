@@ -377,7 +377,7 @@ export default {
         '-' + this.pad(date.getDate());
     },
     formatTime (date) {
-      return this.pad(date.getHours()) + ':' + this.pad(date.getMinutes());
+      return this.pad(this.formatHours()) + ':' + this.pad(date.getMinutes());
     },
     pad (value) {
       return ('0' + value).slice(-2);

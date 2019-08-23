@@ -21,9 +21,9 @@
           <table :class="[{ 'hidden': view !== 'calendar' }, 'calendar', 'table-condensed']">
             <thead>
               <tr>
-                <th class="previous-month control-button" :title="tooltip('prev_month')" @click="previousMonth"><span :class="icons.left"></span></th>
+                <th class="previous-month control-button" :title="translate('prev_month')" @click="previousMonth"><span :class="icons.left"></span></th>
                 <th class="current-month" colspan="5">{{ months[month] }} {{ year }}</th>
-                <th class="next-month control-button" :title="tooltip('next_month')" @click="nextMonth"><span :class="icons.right"></span></th>
+                <th class="next-month control-button" :title="translate('next_month')" @click="nextMonth"><span :class="icons.right"></span></th>
               </tr>
               <tr>
                 <th class="day-of-week" v-for="dayOfWeek in daysOfWeek">{{ dayOfWeek }}</th>
@@ -41,7 +41,7 @@
           <table>
             <tbody>
               <tr class="control-buttons">
-                <td class="set-now" :title="tooltip('today')" @click="setNow()">
+                <td class="set-now" :title="translate('today')" @click="setNow()">
                   <a data-action>
                     <span :class="icons.now"></span>
                   </a>
@@ -51,17 +51,17 @@
                     <span :class="icons.calendar"></span>
                   </a>
                 </td>
-                <td class="show-clock" v-if="mode === 'datetime' && view !== 'clock'" :title="tooltip('select_time')" @click="changeView('clock')">
+                <td class="show-clock" v-if="mode === 'datetime' && view !== 'clock'" :title="translate('select_time')" @click="changeView('clock')">
                   <a data-action>
                     <span :class="icons.time"></span>
                   </a>
                 </td>
-                <td class="clear-selection" :title="tooltip('clear')" @click="flushDateInput()">
+                <td class="clear-selection" :title="translate('clear')" @click="flushDateInput()">
                   <a data-action>
                     <span :class="icons.trash"></span>
                   </a>
                 </td>
-                <td class="close-picker" :title="tooltip('close')" @click="close()">
+                <td class="close-picker" :title="translate('close')" @click="close()">
                   <a data-action>
                     <span :class="icons.close"></span>
                   </a>
@@ -75,34 +75,45 @@
             <table :class="['clock', 'table-condensed']">
               <tbody>
               <tr>
-                <td class="control-button" :title="tooltip('increment_hour')" @click="setClock('hours', 'increment')">
+                <td class="control-button" :title="translate('increment_hour')" @click="setClock('hours', 'increment')">
                   <a data-action>
                     <span :class="icons.up"></span>
                   </a>
                 </td>
                 <td></td>
-                <td class="control-button" :title="tooltip('increment_minute')" @click="setClock('minutes', 'increment')">
+                <td class="control-button" :title="translate('increment_minute')" @click="setClock('minutes', 'increment')">
                   <a data-action>
                     <span :class="icons.up"></span>
                   </a>
                 </td>
+                <td>
+                </td>
               </tr>
               <tr>
-                <td class="hours" :title="tooltip('pick_hour')" @click="changeView('hours')">{{ pad(date.getHours()) }}</td>
+                <td class="hours" :title="translate('pick_hour')" @click="changeView('hours')">
+                    {{ pad(formatHours) }}
+                </td>
                 <td class="colon">:</td>
-                <td class="minutes" :title="tooltip('pick_minute')" @click="changeView('minutes')">{{ pad(date.getMinutes()) }}</td>
+                <td class="minutes" :title="translate('pick_minute')" @click="changeView('minutes')">
+                    {{ pad(date.getMinutes()) }}
+                </td>
+                <td class="am-pm" v-if="useAmPm">
+                  <button type="button" class="btn btn-primary" @click="toggleAmPm">{{ amOrPm }}</button>
+                </td>
               </tr>
               <tr>
-                <td class="control-button" :title="tooltip('decrement_hour')" @click="setClock('hours', 'decrement')">
+                <td class="control-button" :title="translate('decrement_hour')" @click="setClock('hours', 'decrement')">
                   <a data-action>
                     <span :class="icons.down"></span>
                   </a>
                 </td>
                 <td></td>
-                <td class="control-button" :title="tooltip('decrement_minute')" @click="setClock('minutes', 'decrement')">
+                <td class="control-button" :title="translate('decrement_minute')" @click="setClock('minutes', 'decrement')">
                   <a data-action>
                     <span :class="icons.down"></span>
                   </a>
+                </td>
+                <td>
                 </td>
               </tr>
               </tbody>
@@ -167,6 +178,10 @@ export default {
       type: Function,
       default: null
     },
+    useAmPm: {
+      type: Boolean,
+      default: false
+    },
     daysOfWeek: {
       type: Array,
       default: () => {
@@ -213,7 +228,7 @@ export default {
       type: String,
       default: ''
     },
-    // Key-values translations to be used for tooltips
+    // Key-values translations to be used in UI
     translations: {
       type: Object,
       default: () => {
@@ -229,7 +244,9 @@ export default {
           pick_minute: 'Pick Minute',
           increment_minute: 'Increment Minute',
           decrement_minute: 'Decrement Minute',
-          select_time: 'Select Time'
+          select_time: 'Select Time',
+          am: 'AM',
+          pm: 'PM',
         };
       }
     }
@@ -253,6 +270,15 @@ export default {
 
       // Chunk days into weeks
       return chunk([...pastDays, ...days, ...futureDays], 7);
+    },
+    formatHours () {
+      return this.useAmPm ? (this.date.getHours() % 12) || 12 : this.date.getHours();
+    },
+    amOrPm () {
+      if (this.date.getHours() < 12) {
+        return this.translate('am') || 'AM';
+      }
+      return this.translate('pm') || 'PM';
     }
   },
   methods: {
@@ -432,7 +458,7 @@ export default {
 
       return days;
     },
-    setClock (type, operation) {
+    setClock (type, operation, hoursStep = 1, minutesStep = 5) {
       const hours = this.date.getHours();
       const minutes = Math.round(this.date.getMinutes() / 5) * 5;
 
@@ -440,8 +466,8 @@ export default {
         this.date.getFullYear(),
         this.date.getMonth(),
         this.date.getDate(),
-        type === 'hours' ? (operation === 'increment' ? hours + 1 : hours - 1) : hours,
-        type === 'minutes' ? (operation === 'increment' ? minutes + 5 : minutes - 5) : minutes
+        type === 'hours' ? (operation === 'increment' ? hours + hoursStep : hours - hoursStep) : hours,
+        type === 'minutes' ? (operation === 'increment' ? minutes + minutesStep : minutes - minutesStep) : minutes
       );
 
       this.dateInput = this.formatDateTime(this.date);
@@ -509,7 +535,10 @@ export default {
 
       return chunk(minutes, 4);
     },
-    tooltip (key) {
+    toggleAmPm () {
+      this.setClock('hours', this.date.getHours() < 12 ? 'increment' : 'decrement', 12);
+    },
+    translate (key) {
       if (key in this.translations) {
         return this.translations[key];
       }
@@ -599,6 +628,15 @@ export default {
   .clock .colon {
     font-size: 1.25em;
     user-select: none;
+  }
+
+  .am-pm {
+    width: 25px;
+    padding-left: 0;
+  }
+
+  .am-pm button {
+    padding: 8px 10px;
   }
 
   .separator {

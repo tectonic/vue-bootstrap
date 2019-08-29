@@ -7,7 +7,6 @@
       :placeholder="placeholder"
       aria-haspopup="true"
       :aria-expanded="isOpen"
-      @input="$emit('changed', dateInput)"
       @focus="open"
       @keyup.esc="close"
       @keyup.delete="flushDateInput"
@@ -345,21 +344,21 @@ export default {
         this.isOpen = false;
       }
 
-      this.$emit('changed', this.dateInput);
+      this.$emit('changed', this.formatDateTime(this.date, true));
     },
     flushDateInput () {
       this.dateInput = '';
 
-      this.$emit('changed', this.dateInput);
+      this.$emit('changed', '');
     },
-    formatDateTime (date) {
-      if (this.formatter) {
+    formatDateTime (date, forceDefaultFormat = false) {
+      if (!forceDefaultFormat && this.formatter) {
         return this.formatter(date);
       }
 
       let formattedDate = '';
       if (this.mode === 'date' || this.mode === 'datetime') {
-        formattedDate = this.formatDate(date);
+        formattedDate = this.formatDate(date, forceDefaultFormat);
       }
       if (this.mode === 'datetime' || this.mode === 'time') {
         formattedDate += ' ' + this.formatTime(date);
@@ -367,8 +366,8 @@ export default {
 
       return formattedDate;
     },
-    formatDate (date) {
-      if (this.formatter) {
+    formatDate (date, forceDefaultFormat = false) {
+      if (!forceDefaultFormat && this.formatter) {
         return this.formatter(date);
       }
 
@@ -472,7 +471,7 @@ export default {
 
       this.dateInput = this.formatDateTime(this.date);
 
-      this.$emit('changed', this.dateInput);
+      this.$emit('changed', this.formatDateTime(this.date, true));
     },
     dateNow () {
       const now = new Date();
@@ -489,7 +488,7 @@ export default {
       this.date = this.dateNow();
       this.dateInput = this.formatDateTime(this.date);
 
-      this.$emit('changed', this.dateInput);
+      this.$emit('changed', this.formatDateTime(this.date, true));
     },
     setHour (hour) {
       this.date = new Date(

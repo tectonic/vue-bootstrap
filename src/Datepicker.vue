@@ -74,7 +74,7 @@
             <!-- Months selector -->
             <table>
               <tbody>
-              <tr v-for="(monthRow, index) in monthsChunked()" :key="monthRow[index]['id']" class="control-buttons control-buttons-big">
+              <tr v-for="(monthRow, index) in monthsChunked()" :key="monthRow[index]['id']" class="control-buttons control-buttons-lg">
                 <td @click="setMonth(monthRow[0]['id'])">{{ monthRow[0]['name'] }}</td>
                 <td @click="setMonth(monthRow[1]['id'])">{{ monthRow[1]['name'] }}</td>
                 <td @click="setMonth(monthRow[2]['id'])">{{ monthRow[2]['name'] }}</td>
@@ -144,7 +144,7 @@
           <!-- Minutes selector -->
           <table :class="{ 'hidden': view !== 'minutes' }">
             <tbody>
-              <tr v-for="(minutesRow, index) in minutes()" :key="minutesRow[index]" class="control-buttons control-buttons-big">
+              <tr v-for="(minutesRow, index) in minutes()" :key="minutesRow[index]" class="control-buttons control-buttons-lg">
                 <td @click="setMinutes(minutesRow[0])">{{ minutesRow[0] }}</td>
                 <td @click="setMinutes(minutesRow[1])">{{ minutesRow[1] }}</td>
                 <td @click="setMinutes(minutesRow[2])">{{ minutesRow[2] }}</td>
@@ -618,10 +618,10 @@ export default {
 
   .control-button,
   .control-buttons > td {
-    padding: 10px !important;
+    padding: 12px 10px !important;
   }
 
-  .control-buttons-big > td {
+  .control-buttons-lg > td {
     padding: 16px 10px !important;
   }
 

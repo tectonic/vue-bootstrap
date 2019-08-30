@@ -17,11 +17,12 @@
     <div class="datepicker dropdown-menu">
       <ul class="list-unstyled">
         <li>
+          <!-- Calendar view -->
           <table :class="[{ 'hidden': view !== 'calendar' }, 'calendar', 'table-condensed']">
             <thead>
               <tr>
                 <th class="previous-month control-button" :title="translate('prev_month')" @click="previousMonth"><span :class="icons.left"></span></th>
-                <th class="current-month" colspan="5">{{ months[month] }} {{ year }}</th>
+                <th class="current-month control-button" colspan="5" @click="changeView('months')">{{ months[month] }} {{ year }}</th>
                 <th class="next-month control-button" :title="translate('next_month')" @click="nextMonth"><span :class="icons.right"></span></th>
               </tr>
               <tr>
@@ -68,7 +69,21 @@
               </tr>
             </tbody>
           </table>
-          <hr :class="[{ 'hidden': ['hours', 'minutes'].indexOf(view) === -1 }, 'separator']">
+          <hr :class="[{ 'hidden': ['hours', 'minutes', 'months'].indexOf(view) === -1 }, 'separator']">
+          <div :class="{ 'hidden': view !== 'months' }">
+            <hr class="separator">
+            <!-- Months selector -->
+            <table>
+              <tbody>
+              <tr v-for="(monthRow, index) in monthsChunked()" :key="monthRow[index]['id']" class="control-buttons control-buttons-big">
+                <td @click="setMonth(monthRow[0]['id'])">{{ monthRow[0]['name'] }}</td>
+                <td @click="setMonth(monthRow[1]['id'])">{{ monthRow[1]['name'] }}</td>
+                <td @click="setMonth(monthRow[2]['id'])">{{ monthRow[2]['name'] }}</td>
+                <td @click="setMonth(monthRow[3]['id'])">{{ monthRow[3]['name'] }}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
           <div :class="{ 'hidden': view !== 'clock' }">
             <hr class="separator">
             <table :class="['clock', 'table-condensed']">
@@ -84,8 +99,6 @@
                   <a data-action>
                     <span :class="icons.up"></span>
                   </a>
-                </td>
-                <td>
                 </td>
               </tr>
               <tr>
@@ -112,8 +125,6 @@
                     <span :class="icons.down"></span>
                   </a>
                 </td>
-                <td>
-                </td>
               </tr>
               </tbody>
             </table>
@@ -134,7 +145,7 @@
           <!-- Minutes selector -->
           <table :class="{ 'hidden': view !== 'minutes' }">
             <tbody>
-              <tr v-for="(minutesRow, index) in minutes()" :key="minutesRow[index]" class="control-buttons">
+              <tr v-for="(minutesRow, index) in minutes()" :key="minutesRow[index]" class="control-buttons control-buttons-big">
                 <td @click="setMinutes(minutesRow[0])">{{ minutesRow[0] }}</td>
                 <td @click="setMinutes(minutesRow[1])">{{ minutesRow[1] }}</td>
                 <td @click="setMinutes(minutesRow[2])">{{ minutesRow[2] }}</td>
@@ -220,6 +231,15 @@ export default {
         return [
           'January', 'February', 'March', 'April', 'May', 'June',
           'July', 'August', 'September', 'October', 'November', 'December'
+        ];
+      }
+    },
+    monthsShort: {
+      type: Array,
+      default: () => {
+        return [
+          'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+          'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
         ];
       }
     },
@@ -473,6 +493,13 @@ export default {
 
       this.$emit('changed', this.formatDateTime(this.date, true));
     },
+    updateDateInput() {
+      if (this.mode === 'time') {
+        this.dateInput = this.formatTime(this.date);
+      } else {
+        this.dateInput = this.formatDateTime(this.date);
+      }
+    },
     dateNow () {
       const now = new Date();
 
@@ -490,6 +517,19 @@ export default {
 
       this.$emit('changed', this.formatDateTime(this.date, true));
     },
+    setMonth (month) {
+      this.date = new Date(
+        this.date.getFullYear(),
+        month,
+        this.date.getDate(),
+        this.date.getHours(),
+        this.date.getMinutes()
+      );
+
+      this.updateDateInput();
+
+      this.view = 'calendar';
+    },
     setHour (hour) {
       this.date = new Date(
         this.date.getFullYear(),
@@ -499,11 +539,7 @@ export default {
         this.date.getMinutes()
       );
 
-      if (this.mode === 'time') {
-        this.dateInput = this.formatTime(this.date);
-      } else {
-        this.dateInput = this.formatDateTime(this.date);
-      }
+      this.updateDateInput();
 
       this.view = 'clock';
     },
@@ -516,22 +552,21 @@ export default {
         minutes
       );
 
-      if (this.mode === 'time') {
-        this.dateInput = this.formatTime(this.date);
-      } else {
-        this.dateInput = this.formatDateTime(this.date);
-      }
+      this.updateDateInput();
 
       this.view = 'clock';
     },
+    monthsChunked () {
+      return chunk(this.monthsShort.map((value, index) => {
+        return { id: index, name: value };
+      }), 4);
+    },
     hours () {
       const hours = (new Array(24)).fill(0, 0, 24).map((value, index) => (index < 10 ? ('0' + index) : ('' + index)));
-
       return chunk(hours, 4);
     },
     minutes () {
       const minutes = (new Array(12)).fill(0, 0, 12).map((value, index) => (5 * index < 10 ? ('0' + 5 * index) : ('' + 5 * index)));
-
       return chunk(minutes, 4);
     },
     toggleAmPm () {
@@ -587,15 +622,14 @@ export default {
     padding: 10px !important;
   }
 
+  .control-buttons-big > td {
+    padding: 16px 10px !important;
+  }
+
   .control-buttons > td,
   .day {
     cursor: pointer;
     border-radius: 2px;
-  }
-
-  .control-buttons > td {
-    padding-top: 10px;
-    padding-bottom: 10px;
   }
 
   .hours,
@@ -631,7 +665,7 @@ export default {
 
   .am-pm {
     width: 25px;
-    padding-left: 0;
+    padding-left: 5px;
   }
 
   .am-pm button {

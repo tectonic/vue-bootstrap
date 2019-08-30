@@ -37,7 +37,7 @@
               </tr>
             </tbody>
           </table>
-          <hr :class="[{ 'hidden': ['clock', 'hours', 'minutes'].indexOf(view) > -1 }, 'separator']">
+          <hr :class="[{ 'hidden': ['clock', 'months', 'hours', 'minutes'].indexOf(view) > -1 }, 'separator']">
           <table>
             <tbody>
               <tr class="control-buttons">
@@ -69,9 +69,8 @@
               </tr>
             </tbody>
           </table>
-          <hr :class="[{ 'hidden': ['hours', 'minutes', 'months'].indexOf(view) === -1 }, 'separator']">
+          <hr :class="[{ 'hidden': ['months', 'hours', 'minutes'].indexOf(view) === -1 }, 'separator']">
           <div :class="{ 'hidden': view !== 'months' }">
-            <hr class="separator">
             <!-- Months selector -->
             <table>
               <tbody>

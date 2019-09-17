@@ -371,7 +371,6 @@ export default {
       this.$emit('changed', this.formatDateTime(this.date, true));
     },
     clearDate () {
-      this.date = null;
       this.dateInput = '';
 
       this.$emit('changed', '');
@@ -405,19 +404,13 @@ export default {
     },
     hoursFormatted (hours = null) {
       if (hours === null) {
-        if (this.date === null) {
-          return '';
-        }
-        hours = this.date.getHours();
+        hours = this.date === null ? this.dateNow().getHours() : this.date.getHours();
       }
       return this.pad(this.useAmPm ? ((hours % 12) || 12) : hours);
     },
     minutesFormatted (minutes = null) {
       if (minutes === null) {
-        if (this.date === null) {
-          return '';
-        }
-        minutes = this.date.getMinutes();
+        minutes = this.date === null ? this.dateNow().getMinutes() : this.date.getMinutes();
       }
       return this.pad(minutes);
     },

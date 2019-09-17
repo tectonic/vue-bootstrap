@@ -127,7 +127,7 @@ describe('Datepicker', () => {
       value: '2019-08-01'
     });
 
-    vm.flushDateInput();
+    vm.clearDateSelected();
 
     expect(vm.dateInput).to.equal('');
   });

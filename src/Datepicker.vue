@@ -9,7 +9,7 @@
       :aria-expanded="isOpen"
       @focus="open"
       @keyup.esc="close"
-      @keyup.delete="clearDate"
+      @keyup.delete="clearDateSelected"
       class="form-control"
       autocomplete="off"
       readonly
@@ -56,7 +56,7 @@
                     <span :class="icons.time"></span>
                   </a>
                 </td>
-                <td class="clear-selection" :title="translate('clear')" @click="clearDate()">
+                <td class="clear-selection" :title="translate('clear')" @click="clearDateSelected()">
                   <a data-action>
                     <span :class="icons.trash"></span>
                   </a>
@@ -370,7 +370,7 @@ export default {
 
       this.$emit('changed', this.formatDateTime(this.date, true));
     },
-    clearDate () {
+    clearDateSelected () {
       this.dateInput = '';
 
       this.$emit('changed', '');

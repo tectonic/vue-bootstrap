@@ -102,7 +102,7 @@
               </tr>
               <tr>
                 <td class="hours" :title="translate('pick_hour')" @click="changeView('hours')">
-                    {{ pad(hoursFormattedAmOrPm) }}
+                    {{ pad(hoursFormattedAmOrPm(date.getHours())) }}
                 </td>
                 <td class="colon">:</td>
                 <td class="minutes" :title="translate('pick_minute')" @click="changeView('minutes')">
@@ -289,9 +289,6 @@ export default {
       // Chunk days into weeks
       return chunk([...pastDays, ...days, ...futureDays], 7);
     },
-    hoursFormattedAmOrPm () {
-      return this.useAmPm ? (this.date.getHours() % 12) || 12 : this.date.getHours();
-    },
     amOrPm () {
       if (this.date.getHours() < 12) {
         return this.translate('am') || 'AM';
@@ -395,7 +392,10 @@ export default {
         '-' + this.pad(date.getDate());
     },
     formatTime (date) {
-      return this.pad(this.hoursFormattedAmOrPm) + ':' + this.pad(date.getMinutes());
+      return this.pad(this.hoursFormattedAmOrPm(date.getHours())) + ':' + this.pad(date.getMinutes());
+    },
+    hoursFormattedAmOrPm (hours) {
+      return this.useAmPm ? ((hours % 12) || 12) : hours;
     },
     pad (value) {
       return ('0' + value).slice(-2);

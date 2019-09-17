@@ -9,7 +9,7 @@
       :aria-expanded="isOpen"
       @focus="open"
       @keyup.esc="close"
-      @keyup.delete="flushDateInput"
+      @keyup.delete="clearDate"
       class="form-control"
       autocomplete="off"
       readonly
@@ -56,7 +56,7 @@
                     <span :class="icons.time"></span>
                   </a>
                 </td>
-                <td class="clear-selection" :title="translate('clear')" @click="flushDateInput()">
+                <td class="clear-selection" :title="translate('clear')" @click="clearDate()">
                   <a data-action>
                     <span :class="icons.trash"></span>
                   </a>
@@ -75,10 +75,10 @@
             <table>
               <tbody>
               <tr v-for="(monthRow, index) in monthsChunked()" :key="monthRow[index]['id']" class="control-buttons control-buttons-lg">
-                <td @click="setMonth(monthRow[0]['id'])">{{ monthRow[0]['name'] }}</td>
-                <td @click="setMonth(monthRow[1]['id'])">{{ monthRow[1]['name'] }}</td>
-                <td @click="setMonth(monthRow[2]['id'])">{{ monthRow[2]['name'] }}</td>
-                <td @click="setMonth(monthRow[3]['id'])">{{ monthRow[3]['name'] }}</td>
+                <td @click="showMonth(monthRow[0]['id'])">{{ monthRow[0]['name'] }}</td>
+                <td @click="showMonth(monthRow[1]['id'])">{{ monthRow[1]['name'] }}</td>
+                <td @click="showMonth(monthRow[2]['id'])">{{ monthRow[2]['name'] }}</td>
+                <td @click="showMonth(monthRow[3]['id'])">{{ monthRow[3]['name'] }}</td>
               </tr>
               </tbody>
             </table>
@@ -102,11 +102,11 @@
               </tr>
               <tr>
                 <td class="hours" :title="translate('pick_hour')" @click="changeView('hours')">
-                    {{ pad(hoursFormattedAmOrPm(date.getHours())) }}
+                    {{ hoursFormatted() }}
                 </td>
                 <td class="colon">:</td>
                 <td class="minutes" :title="translate('pick_minute')" @click="changeView('minutes')">
-                    {{ pad(date.getMinutes()) }}
+                    {{ minutesFormatted() }}
                 </td>
                 <td class="am-pm" v-if="useAmPm">
                   <button type="button" class="btn btn-primary" @click="toggleAmPm">{{ amOrPm }}</button>
@@ -298,9 +298,13 @@ export default {
   },
   methods: {
     open () {
+      if (this.date === null) {
+        this.date = this.dateNow();
+        this.dateInput = this.formatDateTime(this.date);
+      }
+
       this.month = this.date.getMonth();
       this.year = this.date.getFullYear();
-
       this.isOpen = true;
     },
     close () {
@@ -324,6 +328,10 @@ export default {
         this.month = 11;
         this.year--;
       }
+    },
+    showMonth (month) {
+      this.month = month;
+      this.view = 'calendar';
     },
     isWithinCurrentMonth (date) {
       return date.getMonth() === this.month && date.getFullYear() === this.year;
@@ -362,7 +370,8 @@ export default {
 
       this.$emit('changed', this.formatDateTime(this.date, true));
     },
-    flushDateInput () {
+    clearDate () {
+      this.date = null;
       this.dateInput = '';
 
       this.$emit('changed', '');
@@ -392,10 +401,25 @@ export default {
         '-' + this.pad(date.getDate());
     },
     formatTime (date) {
-      return this.pad(this.hoursFormattedAmOrPm(date.getHours())) + ':' + this.pad(date.getMinutes());
+      return this.hoursFormatted(date.getHours()) + ':' + this.minutesFormatted();
     },
-    hoursFormattedAmOrPm (hours) {
-      return this.useAmPm ? ((hours % 12) || 12) : hours;
+    hoursFormatted (hours = null) {
+      if (hours === null) {
+        if (this.date === null) {
+          return '';
+        }
+        hours = this.date.getHours();
+      }
+      return this.pad(this.useAmPm ? ((hours % 12) || 12) : hours);
+    },
+    minutesFormatted (minutes = null) {
+      if (minutes === null) {
+        if (this.date === null) {
+          return '';
+        }
+        minutes = this.date.getMinutes();
+      }
+      return this.pad(minutes);
     },
     pad (value) {
       return ('0' + value).slice(-2);
@@ -516,19 +540,6 @@ export default {
 
       this.$emit('changed', this.formatDateTime(this.date, true));
     },
-    setMonth (month) {
-      this.date = new Date(
-        this.date.getFullYear(),
-        month,
-        this.date.getDate(),
-        this.date.getHours(),
-        this.date.getMinutes()
-      );
-
-      this.updateDateInput();
-
-      this.view = 'calendar';
-    },
     setHour (hour) {
       this.date = new Date(
         this.date.getFullYear(),
@@ -580,8 +591,10 @@ export default {
     }
   },
   created () {
-    this.date = this.parseDate(this.value);
-    this.dateInput = this.formatDateTime(this.date);
+    if (this.value) {
+      this.date = this.parseDate(this.value);
+      this.dateInput = this.formatDateTime(this.date);
+    }
   }
 };
 </script>

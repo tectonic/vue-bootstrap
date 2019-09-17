@@ -376,16 +376,22 @@ export default {
       this.$emit('changed', '');
     },
     formatDateTime (date, forceDefaultFormat = false) {
+      let formattedDate = '';
+
       if (!forceDefaultFormat && this.formatter) {
-        return this.formatter(date);
+        formattedDate = this.formatter(date);
+      }
+      else {
+        if (this.mode === 'date' || this.mode === 'datetime') {
+          formattedDate = this.formatDate(date, forceDefaultFormat);
+        }
+        if (this.mode === 'datetime' || this.mode === 'time') {
+          formattedDate += ' ' + this.formatTime(date);
+        }
       }
 
-      let formattedDate = '';
-      if (this.mode === 'date' || this.mode === 'datetime') {
-        formattedDate = this.formatDate(date, forceDefaultFormat);
-      }
-      if (this.mode === 'datetime' || this.mode === 'time') {
-        formattedDate += ' ' + this.formatTime(date);
+      if (formattedDate) {
+        formattedDate = formattedDate.trim();
       }
 
       return formattedDate;

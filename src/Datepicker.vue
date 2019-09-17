@@ -406,7 +406,7 @@ export default {
         '-' + this.pad(date.getDate());
     },
     formatTime (date) {
-      return this.hoursFormatted(date.getHours()) + ':' + this.minutesFormatted();
+      return this.hoursFormatted(date.getHours()) + ':' + this.minutesFormatted(date.getMinutes());
     },
     hoursFormatted (hours = null) {
       if (hours === null) {

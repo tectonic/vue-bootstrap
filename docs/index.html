@@ -51,10 +51,10 @@
             <div class="panel panel-default">
               <div class="panel-body">
                 <div class="form-group">
-                  <datepicker value="2019-08-21 09:10" mode="datetime"></datepicker>
+                  <datepicker value="2019-08-31 23:55" mode="datetime"></datepicker>
                 </div>
 <pre v-pre>
-&lt;datepicker value="2017-03-01 12:10" mode="datetime"&gt;&lt;/datepicker&gt;
+&lt;datepicker value="2019-08-31 23:55" mode="datetime"&gt;&lt;/datepicker&gt;
 </pre>
               </div>
             </div>
@@ -88,28 +88,30 @@
                   <td>The <code>id</code> attribute of the input element.</td>
                 </tr>
                 <tr>
-                  <td>placeholder</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>The <code>placeholder</code> attribute of the input element.</td>
-                </tr>
-                <tr>
-                  <td>highlight-today</td>
-                  <td>Boolean</td>
-                  <td>true</td>
-                  <td>Highlights today in the calendar.</td>
-                </tr>
-                <tr>
-                  <td>mode</td>
-                  <td>String</td>
-                  <td>date</td>
-                  <td>Mode can be set to <code>date</code>, <code>datetime</code> or <code>time</code>.</td>
-                </tr>
-                <tr>
                   <td>container-class</td>
                   <td>String</td>
                   <td></td>
                   <td>The class/classes of the container element.</td>
+                </tr>
+                <tr>
+                  <td>formatter</td>
+                  <td>Function</td>
+                  <td>null</td>
+                  <td>
+                    Callback used for formatting the date input. It receives current date in "YYYY-MM-DD (HH:MM)"
+                    format as a parameter. Can be easily used with momentum.js like this:<br>
+                    <code>
+                      formatter(date) {<br>
+                      &nbsp; return moment(date).locale(this.momentLocale).format(this.format);<br>
+                      }
+                    </code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>use-am</td>
+                  <td>Boolean</td>
+                  <td>false</td>
+                  <td>If true then the hour will be displayed in AM/PM format.</td>
                 </tr>
                 <tr>
                   <td>days-of-week</td>
@@ -118,16 +120,46 @@
                   <td>Days of the week.</td>
                 </tr>
                 <tr>
-                  <td>months</td>
-                  <td>Array</td>
-                  <td>['January', 'February', 'March', ...]</td>
-                  <td>Months.</td>
+                  <td>highlight-today</td>
+                  <td>Boolean</td>
+                  <td>true</td>
+                  <td>Highlights today in the calendar.</td>
                 </tr>
                 <tr>
                   <td>icons</td>
                   <td>Object</td>
                   <td>{ left: 'glyphicon glyphicon-chevron-left', ... }</td>
-                  <td>Icons.</td>
+                  <td>Icons for UI buttons.</td>
+                </tr>
+                <tr>
+                  <td>mode</td>
+                  <td>String</td>
+                  <td>date</td>
+                  <td>Mode can be set to <code>date</code>, <code>datetime</code> or <code>time</code>.</td>
+                </tr>
+                <tr>
+                  <td>months</td>
+                  <td>Array</td>
+                  <td>['January', 'February', 'March', ...]</td>
+                  <td>Month names. Override it to use another language.</td>
+                </tr>
+                <tr>
+                  <td>months-short</td>
+                  <td>Array</td>
+                  <td>['Jan', 'Feb', 'Mar', ...]</td>
+                  <td>Short month names, used for the month selector view. Override it to use another language.</td>
+                </tr>
+                <tr>
+                  <td>placeholder</td>
+                  <td>String</td>
+                  <td></td>
+                  <td>The <code>placeholder</code> attribute of the input element.</td>
+                </tr>
+                <tr>
+                  <td>translations</td>
+                  <td>Array</td>
+                  <td>{ today: 'Go to today', clear: 'Clear selection', ... }</td>
+                  <td>Allows to override tooltips with another language.</td>
                 </tr>
                 <tr>
                   <th colspan="4"><span class="label label-lg label-success">Events</span></th>

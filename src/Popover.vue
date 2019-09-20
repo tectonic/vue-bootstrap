@@ -148,7 +148,6 @@ export default {
 
       container.appendChild(popover);
 
-      const arrowRect = arrow.getBoundingClientRect();
       const triggerRect = trigger.getBoundingClientRect();
       const popoverRect = popover.getBoundingClientRect();
 

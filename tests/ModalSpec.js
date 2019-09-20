@@ -42,4 +42,26 @@ describe('Modal', () => {
     expect(modal.find('.modal-title').text()).to.equal('Hello world!');
     expect(modal.find('.modal-body').text()).to.equal('Body!');
   });
+
+  it('emits opened/close events', () => {
+    const modal = shallowMount(Modal);
+
+    modal.vm.open();
+    expect(Object.keys(modal.emitted())).to.include('opened');
+
+    modal.vm.close();
+    expect(Object.keys(modal.emitted())).to.include('closed');
+  });
+
+  it('emits confirmed event', () => {
+    const modal = shallowMount(Modal, {
+      propsData: {
+        closeOnConfirm: true
+      }
+    });
+
+    modal.vm.confirm();
+    expect(Object.keys(modal.emitted())).to.include('closed');
+    expect(Object.keys(modal.emitted())).to.include('confirmed');
+  });
 });

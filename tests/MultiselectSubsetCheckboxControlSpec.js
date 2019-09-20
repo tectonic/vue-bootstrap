@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { initVM } from './utils.js';
+import { shallowMount } from '@vue/test-utils';
 import MultiselectSubsetCheckboxControl from '../src/MultiselectSubsetCheckboxControl.vue';
 
 const baseProps = {
@@ -11,15 +11,19 @@ const baseProps = {
 describe('MultiselectSubsetCheckboxControl', () => {
   it('checkbox is checked', () => {
     const props = Object.assign({ selectedSubsetOptions: ['en_GB', 'de_DE'] }, baseProps);
-    const vm = initVM(MultiselectSubsetCheckboxControl, props);
+    const checkbox = shallowMount(MultiselectSubsetCheckboxControl, {
+      propsData: props
+    });
 
-    expect(vm.checked).to.be.true;
+    expect(checkbox.vm.checked).to.be.true;
   });
 
   it('checkbox is unchecked', () => {
     const props = Object.assign({ selectedSubsetOptions: ['de_DE'] }, baseProps);
-    const vm = initVM(MultiselectSubsetCheckboxControl, props);
+    const checkbox = shallowMount(MultiselectSubsetCheckboxControl, {
+      propsData: props
+    });
 
-    expect(vm.checked).to.be.false;
+    expect(checkbox.vm.checked).to.be.false;
   });
 });

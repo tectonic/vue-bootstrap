@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { expect } from 'chai';
-import { initVM } from './utils.js';
+import { mount, shallowMount } from '@vue/test-utils';
 import Popover from '../src/Popover.vue';
 
 describe('Popover', () => {
@@ -14,25 +14,26 @@ describe('Popover', () => {
   });
 
   it('can be toggled', () => {
-    const vm = initVM(Popover);
+    const popover = shallowMount(Popover);
 
-    vm.toggle();
+    popover.vm.toggle();
 
-    expect(vm.isOpen).to.be.true;
+    expect(popover.vm.isOpen).to.be.true;
   });
 
   it('renders title and content', (done) => {
-    const vm = new Vue({
-      template:  `<popover ref="test" title="Hello world!">
+    const Parent = Vue.component('Parent', {
+      template:  `<popover ref="popover" title="Hello world!">
                     <a class="btn btn-primary">Click me</a>
                     <span slot="content">This is the content.</span>
                   </popover>`,
       components: {
         Popover
       }
-    }).$mount();
+    });
 
-    const popover = vm.$refs.test;
+    const parent = mount(Parent);
+    const popover = parent.vm.$refs.popover;
 
     popover.open();
 

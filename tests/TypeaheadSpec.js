@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { expect } from 'chai';
-import { initVM } from './utils.js';
+import { mount, shallowMount } from '@vue/test-utils';
 import Typeahead from '../src/Typeahead.vue';
 
 describe('Typeahead', () => {
@@ -19,26 +19,30 @@ describe('Typeahead', () => {
   });
 
   it('sets selectedItem on mount', () => {
-    const vm = initVM(Typeahead, {
-      initialValue: 'abc',
-      initialId: '1'
+    const typeahead = shallowMount(Typeahead, {
+      propsData: {
+        initialValue: 'abc',
+        initialId: '1'
+      }
     });
 
-    expect(vm.selectedItem).to.deep.equal({ id: '1', value: 'abc' });
+    expect(typeahead.vm.selectedItem).to.deep.equal({ id: '1', value: 'abc' });
   });
 
   it('populates the hidden field', (done) => {
-    const vm = initVM(Typeahead, {
-      initialValue: 'Jane',
-      initialId: '1',
-      name: 'suggestion',
-      hiddenInputName: 'hidden-field'
+    const typeahead = mount(Typeahead, {
+      propsData: {
+        initialValue: 'Jane',
+        initialId: '1',
+        name: 'suggestion',
+        hiddenInputName: 'hidden-field'
+      }
     });
 
     Vue.nextTick(() => {
       let inputFields, hiddenField;
 
-      inputFields = vm.$el.getElementsByTagName('input');
+      inputFields = typeahead.vm.$el.getElementsByTagName('input');
       hiddenField = inputFields[1];
 
       expect(inputFields.length).to.equal(2);

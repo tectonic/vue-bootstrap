@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { expect } from 'chai';
-import { initVM } from './utils.js';
+import { shallowMount } from '@vue/test-utils';
 import Dropdown from '../src/Dropdown.vue';
 
 describe('Dropdown', () => {
@@ -13,40 +13,42 @@ describe('Dropdown', () => {
   });
 
   it('can be toggled', () => {
-    const vm = initVM(Dropdown);
+    const dropdown = shallowMount(Dropdown);
 
-    vm.toggle();
+    dropdown.vm.toggle();
 
-    expect(vm.isOpen).to.be.true;
+    expect(dropdown.vm.isOpen).to.be.true;
   });
 
-  it('closes on blur', () => {
-    const vm = initVM(Dropdown);
+  it('closes on esc key press', () => {
+    const dropdown = shallowMount(Dropdown);
 
-    vm.toggle();
+    dropdown.vm.toggle();
+    expect(dropdown.vm.isOpen).to.be.true;
 
-    vm.$refs.button.blur();
-
-    setTimeout(() => {
-      expect(vm.isOpen).to.be.false;
-    }, vm.closeTimeout + 100);
+    dropdown.find('.btn').trigger('keyup.esc');
+    expect(dropdown.vm.isOpen).to.be.false;
   });
 
   it('positions the dropdown', () => {
-    const vm = initVM(Dropdown, {
-      horizontalPosition: 'right',
-      verticalPosition: 'top'
+    const dropdown = shallowMount(Dropdown, {
+      propsData: {
+        horizontalPosition: 'right',
+        verticalPosition: 'top'
+      }
     });
 
-    expect(vm.horizontalPositionClass).to.equal('dropdown-menu-right');
-    expect(vm.verticalPositionClass).to.equal('dropup');
+    expect(dropdown.vm.horizontalPositionClass).to.equal('dropdown-menu-right');
+    expect(dropdown.vm.verticalPositionClass).to.equal('dropup');
   });
 
   it('uses a custom menu element', () => {
-    const vm = initVM(Dropdown, {
-      menuElement: 'div'
+    const dropdown = shallowMount(Dropdown, {
+      propsData: {
+        menuElement: 'div'
+      }
     });
 
-    expect(vm.$refs.ul.nodeName.toLowerCase()).to.equal('div');
+    expect(dropdown.vm.$refs.ul.nodeName.toLowerCase()).to.equal('div');
   });
 });

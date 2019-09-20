@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { expect } from 'chai';
-import { initVM } from './utils.js';
+import { shallowMount } from '@vue/test-utils';
 import Modal from '../src/Modal.vue';
 
 describe('Modal', () => {
@@ -26,15 +26,17 @@ describe('Modal', () => {
   });
 
   it('is visible', () => {
-    const vm = initVM(Modal, {
-      title: 'Hello world!',
-      body: 'Body!'
+    const modal = shallowMount(Modal, {
+      propsData: {
+        title: 'Hello world!',
+        body: 'Body!'
+      }
     });
 
-    vm.open();
+    modal.vm.open();
 
-    expect(vm.isVisible).to.be.true;
-    expect(vm.$refs.modal.querySelector('.modal-title').textContent).to.equal('Hello world!');
-    expect(vm.$refs.modal.querySelector('.modal-body').textContent).to.equal('Body!');
+    expect(modal.vm.isVisible).to.be.true;
+    expect(modal.find('.modal-title').text()).to.equal('Hello world!');
+    expect(modal.find('.modal-body').text()).to.equal('Body!');
   });
 });

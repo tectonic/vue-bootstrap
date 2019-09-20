@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import { expect } from 'chai';
-import { initVM } from './utils.js';
+import { shallowMount } from '@vue/test-utils';
 import Multiselect from '../src/Multiselect.vue';
 
-let vm;
+let multiselect;
 
 describe('Multiselect', () => {
   beforeEach(() => {
@@ -18,14 +18,16 @@ describe('Multiselect', () => {
       }
     ];
 
-    vm = initVM(Multiselect, {
-      options: options,
-      selectedOptions: [1]
+    multiselect = shallowMount(Multiselect, {
+      propsData: {
+        options: options,
+        selectedOptions: [1]
+      }
     });
   });
 
   afterEach(() => {
-    vm.$destroy();
+    multiselect.vm.$destroy();
   });
 
   it('initialises with default data', () => {
@@ -50,35 +52,35 @@ describe('Multiselect', () => {
       }
     ];
 
-    expect(vm.tree).that.is.an('array').to.deep.equal(tree);
+    expect(multiselect.vm.tree).that.is.an('array').to.deep.equal(tree);
   });
 
   it('computes option ids', () => {
-    expect(vm.allIds).that.is.an('array').to.deep.equal([1, 2, 4, 5]);
+    expect(multiselect.vm.allIds).that.is.an('array').to.deep.equal([1, 2, 4, 5]);
   });
 
   it('computes selected option ids', () => {
-    expect(vm.selectedIds).that.is.an('array').to.deep.equal([1]);
+    expect(multiselect.vm.selectedIds).that.is.an('array').to.deep.equal([1]);
   });
 
   it('toggles and untoggles all options', () => {
-    vm.toggleAll();
+    multiselect.vm.toggleAll();
 
-    expect(vm.selectedIds).to.deep.equal([1, 2, 4, 5]);
-    expect(vm.allSelected()).to.be.true;
+    expect(multiselect.vm.selectedIds).to.deep.equal([1, 2, 4, 5]);
+    expect(multiselect.vm.allSelected()).to.be.true;
 
-    vm.toggleAll();
+    multiselect.vm.toggleAll();
 
-    expect(vm.selectedIds).to.deep.equal([]);
-    expect(vm.allSelected()).to.be.false;
+    expect(multiselect.vm.selectedIds).to.deep.equal([]);
+    expect(multiselect.vm.allSelected()).to.be.false;
   });
 
   it('adjusts option visibility based on query', (done) => {
-    vm.query = 'ion B';
+    multiselect.vm.query = 'ion B';
 
     Vue.nextTick(() => {
-      expect(vm.tree[0].visible).to.be.false; // option A
-      expect(vm.tree[1].visible).to.be.true; // option B
+      expect(multiselect.vm.tree[0].visible).to.be.false; // option A
+      expect(multiselect.vm.tree[1].visible).to.be.true; // option B
 
       done();
     });

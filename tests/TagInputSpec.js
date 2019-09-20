@@ -1,91 +1,105 @@
 import Vue from 'vue';
 import { expect } from 'chai';
-import { initVM } from './utils.js';
+import { mount, shallowMount } from '@vue/test-utils';
 import TagInput from '../src/TagInput.vue';
 
 describe('TagInput', () => {
   it('accepts a string with tags as value', () => {
-    const vm = initVM(TagInput, {
-      value: 'Magenta, Pink, Yellow'
+    const tagInput = shallowMount(TagInput, {
+      propsData: {
+        value: 'Magenta, Pink, Yellow'
+      }
     });
 
-    expect(vm.tags).to.deep.equal(['Magenta', 'Pink', 'Yellow']);
+    expect(tagInput.vm.tags).to.deep.equal(['Magenta', 'Pink', 'Yellow']);
   });
 
   it('adds a tag', () => {
-    const vm = initVM(TagInput, {
-      value: ['Black']
+    const tagInput = shallowMount(TagInput, {
+      propsData: {
+        value: ['Black']
+      }
     });
 
-    vm.addTag('Orange');
-    vm.addTag({ id: 1, value: 'Blue' });
+    tagInput.vm.addTag('Orange');
+    tagInput.vm.addTag({ id: 1, value: 'Blue' });
 
-    expect(vm.tags).to.deep.equal(['Black', 'Orange', 'Blue']);
+    expect(tagInput.vm.tags).to.deep.equal(['Black', 'Orange', 'Blue']);
   });
 
   it('removes a tag', () => {
-    const vm = initVM(TagInput, {
-      value: ['Black']
+    const tagInput = shallowMount(TagInput, {
+      propsData: {
+        value: ['Black']
+      }
     });
 
-    vm.removeTag('Black');
+    tagInput.vm.removeTag('Black');
 
-    expect(vm.tags).to.deep.equal([]);
+    expect(tagInput.vm.tags).to.deep.equal([]);
   });
 
   it('ignores duplicate tags', () => {
-    const vm = initVM(TagInput);
+    const tagInput = shallowMount(TagInput);
 
-    vm.addTag('Yellow');
-    vm.addTag('Yellow');
-    vm.addTag('Yellow');
+    tagInput.vm.addTag('Yellow');
+    tagInput.vm.addTag('Yellow');
+    tagInput.vm.addTag('Yellow');
 
-    expect(vm.tags).to.deep.equal(['Yellow']);
+    expect(tagInput.vm.tags).to.deep.equal(['Yellow']);
   });
 
   it('trims tags', () => {
-    const vm = initVM(TagInput, {
-      value: ['Black']
+    const tagInput = shallowMount(TagInput, {
+      propsData: {
+        value: ['Black']
+      }
     });
 
-    vm.addTag('');
-    vm.addTag(' ');
-    vm.addTag('Orange   ');
-    vm.addTag({ id: 1, value: '     Purple   ' });
+    tagInput.vm.addTag('');
+    tagInput.vm.addTag(' ');
+    tagInput.vm.addTag('Orange   ');
+    tagInput.vm.addTag({ id: 1, value: '     Purple   ' });
 
-    expect(vm.tags).to.deep.equal(['Black', 'Orange', 'Purple']);
+    expect(tagInput.vm.tags).to.deep.equal(['Black', 'Orange', 'Purple']);
   });
 
   it('handles backspace key', () => {
-    const vm = initVM(TagInput, {
-      value: ['Purple', 'Black']
+    const tagInput = shallowMount(TagInput, {
+      propsData: {
+        value: ['Purple', 'Black']
+      }
     });
 
-    vm.onDelete('Yellow');
-    expect(vm.tags).to.deep.equal(['Purple', 'Black']);
+    tagInput.vm.onDelete('Yellow');
+    expect(tagInput.vm.tags).to.deep.equal(['Purple', 'Black']);
 
-    vm.onDelete('');
-    expect(vm.tags).to.deep.equal(['Purple']);
+    tagInput.vm.onDelete('');
+    expect(tagInput.vm.tags).to.deep.equal(['Purple']);
   });
 
   it('formats tags', () => {
-    const vm = initVM(TagInput, {
-      value: ['Pink', 'Blue', 'Green']
+    const tagInput = shallowMount(TagInput, {
+      propsData: {
+        value: ['Pink', 'Blue', 'Green']
+      }
     });
 
-    expect(vm.formattedTags).to.equal('Pink, Blue, Green');
+    expect(tagInput.vm.formattedTags).to.equal('Pink, Blue, Green');
   });
 
   it('populates the hidden field', (done) => {
-    const vm = initVM(TagInput, {
-      value: ['Black', 'Blue'],
-      hiddenInputName: 'tags'
+    const tagInput = mount(TagInput, {
+      propsData: {
+        value: ['Black', 'Blue'],
+        hiddenInputName: 'tags'
+      }
     });
 
     Vue.nextTick(() => {
       let inputFields, hiddenField;
 
-      inputFields = vm.$el.getElementsByTagName('input');
+      inputFields = tagInput.vm.$el.getElementsByTagName('input');
       hiddenField = inputFields[1];
 
       expect(inputFields.length).to.equal(2);

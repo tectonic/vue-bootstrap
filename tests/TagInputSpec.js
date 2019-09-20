@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import { expect } from 'chai';
 import { mount, shallowMount } from '@vue/test-utils';
 import TagInput from '../src/TagInput.vue';
@@ -96,7 +95,7 @@ describe('TagInput', () => {
       }
     });
 
-    Vue.nextTick(() => {
+    tagInput.vm.$nextTick(() => {
       let inputFields, hiddenField;
 
       inputFields = tagInput.vm.$el.getElementsByTagName('input');

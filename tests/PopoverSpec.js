@@ -3,6 +3,9 @@ import { expect } from 'chai';
 import { mount, shallowMount } from '@vue/test-utils';
 import Popover from '../src/Popover.vue';
 
+Vue.config.devtools = false;
+Vue.config.productionTip = false;
+
 describe('Popover', () => {
   it('initialises with default data', () => {
     expect(typeof Popover.data).to.equal('function');

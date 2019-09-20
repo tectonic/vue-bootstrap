@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import { expect } from 'chai';
 import { shallowMount } from '@vue/test-utils';
 import Multiselect from '../src/Multiselect.vue';
@@ -78,7 +77,7 @@ describe('Multiselect', () => {
   it('adjusts option visibility based on query', (done) => {
     multiselect.vm.query = 'ion B';
 
-    Vue.nextTick(() => {
+    multiselect.vm.$nextTick(() => {
       expect(multiselect.vm.tree[0].visible).to.be.false; // option A
       expect(multiselect.vm.tree[1].visible).to.be.true; // option B
 

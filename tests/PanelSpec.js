@@ -3,6 +3,9 @@ import { expect } from 'chai';
 import { mount } from '@vue/test-utils';
 import Panel from '../src/Panel.vue';
 
+Vue.config.devtools = false;
+Vue.config.productionTip = false;
+
 describe('Panel', () => {
   it('renders a panel with heading and footer', (done) => {
     const Parent = Vue.component('Parent', {

@@ -3,6 +3,9 @@ import { expect } from 'chai';
 import { shallowMount } from '@vue/test-utils';
 import Modal from '../src/Modal.vue';
 
+Vue.config.devtools = false;
+Vue.config.productionTip = false;
+
 describe('Modal', () => {
   it('has a mounted hook', () => {
     expect(typeof Modal.mounted).to.equal('function');

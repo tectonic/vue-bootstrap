@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import { expect } from 'chai';
 import { shallowMount } from '@vue/test-utils';
 import Autocomplete from '../src/Autocomplete.vue';
@@ -13,7 +12,7 @@ describe('Autocomplete', () => {
 
     autocomplete.vm.onInput('h');
 
-    Vue.nextTick(() => {
+    autocomplete.vm.$nextTick(() => {
       expect(autocomplete.vm.autocompleting).to.be.true;
       done();
     });

@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import { expect } from 'chai';
 import { mount, shallowMount } from '@vue/test-utils';
 import Typeahead from '../src/Typeahead.vue';
@@ -39,7 +38,7 @@ describe('Typeahead', () => {
       }
     });
 
-    Vue.nextTick(() => {
+    typeahead.vm.$nextTick(() => {
       let inputFields, hiddenField;
 
       inputFields = typeahead.vm.$el.getElementsByTagName('input');

@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import { expect } from 'chai';
 import { shallowMount } from '@vue/test-utils';
 import SelectField from '../src/SelectField.vue';

@@ -125,7 +125,7 @@ new Vue({
         { id: 15, value: 'Black' }
       ],
       tabs: [
-        { id: 1, name: 'Tab 1'},
+        { id: 1, name: 'Tab 1' },
         { id: 2, name: 'Tab 2' },
         { id: 3, name: 'Tab 3', disabled: true }
       ],

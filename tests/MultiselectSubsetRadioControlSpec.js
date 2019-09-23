@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { initVM } from './utils.js';
+import { shallowMount } from '@vue/test-utils';
 import MultiselectSubsetRadioControl from '../src/MultiselectSubsetRadioControl.vue';
 
 const baseProps = {
@@ -11,15 +11,19 @@ const baseProps = {
 describe('MultiselectSubsetRadioControl', () => {
   it('option is selected', () => {
     const props = Object.assign({ selectedSubsetOptions: ['en_GB'] }, baseProps);
-    const vm = initVM(MultiselectSubsetRadioControl, props);
+    const radio = shallowMount(MultiselectSubsetRadioControl, {
+      propsData: props
+    });
 
-    expect(vm.selectedOption).to.equal('en_GB');
+    expect(radio.vm.selectedOption).to.equal('en_GB');
   });
 
   it('option is unselected', () => {
     const props = Object.assign({ selectedSubsetOptions: [] }, baseProps);
-    const vm = initVM(MultiselectSubsetRadioControl, props);
+    const radio = shallowMount(MultiselectSubsetRadioControl, {
+      propsData: props
+    });
 
-    expect(vm.selectedOption).to.equal('');
+    expect(radio.vm.selectedOption).to.equal('');
   });
 });

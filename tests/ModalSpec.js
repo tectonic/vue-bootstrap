@@ -1,7 +1,10 @@
 import Vue from 'vue';
 import { expect } from 'chai';
-import { initVM } from './utils.js';
+import { shallowMount } from '@vue/test-utils';
 import Modal from '../src/Modal.vue';
+
+Vue.config.devtools = false;
+Vue.config.productionTip = false;
 
 describe('Modal', () => {
   it('has a mounted hook', () => {
@@ -26,15 +29,39 @@ describe('Modal', () => {
   });
 
   it('is visible', () => {
-    const vm = initVM(Modal, {
-      title: 'Hello world!',
-      body: 'Body!'
+    const modal = shallowMount(Modal, {
+      propsData: {
+        title: 'Hello world!',
+        body: 'Body!'
+      }
     });
 
-    vm.open();
+    modal.vm.open();
 
-    expect(vm.isVisible).to.be.true;
-    expect(vm.$refs.modal.querySelector('.modal-title').textContent).to.equal('Hello world!');
-    expect(vm.$refs.modal.querySelector('.modal-body').textContent).to.equal('Body!');
+    expect(modal.vm.isVisible).to.be.true;
+    expect(modal.find('.modal-title').text()).to.equal('Hello world!');
+    expect(modal.find('.modal-body').text()).to.equal('Body!');
+  });
+
+  it('emits opened/close events', () => {
+    const modal = shallowMount(Modal);
+
+    modal.vm.open();
+    expect(Object.keys(modal.emitted())).to.include('opened');
+
+    modal.vm.close();
+    expect(Object.keys(modal.emitted())).to.include('closed');
+  });
+
+  it('emits confirmed event', () => {
+    const modal = shallowMount(Modal, {
+      propsData: {
+        closeOnConfirm: true
+      }
+    });
+
+    modal.vm.confirm();
+    expect(Object.keys(modal.emitted())).to.include('closed');
+    expect(Object.keys(modal.emitted())).to.include('confirmed');
   });
 });

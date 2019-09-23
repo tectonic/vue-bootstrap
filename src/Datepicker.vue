@@ -162,6 +162,7 @@
 import { chunk } from './lib/array.js';
 import { mixin as clickOutside } from './mixins/clickOutside.js';
 
+/* eslint-disable camelcase */
 export default {
   mixins: [
     clickOutside
@@ -264,7 +265,7 @@ export default {
           decrement_minute: 'Decrement Minute',
           select_time: 'Select Time',
           am: 'AM',
-          pm: 'PM',
+          pm: 'PM'
         };
       }
     }
@@ -380,8 +381,7 @@ export default {
 
       if (!forceDefaultFormat && this.formatter) {
         formattedDate = this.formatter(date);
-      }
-      else {
+      } else {
         if (this.mode === 'date' || this.mode === 'datetime') {
           formattedDate = this.formatDate(date, forceDefaultFormat);
         }
@@ -515,7 +515,7 @@ export default {
 
       this.$emit('changed', this.formatDateTime(this.date, true));
     },
-    updateDateInput() {
+    updateDateInput () {
       if (this.mode === 'time') {
         this.dateInput = this.formatTime(this.date);
       } else {

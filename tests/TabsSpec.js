@@ -26,6 +26,7 @@ describe('Tabs', () => {
     wrapper.vm.select(tabs[1]); // Tab B
 
     expect(wrapper.vm.selected).to.equal(2);
+    expect(Object.keys(wrapper.emitted())).to.include('selected');
   });
 
   it('preselects first tab', () => {
@@ -38,11 +39,12 @@ describe('Tabs', () => {
 
   it('ignores disabled tabs', () => {
     const wrapper = shallowMount(Tabs, {
-      propsData: { tabs: tabs, active: 1 }
+      propsData: { tabs: tabs, preselectFirstTab: false }
     });
 
     wrapper.vm.select(tabs[2]); // Tab C
 
-    expect(wrapper.vm.selected).to.equal(1);
+    expect(wrapper.vm.selected).to.be.null;
+    expect(Object.keys(wrapper.emitted())).to.not.include('selected');
   });
 });

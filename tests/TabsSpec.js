@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { expect } from 'chai';
-import { initVM } from './utils.js';
+import { shallowMount } from '@vue/test-utils';
 import Tabs from '../src/Tabs.vue';
 
 const tabs = [
@@ -19,22 +19,30 @@ describe('Tabs', () => {
   });
 
   it('selects tabs', () => {
-    expect(typeof Tabs.data).to.equal('function');
+    const wrapper = shallowMount(Tabs, {
+      propsData: { tabs: tabs, active: 1 }
+    });
 
-    const vm = initVM(Tabs, { tabs: tabs, active: 1 });
+    wrapper.vm.select(tabs[1]); // Tab B
 
-    vm.select(tabs[1]); // Tab B
+    expect(wrapper.vm.selected).to.equal(2);
+  });
 
-    expect(vm.selected).to.equal(2);
+  it('preselects first tab', () => {
+    const wrapper = shallowMount(Tabs, {
+      propsData: { tabs: tabs, preselectFirstTab: true }
+    });
+
+    expect(wrapper.vm.selected).to.equal(1);
   });
 
   it('ignores disabled tabs', () => {
-    expect(typeof Tabs.data).to.equal('function');
+    const wrapper = shallowMount(Tabs, {
+      propsData: { tabs: tabs, active: 1 }
+    });
 
-    const vm = initVM(Tabs, { tabs: tabs, active: 1 });
+    wrapper.vm.select(tabs[2]); // Tab C
 
-    vm.select(tabs[2]); // Tab C
-
-    expect(vm.selected).to.equal(1);
+    expect(wrapper.vm.selected).to.equal(1);
   });
 });

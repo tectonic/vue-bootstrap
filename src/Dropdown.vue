@@ -81,7 +81,6 @@ export default {
   },
   data () {
     return {
-      closeTimeout: 200,
       isOpen: false
     };
   },

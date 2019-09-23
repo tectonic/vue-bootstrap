@@ -3,9 +3,9 @@
     <li
       v-for="tab in tabs"
       role="presentation"
-      :class="{ 'active': tab.id == selected }"
+      :class="[{ 'active': tab.id == selected }, { 'disabled': tab.disabled }]"
     >
-      <a href @click.prevent="select(tab.id)">
+      <a href @click.prevent="select(tab)">
         {{ tab.name }}
       </a>
     </li>
@@ -41,8 +41,12 @@ export default {
     }
   },
   methods: {
-    select (tabId) {
-      this.selected = tabId;
+    select (tab) {
+      if (tab.disabled) {
+        return;
+      }
+
+      this.selected = tab.id;
       this.$emit('selected', this.selected);
     }
   },

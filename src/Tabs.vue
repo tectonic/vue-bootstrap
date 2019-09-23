@@ -14,6 +14,10 @@
 
 <script>
 export default {
+  model: {
+    prop: 'active',
+    event: 'selected'
+  },
   data () {
     return {
       selected: null

@@ -42,6 +42,10 @@ export default {
     stacked: {
       type: Boolean,
       default: false
+    },
+    preselectFirstTab: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {
@@ -55,7 +59,17 @@ export default {
     }
   },
   created () {
-    this.selected = this.active;
+    let tab;
+
+    if (this.active) {
+      tab = this.tabs.find(tab => tab.id === this.active);
+    } else if (this.preselectFirstTab && this.tabs.length) {
+      tab = this.tabs[0];
+    }
+
+    if (tab) {
+      this.select(tab);
+    }
   }
 };
 </script>

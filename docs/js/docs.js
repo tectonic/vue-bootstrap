@@ -6,6 +6,7 @@ import Multiselect from '../../src/Multiselect.vue';
 import Panel from '../../src/Panel.vue';
 import Popover from '../../src/Popover.vue';
 import SelectField from '../../src/SelectField.vue';
+import Tabs from '../../src/Tabs.vue';
 import TagInput from '../../src/TagInput.vue';
 import Typeahead from '../../src/Typeahead.vue';
 
@@ -19,6 +20,7 @@ new Vue({
     Panel,
     Popover,
     SelectField,
+    Tabs,
     TagInput,
     Typeahead
   },
@@ -121,7 +123,13 @@ new Vue({
         { id: 13, value: 'White' },
         { id: 14, value: 'Gray' },
         { id: 15, value: 'Black' }
-      ]
+      ],
+      tabs: [
+        { id: 1, name: 'Tab 1'},
+        { id: 2, name: 'Tab 2' },
+        { id: 3, name: 'Tab 3', disabled: true }
+      ],
+      tab: 2
     };
   },
   methods: {

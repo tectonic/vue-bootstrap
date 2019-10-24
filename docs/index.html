@@ -31,631 +31,631 @@
   </style>
 </head>
 <body>
-  <div id="app">
-    <div class="jumbotron">
-      <a href="https://github.com/tectonic/vue-bootstrap" class="btn btn-primary back-to-github">Back to GitHub</a>
-      <div class="container">
-       <div class="row">
-          <div class="col-xs-12">
-            <h1>vue-bootstrap</h1>
-            <p>Bootstrap components in Vue.js</p>
-          </div>
+<div id="app">
+  <div class="jumbotron">
+    <a href="https://github.com/tectonic/vue-bootstrap" class="btn btn-primary back-to-github">Back to GitHub</a>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h1>vue-bootstrap</h1>
+          <p>Bootstrap components in Vue.js</p>
         </div>
       </div>
     </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-md-8 col-md-offset-2">
-          <div class="island">
-            <h1>Datepicker</h1>
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <div class="form-group">
-                  <datepicker value="2019-08-31 23:55" mode="datetime"></datepicker>
-                </div>
-<pre v-pre>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-8 col-md-offset-2">
+        <div class="island">
+          <h1>Datepicker</h1>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="form-group">
+                <datepicker value="2019-08-31 23:55" mode="datetime"></datepicker>
+              </div>
+              <pre v-pre>
 &lt;datepicker value="2019-08-31 23:55" mode="datetime"&gt;&lt;/datepicker&gt;
 </pre>
-              </div>
             </div>
-            <table class="table table-bordered">
-              <tbody>
-                <tr>
-                  <th colspan="4"><span class="label label-lg label-success">Props</span></th>
-                </tr>
-                <tr>
-                  <th>Name</th>
-                  <th>Type</th>
-                  <th>Default</th>
-                  <th>Description</th>
-                </tr>
-                <tr>
-                  <td>name</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>The <code>name</code> attribute of the input element.</td>
-                </tr>
-                <tr>
-                  <td>value</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>Initial value (date). Date needs to have a format such as <i>2017-03-01</i> or <i>2017-03-01 12:10</i></td>
-                </tr>
-                <tr>
-                  <td>id</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>The <code>id</code> attribute of the input element.</td>
-                </tr>
-                <tr>
-                  <td>container-class</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>The class/classes of the container element.</td>
-                </tr>
-                <tr>
-                  <td>formatter</td>
-                  <td>Function</td>
-                  <td>null</td>
-                  <td>
-                    Callback used for formatting the date input. It receives current date in "YYYY-MM-DD (HH:MM)"
-                    format as a parameter. Can be easily used with momentum.js like this:<br>
-                    <code>
-                      formatter(date) {<br>
-                      &nbsp; return moment(date).locale(this.momentLocale).format(this.format);<br>
-                      }
-                    </code>
-                  </td>
-                </tr>
-                <tr>
-                  <td>use-am</td>
-                  <td>Boolean</td>
-                  <td>false</td>
-                  <td>If true then the hour will be displayed in AM/PM format.</td>
-                </tr>
-                <tr>
-                  <td>days-of-week</td>
-                  <td>Array</td>
-                  <td>['Su', 'Mo', 'Tu', ...]</td>
-                  <td>Days of the week.</td>
-                </tr>
-                <tr>
-                  <td>highlight-today</td>
-                  <td>Boolean</td>
-                  <td>true</td>
-                  <td>Highlights today in the calendar.</td>
-                </tr>
-                <tr>
-                  <td>icons</td>
-                  <td>Object</td>
-                  <td>{ left: 'glyphicon glyphicon-chevron-left', ... }</td>
-                  <td>Icons for UI buttons.</td>
-                </tr>
-                <tr>
-                  <td>mode</td>
-                  <td>String</td>
-                  <td>date</td>
-                  <td>Mode can be set to <code>date</code>, <code>datetime</code> or <code>time</code>.</td>
-                </tr>
-                <tr>
-                  <td>months</td>
-                  <td>Array</td>
-                  <td>['January', 'February', 'March', ...]</td>
-                  <td>Month names. Override it to use another language.</td>
-                </tr>
-                <tr>
-                  <td>months-short</td>
-                  <td>Array</td>
-                  <td>['Jan', 'Feb', 'Mar', ...]</td>
-                  <td>Short month names, used for the month selector view. Override it to use another language.</td>
-                </tr>
-                <tr>
-                  <td>placeholder</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>The <code>placeholder</code> attribute of the input element.</td>
-                </tr>
-                <tr>
-                  <td>translations</td>
-                  <td>Array</td>
-                  <td>{ today: 'Go to today', clear: 'Clear selection', ... }</td>
-                  <td>Allows to override tooltips with another language.</td>
-                </tr>
-                <tr>
-                  <th colspan="4"><span class="label label-lg label-success">Events</span></th>
-                </tr>
-                <tr>
-                  <th>Name</th>
-                  <th colspan="2">Parameters</th>
-                  <th>Description</th>
-                </tr>
-                <tr>
-                  <td>changed</td>
-                  <td colspan="2">New date (String)</td>
-                  <td>Emitted when the date is changed.</td>
-                </tr>
-              </tbody>
-            </table>
           </div>
-          <div class="island">
-            <h1>Dropdown</h1>
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <div class="form-group">
-                  <dropdown label="Dropdown" id="menu">
-                    <li><a href="javascript:;">Action</a></li>
-                    <li><a href="javascript:;">Another action</a></li>
-                  </dropdown>
-                </div>
-<pre v-pre>
+          <table class="table table-bordered">
+            <tbody>
+            <tr>
+              <th colspan="4"><span class="label label-lg label-success">Props</span></th>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>name</td>
+              <td>String</td>
+              <td></td>
+              <td>The <code>name</code> attribute of the input element.</td>
+            </tr>
+            <tr>
+              <td>value</td>
+              <td>String</td>
+              <td></td>
+              <td>Initial value (date). Date needs to have a format such as <i>2017-03-01</i> or <i>2017-03-01 12:10</i></td>
+            </tr>
+            <tr>
+              <td>id</td>
+              <td>String</td>
+              <td></td>
+              <td>The <code>id</code> attribute of the input element.</td>
+            </tr>
+            <tr>
+              <td>container-class</td>
+              <td>String</td>
+              <td></td>
+              <td>The class/classes of the container element.</td>
+            </tr>
+            <tr>
+              <td>formatter</td>
+              <td>Function</td>
+              <td>null</td>
+              <td>
+                Callback used for formatting the date input. It receives current date in "YYYY-MM-DD (HH:MM)"
+                format as a parameter. Can be easily used with momentum.js like this:<br>
+                <code>
+                  formatter(date) {<br>
+                  &nbsp; return moment(date).locale(this.momentLocale).format(this.format);<br>
+                  }
+                </code>
+              </td>
+            </tr>
+            <tr>
+              <td>use-am</td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>If true then the hour will be displayed in AM/PM format.</td>
+            </tr>
+            <tr>
+              <td>days-of-week</td>
+              <td>Array</td>
+              <td>['Su', 'Mo', 'Tu', ...]</td>
+              <td>Days of the week.</td>
+            </tr>
+            <tr>
+              <td>highlight-today</td>
+              <td>Boolean</td>
+              <td>true</td>
+              <td>Highlights today in the calendar.</td>
+            </tr>
+            <tr>
+              <td>icons</td>
+              <td>Object</td>
+              <td>{ left: 'glyphicon glyphicon-chevron-left', ... }</td>
+              <td>Icons for UI buttons.</td>
+            </tr>
+            <tr>
+              <td>mode</td>
+              <td>String</td>
+              <td>date</td>
+              <td>Mode can be set to <code>date</code>, <code>datetime</code> or <code>time</code>.</td>
+            </tr>
+            <tr>
+              <td>months</td>
+              <td>Array</td>
+              <td>['January', 'February', 'March', ...]</td>
+              <td>Month names. Override it to use another language.</td>
+            </tr>
+            <tr>
+              <td>months-short</td>
+              <td>Array</td>
+              <td>['Jan', 'Feb', 'Mar', ...]</td>
+              <td>Short month names, used for the month selector view. Override it to use another language.</td>
+            </tr>
+            <tr>
+              <td>placeholder</td>
+              <td>String</td>
+              <td></td>
+              <td>The <code>placeholder</code> attribute of the input element.</td>
+            </tr>
+            <tr>
+              <td>translations</td>
+              <td>Array</td>
+              <td>{ today: 'Go to today', clear: 'Clear selection', ... }</td>
+              <td>Allows to override tooltips with another language.</td>
+            </tr>
+            <tr>
+              <th colspan="4"><span class="label label-lg label-success">Events</span></th>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <th colspan="2">Parameters</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>changed</td>
+              <td colspan="2">New date (String)</td>
+              <td>Emitted when the date is changed.</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="island">
+          <h1>Dropdown</h1>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="form-group">
+                <dropdown label="Dropdown" id="menu">
+                  <li><a href="javascript:;">Action</a></li>
+                  <li><a href="javascript:;">Another action</a></li>
+                </dropdown>
+              </div>
+              <pre v-pre>
 &lt;dropdown label="Dropdown" id="menu"&gt;
   &lt;li&gt;&lt;a href="">Action&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href="">Another action&lt;/a&gt;&lt;/li&gt;
 &lt;/dropdown&gt;
 </pre>
-              </div>
             </div>
-            <table class="table table-bordered">
-              <tbody>
-                <tr>
-                  <th colspan="4"><span class="label label-lg label-success">Props</span></th>
-                </tr>
-                <tr>
-                  <th>Name</th>
-                  <th>Type</th>
-                  <th>Default</th>
-                  <th>Description</th>
-                </tr>
-                <tr>
-                  <td>id</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>The <code>id</code> attribute of the button.</td>
-                </tr>
-                <tr>
-                  <td>label</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>The label of the button.</td>
-                </tr>
-                <tr>
-                  <td>button-class</td>
-                  <td>String</td>
-                  <td>btn btn-default</td>
-                  <td>The class/classes of the button element.</td>
-                </tr>
-                <tr>
-                  <td>container-class</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>The class/classes of the container element.</td>
-                </tr>
-                <tr>
-                  <td>menu-class</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>The class/classes of the menu element.</td>
-                </tr>
-                <tr>
-                  <td>menu-element</td>
-                  <td>String</td>
-                  <td>ul</td>
-                  <td>Customise the menu element.</td>
-                </tr>
-                <tr>
-                  <td>horizontal-position</td>
-                  <td>String</td>
-                  <td>left</td>
-                  <td>Horizontal position of the dropdown (left or right).</td>
-                </tr>
-                <tr>
-                  <td>vertical-position</td>
-                  <td>String</td>
-                  <td>bottom</td>
-                  <td>Vertical position of the dropdown (bottom or top).</td>
-                </tr>
-                <tr>
-                  <td>manual</td>
-                  <td>Boolean</td>
-                  <td>false</td>
-                  <td>In manual mode the dropdown can be opened using the <code>open</code>, <code>close</code> or <code>toggle</code> methods.</td>
-                </tr>
-              </tbody>
-            </table>
           </div>
-          <div class="island">
-            <h1>Modal</h1>
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <div class="form-group">
-                  <div>
-                    <button class="btn btn-primary" @click="showModal = true">Show modal</button>
-                    <modal title="Hello world!" v-model="showModal" @closed="showModal = false">
-                      This is the body.
-                    </modal>
-                  </div>
+          <table class="table table-bordered">
+            <tbody>
+            <tr>
+              <th colspan="4"><span class="label label-lg label-success">Props</span></th>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>id</td>
+              <td>String</td>
+              <td></td>
+              <td>The <code>id</code> attribute of the button.</td>
+            </tr>
+            <tr>
+              <td>label</td>
+              <td>String</td>
+              <td></td>
+              <td>The label of the button.</td>
+            </tr>
+            <tr>
+              <td>button-class</td>
+              <td>String</td>
+              <td>btn btn-default</td>
+              <td>The class/classes of the button element.</td>
+            </tr>
+            <tr>
+              <td>container-class</td>
+              <td>String</td>
+              <td></td>
+              <td>The class/classes of the container element.</td>
+            </tr>
+            <tr>
+              <td>menu-class</td>
+              <td>String</td>
+              <td></td>
+              <td>The class/classes of the menu element.</td>
+            </tr>
+            <tr>
+              <td>menu-element</td>
+              <td>String</td>
+              <td>ul</td>
+              <td>Customise the menu element.</td>
+            </tr>
+            <tr>
+              <td>horizontal-position</td>
+              <td>String</td>
+              <td>left</td>
+              <td>Horizontal position of the dropdown (left or right).</td>
+            </tr>
+            <tr>
+              <td>vertical-position</td>
+              <td>String</td>
+              <td>bottom</td>
+              <td>Vertical position of the dropdown (bottom or top).</td>
+            </tr>
+            <tr>
+              <td>manual</td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>In manual mode the dropdown can be opened using the <code>open</code>, <code>close</code> or <code>toggle</code> methods.</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="island">
+          <h1>Modal</h1>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="form-group">
+                <div>
+                  <button class="btn btn-primary" @click="showModal = true">Show modal</button>
+                  <modal title="Hello world!" v-model="showModal" @closed="showModal = false">
+                    This is the body.
+                  </modal>
                 </div>
-<pre v-pre>
+              </div>
+              <pre v-pre>
 &lt;button class="btn btn-primary" @click="showModal = true">Show modal&lt;/button&gt;
 &lt;modal title="Hello world!" v-model="showModal" @closed="showModal = false"&gt;
   This is the body.
 &lt;/modal&gt;
 </pre>
-              </div>
             </div>
-            <table class="table table-bordered">
-              <tbody>
-                <tr>
-                  <th colspan="4"><span class="label label-lg label-success">Props</span></th>
-                </tr>
-                <tr>
-                  <th>Name</th>
-                  <th>Type</th>
-                  <th>Default</th>
-                  <th>Description</th>
-                </tr>
-                <tr>
-                  <td>v-model</td>
-                  <td>Boolean</td>
-                  <td>false</td>
-                  <td>Used to open or close the modal.</td>
-                </tr>
-                <tr>
-                  <td>title</td>
-                  <td>String</td>
-                  <td>Modal title</td>
-                  <td>The title of the modal.</td>
-                </tr>
-                <tr>
-                  <td>body</td>
-                  <td>String</td>
-                  <td>One fine body...</td>
-                  <td>The body (content) of the modal.</td>
-                </tr>
-                <tr>
-                  <td>id</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>The <code>id</code> attribute of the modal.</td>
-                </tr>
-                <tr>
-                  <td>header</td>
-                  <td>Boolean</td>
-                  <td>true</td>
-                  <td>Controls the visibility of the header.</td>
-                </tr>
-                <tr>
-                  <td>header-close-button</td>
-                  <td>Boolean</td>
-                  <td>true</td>
-                  <td>Controls the visibility of the close button in the header.</td>
-                </tr>
-                <tr>
-                  <td>footer</td>
-                  <td>Boolean</td>
-                  <td>true</td>
-                  <td>Controls the visibility of the footer.</td>
-                </tr>
-                <tr>
-                  <td>confirm-button</td>
-                  <td>Boolean</td>
-                  <td>true</td>
-                  <td>Controls the visibility of the "Confirm" button.</td>
-                </tr>
-                <tr>
-                  <td>confirm-button-label</td>
-                  <td>String</td>
-                  <td>Confirm</td>
-                  <td>"Confirm" button label.</td>
-                </tr>
-                <tr>
-                  <td>close-on-confirm</td>
-                  <td>Boolean</td>
-                  <td>true</td>
-                  <td>Close the modal on "Confirm" button press?</td>
-                </tr>
-                <tr>
-                  <td>close-button</td>
-                  <td>Boolean</td>
-                  <td>true</td>
-                  <td>Controls the visibility of the "Close" button.</td>
-                </tr>
-                <tr>
-                  <td>close-button-label</td>
-                  <td>String</td>
-                  <td>Close</td>
-                  <td>"Close" button label.</td>
-                </tr>
-                <tr>
-                  <th colspan="4"><span class="label label-lg label-success">Events</span></th>
-                </tr>
-                <tr>
-                  <th>Name</th>
-                  <th colspan="2">Parameters</th>
-                  <th>Description</th>
-                </tr>
-                <tr>
-                  <td>opened</td>
-                  <td colspan="2"></td>
-                  <td>Emitted when the modal gets opened.</td>
-                </tr>
-                <tr>
-                  <td>closed</td>
-                  <td colspan="2"></td>
-                  <td>Emitted when the modal gets closed.</td>
-                </tr>
-                <tr>
-                  <td>confirmed</td>
-                  <td colspan="2"></td>
-                  <td>Emitted on "Confirm" button press.</td>
-                </tr>
-              </tbody>
-            </table>
           </div>
-          <div class="island">
-            <h1>Multiselect</h1>
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <div class="form-group">
-                  <div>
-                    <multiselect :options="multiselectOptions" :subset="true" subset-label="" :randomizer="true" randomizer-help-text="Help text."></multiselect>
-                  </div>
+          <table class="table table-bordered">
+            <tbody>
+            <tr>
+              <th colspan="4"><span class="label label-lg label-success">Props</span></th>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>v-model</td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>Used to open or close the modal.</td>
+            </tr>
+            <tr>
+              <td>title</td>
+              <td>String</td>
+              <td>Modal title</td>
+              <td>The title of the modal.</td>
+            </tr>
+            <tr>
+              <td>body</td>
+              <td>String</td>
+              <td>One fine body...</td>
+              <td>The body (content) of the modal.</td>
+            </tr>
+            <tr>
+              <td>id</td>
+              <td>String</td>
+              <td></td>
+              <td>The <code>id</code> attribute of the modal.</td>
+            </tr>
+            <tr>
+              <td>header</td>
+              <td>Boolean</td>
+              <td>true</td>
+              <td>Controls the visibility of the header.</td>
+            </tr>
+            <tr>
+              <td>header-close-button</td>
+              <td>Boolean</td>
+              <td>true</td>
+              <td>Controls the visibility of the close button in the header.</td>
+            </tr>
+            <tr>
+              <td>footer</td>
+              <td>Boolean</td>
+              <td>true</td>
+              <td>Controls the visibility of the footer.</td>
+            </tr>
+            <tr>
+              <td>confirm-button</td>
+              <td>Boolean</td>
+              <td>true</td>
+              <td>Controls the visibility of the "Confirm" button.</td>
+            </tr>
+            <tr>
+              <td>confirm-button-label</td>
+              <td>String</td>
+              <td>Confirm</td>
+              <td>"Confirm" button label.</td>
+            </tr>
+            <tr>
+              <td>close-on-confirm</td>
+              <td>Boolean</td>
+              <td>true</td>
+              <td>Close the modal on "Confirm" button press?</td>
+            </tr>
+            <tr>
+              <td>close-button</td>
+              <td>Boolean</td>
+              <td>true</td>
+              <td>Controls the visibility of the "Close" button.</td>
+            </tr>
+            <tr>
+              <td>close-button-label</td>
+              <td>String</td>
+              <td>Close</td>
+              <td>"Close" button label.</td>
+            </tr>
+            <tr>
+              <th colspan="4"><span class="label label-lg label-success">Events</span></th>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <th colspan="2">Parameters</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>opened</td>
+              <td colspan="2"></td>
+              <td>Emitted when the modal gets opened.</td>
+            </tr>
+            <tr>
+              <td>closed</td>
+              <td colspan="2"></td>
+              <td>Emitted when the modal gets closed.</td>
+            </tr>
+            <tr>
+              <td>confirmed</td>
+              <td colspan="2"></td>
+              <td>Emitted on "Confirm" button press.</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="island">
+          <h1>Multiselect</h1>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="form-group">
+                <div>
+                  <multiselect :options="multiselectOptions" :subset="true" subset-label="" :randomizer="true" randomizer-help-text="Help text."></multiselect>
                 </div>
-<pre v-pre>
+              </div>
+              <pre v-pre>
 &lt;multiselect :options="multiselectOptions" :subset="true" subset-label="" :randomizer="true" randomizer-help-text="Help text."&gt;&lt;/multiselect&gt;
 </pre>
-              </div>
             </div>
-            <h2 class="h4">Optionally provide a custom template for the first level of Multiselect options:</h2>
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <div class="form-group">
-                  <div>
-                    <multiselect :options="multiselectOptionsFlat" :filter="false">
-                      <template scope="{ item }">
-                        <span style="color:red">{{ item.name }}!</span>
-                      </template>
-                    </multiselect>
-                  </div>
+          </div>
+          <h2 class="h4">Optionally provide a custom template for the first level of Multiselect options:</h2>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="form-group">
+                <div>
+                  <multiselect :options="multiselectOptionsFlat" :filter="false">
+                    <template scope="{ item }">
+                      <span style="color:red">{{ item.name }}!</span>
+                    </template>
+                  </multiselect>
                 </div>
-                <pre v-pre>
+              </div>
+              <pre v-pre>
 &lt;multiselect :options="multiselectOptionsFlat" :filter="false"&gt;
   &lt;template scope="{ item }"&gt;
     &lt;span style="color:red"&gt;{{ item.name }}!&lt;/span&gt;
   &lt;/template&gt;
 &lt;/multiselect&gt;
 </pre>
-              </div>
             </div>
-            <table class="table table-bordered">
-              <tbody>
-                <tr>
-                  <th colspan="4"><span class="label label-lg label-success">Props</span></th>
-                </tr>
-                <tr>
-                  <th>Name</th>
-                  <th>Type</th>
-                  <th>Default</th>
-                  <th>Description</th>
-                </tr>
-                <tr>
-                  <td>name</td>
-                  <td>String</td>
-                  <td>multiselect[]</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>filter</td>
-                  <td>Boolean</td>
-                  <td>true</td>
-                  <td>Show the keyword filter?</td>
-                </tr>
-                <tr>
-                  <td>counter</td>
-                  <td>Boolean</td>
-                  <td>true</td>
-                  <td>Show the counter?</td>
-                </tr>
-                <tr>
-                  <td>select-all</td>
-                  <td>Boolean</td>
-                  <td>true</td>
-                  <td>Show the "Select all" checkbox?</td>
-                </tr>
-                <tr>
-                  <td>placeholder</td>
-                  <td>String</td>
-                  <td>Filter list</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>select-all-label</td>
-                  <td>String</td>
-                  <td>Select all</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>options</td>
-                  <td>Array</td>
-                  <td>[]</td>
-                  <td>Options.</td>
-                </tr>
-                <tr>
-                  <td>selected-options</td>
-                  <td>Array</td>
-                  <td>[]</td>
-                  <td>Selected options.</td>
-                </tr>
-                <tr>
-                  <td>id-property</td>
-                  <td>String</td>
-                  <td>id</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>value-property</td>
-                  <td>String</td>
-                  <td>name</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>extra-property</td>
-                  <td>String</td>
-                  <td>extra</td>
-                  <td>
-                    Property name which can be used to access extra information. When available
-                    the extra information will be displayed in a popover next to the option value.
-                  </td>
-                </tr>
-                <tr>
-                  <td>randomizer</td>
-                  <td>Boolean</td>
-                  <td>false</td>
-                  <td>Show the randomizer?</td>
-                </tr>
-                <tr>
-                  <td>randomizer-show</td>
-                  <td>String</td>
-                  <td>Random selection</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>randomizer-how-many</td>
-                  <td>String</td>
-                  <td>How many?</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>randomizer-help-text</td>
-                  <td>String</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>randomizer-button</td>
-                  <td>String</td>
-                  <td>Go</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>subset</td>
-                  <td>Boolean</td>
-                  <td>false</td>
-                  <td>Enable subset selection?</td>
-                </tr>
-                <tr>
-                  <td>subset-type</td>
-                  <td>String</td>
-                  <td>radio</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>subset-name</td>
-                  <td>String</td>
-                  <td>subset</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>subset-label</td>
-                  <td>String</td>
-                  <td>Default</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>selected-subset-options</td>
-                  <td>Array</td>
-                  <td>[]</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>info-icon-class</td>
-                  <td>String</td>
-                  <td>glyphicon glyphicon-info-sign</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>help-icon-class</td>
-                  <td>String</td>
-                  <td>glyphicon glyphicon-question-sign</td>
-                  <td></td>
-                </tr>
-              </tbody>
-              <tbody>
-                <tr>
-                  <th colspan="4"><span class="label label-lg label-success">Events</span></th>
-                </tr>
-                <tr>
-                  <th>Name</th>
-                  <th colspan="2">Parameters</th>
-                  <th>Description</th>
-                </tr>
-                <tr>
-                  <td>selected</td>
-                  <td colspan="2">Ids (Array)</td>
-                  <td>Emitted when the selection is changed.</td>
-                </tr>
-              </tbody>
-            </table>
           </div>
-          <div class="island">
-            <h1>Panel</h1>
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <div class="form-group">
-                  <panel>
-                    <div slot="heading">Heading</div>
-                    This is the content.
-                    <div slot="footer">Footer</div>
-                  </panel>
-                </div>
-<pre v-pre>
+          <table class="table table-bordered">
+            <tbody>
+            <tr>
+              <th colspan="4"><span class="label label-lg label-success">Props</span></th>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>name</td>
+              <td>String</td>
+              <td>multiselect[]</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>filter</td>
+              <td>Boolean</td>
+              <td>true</td>
+              <td>Show the keyword filter?</td>
+            </tr>
+            <tr>
+              <td>counter</td>
+              <td>Boolean</td>
+              <td>true</td>
+              <td>Show the counter?</td>
+            </tr>
+            <tr>
+              <td>select-all</td>
+              <td>Boolean</td>
+              <td>true</td>
+              <td>Show the "Select all" checkbox?</td>
+            </tr>
+            <tr>
+              <td>placeholder</td>
+              <td>String</td>
+              <td>Filter list</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>select-all-label</td>
+              <td>String</td>
+              <td>Select all</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>options</td>
+              <td>Array</td>
+              <td>[]</td>
+              <td>Options.</td>
+            </tr>
+            <tr>
+              <td>selected-options</td>
+              <td>Array</td>
+              <td>[]</td>
+              <td>Selected options.</td>
+            </tr>
+            <tr>
+              <td>id-property</td>
+              <td>String</td>
+              <td>id</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>value-property</td>
+              <td>String</td>
+              <td>name</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>extra-property</td>
+              <td>String</td>
+              <td>extra</td>
+              <td>
+                Property name which can be used to access extra information. When available
+                the extra information will be displayed in a popover next to the option value.
+              </td>
+            </tr>
+            <tr>
+              <td>randomizer</td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>Show the randomizer?</td>
+            </tr>
+            <tr>
+              <td>randomizer-show</td>
+              <td>String</td>
+              <td>Random selection</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>randomizer-how-many</td>
+              <td>String</td>
+              <td>How many?</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>randomizer-help-text</td>
+              <td>String</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>randomizer-button</td>
+              <td>String</td>
+              <td>Go</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>subset</td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>Enable subset selection?</td>
+            </tr>
+            <tr>
+              <td>subset-type</td>
+              <td>String</td>
+              <td>radio</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>subset-name</td>
+              <td>String</td>
+              <td>subset</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>subset-label</td>
+              <td>String</td>
+              <td>Default</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>selected-subset-options</td>
+              <td>Array</td>
+              <td>[]</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>info-icon-class</td>
+              <td>String</td>
+              <td>glyphicon glyphicon-info-sign</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>help-icon-class</td>
+              <td>String</td>
+              <td>glyphicon glyphicon-question-sign</td>
+              <td></td>
+            </tr>
+            </tbody>
+            <tbody>
+            <tr>
+              <th colspan="4"><span class="label label-lg label-success">Events</span></th>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <th colspan="2">Parameters</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>selected</td>
+              <td colspan="2">Ids (Array)</td>
+              <td>Emitted when the selection is changed.</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="island">
+          <h1>Panel</h1>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="form-group">
+                <panel>
+                  <div slot="heading">Heading</div>
+                  This is the content.
+                  <div slot="footer">Footer</div>
+                </panel>
+              </div>
+              <pre v-pre>
 &lt;panel&gt;
   &lt;div slot="heading"&gt;Heading&lt;/div&gt;
   This is the content.
   &lt;div slot="footer"&gt;Footer&lt;/div&gt;
 &lt;/panel&gt;
 </pre>
-              </div>
             </div>
-            <table class="table table-bordered">
-              <tbody>
-                <tr>
-                  <th colspan="4"><span class="label label-lg label-success">Props</span></th>
-                </tr>
-                <tr>
-                  <th>Name</th>
-                  <th>Type</th>
-                  <th>Default</th>
-                  <th>Description</th>
-                </tr>
-                <tr>
-                  <td>type</td>
-                  <td>String</td>
-                  <td>default</td>
-                  <td>Panel type.</td>
-                </tr>
-                <tr>
-                  <td>panel-class</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>Any extra class/classes.</td>
-                </tr>
-              </tbody>
-            </table>
           </div>
-          <div class="island">
-            <h1>Popover</h1>
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <div class="form-group">
-                  <popover title="Hello world!" placement="top" origin="left">
-                    <a class="btn btn-primary">Click me</a>
-                    <div slot="content">
-                      This is the content.
-                    </div>
-                  </popover>
-                </div>
-<pre v-pre>
+          <table class="table table-bordered">
+            <tbody>
+            <tr>
+              <th colspan="4"><span class="label label-lg label-success">Props</span></th>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>type</td>
+              <td>String</td>
+              <td>default</td>
+              <td>Panel type.</td>
+            </tr>
+            <tr>
+              <td>panel-class</td>
+              <td>String</td>
+              <td></td>
+              <td>Any extra class/classes.</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="island">
+          <h1>Popover</h1>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="form-group">
+                <popover title="Hello world!" placement="top" origin="left">
+                  <a class="btn btn-primary">Click me</a>
+                  <div slot="content">
+                    This is the content.
+                  </div>
+                </popover>
+              </div>
+              <pre v-pre>
 &lt;popover title="Hello world!" placement="top" origin="left"&gt;
   &lt;a class="btn btn-primary">Click me&lt;/a&gt;
   &lt;div slot="content"&gt;
@@ -663,464 +663,464 @@
   &lt;/div&gt;
 &lt;/popover&gt;
 </pre>
-              </div>
             </div>
-            <table class="table table-bordered">
-              <tbody>
-                <tr>
-                  <th colspan="4"><span class="label label-lg label-success">Props</span></th>
-                </tr>
-                <tr>
-                  <th>Name</th>
-                  <th>Type</th>
-                  <th>Default</th>
-                  <th>Description</th>
-                </tr>
-                <tr>
-                  <td>title</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>Title.</td>
-                </tr>
-                <tr>
-                  <td>content</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>
-                    Content.<br>
-                    A slot can also be used to insert content (like in the example above).
-                  </td>
-                </tr>
-                <tr>
-                  <td>placement</td>
-                  <td>String</td>
-                  <td>top</td>
-                  <td>Placement (<code>top</code>, <code>bottom</code>, <code>left</code> or <code>right</code>).</td>
-                </tr>
-                <tr>
-                  <td>origin</td>
-                  <td>String</td>
-                  <td>center</td>
-                  <td>
-                    <p>Origin (<code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code> or <code>center</code>).</p>
-                    <p>It only makes sense to use certain combinations of placement and origin:</p>
-                    <ul>
-                      <li>If the placement is <code>top</code> or <code>bottom</code>, the origin can be <code>left</code>, <code>right</code> or <code>center</code>.</li>
-                      <li>If the placement is <code>left</code> or <code>right</code>, the origing can be <code>top</code>, <code>bottom</code> or <code>center</code>.</li>
-                    </ul>
-                    <p>In all other cases the origin will default to <code>center</code>.</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>effect</td>
-                  <td>String</td>
-                  <td>fade</td>
-                  <td>Effect (currently only the <code>fade</code> effect is supported).</td>
-                </tr>
-                <tr>
-                  <td>trigger</td>
-                  <td>String</td>
-                  <td>click</td>
-                  <td>Trigger (<code>click</code>, <code>hover</code> or <code>manual</code>).</td>
-                </tr>
-                <tr>
-                  <td>append-to</td>
-                  <td>String</td>
-                  <td>body</td>
-                  <td>The element to which to append the popover.</td>
-                </tr>
-                <tr>
-                  <td>popover-class</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>Additional class for the popover.</td>
-                </tr>
-              </tbody>
-            </table>
           </div>
-          <div class="island">
-            <h1>Select field</h1>
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <div class="form-group">
-                  <select-field :items="selectFieldItems" value="1" :empty-option="true"></select-field>
-                </div>
-<pre v-pre>
+          <table class="table table-bordered">
+            <tbody>
+            <tr>
+              <th colspan="4"><span class="label label-lg label-success">Props</span></th>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>title</td>
+              <td>String</td>
+              <td></td>
+              <td>Title.</td>
+            </tr>
+            <tr>
+              <td>content</td>
+              <td>String</td>
+              <td></td>
+              <td>
+                Content.<br>
+                A slot can also be used to insert content (like in the example above).
+              </td>
+            </tr>
+            <tr>
+              <td>placement</td>
+              <td>String</td>
+              <td>top</td>
+              <td>Placement (<code>top</code>, <code>bottom</code>, <code>left</code> or <code>right</code>).</td>
+            </tr>
+            <tr>
+              <td>origin</td>
+              <td>String</td>
+              <td>center</td>
+              <td>
+                <p>Origin (<code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code> or <code>center</code>).</p>
+                <p>It only makes sense to use certain combinations of placement and origin:</p>
+                <ul>
+                  <li>If the placement is <code>top</code> or <code>bottom</code>, the origin can be <code>left</code>, <code>right</code> or <code>center</code>.</li>
+                  <li>If the placement is <code>left</code> or <code>right</code>, the origing can be <code>top</code>, <code>bottom</code> or <code>center</code>.</li>
+                </ul>
+                <p>In all other cases the origin will default to <code>center</code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>effect</td>
+              <td>String</td>
+              <td>fade</td>
+              <td>Effect (currently only the <code>fade</code> effect is supported).</td>
+            </tr>
+            <tr>
+              <td>trigger</td>
+              <td>String</td>
+              <td>click</td>
+              <td>Trigger (<code>click</code>, <code>hover</code> or <code>manual</code>).</td>
+            </tr>
+            <tr>
+              <td>append-to</td>
+              <td>String</td>
+              <td>body</td>
+              <td>The element to which to append the popover.</td>
+            </tr>
+            <tr>
+              <td>popover-class</td>
+              <td>String</td>
+              <td></td>
+              <td>Additional class for the popover.</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="island">
+          <h1>Select field</h1>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="form-group">
+                <select-field :items="selectFieldItems" value="1" :empty-option="true"></select-field>
+              </div>
+              <pre v-pre>
 &lt;select-field items="selectFieldItems" value="1" :empty-option="true"&gt;&lt;/select-field&gt;
 </pre>
-              </div>
             </div>
-            <table class="table table-bordered">
-              <tbody>
-                <tr>
-                  <th colspan="4"><span class="label label-lg label-success">Props</span></th>
-                </tr>
-                <tr>
-                  <th>Name</th>
-                  <th>Type</th>
-                  <th>Default</th>
-                  <th>Description</th>
-                </tr>
-                <tr>
-                  <td>id</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>The <code>id</code> attribute of the select field.</td>
-                </tr>
-                <tr>
-                  <td>name</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>The <code>name</code> attribute of the select field.</td>
-                </tr>
-                <tr>
-                  <td>empty-option</td>
-                  <td>Boolean</td>
-                  <td>false</td>
-                  <td>Prepend an empty option to the select field?</td>
-                </tr>
-                <tr>
-                  <td>items</td>
-                  <td>Array</td>
-                  <td>[]</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>id-property</td>
-                  <td>String</td>
-                  <td>id</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>value-property</td>
-                  <td>String</td>
-                  <td>name</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>value</td>
-                  <td>[String, Number]</td>
-                  <td></td>
-                  <td>Initial value.</td>
-                </tr>
-              </tbody>
-              <tbody>
-                <tr>
-                  <th colspan="4"><span class="label label-lg label-success">Events</span></th>
-                </tr>
-                <tr>
-                  <th>Name</th>
-                  <th colspan="2">Parameters</th>
-                  <th>Description</th>
-                </tr>
-                <tr>
-                  <td>selected</td>
-                  <td colspan="2">Name (String),<br> Value ([String, Number])</td>
-                  <td>Emitted when an item gets selected.</td>
-                </tr>
-              </tbody>
-            </table>
           </div>
-          <div class="island">
-            <h1>Tabs</h1>
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <div class="form-group">
-                  <label for="tag-input">Tabs</label>
-                  <tabs :tabs="tabs" v-model="tab"></tabs>
-                </div>
-                <div class="form-group">
-                  Selected tab: {{ tab }}
-                </div>
-<pre v-pre>
+          <table class="table table-bordered">
+            <tbody>
+            <tr>
+              <th colspan="4"><span class="label label-lg label-success">Props</span></th>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>id</td>
+              <td>String</td>
+              <td></td>
+              <td>The <code>id</code> attribute of the select field.</td>
+            </tr>
+            <tr>
+              <td>name</td>
+              <td>String</td>
+              <td></td>
+              <td>The <code>name</code> attribute of the select field.</td>
+            </tr>
+            <tr>
+              <td>empty-option</td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>Prepend an empty option to the select field?</td>
+            </tr>
+            <tr>
+              <td>items</td>
+              <td>Array</td>
+              <td>[]</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>id-property</td>
+              <td>String</td>
+              <td>id</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>value-property</td>
+              <td>String</td>
+              <td>name</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>value</td>
+              <td>[String, Number]</td>
+              <td></td>
+              <td>Initial value.</td>
+            </tr>
+            </tbody>
+            <tbody>
+            <tr>
+              <th colspan="4"><span class="label label-lg label-success">Events</span></th>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <th colspan="2">Parameters</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>selected</td>
+              <td colspan="2">Name (String),<br> Value ([String, Number])</td>
+              <td>Emitted when an item gets selected.</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="island">
+          <h1>Tabs</h1>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="form-group">
+                <label for="tag-input">Tabs</label>
+                <tabs :tabs="tabs" v-model="tab"></tabs>
+              </div>
+              <div class="form-group">
+                Selected tab: {{ tab }}
+              </div>
+              <pre v-pre>
 &lt;tabs :tabs="tabs" v-model="tab"&gt;&lt;/tabs&gt;
 </pre>
-              </div>
             </div>
-            <table class="table table-bordered">
-              <tbody>
-                <tr>
-                  <th colspan="4"><span class="label label-lg label-success">Props</span></th>
-                </tr>
-                <tr>
-                  <th>Name</th>
-                  <th>Type</th>
-                  <th>Default</th>
-                  <th>Description</th>
-                </tr>
-                <tr>
-                  <td>tabs</td>
-                  <td>Array</td>
-                  <td></td>
-                  <td>An array with available tabs (<code>[{ id: 1, name: 'Tab 1', disabled: false }]</code>).</td>
-                </tr>
-                <tr>
-                  <td>active</td>
-                  <td>Number, String</td>
-                  <td></td>
-                  <td>Id of the active tab.</td>
-                </tr>
-                <tr>
-                  <td>type</td>
-                  <td>String</td>
-                  <td>tabs</td>
-                  <td>Can be one of: <code>tabs</code>, <code>pills</code>.</td>
-                </tr>
-                <tr>
-                  <td>stacked</td>
-                  <td>Boolean</td>
-                  <td>false</td>
-                  <td>Should the tabs be stacked?</td>
-                </tr>
-                <tr>
-                  <td>preselect-first-tab</td>
-                  <td>Boolean</td>
-                  <td>true</td>
-                  <td>If the active tab isn't specified the default behaviour is to preselect the first tab.</td>
-                </tr>
-              </tbody>
-              <tbody>
-                <tr>
-                  <th colspan="4"><span class="label label-lg label-success">Events</span></th>
-                </tr>
-                <tr>
-                  <th>Name</th>
-                  <th colspan="2">Parameters</th>
-                  <th>Description</th>
-                </tr>
-                <tr>
-                  <td>selected</td>
-                  <td colspan="2">Active tab id (String, Number)</td>
-                  <td>Emitted when a tab gets selected. Provides support for <code>v-model</code>.</td>
-                </tr>
-              </tbody>
-            </table>
           </div>
-          <div class="island">
-            <h1>Tag input</h1>
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <div class="form-group">
-                  <label for="tag-input">Tag input with autocomplete</label>
-                  <tag-input value="Orange, Black" id="tag-input" placeholder="Add tag" :available-tags="availableTags" hidden-input-name="tags"></tag-input>
-                </div>
-<pre v-pre>
+          <table class="table table-bordered">
+            <tbody>
+            <tr>
+              <th colspan="4"><span class="label label-lg label-success">Props</span></th>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>tabs</td>
+              <td>Array</td>
+              <td></td>
+              <td>An array with available tabs (<code>[{ id: 1, name: 'Tab 1', disabled: false }]</code>).</td>
+            </tr>
+            <tr>
+              <td>active</td>
+              <td>Number, String</td>
+              <td></td>
+              <td>Id of the active tab.</td>
+            </tr>
+            <tr>
+              <td>type</td>
+              <td>String</td>
+              <td>tabs</td>
+              <td>Can be one of: <code>tabs</code>, <code>pills</code>.</td>
+            </tr>
+            <tr>
+              <td>stacked</td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>Should the tabs be stacked?</td>
+            </tr>
+            <tr>
+              <td>preselect-first-tab</td>
+              <td>Boolean</td>
+              <td>true</td>
+              <td>If the active tab isn't specified the default behaviour is to preselect the first tab.</td>
+            </tr>
+            </tbody>
+            <tbody>
+            <tr>
+              <th colspan="4"><span class="label label-lg label-success">Events</span></th>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <th colspan="2">Parameters</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>selected</td>
+              <td colspan="2">Active tab id (String, Number)</td>
+              <td>Emitted when a tab gets selected. Provides support for <code>v-model</code>.</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="island">
+          <h1>Tag input</h1>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="form-group">
+                <label for="tag-input">Tag input with autocomplete</label>
+                <tag-input value="Orange, Black" id="tag-input" placeholder="Add tag" :available-tags="availableTags" hidden-input-name="tags"></tag-input>
+              </div>
+              <pre v-pre>
 &lt;tag-input value="Orange, Black" id="tag-input" placeholder="Add tag" :available-tags="availableTags" hidden-input-name="tags"&gt;&lt;/tag-input&gt;
 </pre>
-              </div>
             </div>
-            <table class="table table-bordered">
-              <tbody>
-                <tr>
-                  <th colspan="4"><span class="label label-lg label-success">Props</span></th>
-                </tr>
-                <tr>
-                  <th>Name</th>
-                  <th>Type</th>
-                  <th>Default</th>
-                  <th>Description</th>
-                </tr>
-                <tr>
-                  <td>available-tags</td>
-                  <td>Array</td>
-                  <td></td>
-                  <td>An array with available tags (<code>[{ id: 1, value: 'hey' }]</code>).</td>
-                </tr>
-                <tr>
-                  <td>value</td>
-                  <td>[Array, String]</td>
-                  <td></td>
-                  <td>An array or comma separated string with tags (<code>['hey', 'there']</code> or <code>hey, there</code>).</td>
-                </tr>
-                <tr>
-                  <td>src</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>URL that will be used to fetch autocomplete suggestions (such as: /tag/search?q=).<br>
-                    A query will be appended to this URL.<br>
-                    There is no need to define <code>available-tags</code> when a remote source is defined.</td>
-                </tr>
-                <tr>
-                  <td>id</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>The <code>id</code> attribute of the input element.</td>
-                </tr>
-                <tr>
-                  <td>placeholder</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>The <code>placeholder</code> attribute of the input element.</td>
-                </tr>
-                <tr>
-                  <td>limit</td>
-                  <td>Number</td>
-                  <td>0</td>
-                  <td>Limit the number of autocomplete suggestions. No limit is applied by default.</td>
-                </tr>
-                <tr>
-                  <td>hidden-input-name</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>The name of a hidden input field that will be populated with tags (<code>hey, there</code>).</td>
-                </tr>
-              </tbody>
-              <tbody>
-                <tr>
-                  <th colspan="4"><span class="label label-lg label-success">Events</span></th>
-                </tr>
-                <tr>
-                  <th>Name</th>
-                  <th colspan="2">Parameters</th>
-                  <th>Description</th>
-                </tr>
-                <tr>
-                  <td>input</td>
-                  <td colspan="2">Tags (Array)</td>
-                  <td>Emitted on user input. Provides support for <code>v-model</code>.</td>
-                </tr>
-                <tr>
-                  <td>error</td>
-                  <td colspan="2">Response (Object)</td>
-                  <td>Emitted when there was an error communicating with the remote source.</td>
-                </tr>
-              </tbody>
-            </table>
           </div>
-          <div class="island">
-            <h1>Typeahead</h1>
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <div class="form-group">
-                  <label for="typeahead-input">Text input with autocomplete</label>
-                  <typeahead initial-id="14" initial-value="John Stockton" id="typeahead-input" placeholder="Type a name" :initial-items="typeaheadItems" hidden-input-name="typeaheadId" @selected="onSelect"></typeahead>
-                </div>
-<pre v-pre>
+          <table class="table table-bordered">
+            <tbody>
+            <tr>
+              <th colspan="4"><span class="label label-lg label-success">Props</span></th>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>available-tags</td>
+              <td>Array</td>
+              <td></td>
+              <td>An array with available tags (<code>[{ id: 1, value: 'hey' }]</code>).</td>
+            </tr>
+            <tr>
+              <td>value</td>
+              <td>[Array, String]</td>
+              <td></td>
+              <td>An array or comma separated string with tags (<code>['hey', 'there']</code> or <code>hey, there</code>).</td>
+            </tr>
+            <tr>
+              <td>src</td>
+              <td>String</td>
+              <td></td>
+              <td>URL that will be used to fetch autocomplete suggestions (such as: /tag/search?q=).<br>
+                A query will be appended to this URL.<br>
+                There is no need to define <code>available-tags</code> when a remote source is defined.</td>
+            </tr>
+            <tr>
+              <td>id</td>
+              <td>String</td>
+              <td></td>
+              <td>The <code>id</code> attribute of the input element.</td>
+            </tr>
+            <tr>
+              <td>placeholder</td>
+              <td>String</td>
+              <td></td>
+              <td>The <code>placeholder</code> attribute of the input element.</td>
+            </tr>
+            <tr>
+              <td>limit</td>
+              <td>Number</td>
+              <td>0</td>
+              <td>Limit the number of autocomplete suggestions. No limit is applied by default.</td>
+            </tr>
+            <tr>
+              <td>hidden-input-name</td>
+              <td>String</td>
+              <td></td>
+              <td>The name of a hidden input field that will be populated with tags (<code>hey, there</code>).</td>
+            </tr>
+            </tbody>
+            <tbody>
+            <tr>
+              <th colspan="4"><span class="label label-lg label-success">Events</span></th>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <th colspan="2">Parameters</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>input</td>
+              <td colspan="2">Tags (Array)</td>
+              <td>Emitted on user input. Provides support for <code>v-model</code>.</td>
+            </tr>
+            <tr>
+              <td>error</td>
+              <td colspan="2">Response (Object)</td>
+              <td>Emitted when there was an error communicating with the remote source.</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="island">
+          <h1>Typeahead</h1>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="form-group">
+                <label for="typeahead-input">Text input with autocomplete</label>
+                <typeahead initial-id="14" initial-value="John Stockton" id="typeahead-input" placeholder="Type a name" :initial-items="typeaheadItems" hidden-input-name="typeaheadId" @selected="onSelect"></typeahead>
+              </div>
+              <pre v-pre>
 &lt;typeahead initial-id="14" initial-value="John Stockton" id="typeahead-input" placeholder="Type a name" :initial-items="typeaheadItems" hidden-input-name="typeaheadId" @selected="onSelect"&gt;&lt;/typeahead&gt;
 </pre>
-              </div>
             </div>
-            <table class="table table-bordered">
-              <tbody>
-                <tr>
-                  <th colspan="4"><span class="label label-lg label-success">Props</span></th>
-                </tr>
-                <tr>
-                  <th>Name</th>
-                  <th>Type</th>
-                  <th>Default</th>
-                  <th>Description</th>
-                </tr>
-                <tr>
-                  <td>initial-items</td>
-                  <td>Array</td>
-                  <td></td>
-                  <td>An array of items that will be used to display autocomplete suggestions (<code>[{ id: 1, value: 'hey' }]</code>).</td>
-                </tr>
-                <tr>
-                  <td>initial-value</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>Initial value of the autocomplete suggestion.</td>
-                </tr>
-                <tr>
-                  <td>initial-id</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>Initial id of the autocomplete suggestion.</td>
-                </tr>
-                <tr>
-                  <td>src</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>URL that will be used to fetch autocomplete suggestions (such as: /user/search?q=).<br>
-                    A query will be appended to this URL.<br>
-                    There is no need to define <code>initial-items</code> when a remote source is defined.</td>
-                </tr>
-                <tr>
-                  <td>id</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>The <code>id</code> attribute of the input element.</td>
-                </tr>
-                <tr>
-                  <td>placeholder</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>The <code>placeholder</code> attribute of the input element.</td>
-                </tr>
-                <tr>
-                  <td>limit</td>
-                  <td>Number</td>
-                  <td>0</td>
-                  <td>Limit the number of autocomplete suggestions. No limit is applied by default.</td>
-                </tr>
-                <tr>
-                  <td>name</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>The name of the input field.</td>
-                </tr>
-                <tr>
-                  <td>hidden-input-name</td>
-                  <td>String</td>
-                  <td></td>
-                  <td>The name of a hidden input field that will be populated with autocomplete suggestion's id.</td>
-                </tr>
-              </tbody>
-              <tbody>
-                <tr>
-                  <th colspan="4"><span class="label label-lg label-success">Events</span></th>
-                </tr>
-                <tr>
-                  <th>Name</th>
-                  <th colspan="2">Parameters</th>
-                  <th>Description</th>
-                </tr>
-                <tr>
-                  <td>selected</td>
-                  <td colspan="2">Item (Object)</td>
-                  <td>Emitted when an item gets selected.</td>
-                </tr>
-                <tr>
-                  <td>error</td>
-                  <td colspan="2">Response (Object)</td>
-                  <td>Emitted when there was an error communicating with the remote source.</td>
-                </tr>
-              </tbody>
-            </table>
-            <h3>Ajax</h3>
-            <p>
-Using the Typeahead component with Ajax by defining the <code>src</code> prop will require 'vue-resource' peer
-dependency to be installed. Install 'vue-resource' with NPM and hook it to the main Vue instance.
+          </div>
+          <table class="table table-bordered">
+            <tbody>
+            <tr>
+              <th colspan="4"><span class="label label-lg label-success">Props</span></th>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>initial-items</td>
+              <td>Array</td>
+              <td></td>
+              <td>An array of items that will be used to display autocomplete suggestions (<code>[{ id: 1, value: 'hey' }]</code>).</td>
+            </tr>
+            <tr>
+              <td>initial-value</td>
+              <td>String</td>
+              <td></td>
+              <td>Initial value of the autocomplete suggestion.</td>
+            </tr>
+            <tr>
+              <td>initial-id</td>
+              <td>String</td>
+              <td></td>
+              <td>Initial id of the autocomplete suggestion.</td>
+            </tr>
+            <tr>
+              <td>src</td>
+              <td>String</td>
+              <td></td>
+              <td>URL that will be used to fetch autocomplete suggestions (such as: /user/search?q=).<br>
+                A query will be appended to this URL.<br>
+                There is no need to define <code>initial-items</code> when a remote source is defined.</td>
+            </tr>
+            <tr>
+              <td>id</td>
+              <td>String</td>
+              <td></td>
+              <td>The <code>id</code> attribute of the input element.</td>
+            </tr>
+            <tr>
+              <td>placeholder</td>
+              <td>String</td>
+              <td></td>
+              <td>The <code>placeholder</code> attribute of the input element.</td>
+            </tr>
+            <tr>
+              <td>limit</td>
+              <td>Number</td>
+              <td>0</td>
+              <td>Limit the number of autocomplete suggestions. No limit is applied by default.</td>
+            </tr>
+            <tr>
+              <td>name</td>
+              <td>String</td>
+              <td></td>
+              <td>The name of the input field.</td>
+            </tr>
+            <tr>
+              <td>hidden-input-name</td>
+              <td>String</td>
+              <td></td>
+              <td>The name of a hidden input field that will be populated with autocomplete suggestion's id.</td>
+            </tr>
+            </tbody>
+            <tbody>
+            <tr>
+              <th colspan="4"><span class="label label-lg label-success">Events</span></th>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <th colspan="2">Parameters</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>selected</td>
+              <td colspan="2">Item (Object)</td>
+              <td>Emitted when an item gets selected.</td>
+            </tr>
+            <tr>
+              <td>error</td>
+              <td colspan="2">Response (Object)</td>
+              <td>Emitted when there was an error communicating with the remote source.</td>
+            </tr>
+            </tbody>
+          </table>
+          <h3>Ajax</h3>
+          <p>
+            Using the Typeahead component with Ajax by defining the <code>src</code> prop will require the 'axios' peer
+            dependency to be installed. Install 'axios' with NPM and hook it to the main Vue instance.
 
-<pre v-pre>
+          <pre v-pre>
 import Vue from 'vue';
-import VueResource from 'vue-resource';
+import axios from 'axios'
 
-Vue.use(VueResource);
+Vue.prototype.$http = axios;
 </pre>
 
-            </p>
-          </div>
-          <div class="island">
-            <h1>Customising templates</h1>
-            <p>
-              The preferred way to customise templates is by using
-              <a href="https://vuejs.org/v2/guide/components.html#Content-Distribution-with-Slots">slots</a>.
-            </p>
-            <p>Alternatively, you can use an inline template to fully replace the default template of any of the components.</p>
-<pre v-pre>
+          </p>
+        </div>
+        <div class="island">
+          <h1>Customising templates</h1>
+          <p>
+            The preferred way to customise templates is by using
+            <a href="https://vuejs.org/v2/guide/components.html#Content-Distribution-with-Slots">slots</a>.
+          </p>
+          <p>Alternatively, you can use an inline template to fully replace the default template of any of the components.</p>
+          <pre v-pre>
 &lt;component inline-template&gt;
   &lt;div&gt;...your custom template goes here...&lt;/div&gt;
 &lt;/component&gt;
 </pre>
-          </div>
         </div>
       </div>
-      <p>&nbsp;</p>
     </div>
+    <p>&nbsp;</p>
   </div>
-  <script src="js/docs.bundle.js" type="text/javascript"></script>
+</div>
+<script src="js/docs.bundle.js" type="text/javascript"></script>
 </body>
 </html>

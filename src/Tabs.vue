@@ -5,7 +5,7 @@
       role="presentation"
       :class="[{ 'active': tab.id == selected }, { 'disabled': tab.disabled }]"
     >
-      <a href @click.prevent="select(tab)">
+      <a href @click.prevent="select(tab.id)">
         {{ tab.name }}
       </a>
     </li>
@@ -48,9 +48,19 @@ export default {
       default: true
     }
   },
+  watch: {
+    active (id) {
+      this.select(id);
+    }
+  },
   methods: {
-    select (tab) {
-      if (tab.disabled) {
+    findTab (id) {
+      return this.tabs.find(tab => tab.id === id);
+    },
+    select (id) {
+      const tab = this.findTab(id);
+
+      if (!tab || tab.disabled || tab.id === this.selected) {
         return;
       }
 
@@ -59,16 +69,10 @@ export default {
     }
   },
   created () {
-    let tab;
-
     if (this.active) {
-      tab = this.tabs.find(tab => tab.id === this.active);
+      this.select(this.active);
     } else if (this.preselectFirstTab && this.tabs.length) {
-      tab = this.tabs[0];
-    }
-
-    if (tab) {
-      this.select(tab);
+      this.select(this.tabs[0].id);
     }
   }
 };

@@ -23,7 +23,7 @@ describe('Tabs', () => {
       propsData: { tabs: tabs, active: 1 }
     });
 
-    wrapper.vm.select(tabs[1]); // Tab B
+    wrapper.vm.select(2); // Tab B
 
     expect(wrapper.vm.selected).to.equal(2);
     expect(Object.keys(wrapper.emitted())).to.include('selected');
@@ -42,9 +42,30 @@ describe('Tabs', () => {
       propsData: { tabs: tabs, preselectFirstTab: false }
     });
 
-    wrapper.vm.select(tabs[2]); // Tab C
+    wrapper.vm.select(3); // Tab C
 
     expect(wrapper.vm.selected).to.be.null;
     expect(Object.keys(wrapper.emitted())).to.not.include('selected');
+  });
+
+  it('finds a tab', () => {
+    const wrapper = shallowMount(Tabs, {
+      propsData: { tabs: tabs }
+    });
+
+    expect(wrapper.vm.findTab(99)).to.be.undefined;
+    expect(wrapper.vm.findTab(2)).to.be.an('object');
+  });
+
+  it('watches the active prop', () => {
+    const wrapper = shallowMount(Tabs, {
+      propsData: { tabs: tabs, active: 1 }
+    });
+
+    wrapper.setProps({ active: 2 });
+    expect(wrapper.vm.selected).to.equal(2);
+
+    wrapper.setProps({ active: 99 });
+    expect(wrapper.vm.selected).to.equal(2);
   });
 });

@@ -10,10 +10,10 @@
       </div>
       <div class="checkbox multiselect-selectall" v-if="selectAll || randomizer">
         <label v-if="selectAll">
-          <input :checked="allSelected()" type="checkbox" @click="toggleAll"> {{ selectAllLabel }}
+          <input :checked="allSelected()" type="checkbox" @click="toggleAll" :disabled="disabled"> {{ selectAllLabel }}
         </label>
-        <span v-if="selectAll && randomizer"> | </span>
-        <span class="randomizer-toggle" v-if="randomizer">
+        <span v-if="selectAll && randomizer && !disabled"> | </span>
+        <span class="randomizer-toggle" v-if="randomizer && !disabled">
           <a href="" @click.prevent="randomizerActive = !randomizerActive">{{ randomizerShow }}</a>
           <popover v-if="randomizerHelpText" :content="randomizerHelpText">
             <span :class="helpIconClass"></span>
@@ -38,7 +38,9 @@
       :subsetType="subsetType"
       :subsetName="subsetName"
       :selectedSubsetOptions="selectedSubsetOptions"
-      :infoIconClass="infoIconClass">
+      :infoIconClass="infoIconClass"
+      :disabled="disabled"
+    >
       <template scope="{item}">
         <slot :item="item"></slot>
       </template>
@@ -158,6 +160,10 @@ export default {
     helpIconClass: {
       type: String,
       default: 'glyphicon glyphicon-question-sign'
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {

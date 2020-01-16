@@ -9,7 +9,9 @@
       :id-property="idProperty"
       :value-property="valueProperty"
       :extra-property="extraProperty"
-      v-bind="$attrs">
+      v-bind="$attrs"
+      :disabled="disabled"
+    >
       <template>
         <slot :item="option"></slot>
       </template>
@@ -37,7 +39,11 @@ export default {
     name: String,
     idProperty: String,
     valueProperty: String,
-    extraProperty: String
+    extraProperty: String,
+    disabled: {
+      type: Boolean,
+      default: false
+    }
   },
   computed: {
     topLevel () {

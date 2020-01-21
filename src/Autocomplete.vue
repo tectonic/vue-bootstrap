@@ -11,7 +11,7 @@
     <ul class="dropdown-menu">
       <li v-for="(item, index) in autocompleteItems" :class="{ 'active': isMarked(index) }">
         <a href="" @mousedown.prevent="selectItem" @mousemove="markItem(index)">
-          {{ item.value }}
+          {{ item[valueProperty] }}
         </a>
       </li>
     </ul>
@@ -58,6 +58,10 @@ export default {
     autocompleteKeys: {
       type: Array,
       default: () => [13]
+    },
+    valueProperty: {
+      type: String,
+      default: 'value'
     }
   },
   data () {
@@ -76,7 +80,7 @@ export default {
 
       // Filter items by query
       let autocompleteItems = this.src ? this.availableItems : this.availableItems.filter(item => {
-        return item.value.toLowerCase().indexOf(this.query.toLowerCase()) !== -1;
+        return item[this.valueProperty].toLowerCase().indexOf(this.query.toLowerCase()) !== -1;
       });
 
       if (this.limit !== 0) {
@@ -106,7 +110,7 @@ export default {
       }
 
       const validSelection = this.availableItems.find(item => {
-        return value.toLowerCase() === item.value.toLowerCase();
+        return value.toLowerCase() === item[this.valueProperty].toLowerCase();
       });
 
       if (!validSelection) {
@@ -179,7 +183,7 @@ export default {
 
       if (item && this.autocompleting) {
         this.$emit('autocompleted', item);
-        this.query = this.clearOnSelect ? '' : item.value;
+        this.query = this.clearOnSelect ? '' : item[this.valueProperty];
         this.stopAutocomplete();
 
         return;

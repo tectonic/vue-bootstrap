@@ -1,5 +1,5 @@
 <template>
-  <div :class="[{ 'open': autocompleting }, 'dropdown', dropdownClass]">
+  <div :class="containerClass">
     <slot
       :autocomplete-bindings="{ value: query }"
       :autocomplete-handlers="{
@@ -8,7 +8,7 @@
         keydown: onKeydown,
       }"
     ></slot>
-    <ul class="dropdown-menu">
+    <ul :class="listClass">
       <li v-for="(item, index) in autocompleteItems" :class="{ 'active': isMarked(index) }">
         <a href="" @mousedown.prevent="selectItem" @mousemove="markItem(index)">
           {{ item[valueProperty] }}
@@ -23,6 +23,13 @@ import debounce from 'debounce';
 
 export default {
   props: {
+    mode: {
+      type: String,
+      default: 'dropdown',
+      validator: type => {
+        return ['dropdown', 'list'].includes(type);
+      }
+    },
     initialItems: {
       type: Array,
       default: () => []
@@ -73,6 +80,14 @@ export default {
     };
   },
   computed: {
+    containerClass () {
+      return this.mode === 'dropdown' ?
+        [{ 'open': this.autocompleting }, 'dropdown', this.dropdownClass] :
+        [];
+    },
+    listClass () {
+      return this.mode === 'dropdown' ? ['dropdown-menu'] : ['list-unstyled']
+    },
     autocompleteItems () {
       if (!this.query) {
         return [];

@@ -76,7 +76,7 @@ export default {
       type: String,
       default: 'value'
     },
-    showAllByDefault: {
+    showAllAvailable: {
       type: Boolean,
       default: false
     },
@@ -102,7 +102,7 @@ export default {
     },
     autocompleteItems () {
       if (!this.query) {
-        return this.showAllByDefault && !this.src ? this.availableItems : [];
+        return this.showAllAvailable && !this.src ? this.availableItems : [];
       }
 
       // Filter items by query

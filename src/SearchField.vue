@@ -12,7 +12,7 @@
         :limit="10"
         :clear-on-select="true"
         :value-property="valueProperty"
-        :show-all-by-default="true"
+        :show-all-available="true"
         :autohide="false"
         container-class="search-container"
         @autocompleted="handleAutocomplete"

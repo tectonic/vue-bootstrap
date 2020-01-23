@@ -1,5 +1,5 @@
 <template>
-  <div :class="containerClass">
+  <div :class="containerClasses">
     <slot
       :autocomplete-bindings="{ value: query }"
       :autocomplete-handlers="{
@@ -8,13 +8,22 @@
         keydown: onKeydown,
       }"
     ></slot>
-    <ul :class="listClass">
-      <li v-for="(item, index) in autocompleteItems" :class="{ 'active': isMarked(index) }">
-        <a href="" @mousedown.prevent="selectItem" @mousemove="markItem(index)">
-          {{ item[valueProperty] }}
-        </a>
-      </li>
-    </ul>
+    <slot
+      name="items"
+      :autocomplete-items="autocompleteItems"
+      :searching="searching"
+      :is-marked="isMarked"
+      :mark-item="markItem"
+      :selectItem="selectItem"
+    >
+      <ul class="dropdown-menu">
+        <li v-for="(item, index) in autocompleteItems" :class="{ 'active': isMarked(index) }">
+          <a href="" @mousedown.prevent="selectItem" @mousemove="markItem(index)">
+            {{ item.value }}
+          </a>
+        </li>
+      </ul>
+    </slot>
   </div>
 </template>
 
@@ -23,13 +32,6 @@ import debounce from 'debounce';
 
 export default {
   props: {
-    mode: {
-      type: String,
-      default: 'dropdown',
-      validator: type => {
-        return ['dropdown', 'list'].includes(type);
-      }
-    },
     initialItems: {
       type: Array,
       default: () => []
@@ -58,6 +60,10 @@ export default {
       type: Boolean,
       default: false
     },
+    containerClass: {
+      type: String,
+      default: ''
+    },
     dropdownClass: {
       type: String,
       default: ''
@@ -69,6 +75,14 @@ export default {
     valueProperty: {
       type: String,
       default: 'value'
+    },
+    showAllByDefault: {
+      type: Boolean,
+      default: false
+    },
+    autohide: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -76,21 +90,19 @@ export default {
       availableItems: this.initialItems,
       query: this.initialQuery,
       autocompleting: false,
+      searching: false,
       currentItem: 0
     };
   },
   computed: {
-    containerClass () {
-      return this.mode === 'dropdown' ?
-        [{ 'open': this.autocompleting }, 'dropdown', this.dropdownClass] :
-        [];
-    },
-    listClass () {
-      return this.mode === 'dropdown' ? ['dropdown-menu'] : ['list-unstyled']
+    containerClasses () {
+      return this.containerClass ?
+        this.containerClass :
+        [{ 'open': this.autocompleting }, 'dropdown', this.dropdownClass];
     },
     autocompleteItems () {
       if (!this.query) {
-        return [];
+        return this.showAllByDefault && !this.src ? this.availableItems : [];
       }
 
       // Filter items by query
@@ -157,19 +169,31 @@ export default {
       }
     },
     fetchItems () {
+      this.searching = true;
+
       this.$http.get(this.src + this.query).then((response) => {
         this.availableItems = response.data;
 
         // New items arrived - trigger autocomplete
         this.autocomplete();
+        this.searching = false;
       }, (response) => {
         this.$emit('error', response);
+        this.searching = false;
       });
     },
     autocomplete () {
+      if (!this.autohide) {
+        return;
+      }
+
       this.autocompleting = this.autocompleteItems.length > 0;
     },
     stopAutocomplete () {
+      if (!this.autohide) {
+        return;
+      }
+
       this.autocompleting = false;
       this.currentItem = 0;
     },
@@ -213,6 +237,10 @@ export default {
   },
   mounted () {
     this.fetchItems = debounce(this.fetchItems, 200);
+
+    if (!this.autohide) {
+      this.autocompleting = true;
+    }
   }
 };
 </script>

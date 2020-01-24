@@ -1,6 +1,6 @@
 <template>
   <div class="multiselect-subset-control">
-    <input type="radio" :name="subsetName" v-model="selectedOption" :value="option[idProperty]">
+    <input type="radio" :name="subsetName" v-model="selectedOption" :value="option[idProperty]" :disabled="disabled">
   </div>
 </template>
 
@@ -21,7 +21,11 @@ export default {
       required: true
     },
     idProperty: String,
-    subsetName: String
+    subsetName: String,
+    disabled: {
+      type: Boolean,
+      default: false
+    }
   },
   created () {
     this.selectedOption = this.selectedSubsetOptions.length > 0 ? this.selectedSubsetOptions[0] : '';

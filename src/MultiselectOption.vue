@@ -3,7 +3,7 @@
     <template v-if="isParent">
       <div class="checkbox radio multiselect-option">
         <label :style="indentStyle()" :title="option[valueProperty]">
-          <input type="checkbox" v-model="option.selected" @change="toggleParent">
+          <input type="checkbox" v-model="option.selected" @change="toggleParent" :disabled="disabled">
           <strong>{{ option[valueProperty] }}</strong>
         </label>
       </div>
@@ -18,8 +18,9 @@
         :subsetType="subsetType"
         :subsetName="$attrs.subsetName"
         :selectedSubsetOptions="$attrs.selectedSubsetOptions"
-        :infoIconClass="infoIconClass">
-      </multiselect-list>
+        :infoIconClass="infoIconClass"
+        :disabled="disabled"
+      />
     </template>
     <template v-else>
       <div v-show="option.visible" class="checkbox radio multiselect-option">
@@ -29,19 +30,21 @@
             :option="option"
             :id-property="idProperty"
             :subsetName="$attrs.subsetName"
-            :selectedSubsetOptions="$attrs.selectedSubsetOptions">
-          </multiselect-subset-radio-control>
+            :selectedSubsetOptions="$attrs.selectedSubsetOptions"
+            :disabled="disabled"
+          />
           <multiselect-subset-checkbox-control
             v-else
             :option="option"
             :id-property="idProperty"
             :subsetName="$attrs.subsetName"
-            :selectedSubsetOptions="$attrs.selectedSubsetOptions">
-          </multiselect-subset-checkbox-control>
+            :selectedSubsetOptions="$attrs.selectedSubsetOptions"
+            :disabled="disabled"
+          />
         </template>
         <label :style="indentStyle()" :title="option[valueProperty]">
-          <input type="checkbox" :name="name" v-model="option.selected" :value="option[idProperty]">
-          <slot>{{option[valueProperty]}}</slot>
+          <input type="checkbox" :name="name" v-model="option.selected" :value="option[idProperty]" :disabled="disabled">
+          <slot>{{ option[valueProperty] }}</slot>
           <popover v-if="option[extraProperty]" :content="option[extraProperty]" trigger="hover">
             <span :class="infoIconClass"></span>
           </popover>
@@ -78,7 +81,11 @@ export default {
     extraProperty: String,
     subset: Boolean,
     subsetType: String,
-    infoIconClass: String
+    infoIconClass: String,
+    disabled: {
+      type: Boolean,
+      default: false
+    }
   },
   computed: {
     isParent () {

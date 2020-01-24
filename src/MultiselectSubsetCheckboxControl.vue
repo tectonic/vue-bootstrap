@@ -1,6 +1,6 @@
 <template>
   <div class="multiselect-subset-control">
-    <input type="checkbox" :name="subsetName + '[]'" v-model="checked" :value="option[idProperty]">
+    <input type="checkbox" :name="subsetName + '[]'" v-model="checked" :value="option[idProperty]" :disabled="disabled">
   </div>
 </template>
 
@@ -21,7 +21,11 @@ export default {
       required: true
     },
     idProperty: String,
-    subsetName: String
+    subsetName: String,
+    disabled: {
+      type: Boolean,
+      default: false
+    }
   },
   created () {
     this.checked = this.selectedSubsetOptions.includes(this.option[this.idProperty]);

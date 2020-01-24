@@ -13,6 +13,7 @@
       class="form-control"
       autocomplete="off"
       readonly
+      :disabled="disabled"
     />
     <div class="datepicker dropdown-menu">
       <ul class="list-unstyled">
@@ -268,6 +269,10 @@ export default {
           pm: 'PM'
         };
       }
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -299,6 +304,10 @@ export default {
   },
   methods: {
     open () {
+      if (this.disabled) {
+        return;
+      }
+
       if (this.date === null) {
         this.date = this.dateNow();
         this.dateInput = this.formatDateTime(this.date);

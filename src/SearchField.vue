@@ -93,7 +93,7 @@ export default {
       default: ''
     },
     initialId: {
-      type: String,
+      type: [String, Number],
       default: ''
     },
     src: {

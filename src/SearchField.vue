@@ -1,6 +1,6 @@
 <template>
   <div class="search-field" v-on-click-outside="close">
-    <div class="form-control" @click="toggle">
+    <div class="form-control" :disabled="disabled" @click="toggle">
       <div class="search-result">
         {{ selectedItem[valueProperty] }}
       </div>
@@ -111,10 +111,18 @@ export default {
     valueProperty: {
       type: String,
       default: 'value'
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
     toggle () {
+      if (this.disabled) {
+        return;
+      }
+
       this.isOpen = !this.isOpen;
     },
     close () {
@@ -145,7 +153,7 @@ export default {
     overflow-x: hidden;
     white-space: nowrap;
     padding-right: 20px;
-    cursor: default;
+    user-select: none;
   }
 
   .search-icon {

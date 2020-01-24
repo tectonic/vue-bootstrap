@@ -96,9 +96,9 @@ export default {
   },
   computed: {
     containerClasses () {
-      return this.containerClass ?
-        this.containerClass :
-        [{ 'open': this.autocompleting }, 'dropdown', this.dropdownClass];
+      return this.containerClass
+        ? this.containerClass
+        : [{ 'open': this.autocompleting }, 'dropdown', this.dropdownClass];
     },
     autocompleteItems () {
       if (!this.query) {

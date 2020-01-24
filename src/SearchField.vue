@@ -67,8 +67,8 @@ export default {
   data () {
     const selectedItem = {};
 
-    selectedItem[this.idProperty] = '';
-    selectedItem[this.valueProperty] = '';
+    selectedItem[this.idProperty] = this.initialId;
+    selectedItem[this.valueProperty] = this.initialValue;
 
     return {
       isOpen: false,
@@ -128,18 +128,11 @@ export default {
     close () {
       this.isOpen = false;
     },
-    select (id, value) {
-      this.selectedItem[this.idProperty] = id;
-      this.selectedItem[this.valueProperty] = value;
-    },
     handleAutocomplete (item) {
-      this.select(item[this.idProperty], item[this.valueProperty]);
+      this.selectedItem = item;
       this.$emit('selected', this.selectedItem);
       this.close();
     }
-  },
-  created () {
-    this.select(this.initialId, this.initialValue);
   }
 };
 </script>

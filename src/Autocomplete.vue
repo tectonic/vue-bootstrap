@@ -1,5 +1,5 @@
 <template>
-  <div :class="[{ 'open': autocompleting }, 'dropdown', dropdownClass]">
+  <div :class="containerClasses">
     <slot
       :autocomplete-bindings="{ value: query }"
       :autocomplete-handlers="{
@@ -8,13 +8,22 @@
         keydown: onKeydown,
       }"
     ></slot>
-    <ul class="dropdown-menu">
-      <li v-for="(item, index) in autocompleteItems" :class="{ 'active': isMarked(index) }">
-        <a href="" @mousedown.prevent="selectItem" @mousemove="markItem(index)">
-          {{ item.value }}
-        </a>
-      </li>
-    </ul>
+    <slot
+      name="items"
+      :autocomplete-items="autocompleteItems"
+      :searching="searching"
+      :is-marked="isMarked"
+      :mark-item="markItem"
+      :selectItem="selectItem"
+    >
+      <ul class="dropdown-menu">
+        <li v-for="(item, index) in autocompleteItems" :class="{ 'active': isMarked(index) }">
+          <a href="" @mousedown.prevent="selectItem" @mousemove="markItem(index)">
+            {{ item.value }}
+          </a>
+        </li>
+      </ul>
+    </slot>
   </div>
 </template>
 
@@ -51,6 +60,10 @@ export default {
       type: Boolean,
       default: false
     },
+    containerClass: {
+      type: String,
+      default: ''
+    },
     dropdownClass: {
       type: String,
       default: ''
@@ -58,6 +71,18 @@ export default {
     autocompleteKeys: {
       type: Array,
       default: () => [13]
+    },
+    valueProperty: {
+      type: String,
+      default: 'value'
+    },
+    showAllAvailable: {
+      type: Boolean,
+      default: false
+    },
+    autohide: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -65,18 +90,24 @@ export default {
       availableItems: this.initialItems,
       query: this.initialQuery,
       autocompleting: false,
+      searching: false,
       currentItem: 0
     };
   },
   computed: {
+    containerClasses () {
+      return this.containerClass
+        ? this.containerClass
+        : [{ 'open': this.autocompleting }, 'dropdown', this.dropdownClass];
+    },
     autocompleteItems () {
       if (!this.query) {
-        return [];
+        return this.showAllAvailable && !this.src ? this.availableItems : [];
       }
 
       // Filter items by query
       let autocompleteItems = this.src ? this.availableItems : this.availableItems.filter(item => {
-        return item.value.toLowerCase().indexOf(this.query.toLowerCase()) !== -1;
+        return item[this.valueProperty].toLowerCase().indexOf(this.query.toLowerCase()) !== -1;
       });
 
       if (this.limit !== 0) {
@@ -106,7 +137,7 @@ export default {
       }
 
       const validSelection = this.availableItems.find(item => {
-        return value.toLowerCase() === item.value.toLowerCase();
+        return value.toLowerCase() === item[this.valueProperty].toLowerCase();
       });
 
       if (!validSelection) {
@@ -138,19 +169,31 @@ export default {
       }
     },
     fetchItems () {
+      this.searching = true;
+
       this.$http.get(this.src + this.query).then((response) => {
         this.availableItems = response.data;
 
         // New items arrived - trigger autocomplete
         this.autocomplete();
+        this.searching = false;
       }, (response) => {
         this.$emit('error', response);
+        this.searching = false;
       });
     },
     autocomplete () {
+      if (!this.autohide) {
+        return;
+      }
+
       this.autocompleting = this.autocompleteItems.length > 0;
     },
     stopAutocomplete () {
+      if (!this.autohide) {
+        return;
+      }
+
       this.autocompleting = false;
       this.currentItem = 0;
     },
@@ -179,7 +222,7 @@ export default {
 
       if (item && this.autocompleting) {
         this.$emit('autocompleted', item);
-        this.query = this.clearOnSelect ? '' : item.value;
+        this.query = this.clearOnSelect ? '' : item[this.valueProperty];
         this.stopAutocomplete();
 
         return;
@@ -194,6 +237,10 @@ export default {
   },
   mounted () {
     this.fetchItems = debounce(this.fetchItems, 200);
+
+    if (!this.autohide) {
+      this.autocompleting = true;
+    }
   }
 };
 </script>

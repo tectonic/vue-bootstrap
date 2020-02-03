@@ -5,6 +5,7 @@ import Modal from '../../src/Modal.vue';
 import Multiselect from '../../src/Multiselect.vue';
 import Panel from '../../src/Panel.vue';
 import Popover from '../../src/Popover.vue';
+import SearchField from '../../src/SearchField.vue';
 import SelectField from '../../src/SelectField.vue';
 import Tabs from '../../src/Tabs.vue';
 import TagInput from '../../src/TagInput.vue';
@@ -19,6 +20,7 @@ new Vue({
     Multiselect,
     Panel,
     Popover,
+    SearchField,
     SelectField,
     Tabs,
     TagInput,
@@ -35,6 +37,28 @@ new Vue({
             { id: 4, name: 'Item C' }
           ]
         }
+      ],
+      searchFieldItems: [
+        { id: 1, value: 'Alice Munro' },
+        { id: 2, value: 'Bob Dylan' },
+        { id: 3, value: 'Doris Lessing' },
+        { id: 4, value: 'Elfriede Jelinek' },
+        { id: 5, value: 'Gao Xingjian' },
+        { id: 6, value: 'Harold Pinter' },
+        { id: 7, value: 'Herta Müller' },
+        { id: 8, value: 'Imre Kertész' },
+        { id: 9, value: 'J. M. Coetzee' },
+        { id: 10, value: 'J. M. G. Le Clézio' },
+        { id: 11, value: 'Kazuo Ishiguro' },
+        { id: 12, value: 'Mario Vargas Llosa' },
+        { id: 13, value: 'Mo Yan' },
+        { id: 14, value: 'Olga Tokarczuk' },
+        { id: 15, value: 'Orhan Pamuk' },
+        { id: 16, value: 'Patrick Modiano' },
+        { id: 17, value: 'Peter Handke' },
+        { id: 18, value: 'Svetlana Alexievich' },
+        { id: 19, value: 'Tomas Tranströmer' },
+        { id: 20, value: 'V. S. Naipaul' }
       ],
       typeaheadItems: [
         { id: 1, value: 'Anne Sullivan' },

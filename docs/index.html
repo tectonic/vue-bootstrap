@@ -751,6 +751,109 @@
           </table>
         </div>
         <div class="island">
+          <h1>Search field</h1>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="form-group">
+                <search-field :initial-items="searchFieldItems" initial-id="1" initial-value="Alice Munro"></search-field>
+              </div>
+              <pre v-pre>
+&lt;search-field :initial-items="searchFieldItems" initial-id="1" initial-value="Alice Munro"&gt;&lt;/search-field&gt;
+</pre>
+            </div>
+          </div>
+          <table class="table table-bordered">
+            <tbody>
+            <tr>
+              <th colspan="4"><span class="label label-lg label-success">Props</span></th>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>id</td>
+              <td>String</td>
+              <td></td>
+              <td>The <code>id</code> of the input element.</td>
+            </tr>
+            <tr>
+              <td>name</td>
+              <td>String</td>
+              <td></td>
+              <td>The <code>name</code> of the input element.</td>
+            </tr>
+            <tr>
+              <td>initial-items</td>
+              <td>Array</td>
+              <td></td>
+              <td>An array of items that will be used to display autocomplete suggestions (<code>[{ id: 1, value: 'hey' }]</code>).</td>
+            </tr>
+            <tr>
+              <td>initial-value</td>
+              <td>String</td>
+              <td></td>
+              <td>Initial value.</td>
+            </tr>
+            <tr>
+              <td>initial-id</td>
+              <td>String, Number</td>
+              <td></td>
+              <td>Initial id.</td>
+            </tr>
+            <tr>
+              <td>src</td>
+              <td>String</td>
+              <td></td>
+              <td>URL that will be used to fetch autocomplete suggestions (such as: /user/search?q=).<br>
+                A query will be appended to this URL.<br>
+                There is no need to define <code>initial-items</code> when a remote source is defined.</td>
+            </tr>
+            <tr>
+              <td>searching-label</td>
+              <td>String</td>
+              <td>Searching...</td>
+              <td>Displayed while a search is in progress.</td>
+            </tr>
+            <tr>
+              <td>id-property</td>
+              <td>String</td>
+              <td>id</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>value-property</td>
+              <td>String</td>
+              <td>value</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>disabled</td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>Disables the input.</td>
+            </tr>
+            </tbody>
+            <tbody>
+            <tr>
+              <th colspan="4"><span class="label label-lg label-success">Events</span></th>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <th colspan="2">Parameters</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>selected</td>
+              <td colspan="2">Item (Object)</td>
+              <td>Emitted when an item gets selected.</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="island">
           <h1>Select field</h1>
           <div class="panel panel-default">
             <div class="panel-body">

@@ -311,6 +311,7 @@ export default {
       if (this.date === null) {
         this.date = this.dateNow();
         this.dateInput = this.formatDateTime(this.date);
+        this.$emit('changed', this.formatDateTime(this.date, true));
       }
 
       this.month = this.date.getMonth();

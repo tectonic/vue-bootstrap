@@ -3,7 +3,7 @@
     <li
       v-for="tab in tabs"
       role="presentation"
-      :class="[{ 'active': tab.id == selected }, { 'disabled': tab.disabled }]"
+      :class="[{ 'active': tab.id == selected }, { 'disabled': tab.disabled }, { 'invalid': tab.invalidFields }]"
     >
       <a href @click.prevent="select(tab.id)">
         {{ tab.name }}

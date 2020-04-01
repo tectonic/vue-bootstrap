@@ -130,6 +130,10 @@ export default {
       type: String,
       default: 'Go'
     },
+    rememberSelection: {
+      type: Boolean,
+      default: false
+    },
     subset: {
       type: Boolean,
       default: false
@@ -199,7 +203,7 @@ export default {
         return;
       }
 
-      this.buildTree(newOptions);
+      this.buildTree(newOptions, this.rememberSelection ? this.selectedOptions : []);
       this.filterTree();
     },
     selectedOptions (newOptions, oldOptions) {

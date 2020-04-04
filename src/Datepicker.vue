@@ -513,8 +513,8 @@ export default {
           yearSign = -1;
           negative = 1;
         }
-        const yearVal = ('0'.repeat((dateParts[negative].length - 4) * -1) + dateParts[negative]);
-        parsedDate.setFullYear(yearSign * yearVal);
+        const yearVal = dateParts[negative];
+        parsedDate.setUTCFullYear(yearSign * yearVal);
         parsedDate.setMonth(dateParts[1 + negative] - 1);
         const hours = dateParts[2 + negative].split(' ');
         parsedDate.setDate(hours[0]);

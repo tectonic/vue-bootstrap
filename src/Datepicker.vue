@@ -488,7 +488,7 @@ export default {
     validFormat (date) {
       // Accept dates in the format of '2017-03-01' or '2017-03-01 12:10' or '23:09' or with years less than 1000 and negative.
       return (date.length > 5 && date.length < 11 && /^[0-9-]+$/.test(date)) ||
-        (date.length > 13 && date.length < 17 && /^[0-9-\s:]+$/.test(date)) ||
+        (date.length >= 13 && date.length < 17 && /^[0-9-\s:]+$/.test(date)) ||
         (date.length === 5 && /^\d{2}:\d{2}$/.test(date)) ||
         (date.length > 6 && date.length < 12 && /^-[0-9-]+$/.test(date)) ||
         (date.length > 14 && date.length < 18 && /^-[0-9-\s:]+$/.test(date));

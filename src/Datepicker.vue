@@ -23,7 +23,7 @@
             <thead>
               <tr>
                 <th class="previous-month control-button" :title="translate('prev_month')" @click="previousMonth"><span :class="icons.left"></span></th>
-                <th class="current-month control-button" colspan="5" @click="changeView('months')">{{ months[month] }} {{ year }}</th>
+                <th class="current-month control-button control-display" colspan="5" @click="changeView('months')">{{ months[month] }} {{ year }}</th>
                 <th class="next-month control-button" :title="translate('next_month')" @click="nextMonth"><span :class="icons.right"></span></th>
               </tr>
               <tr>
@@ -38,36 +38,15 @@
               </tr>
             </tbody>
           </table>
-          <hr :class="[{ 'hidden': ['clock', 'months', 'hours', 'minutes'].indexOf(view) > -1 }, 'separator']">
-          <table>
+          <table :class="[{ 'hidden': view !== 'months' }, 'calendar', 'table-condensed']">
+            <thead>
+            <tr>
+              <th class="previous-year control-button" :title="translate('prev_year')" @click="previousYear"><span :class="icons.left"></span></th>
+              <th class="current-year control-button control-display" colspan="5" @click="changeView('years')">{{ year }}</th>
+              <th class="next-year control-button" :title="translate('next_year')" @click="nextYear"><span :class="icons.right"></span></th>
+            </tr>
+            </thead>
             <tbody>
-              <tr class="control-buttons">
-                <td class="set-now" :title="translate('today')" @click="setNow()">
-                  <a data-action>
-                    <span :class="icons.now"></span>
-                  </a>
-                </td>
-                <td class="show-calendar" v-if="mode === 'datetime' && view === 'clock'" @click="changeView('calendar')">
-                  <a data-action>
-                    <span :class="icons.calendar"></span>
-                  </a>
-                </td>
-                <td class="show-clock" v-if="mode === 'datetime' && view !== 'clock'" :title="translate('select_time')" @click="changeView('clock')">
-                  <a data-action>
-                    <span :class="icons.time"></span>
-                  </a>
-                </td>
-                <td class="clear-selection" :title="translate('clear')" @click="clearDateSelected()">
-                  <a data-action>
-                    <span :class="icons.trash"></span>
-                  </a>
-                </td>
-                <td class="close-picker" :title="translate('close')" @click="close()">
-                  <a data-action>
-                    <span :class="icons.close"></span>
-                  </a>
-                </td>
-              </tr>
             </tbody>
           </table>
           <hr :class="[{ 'hidden': ['months', 'hours', 'minutes'].indexOf(view) === -1 }, 'separator']">
@@ -76,10 +55,34 @@
             <table>
               <tbody>
               <tr v-for="(monthRow, index) in monthsChunked()" :key="monthRow[index]['id']" class="control-buttons control-buttons-lg">
-                <td @click="showMonth(monthRow[0]['id'])">{{ monthRow[0]['name'] }}</td>
-                <td @click="showMonth(monthRow[1]['id'])">{{ monthRow[1]['name'] }}</td>
-                <td @click="showMonth(monthRow[2]['id'])">{{ monthRow[2]['name'] }}</td>
-                <td @click="showMonth(monthRow[3]['id'])">{{ monthRow[3]['name'] }}</td>
+                <td :class="{'selected': monthRow[0]['id'] === month}" @click="showMonth(monthRow[0]['id'])">{{ monthRow[0]['name'] }}</td>
+                <td :class="{'selected': monthRow[1]['id'] === month}" @click="showMonth(monthRow[1]['id'])">{{ monthRow[1]['name'] }}</td>
+                <td :class="{'selected': monthRow[2]['id'] === month}" @click="showMonth(monthRow[2]['id'])">{{ monthRow[2]['name'] }}</td>
+                <td :class="{'selected': monthRow[3]['id'] === month}" @click="showMonth(monthRow[3]['id'])">{{ monthRow[3]['name'] }}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+            <!-- Years selector -->
+            <table :class="[{ 'hidden': view !== 'years' }, 'calendar', 'table-condensed']">
+              <thead>
+              <tr>
+                <th class="previous-year-range control-button" :title="translate('prev_year_range')" @click="previousYearRange"><span :class="icons.left"></span></th>
+                <th class="current-year-range control-button control-display" colspan="5" @click="changeView('years')">{{ years[0] + ' - ' + years[11] }}</th>
+                <th class="next-year-range control-button" :title="translate('next_year_range')" @click="nextYearRange"><span :class="icons.right"></span></th>
+              </tr>
+              </thead>
+             <tbody/>
+            </table>
+          <hr :class="[{ 'hidden': view !== 'years' }, 'separator']">
+          <div :class="{ 'hidden': view !== 'years' }">
+            <table>
+              <tbody>
+              <tr v-for="(yearRow, index) in yearsChunked()" :key="yearRow[index]['name']" class="control-buttons control-buttons-lg">
+                <td :class="{'selected': yearRow[0]['name'] === year}" @click="showYear(yearRow[0]['name'])">{{ yearRow[0]['name'] }}</td>
+                <td :class="{'selected': yearRow[1]['name'] === year}" @click="showYear(yearRow[1]['name'])">{{ yearRow[1]['name'] }}</td>
+                <td :class="{'selected': yearRow[2]['name'] === year}" @click="showYear(yearRow[2]['name'])">{{ yearRow[2]['name'] }}</td>
+                <td :class="{'selected': yearRow[3]['name'] === year}" @click="showYear(yearRow[3]['name'])">{{ yearRow[3]['name'] }}</td>
               </tr>
               </tbody>
             </table>
@@ -151,6 +154,39 @@
                 <td @click="setMinutes(minutesRow[2])">{{ minutesRow[2] }}</td>
                 <td @click="setMinutes(minutesRow[3])">{{ minutesRow[3] }}</td>
               </tr>
+            </tbody>
+          </table>
+
+          <hr :class="[{ 'hidden': ['clock', 'hours', 'minutes'].indexOf(view) > -1 }, 'separator']">
+          <table>
+            <tbody>
+            <tr class="control-buttons">
+              <td class="set-now" :title="translate('today')" @click="setNow()">
+                <a data-action>
+                  <span :class="icons.now"></span>
+                </a>
+              </td>
+              <td class="show-calendar" v-if="mode === 'datetime' && view === 'clock'" @click="changeView('calendar')">
+                <a data-action>
+                  <span :class="icons.calendar"></span>
+                </a>
+              </td>
+              <td class="show-clock" v-if="mode === 'datetime' && view !== 'clock'" :title="translate('select_time')" @click="changeView('clock')">
+                <a data-action>
+                  <span :class="icons.time"></span>
+                </a>
+              </td>
+              <td class="clear-selection" :title="translate('clear')" @click="clearDateSelected()">
+                <a data-action>
+                  <span :class="icons.trash"></span>
+                </a>
+              </td>
+              <td class="close-picker" :title="translate('close')" @click="close()">
+                <a data-action>
+                  <span :class="icons.close"></span>
+                </a>
+              </td>
+            </tr>
             </tbody>
           </table>
         </li>
@@ -258,6 +294,8 @@ export default {
           close: 'Close the picker',
           prev_month: 'Previous Month',
           next_month: 'Next Month',
+          prev_year: 'Previous Year',
+          next_year: 'Next Year',
           pick_hour: 'Pick Hour',
           increment_hour: 'Increment Hour',
           decrement_hour: 'Decrement Hour',
@@ -281,7 +319,8 @@ export default {
       date: null,
       dateInput: '',
       month: new Date().getMonth(),
-      year: new Date().getFullYear(),
+      year: new Date().getUTCFullYear(),
+      years: this.years,
       isOpen: false
     };
   },
@@ -315,7 +354,8 @@ export default {
       }
 
       this.month = this.date.getMonth();
-      this.year = this.date.getFullYear();
+      this.year = this.date.getUTCFullYear();
+      this.view = this.mode === 'time' ? 'clock' : 'calendar';
       this.isOpen = true;
     },
     close () {
@@ -329,7 +369,7 @@ export default {
         this.month++;
       } else {
         this.month = 0;
-        this.year++;
+        this.nextYear();
       }
     },
     previousMonth () {
@@ -337,15 +377,33 @@ export default {
         this.month--;
       } else {
         this.month = 11;
-        this.year--;
+        this.previousYear();
       }
+    },
+    nextYear () {
+      this.year++;
+      this.years = this.years.map((year) => year + 1);
+    },
+    previousYear () {
+      this.year--;
+      this.years = this.years.map((year) => year - 1);
+    },
+    nextYearRange () {
+      this.years = this.generateNextYears.next().value;
+    },
+    previousYearRange () {
+      this.years = this.generatePrevYears.next().value;
     },
     showMonth (month) {
       this.month = month;
       this.view = 'calendar';
     },
+    showYear (year) {
+      this.year = year;
+      this.view = 'calendar';
+    },
     isWithinCurrentMonth (date) {
-      return date.getMonth() === this.month && date.getFullYear() === this.year;
+      return date.getMonth() === this.month && date.getUTCFullYear() === this.year;
     },
     isSelected (date) {
       if (!this.dateInput) {
@@ -354,22 +412,16 @@ export default {
 
       return date.getDate() === this.date.getDate() &&
         date.getMonth() === this.date.getMonth() &&
-        date.getFullYear() === this.date.getFullYear();
+        date.getUTCFullYear() === this.date.getUTCFullYear();
     },
     isToday (date) {
       var today = new Date();
       return date.getDate() === today.getDate() &&
         date.getMonth() === today.getMonth() &&
-        date.getFullYear() === today.getFullYear();
+        date.getUTCFullYear() === today.getUTCFullYear();
     },
     select (date) {
-      this.date = new Date(
-        date.getFullYear(),
-        date.getMonth(),
-        date.getDate(),
-        this.date.getHours(),
-        this.date.getMinutes()
-      );
+      this.date = date;
 
       this.dateInput = this.formatDateTime(this.date);
 
@@ -411,7 +463,7 @@ export default {
         return this.formatter(date);
       }
 
-      return date.getFullYear() +
+      return date.getUTCFullYear() +
         '-' + this.pad(date.getMonth() + 1) +
         '-' + this.pad(date.getDate());
     },
@@ -434,40 +486,51 @@ export default {
       return ('0' + value).slice(-2);
     },
     validFormat (date) {
-      // Accept dates in the format of '2017-03-01' or '2017-03-01 12:10' or '23:09'.
-      return (date.length === 10 && /^[0-9-]+$/.test(date)) ||
-        (date.length === 16 && /^[0-9-\s:]+$/.test(date)) ||
-        (date.length === 5 && /^\d{2}:\d{2}$/.test(date));
+      // Accept dates in the format of '2017-03-01' or '2017-03-01 12:10' or '23:09' or with years less than 1000 and negative.
+      return (date.length > 5 && date.length < 11 && /^[0-9-]+$/.test(date)) ||
+        (date.length >= 13 && date.length < 17 && /^[0-9-\s:]+$/.test(date)) ||
+        (date.length === 5 && /^\d{2}:\d{2}$/.test(date)) ||
+        (date.length > 6 && date.length < 12 && /^-[0-9-]+$/.test(date)) ||
+        (date.length > 14 && date.length < 18 && /^-[0-9-\s:]+$/.test(date));
     },
     parseDate (date) {
       let parsedDate;
 
       if (date && this.validFormat(date)) {
+        parsedDate = new Date();
         if (this.mode === 'time') {
-          parsedDate = new Date();
           parsedDate.setHours(date.substring(0, 2));
           parsedDate.setMinutes(date.substring(3, 5));
           parsedDate.setSeconds(0);
 
           return parsedDate;
         }
-
-        parsedDate = new Date(
-          date.substring(0, 4),
-          date.substring(5, 7) - 1,
-          date.substring(8, 10)
-        );
-
-        if (date.length === 16) {
-          parsedDate.setHours(date.substring(11, 13));
-          parsedDate.setMinutes(date.substring(14, 16));
+        // Manage all kinds of valid year inputs
+        const dateParts = date.split('-');
+        let negative = 0;
+        let yearSign = 1;
+        if (date.indexOf('-') === 0) {
+          yearSign = -1;
+          negative = 1;
+        }
+        const yearVal = dateParts[negative];
+        parsedDate.setUTCFullYear(yearSign * yearVal);
+        parsedDate.setMonth(dateParts[1 + negative] - 1);
+        const hours = dateParts[2 + negative].split(' ');
+        parsedDate.setDate(hours[0]);
+        if (hours.length > 1) {
+          parsedDate.setHours(hours[1].substring(0, 2));
+          parsedDate.setMinutes(hours[1].substring(3, 5));
         }
       }
 
       return parsedDate;
     },
     daysInMonth (month, year) {
-      const date = new Date(year, month, 1);
+      const date = new Date();
+      date.setUTCFullYear(year);
+      date.setMonth(month);
+      date.setDate(1);
       const days = [];
 
       while (date.getMonth() === month) {
@@ -514,7 +577,7 @@ export default {
       const minutes = Math.round(this.date.getMinutes() / 5) * 5;
 
       this.date = new Date(
-        this.date.getFullYear(),
+        this.date.getUTCFullYear(),
         this.date.getMonth(),
         this.date.getDate(),
         type === 'hours' ? (operation === 'increment' ? hours + hoursStep : hours - hoursStep) : hours,
@@ -536,7 +599,7 @@ export default {
       const now = new Date();
 
       return new Date(
-        now.getFullYear(),
+        now.getUTCFullYear(),
         now.getMonth(),
         now.getDate(),
         now.getHours(),
@@ -546,12 +609,15 @@ export default {
     setNow () {
       this.date = this.dateNow();
       this.dateInput = this.formatDateTime(this.date);
-
+      this.year = this.date.getUTCFullYear();
+      this.month = this.date.getMonth();
+      this.years = this.currentYears;
       this.$emit('changed', this.formatDateTime(this.date, true));
+      this.view = this.mode === 'time' ? 'clock' : 'calendar';
     },
     setHour (hour) {
       this.date = new Date(
-        this.date.getFullYear(),
+        this.date.getUTCFullYear(),
         this.date.getMonth(),
         this.date.getDate(),
         hour,
@@ -564,7 +630,7 @@ export default {
     },
     setMinutes (minutes) {
       this.date = new Date(
-        this.date.getFullYear(),
+        this.date.getUTCFullYear(),
         this.date.getMonth(),
         this.date.getDate(),
         this.date.getHours(),
@@ -577,6 +643,11 @@ export default {
     },
     monthsChunked () {
       return chunk(this.monthsShort.map((value, index) => {
+        return { id: index, name: value };
+      }), 4);
+    },
+    yearsChunked () {
+      return chunk(this.years.map((value, index) => {
         return { id: index, name: value };
       }), 4);
     },
@@ -597,13 +668,28 @@ export default {
       }
 
       return null;
+    },
+    * yearsGenerator (direction = '+') {
+      let year = this.years !== undefined ? this.years[0] : this.year - 5;
+      const key = direction === '+' ? 0 : 11;
+      while (true) {
+        yield Array.from({ length: 12 }, (_, i) => eval(year + direction + i)).sort((a, b) => a - b);
+        year = eval(this.years[key] + direction + 12);
+      }
     }
   },
   created () {
+    this.year = new Date().getUTCFullYear();
+    this.currentYears = Array.from({ length: 12 }, (_, i) => this.year - 5 + i);
     if (this.value) {
       this.date = this.parseDate(this.value);
       this.dateInput = this.formatDateTime(this.date);
+      this.year = this.date.getUTCFullYear();
     }
+    this.generateNextYears = this.yearsGenerator();
+    this.generatePrevYears = this.yearsGenerator('-');
+
+    this.years = this.generateNextYears.next().value;
   }
 };
 </script>
@@ -672,7 +758,7 @@ export default {
     color: #d9d9d9;
   }
 
-  .day.selected {
+  .selected {
     background: #333;
     color: #fff;
   }
@@ -696,5 +782,9 @@ export default {
   .separator {
     margin-top: 8px;
     margin-bottom: 8px;
+  }
+
+  .control-display, .day-of-week {
+    font-weight: bold;
   }
 </style>

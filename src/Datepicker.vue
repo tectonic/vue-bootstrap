@@ -335,7 +335,8 @@ export default {
       return chunk([...pastDays, ...days, ...futureDays], 7);
     },
     amOrPm () {
-      if (this.date.getHours() < 12) {
+      const date = this.date || this.dateNow();
+      if (date.getHours() < 12) {
         return this.translate('am') || 'AM';
       }
       return this.translate('pm') || 'PM';

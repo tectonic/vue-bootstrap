@@ -515,10 +515,10 @@ export default {
           negative = 1;
         }
         const yearVal = dateParts[negative];
-        parsedDate.setUTCFullYear(yearSign * yearVal);
-        parsedDate.setMonth(dateParts[1 + negative] - 1);
         const hours = dateParts[2 + negative].split(' ');
+        parsedDate.setUTCFullYear(yearSign * yearVal);
         parsedDate.setDate(hours[0]);
+        parsedDate.setMonth(dateParts[1 + negative] - 1);
         if (hours.length > 1) {
           parsedDate.setHours(hours[1].substring(0, 2));
           parsedDate.setMinutes(hours[1].substring(3, 5));
@@ -530,8 +530,8 @@ export default {
     daysInMonth (month, year) {
       const date = new Date();
       date.setUTCFullYear(year);
-      date.setMonth(month);
       date.setDate(1);
+      date.setMonth(month);
       const days = [];
 
       while (date.getMonth() === month) {

@@ -41,13 +41,12 @@
     "vue": "vue/dist/vue.common.js"
   },
   "scripts": {
-    "docs:build": "./node_modules/webpack/bin/webpack.js --progress --config webpack.docs.js",
-    "docs:watch": "./node_modules/webpack/bin/webpack.js --progress --watch --config webpack.docs.js",
-    "build": "./node_modules/webpack/bin/webpack.js --progress --config webpack.dist.js",
-    "test": "./node_modules/karma/bin/karma start",
-    "test:watch": "./node_modules/karma/bin/karma start --auto-watch --no-single-run",
-    "test-win": "karma start karma.conf.js --single-run",
-    "eslint": "./node_modules/eslint/bin/eslint.js src/**/*.vue tests/**/*.js docs/js/docs.js; exit 0"
+    "docs:build": "webpack --progress --config webpack.docs.js",
+    "docs:watch": "webpack --progress --watch --config webpack.docs.js",
+    "build": "webpack --progress --config webpack.dist.js",
+    "test": "karma start karma.conf.js --single-run",
+    "test:watch": "karma start karma.conf.js --auto-watch --no-single-run",
+    "eslint": "eslint src/**/*.vue tests/**/*.js docs/js/docs.js; exit 0"
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,5 @@
 {
-  "extends": "vue",
+  "extends": "plugin:vue-libs/recommended",
   "rules": {
     "semi": [2, "always"]
   }

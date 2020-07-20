@@ -200,6 +200,7 @@ import { chunk } from './lib/array.js';
 import { mixin as clickOutside } from './mixins/clickOutside.js';
 
 /* eslint-disable camelcase */
+/* eslint-disable no-eval */
 export default {
   mixins: [
     clickOutside

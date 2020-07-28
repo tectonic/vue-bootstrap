@@ -759,7 +759,7 @@ export default {
 
   .hours:hover,
   .minutes:hover,
-  .control-buttons td:hover,
+  .control-buttons td:not(.selected):hover,
   .control-button:hover {
     background-color: #f2f2f2;
     cursor: pointer;
@@ -769,8 +769,18 @@ export default {
     color: #d9d9d9;
   }
 
-  .selected {
-    background: #333;
+  .day:hover {
+    background-color: #f2f2f2;
+  }
+
+  .today,
+  .today:hover {
+    background-color: #f2f2f2;
+  }
+
+  .selected,
+  .selected:hover {
+    background: #2f79b9;
     color: #fff;
   }
 

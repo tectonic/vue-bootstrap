@@ -88,7 +88,6 @@
             </table>
           </div>
           <div :class="{ 'hidden': view !== 'clock' }">
-            <hr class="separator">
             <table :class="['clock', 'table-condensed']">
               <tbody>
               <tr>
@@ -350,13 +349,21 @@ export default {
       }
 
       if (this.date === null) {
-        this.date = this.dateNow();
-        this.dateInput = this.formatDateTime(this.date);
-        this.$emit('changed', this.formatDateTime(this.date, true));
+        const dateNow = this.dateNow();
+
+        this.month = dateNow.getMonth();
+        this.year = dateNow.getUTCFullYear();
+
+        if (this.highlightToday) {
+          this.date = dateNow;
+          this.dateInput = this.formatDateTime(this.date);
+          this.$emit('changed', this.formatDateTime(this.date, true));
+        }
+      } else {
+        this.month = this.date.getMonth();
+        this.year = this.date.getUTCFullYear();
       }
 
-      this.month = this.date.getMonth();
-      this.year = this.date.getUTCFullYear();
       this.view = this.mode === 'time' ? 'clock' : 'calendar';
       this.isOpen = true;
     },
@@ -437,6 +444,7 @@ export default {
     },
     clearDateSelected () {
       this.dateInput = '';
+      this.date = null;
 
       this.$emit('changed', '');
     },
@@ -575,13 +583,14 @@ export default {
       return days;
     },
     setClock (type, operation, hoursStep = 1, minutesStep = 5) {
-      const hours = this.date.getHours();
-      const minutes = Math.round(this.date.getMinutes() / 5) * 5;
+      const currentDate = this.date ? this.date : this.dateNow();
+      const hours = currentDate.getHours();
+      const minutes = Math.round(currentDate.getMinutes() / 5) * 5;
 
       this.date = new Date(
-        this.date.getUTCFullYear(),
-        this.date.getMonth(),
-        this.date.getDate(),
+        currentDate.getUTCFullYear(),
+        currentDate.getMonth(),
+        currentDate.getDate(),
         type === 'hours' ? (operation === 'increment' ? hours + hoursStep : hours - hoursStep) : hours,
         type === 'minutes' ? (operation === 'increment' ? minutes + minutesStep : minutes - minutesStep) : minutes
       );

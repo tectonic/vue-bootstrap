@@ -39,22 +39,6 @@ describe('Datepicker', () => {
     expect(Object.keys(datepicker.emitted())).to.include('changed');
   });
 
-  it('clears selected date', () => {
-    const datepicker = shallowMount(Datepicker);
-
-    datepicker.setData({
-      date: new Date(),
-      dateInput: '2020-07-28 13:50'
-    });
-
-    datepicker.vm.clearDateSelected();
-
-    expect(datepicker.vm.date).to.equal(null);
-    expect(datepicker.vm.dateInput).to.equal('');
-
-    expect(Object.keys(datepicker.emitted())).to.include('changed');
-  });
-
   it('should select all days in a month', () => {
     const datepicker = shallowMount(Datepicker);
 
@@ -206,9 +190,12 @@ describe('Datepicker', () => {
       }
     });
 
-    datepicker.vm.clearDateSelected();
+    datepicker.vm.clearSelectedDate();
 
+    expect(datepicker.vm.date).to.equal(null);
     expect(datepicker.vm.dateInput).to.equal('');
+
+    expect(Object.keys(datepicker.emitted())).to.include('changed');
   });
 
   it('formats date', () => {

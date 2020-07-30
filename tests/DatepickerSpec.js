@@ -27,6 +27,18 @@ describe('Datepicker', () => {
     expect(datepicker.vm.dateInput).to.equal('2017-02-01');
   });
 
+  it('preselects current date', () => {
+    const datepicker = shallowMount(Datepicker);
+
+    datepicker.vm.open();
+
+    expect(datepicker.vm.date).to.not.equal(null);
+    expect(datepicker.vm.dateInput).to.not.equal('');
+    expect(datepicker.vm.isOpen).to.be.true;
+
+    expect(Object.keys(datepicker.emitted())).to.include('changed');
+  });
+
   it('should select all days in a month', () => {
     const datepicker = shallowMount(Datepicker);
 
@@ -178,9 +190,12 @@ describe('Datepicker', () => {
       }
     });
 
-    datepicker.vm.clearDateSelected();
+    datepicker.vm.clearSelectedDate();
 
+    expect(datepicker.vm.date).to.equal(null);
     expect(datepicker.vm.dateInput).to.equal('');
+
+    expect(Object.keys(datepicker.emitted())).to.include('changed');
   });
 
   it('formats date', () => {

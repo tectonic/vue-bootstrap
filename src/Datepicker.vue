@@ -9,7 +9,7 @@
       :aria-expanded="isOpen"
       @focus="open"
       @keyup.esc="close"
-      @keyup.delete="clearDateSelected"
+      @keyup.delete="clearSelectedDate"
       class="form-control"
       autocomplete="off"
       readonly
@@ -88,7 +88,6 @@
             </table>
           </div>
           <div :class="{ 'hidden': view !== 'clock' }">
-            <hr class="separator">
             <table :class="['clock', 'table-condensed']">
               <tbody>
               <tr>
@@ -176,7 +175,7 @@
                   <span :class="icons.time"></span>
                 </a>
               </td>
-              <td class="clear-selection" :title="translate('clear')" @click="clearDateSelected()">
+              <td class="clear-selection" :title="translate('clear')" @click="clearSelectedDate">
                 <a data-action>
                   <span :class="icons.trash"></span>
                 </a>
@@ -350,13 +349,21 @@ export default {
       }
 
       if (this.date === null) {
-        this.date = this.dateNow();
-        this.dateInput = this.formatDateTime(this.date);
-        this.$emit('changed', this.formatDateTime(this.date, true));
+        const dateNow = this.dateNow();
+
+        this.month = dateNow.getMonth();
+        this.year = dateNow.getUTCFullYear();
+
+        if (this.highlightToday) {
+          this.date = dateNow;
+          this.dateInput = this.formatDateTime(this.date);
+          this.$emit('changed', this.formatDateTime(this.date, true));
+        }
+      } else {
+        this.month = this.date.getMonth();
+        this.year = this.date.getUTCFullYear();
       }
 
-      this.month = this.date.getMonth();
-      this.year = this.date.getUTCFullYear();
       this.view = this.mode === 'time' ? 'clock' : 'calendar';
       this.isOpen = true;
     },
@@ -435,8 +442,9 @@ export default {
 
       this.$emit('changed', this.formatDateTime(this.date, true));
     },
-    clearDateSelected () {
+    clearSelectedDate () {
       this.dateInput = '';
+      this.date = null;
 
       this.$emit('changed', '');
     },
@@ -575,13 +583,14 @@ export default {
       return days;
     },
     setClock (type, operation, hoursStep = 1, minutesStep = 5) {
-      const hours = this.date.getHours();
-      const minutes = Math.round(this.date.getMinutes() / 5) * 5;
+      const currentDate = this.date ? this.date : this.dateNow();
+      const hours = currentDate.getHours();
+      const minutes = Math.round(currentDate.getMinutes() / 5) * 5;
 
       this.date = new Date(
-        this.date.getUTCFullYear(),
-        this.date.getMonth(),
-        this.date.getDate(),
+        currentDate.getUTCFullYear(),
+        currentDate.getMonth(),
+        currentDate.getDate(),
         type === 'hours' ? (operation === 'increment' ? hours + hoursStep : hours - hoursStep) : hours,
         type === 'minutes' ? (operation === 'increment' ? minutes + minutesStep : minutes - minutesStep) : minutes
       );
@@ -750,7 +759,7 @@ export default {
 
   .hours:hover,
   .minutes:hover,
-  .control-buttons td:hover,
+  .control-buttons td:not(.selected):hover,
   .control-button:hover {
     background-color: #f2f2f2;
     cursor: pointer;
@@ -760,8 +769,18 @@ export default {
     color: #d9d9d9;
   }
 
-  .selected {
-    background: #333;
+  .day:hover {
+    background-color: #f2f2f2;
+  }
+
+  .today,
+  .today:hover {
+    background-color: #f2f2f2;
+  }
+
+  .selected,
+  .selected:hover {
+    background: #2f79b9;
     color: #fff;
   }
 

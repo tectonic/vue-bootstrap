@@ -10,6 +10,8 @@ Run `npm run docs:watch` to watch for changes when working on the documentation.
 
 Run `npm run build` to build the library.
 
+Run `npm run watch` to watch for changes and build the library.
+
 Run `npm run test` to run the test suite.
 
 Run `npm run test:watch` to watch the test suite when working on tests.

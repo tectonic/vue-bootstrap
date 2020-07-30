@@ -44,6 +44,7 @@
     "docs:build": "webpack --progress --config webpack.docs.js",
     "docs:watch": "webpack --progress --watch --config webpack.docs.js",
     "build": "webpack --progress --config webpack.dist.js",
+    "watch": "webpack --progress --watch --config webpack.dist.js",
     "test": "karma start karma.conf.js --single-run",
     "test:watch": "karma start karma.conf.js --auto-watch --no-single-run",
     "eslint": "eslint src/**/*.vue tests/**/*.js docs/js/docs.js; exit 0"

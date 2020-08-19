@@ -49,7 +49,7 @@ export default {
     },
     nothingFoundLabel: {
       type: String,
-      default: ''
+      default: 'Nothing found'
     },
     disabled: {
       type: Boolean,

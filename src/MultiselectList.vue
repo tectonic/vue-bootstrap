@@ -1,5 +1,8 @@
 <template>
   <div :class="className()">
+    <div v-if="showNothingFound" class="multiselect-nothing-found">
+      <div class="title">{{ nothingFoundLabel }}</div>
+    </div>
     <multiselect-option
       v-for="option in options"
       :option="option"
@@ -40,6 +43,14 @@ export default {
     idProperty: String,
     valueProperty: String,
     extraProperty: String,
+    showNothingFound: {
+      type: Boolean,
+      default: false
+    },
+    nothingFoundLabel: {
+      type: String,
+      default: 'Nothing found'
+    },
     disabled: {
       type: Boolean,
       default: false
@@ -69,5 +80,9 @@ export default {
     overflow-x: hidden;
     overflow-y: auto;
     background-color: white;
+  }
+
+  .multiselect-nothing-found {
+    padding: 15px 12px;
   }
 </style>

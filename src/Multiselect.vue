@@ -39,6 +39,8 @@
       :subsetName="subsetName"
       :selectedSubsetOptions="selectedSubsetOptions"
       :infoIconClass="infoIconClass"
+      :show-nothing-found="showNothingFound"
+      :nothing-found-label="nothingFoundLabel"
       :disabled="disabled"
     >
       <template scope="{item}">
@@ -164,6 +166,14 @@ export default {
     helpIconClass: {
       type: String,
       default: 'glyphicon glyphicon-question-sign'
+    },
+    showNothingFound: {
+      type: Boolean,
+      default: false
+    },
+    nothingFoundLabel: {
+      type: String,
+      default: ''
     },
     disabled: {
       type: Boolean,

@@ -140,10 +140,4 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-
-  .multiselect-option span.af-icons {
-    vertical-align: middle;
-    margin-left: 2px;
-    padding-bottom: 3px;
-  }
 </style>

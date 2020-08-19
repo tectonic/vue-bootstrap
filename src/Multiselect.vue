@@ -161,7 +161,7 @@ export default {
     },
     infoIconClass: {
       type: String,
-      default: 'af-icons af-icons-info'
+      default: 'glyphicon glyphicon-info-sign'
     },
     helpIconClass: {
       type: String,

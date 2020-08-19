@@ -1,3 +1,8 @@
+1.3.0
+-----
+
+- Datepicker has been heavily reworked, it expects a date in a different format (YYYY-MM-DD HH:mm)
+
 1.2.0
 -----
 

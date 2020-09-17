@@ -1,9 +1,11 @@
 <template>
-  <ul :class="['nav', 'nav-'+type, { 'nav-stacked' : stacked }]">
+  <ul :class="['nav', 'nav-'+type, { 'nav-stacked' : stacked }]" role="tablist">
     <li
-      v-for="tab in tabs"
-      role="presentation"
+      v-for="(tab, index) in tabs"
+      role="tab"
       :class="[{ 'active': tab.id == selected }, { 'disabled': tab.disabled }, { 'invalid': tab.invalidFields }]"
+      :aria-selected="tab.id == selected ? 'true' : 'false'"
+      :tabindex="index"
     >
       <a href @click.prevent="select(tab.id)">
         {{ tab.name }}

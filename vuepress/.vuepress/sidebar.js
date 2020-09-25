@@ -5,6 +5,14 @@ module.exports = [
     collapsable: false,
     children: prefix('components', [
       'datepicker',
+      'dropdown',
+      'modal',
+      'multiselect',
+      'panel',
+      'popover',
+      'searchfield',
+      'selectfield',
+      'tabs',
       'taginput',
       'typeahead'
     ]),

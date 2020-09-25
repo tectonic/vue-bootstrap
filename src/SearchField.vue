@@ -5,7 +5,7 @@
         {{ selectedItem[valueProperty] }}
       </div>
     </div>
-    <div v-if="isOpen" class="search-box">
+    <div v-if="isOpen" class="search-panel">
       <autocomplete
         :initial-items="initialItems"
         :src="src"
@@ -162,7 +162,7 @@ export default {
     right: 15px;
   }
 
-  .search-box {
+  .search-panel {
     width: 100%;
     margin-top: -5px;
     position: absolute;

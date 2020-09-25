@@ -29,3 +29,16 @@ At this point you can start using the components in your project:
 ```js
 import { Modal, Datepicker } from 'vue-bootstrap';
 ```
+
+## Ajax
+
+Some of the components ([Typeahead](/components/typeahead.html), [Search field](/components/searchfield.html), [Tag Input](/components/taginput.html)) communicate with the server-side using
+Ajax. This will require the `axios` peer dependency to be installed. Install `axios` with NPM
+and hook it to the main Vue instance.
+
+```js
+import Vue from 'vue';
+import axios from 'axios'
+
+Vue.prototype.$http = axios;
+```

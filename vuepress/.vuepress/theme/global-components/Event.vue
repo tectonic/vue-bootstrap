@@ -1,22 +1,16 @@
 <template>
-  <table class="prop">
+  <table class="event">
     <tr>
       <td class="name">
         {{ name }}
       </td>
       <td>
         <p>
-          <small>Type</small><br>
-          {{ type }}
+          <small>Parameters</small><br>
+          {{ parameters }}
         </p>
-        <p v-if="defaultValue">
-          <small>Default</small><br>
-          {{ defaultValue }}
-        </p>
-        <div v-if="slotContent" class="description">
-          <small>
-            Description
-          </small><br>
+        <div class="description">
+          <small>Description</small><br>
           <slot></slot>
         </div>
       </td>
@@ -31,25 +25,16 @@ export default {
       type: String,
       required: true
     },
-    type: {
+    parameters: {
       type: String,
-      required: true
-    },
-    defaultValue: {
-      type: String,
-      default: null
-    }
-  },
-  computed: {
-    slotContent() {
-      return !!this.$slots.default;
+      default: '-'
     }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
-.prop
+.event
   width 100%
   border-bottom 1px solid #eaecef
 .name

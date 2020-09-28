@@ -526,14 +526,13 @@ export default {
         const yearVal = dateParts[negative];
         const hours = dateParts[2 + negative].split(' ');
         parsedDate.setUTCFullYear(yearSign * yearVal);
-        parsedDate.setDate(hours[0]);
-        parsedDate.setMonth(dateParts[1 + negative] - 1);
+        parsedDate.setUTCMonth(dateParts[1 + negative] - 1);
+        parsedDate.setUTCDate(hours[0]);
         if (hours.length > 1) {
           parsedDate.setHours(hours[1].substring(0, 2));
           parsedDate.setMinutes(hours[1].substring(3, 5));
         }
       }
-
       return parsedDate;
     },
     daysInMonth (month, year) {

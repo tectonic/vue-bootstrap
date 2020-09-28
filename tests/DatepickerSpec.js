@@ -17,14 +17,14 @@ describe('Datepicker', () => {
     expect(data.date).to.be.null;
   });
 
-  it('sets dateInput when created', () => {
+  it('sets correct dateInput when created', () => {
     const datepicker = shallowMount(Datepicker, {
       propsData: {
-        value: '2017-02-01'
+        value: '2020-07-31'
       }
     });
 
-    expect(datepicker.vm.dateInput).to.equal('2017-02-01');
+    expect(datepicker.vm.dateInput).to.equal('2020-07-31');
   });
 
   it('preselects current date', () => {

@@ -22,5 +22,6 @@ Run `npm run eslint` to lint Javascript files and Vue components.
 Before tagging the repository and releasing a new version please make sure to:
 
 - update `package.json` with the new version number
-- include compiled scripts with each new release (`npm run build`, `npm run docs:build`)
+- include compiled scripts with each new release (`npm run build`)
+- build documentation if necessary (`npm run docs:build`)
 - document all breaking changes in the [changelog](https://github.com/tectonic/vue-bootstrap/blob/master/CHANGELOG.md). :kissing_cat:

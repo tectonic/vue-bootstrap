@@ -1,7 +1,7 @@
 module.exports = [
   '/',
   {
-    title: "Components",
+    title: 'Components',
     collapsable: false,
     children: prefix('components', [
       'datepicker',

@@ -1,7 +1,7 @@
 module.exports = {
-  title: "vue-bootstrap",
-  description: "Bootstrap components in Vue.js",
-  base: '/',
+  title: 'vue-bootstrap',
+  description: 'Bootstrap components in Vue.js',
+  base: '/vue-bootstrap/',
   dest: 'docs',
   head: [
     [

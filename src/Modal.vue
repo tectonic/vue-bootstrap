@@ -139,11 +139,11 @@ export default {
       this.$emit('closed');
     },
     confirm () {
+      this.$emit('confirmed');
+
       if (this.closeOnConfirm) {
         this.close();
       }
-
-      this.$emit('confirmed');
     },
     onBackdropClick (event) {
       // This will ignore clicks on any elements inside the modal.

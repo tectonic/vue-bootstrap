@@ -50,7 +50,10 @@ export default {
       type: String,
       default: 'name'
     },
-    value: [String, Number]
+    value: {
+      type: [String, Number],
+      default: null
+    }
   },
   computed: {
     flatItems () {
@@ -70,7 +73,7 @@ export default {
   },
   methods: {
     select (id) {
-      if (!id || !this.getItem(id)) {
+      if (id === null || !this.getItem(id)) {
         return;
       }
 

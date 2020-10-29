@@ -73,7 +73,7 @@ export default {
   },
   methods: {
     select (id) {
-      if (id === null || !this.getItem(id)) {
+      if (id === null || id === undefined || !this.getItem(id)) {
         return;
       }
 

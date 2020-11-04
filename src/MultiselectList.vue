@@ -13,7 +13,7 @@
       :value-property="valueProperty"
       :extra-property="extraProperty"
       v-bind="$attrs"
-      :disabled="disabled"
+      :disabled="disabled || option.disabled"
     >
       <template>
         <slot :item="option"></slot>

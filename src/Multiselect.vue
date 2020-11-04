@@ -200,6 +200,9 @@ export default {
     allIds () {
       return this.flatTree.map(o => o[this.idProperty]);
     },
+    allEnabledIds () {
+      return this.flatTree.filter(o => !o.disabled).map(o => o[this.idProperty]);
+    },
     selectedIds () {
       return this.flatTree.filter(o => o.selected).map(o => o[this.idProperty]);
     }
@@ -233,13 +236,13 @@ export default {
       return option.children && option.children.length;
     },
     allSelected () {
-      return this.tree.length > 0 && this.allIds.length === this.selectedIds.length;
+      return this.tree.length > 0 && this.allEnabledIds.length === this.selectedIds.length;
     },
     toggleAll () {
       const allSelected = this.allSelected();
 
       const mapOptions = option => {
-        option.selected = !allSelected;
+        option.selected = !allSelected && !option.disabled;
 
         if (this.hasChildren(option)) {
           option.children.map(mapOptions);

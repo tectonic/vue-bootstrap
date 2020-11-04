@@ -10,7 +10,7 @@
         </optgroup>
       </template>
       <template v-else>
-        <option :value="item[idProperty]">
+        <option :value="item[idProperty]" :disabled="item.disabled">
           {{ item[valueProperty] }}
         </option>
       </template>

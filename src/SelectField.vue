@@ -4,7 +4,7 @@
     <template v-for="item in items">
       <template v-if="item.children">
         <optgroup :label="item[valueProperty]">
-          <option v-for="child in item.children" :value="child[idProperty]">
+          <option v-for="child in item.children" :value="child[idProperty]" :disabled="item.disabled || child.disabled">
             {{ child[valueProperty] }}
           </option>
         </optgroup>

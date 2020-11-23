@@ -38,7 +38,7 @@ export default {
             { id: 10, name: 'Slapstick' }
           ]
         },
-        { id: 11, name: 'Crime & Gangster',
+        { id: 11, name: 'Crime & Gangster', disabled: true,
           children: [
             { id: 12, name: 'Lovers on the run' },
             { id: 13, name: 'Mysteries' },

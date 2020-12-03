@@ -1,5 +1,9 @@
+// Polyfills
+import 'custom-event-polyfill';
+
 // Mixins
 import { mixin as clickOutside } from './mixins/clickOutside.js';
+import { mixin as formatUrl } from './mixins/formatUrl.js';
 
 // Components
 import Datepicker from './Datepicker.vue';
@@ -16,6 +20,7 @@ import Typeahead from './Typeahead.vue';
 
 export {
   clickOutside,
+  formatUrl,
   Datepicker,
   Dropdown,
   Modal,

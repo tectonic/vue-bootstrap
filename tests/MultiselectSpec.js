@@ -7,12 +7,12 @@ let multiselect;
 describe('Multiselect', () => {
   beforeEach(() => {
     const options = [
-      { id: 1, name: 'option A' },
-      { id: 2, name: 'option B' },
-      { id: 3, name: 'option C',
+      { id: 1, name: 'option A', disabled: false },
+      { id: 2, name: 'option B', disabled: false },
+      { id: 3, name: 'option C', disabled: false,
         children: [
-          { id: 4, name: 'option D' },
-          { id: 5, name: 'option E' }
+          { id: 4, name: 'option D', disabled: false },
+          { id: 5, name: 'option E', disabled: false }
         ]
       }
     ];
@@ -41,12 +41,12 @@ describe('Multiselect', () => {
 
   it('builds the tree', () => {
     var tree = [
-      { id: 1, name: 'option A', visible: true, selected: true },
-      { id: 2, name: 'option B', visible: true, selected: false },
-      { id: 3, name: 'option C', visible: true, selected: false,
-        children: [
-          { id: 4, name: 'option D', visible: true, selected: false },
-          { id: 5, name: 'option E', visible: true, selected: false }
+      { id: 1, name: 'option A', visible: true, selected: true, disabled: false },
+      { id: 2, name: 'option B', visible: true, selected: false, disabled: false },
+      { id: 3, name: 'option C', visible: true, selected: false, disabled: false,
+    children: [
+          { id: 4, name: 'option D', visible: true, selected: false, disabled: false },
+          { id: 5, name: 'option E', visible: true, selected: false, disabled: false }
         ]
       }
     ];

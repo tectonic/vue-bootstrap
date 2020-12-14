@@ -244,7 +244,7 @@ export default {
       const mapOptions = option => {
         option.selected = !allSelected && !option.disabled;
 
-        if (this.hasChildren(option)) {
+        if (this.hasChildren(option) && !option.disabled) {
           option.children.map(mapOptions);
         }
 
@@ -257,7 +257,7 @@ export default {
       const mapOptions = option => {
         option.selected = ids.includes(option[this.idProperty]);
 
-        if (this.hasChildren(option)) {
+        if (this.hasChildren(option) && !option.disabled) {
           option.children.map(mapOptions);
         }
 
@@ -274,7 +274,10 @@ export default {
         option.visible = true;
 
         if (this.hasChildren(option)) {
-          option.children.map(mapOptions);
+          option.children.map(o => {
+            o.disabled = o.disabled || option.disabled;
+            return o;
+          }).map(mapOptions);
         }
 
         return option;

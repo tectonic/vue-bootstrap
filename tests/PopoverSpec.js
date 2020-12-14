@@ -47,4 +47,18 @@ describe('Popover', () => {
       done();
     });
   });
+
+  it('closes on escape', () => {
+    const popover = shallowMount(Popover);
+    popover.vm.toggle();
+    expect(popover.vm.isOpen).to.be.true;
+
+    document.dispatchEvent(new KeyboardEvent('keyup', { 'key': 'Escape', 'keyCode': 27 }));
+
+    expect(popover.vm.isOpen).to.be.false;
+
+    // Somehow this is braking other tests if left closed
+    popover.vm.toggle();
+  });
+
 });

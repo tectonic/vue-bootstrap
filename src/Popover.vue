@@ -81,6 +81,14 @@ export default {
       id: 'popover-' + this._uid
     };
   },
+  mounted () {
+    // Close popover with 'esc' key
+    document.addEventListener('keyup', e => {
+      if (e.keyCode === 27 || e.key === 'Escape') {
+        this.close();
+      }
+    });
+  },
   methods: {
     onClick () {
       if (this.trigger !== 'click') {

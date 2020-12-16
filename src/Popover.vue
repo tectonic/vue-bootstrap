@@ -11,6 +11,7 @@
         role="tooltip"
         :id="id"
         v-on-click-outside="close"
+        @mouseout="onMouseout"
       >
         <div class="arrow" ref="arrow"></div>
         <h3 class="popover-title" v-if="title">
@@ -109,7 +110,9 @@ export default {
         return;
       }
       setTimeout(() => {
-        if (!this.$refs.popover.matches(':hover')) {
+        if (this.$refs.popover !== undefined &&
+          !this.$refs.popover.matches(':hover')
+        ) {
           this.close();
         }
       }, 300);

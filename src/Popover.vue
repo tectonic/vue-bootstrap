@@ -108,8 +108,11 @@ export default {
       if (this.trigger !== 'hover') {
         return;
       }
-
-      this.close();
+      setTimeout(() => {
+        if (!this.$refs.popover.matches(':hover')) {
+          this.close();
+        }
+      }, 300);
     },
     toggle () {
       this.isOpen ? this.close() : this.open();

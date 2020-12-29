@@ -44,3 +44,12 @@ export function removeClass (el, className) {
 export function isRtl () {
   return document.dir === 'rtl';
 };
+
+export function matchesSelector (element, selector) {
+  var matches = (element.matches || element.msMatchesSelector);
+  try {
+    return matches.call(element, selector);
+  } catch (error) {
+    return false;
+  }
+}

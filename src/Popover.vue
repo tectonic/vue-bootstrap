@@ -29,7 +29,7 @@
 
 <script>
 import { mixin as clickOutside } from './mixins/clickOutside.js';
-import { isRtl } from './lib/dom.js';
+import { isRtl, matchesSelector } from './lib/dom.js';
 
 export default {
   mixins: [
@@ -84,11 +84,10 @@ export default {
   },
   mounted () {
     // Close popover with 'esc' key
-    document.addEventListener('keyup', e => {
-      if (e.keyCode === 27 || e.key === 'Escape') {
-        this.close();
-      }
-    });
+    document.addEventListener('keyup', this.keyupHandler);
+  },
+  beforeDestroy () {
+    document.removeEventListener('keyup', this.keyupHandler);
   },
   methods: {
     onClick () {
@@ -111,7 +110,7 @@ export default {
       }
       setTimeout(() => {
         if (this.$refs.popover !== undefined &&
-          !this.$refs.popover.matches(':hover')
+          !matchesSelector(this.$refs.popover, ':hover')
         ) {
           this.close();
         }
@@ -234,6 +233,11 @@ export default {
       this.$nextTick(() => {
         this.setPosition();
       });
+    },
+    keyupHandler (e) {
+      if (e.keyCode === 27 || e.key === 'Escape') {
+        this.close();
+      }
     }
   }
 };

@@ -56,9 +56,5 @@ describe('Popover', () => {
     document.dispatchEvent(new KeyboardEvent('keyup', { 'key': 'Escape', 'keyCode': 27 }));
 
     expect(popover.vm.isOpen).to.be.false;
-
-    // Somehow this is braking other tests if left closed
-    popover.vm.toggle();
   });
-
 });

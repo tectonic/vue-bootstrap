@@ -231,7 +231,9 @@ export default {
     },
     position () {
       this.$nextTick(() => {
-        this.setPosition();
+        if (this.isOpen) {
+          this.setPosition();
+        }
       });
     },
     keyupHandler (e) {

@@ -1,6 +1,15 @@
 <template>
-  <div class="search-field" v-on-click-outside="close">
-    <div class="form-control" :disabled="disabled" @click="toggle">
+  <div
+    class="search-field"
+    tabindex="0"
+    role="combobox"
+    :aria-expanded="isOpen"
+    aria-autocomplete="list"
+    aria-haspopup="listbox"
+    v-on-click-outside="close"
+    @focus="onFocus"
+  >
+    <div class="form-control" :disabled="disabled">
       <div class="search-result">
         {{ selectedItem[valueProperty] }}
       </div>
@@ -26,20 +35,35 @@
             :id="id"
             class="form-control"
             autocomplete="off"
+            ref="input"
           />
           <slot name="search-icon">
             <span class="glyphicon glyphicon-search search-icon"></span>
           </slot>
         </template>
-        <template slot="items" scope="{ autocompleteItems, searching, markItem, selectItem }">
+        <template
+          slot="items"
+          scope="{ autocompleteItems, searching, isMarked, markItem, selectItem }"
+        >
           <div class="autocomplete-items">
             <div v-if="!autocompleteItems.length && searching">
               {{ searchingLabel }}
             </div>
-            <ul v-else class="list-unstyled">
+            <ul v-else class="list-unstyled" role="listbox">
               <li v-for="(item, index) in autocompleteItems">
-                <a href="" @mousedown.prevent="selectItem" @mousemove="markItem(index)">
-                  {{ item[valueProperty] }}
+                <a
+                  href
+                  role="option"
+                  :aria-selected="item[idProperty] === selectedItem[idProperty]"
+                  @mousedown.prevent="selectItem"
+                  @mousemove="markItem(index)"
+                >
+                  <b v-if="isMarked(index)">
+                    {{ item[valueProperty] }}
+                  </b>
+                  <template v-else>
+                    {{ item[valueProperty] }}
+                  </template>
                 </a>
               </li>
             </ul>
@@ -125,6 +149,13 @@ export default {
 
       this.isOpen = !this.isOpen;
     },
+    open () {
+      if (this.disabled) {
+        return;
+      }
+
+      this.isOpen = true;
+    },
     close () {
       this.isOpen = false;
     },
@@ -132,6 +163,14 @@ export default {
       this.selectedItem = item;
       this.$emit('selected', this.selectedItem);
       this.close();
+    },
+    onFocus () {
+      if (!this.isOpen) {
+        this.open();
+        this.$nextTick(() => {
+          this.$refs.input.focus();
+        });
+      }
     }
   }
 };

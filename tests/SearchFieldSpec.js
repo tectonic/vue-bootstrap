@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { shallowMount } from '@vue/test-utils';
+import { mount, shallowMount } from '@vue/test-utils';
 import SearchField from '../src/SearchField.vue';
 
 describe('SearchField', () => {
@@ -47,5 +47,20 @@ describe('SearchField', () => {
     expect(searchField.vm.selectedItem).to.deep.equal({ id: 3, value: 'Jack' });
     expect(searchField.vm.isOpen).to.equal(false);
     expect(Object.keys(searchField.emitted())).to.include('selected');
+  });
+
+  it('shifts focus to the input field', done => {
+    const searchField = mount(SearchField, { attachToDocument: true });
+
+    searchField.vm.onFocus();
+
+    expect(searchField.vm.isOpen).to.equal(true);
+
+    searchField.vm.$nextTick(() => {
+      const input = searchField.find('input').element;
+      expect(input).to.deep.equal(document.activeElement);
+
+      done();
+    });
   });
 });

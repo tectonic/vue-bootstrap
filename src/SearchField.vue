@@ -7,6 +7,7 @@
     aria-autocomplete="list"
     aria-haspopup="listbox"
     v-on-click-outside="close"
+    ref="combobox"
     @focus="onFocus"
   >
     <div class="form-control" :disabled="disabled">
@@ -36,6 +37,7 @@
             class="form-control"
             autocomplete="off"
             ref="input"
+            @blur="onBlur"
           />
           <slot name="search-icon">
             <span class="glyphicon glyphicon-search search-icon"></span>
@@ -54,6 +56,7 @@
                 <a
                   href
                   role="option"
+                  tabindex="-1"
                   :aria-selected="item[idProperty] === selectedItem[idProperty]"
                   @mousedown.prevent="selectItem"
                   @mousemove="markItem(index)"
@@ -171,6 +174,11 @@ export default {
           this.$refs.input.focus();
         });
       }
+    },
+    onBlur (event) {
+      if (event.relatedTarget !== this.$refs.combobox) {
+        this.close();
+      }
     }
   }
 };
@@ -179,6 +187,10 @@ export default {
 <style scoped>
   .search-field {
     position: relative;
+  }
+
+  .search-field:focus {
+    outline: none;
   }
 
   .search-result {
@@ -229,6 +241,7 @@ export default {
   }
 
   .autocomplete-items ul li a {
+    text-decoration: none;
     display: inline-block;
     width: 100%;
   }

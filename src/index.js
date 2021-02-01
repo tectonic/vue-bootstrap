@@ -1,6 +1,3 @@
-// Polyfills
-import 'custom-event-polyfill';
-
 // Mixins
 import { mixin as clickOutside } from './mixins/clickOutside.js';
 import { mixin as formatUrl } from './mixins/formatUrl.js';

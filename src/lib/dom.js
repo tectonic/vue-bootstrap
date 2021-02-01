@@ -44,3 +44,22 @@ export function removeClass (el, className) {
 export function isRtl () {
   return document.dir === 'rtl';
 };
+
+/**
+ * A reliable way to trigger a CustomEvent
+ * https://developer.mozilla.org/en-us/docs/Web/API/CustomEvent/CustomEvent
+ */
+export function customEvent (type, params) {
+  params = params || { bubbles: false, cancelable: false, detail: undefined };
+
+  // Modern browser
+  if (typeof window.CustomEvent === 'function') {
+    return new window.CustomEvent(type, params);
+  }
+
+  // Fallback
+  const event = document.createEvent('CustomEvent');
+  event.initCustomEvent(type, params.bubbles, params.cancelable, params.detail);
+
+  return event;
+};

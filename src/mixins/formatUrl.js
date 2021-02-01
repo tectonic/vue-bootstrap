@@ -6,6 +6,8 @@
  *
  * <input type="text" v-format-url>
  */
+import { customEvent } from '../lib/dom';
+
 const HANDLER = 'v-bs-format-url-handler';
 
 const bind = (el, binding, vnode) => {
@@ -14,7 +16,7 @@ const bind = (el, binding, vnode) => {
   el[HANDLER] = event => {
     if (event.target.value && !event.target.value.match('^' + (binding.arg || 'https?') + '://')) {
       event.target.value = (binding.arg || 'https') + '://' + event.target.value;
-      vnode.elm.dispatchEvent(new window.CustomEvent('input'));
+      vnode.elm.dispatchEvent(customEvent('input'));
     }
   };
 

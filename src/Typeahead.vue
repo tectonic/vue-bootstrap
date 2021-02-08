@@ -7,7 +7,7 @@
     dropdown-class="dropdown-typeahead"
     @autocompleted="handleAutocomplete"
     @reset="handleReset"
-    @error="$emit('error', response)"
+    @error="error => $emit('error', error)"
   >
     <template scope="{ autocompleteBindings, autocompleteHandlers }">
       <input type="text"

@@ -26,7 +26,7 @@
         :autohide="false"
         container-class="search-container"
         @autocompleted="handleAutocomplete"
-        @error="$emit('error', response)"
+        @error="error => $emit('error', error)"
       >
         <template scope="{ autocompleteBindings, autocompleteHandlers }">
           <input type="text"

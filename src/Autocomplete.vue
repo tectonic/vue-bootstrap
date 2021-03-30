@@ -177,8 +177,8 @@ export default {
         // New items arrived - trigger autocomplete
         this.autocomplete();
         this.searching = false;
-      }, (response) => {
-        this.$emit('error', response);
+      }, error => {
+        this.$emit('error', error);
         this.searching = false;
       });
     },

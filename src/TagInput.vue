@@ -10,7 +10,7 @@
     dropdown-class="dropdown-tags"
     @autocompleted="addTag"
     @deleted="onDelete"
-    @error="$emit('error', response)"
+    @error="error => $emit('error', error)"
   >
     <template scope="{ autocompleteBindings, autocompleteHandlers }">
       <div class="tags form-control">

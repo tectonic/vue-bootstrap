@@ -123,7 +123,7 @@ export default {
     subsetSelection: {
       deep: true,
       handler: function () {
-        this.$emit('selected', this.selection, this.subsetSelection)
+        this.$emit('selected', this.selection, this.subsetSelection);
       }
     }
   },

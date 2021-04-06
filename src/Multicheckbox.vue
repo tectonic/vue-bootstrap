@@ -119,6 +119,17 @@ export default {
       return subset => (this.subsetSelection[subset.id] || []).length === this.options.length;
     }
   },
+  watch: {
+    selection () {
+      this.$emit('selected', this.selection, this.subsetSelection);
+    },
+    subsetSelection: {
+      deep: true,
+      handler: function () {
+        this.$emit('selected', this.selection, this.subsetSelection)
+      }
+    }
+  },
   methods: {
     toggleAll () {
       this.selection = this.allSelected

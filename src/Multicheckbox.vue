@@ -154,13 +154,13 @@ export default {
         this.$set(
           this.subsetSelection,
           subset.id,
-          [...this.subsetSelection[subset.id], option.id]
+          [...(this.subsetSelection[subset.id] || []), option.id]
         );
       } else {
         this.$set(
           this.subsetSelection,
           subset.id,
-          this.subsetSelection[subset.id].filter(id => id !== option.id)
+          (this.subsetSelection[subset.id] || []).filter(id => id !== option.id)
         );
       }
     }

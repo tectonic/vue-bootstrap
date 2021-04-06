@@ -3,9 +3,9 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <multicheckbox
+          name="stats"
           :options="players"
           :selected-options="[1, 2]"
-          subset-name="stats"
           :subsets="[
             { id: 'steals', name: 'Steals' },
             { id: 'rebounds', name: 'Rebounds' },

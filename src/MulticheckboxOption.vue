@@ -7,8 +7,9 @@
       >
         <input
           type="checkbox"
+          :name="`${name}[${option.id}][${subset.id}]`"
           :checked="(subsetSelection[subset.id] || []).includes(option.id)"
-          :id="option.id"
+          :id="`${name}-${option.id}-${subset.id}`"
           :value="option.id"
           :disabled="disabled"
           @change="event => $emit('subsetChecked', option, subset, event.target.checked)"
@@ -18,8 +19,9 @@
     <label>
       <input
         type="checkbox"
+        :name="`${name}[${option.id}][enabled]`"
         :checked="selection.includes(option.id)"
-        :id="option.id"
+        :id="`${name}-${option.id}-enabled`"
         :value="option.id"
         :disabled="disabled"
         @change="event => $emit('checked', option, event.target.checked)"
@@ -31,6 +33,10 @@
 <script>
 export default {
   props: {
+    name: {
+      type: String,
+      required: true
+    },
     option: {
       type: Object,
       required: true

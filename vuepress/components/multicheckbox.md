@@ -26,7 +26,7 @@
 
 ## Props
 
-<prop name="name" type="String" default-value="multiselect[]">
+<prop name="name" type="String" default-value="multicheckbox">
 </prop>
 
 <prop name="filter" type="Boolean" default-value="true">

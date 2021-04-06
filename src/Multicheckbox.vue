@@ -39,6 +39,7 @@
         v-for="option in visibleOptions"
         :key="'option-' + option.id"
         :option="option"
+        :name="name"
         :subsets="subsets"
         :selection="selection"
         :subset-selection="subsetSelection"
@@ -67,7 +68,7 @@ export default {
   props: {
     name: {
       type: String,
-      default: 'multicheckbox[]'
+      default: 'multicheckbox'
     },
     filter: {
       type: Boolean,
@@ -88,10 +89,6 @@ export default {
     selectedOptions: {
       type: Array,
       default: () => []
-    },
-    subsetName: {
-      type: String,
-      default: 'subset'
     },
     subsets: {
       type: Array,

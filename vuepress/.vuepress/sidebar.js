@@ -7,6 +7,7 @@ module.exports = [
       'datepicker',
       'dropdown',
       'modal',
+      'multicheckbox',
       'multiselect',
       'panel',
       'popover',

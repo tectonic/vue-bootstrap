@@ -7,6 +7,7 @@
       >
         <input
           type="checkbox"
+          :aria-label="`${option.name} - ${subset.name}`"
           :name="`${name}[${option.id}][${subset.id}]`"
           :checked="(subsetSelection[subset.id] || []).includes(option.id)"
           :id="`${name}-${option.id}-${subset.id}`"

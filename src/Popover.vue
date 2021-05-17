@@ -11,6 +11,7 @@
         role="tooltip"
         :id="id"
         v-on-click-outside="close"
+        @mouseout="onMouseout"
       >
         <div class="arrow" ref="arrow"></div>
         <h3 class="popover-title" v-if="title">
@@ -28,7 +29,7 @@
 
 <script>
 import { mixin as clickOutside } from './mixins/clickOutside.js';
-import { isRtl } from './lib/dom.js';
+import { isRtl, matchesSelector } from './lib/dom.js';
 
 export default {
   mixins: [
@@ -81,6 +82,13 @@ export default {
       id: 'popover-' + this._uid
     };
   },
+  mounted () {
+    // Close popover with 'esc' key
+    document.addEventListener('keyup', this.keyupHandler);
+  },
+  beforeDestroy () {
+    document.removeEventListener('keyup', this.keyupHandler);
+  },
   methods: {
     onClick () {
       if (this.trigger !== 'click') {
@@ -100,8 +108,13 @@ export default {
       if (this.trigger !== 'hover') {
         return;
       }
-
-      this.close();
+      setTimeout(() => {
+        if (this.$refs.popover !== undefined &&
+          !matchesSelector(this.$refs.popover, ':hover')
+        ) {
+          this.close();
+        }
+      }, 300);
     },
     toggle () {
       this.isOpen ? this.close() : this.open();
@@ -218,8 +231,15 @@ export default {
     },
     position () {
       this.$nextTick(() => {
-        this.setPosition();
+        if (this.isOpen) {
+          this.setPosition();
+        }
       });
+    },
+    keyupHandler (e) {
+      if (e.keyCode === 27 || e.key === 'Escape') {
+        this.close();
+      }
     }
   }
 };

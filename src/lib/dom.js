@@ -45,6 +45,15 @@ export function isRtl () {
   return document.dir === 'rtl';
 };
 
+export function matchesSelector (element, selector) {
+  var matches = (element.matches || element.msMatchesSelector);
+  try {
+    return matches.call(element, selector);
+  } catch (error) {
+    return false;
+  }
+};
+
 /**
  * A reliable way to trigger a CustomEvent
  * https://developer.mozilla.org/en-us/docs/Web/API/CustomEvent/CustomEvent

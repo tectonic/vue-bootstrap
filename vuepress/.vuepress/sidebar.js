@@ -23,6 +23,7 @@ module.exports = [
     collapsable: false,
     children: prefix('mixins', [
       'clickoutside',
+      'disableform',
     ]),
   }
 ];

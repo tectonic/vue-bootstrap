@@ -5,6 +5,7 @@ import { mixin as clickOutside } from './mixins/clickOutside.js';
 import Datepicker from './Datepicker.vue';
 import Dropdown from './Dropdown.vue';
 import Modal from './Modal.vue';
+import Multicheckbox from './Multicheckbox.vue';
 import Multiselect from './Multiselect.vue';
 import Panel from './Panel.vue';
 import Popover from './Popover.vue';
@@ -19,6 +20,7 @@ export {
   Datepicker,
   Dropdown,
   Modal,
+  Multicheckbox,
   Multiselect,
   Panel,
   Popover,

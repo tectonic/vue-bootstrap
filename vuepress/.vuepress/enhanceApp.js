@@ -1,6 +1,7 @@
 import Datepicker from '../../src/Datepicker';
 import Dropdown from '../../src/Dropdown';
 import Modal from '../../src/Modal';
+import Multicheckbox from '../../src/Multicheckbox';
 import Multiselect from '../../src/Multiselect';
 import Panel from '../../src/Panel';
 import Popover from '../../src/Popover';
@@ -20,6 +21,7 @@ export default ({
   Vue.component('Datepicker', Datepicker);
   Vue.component('Dropdown', Dropdown);
   Vue.component('Modal', Modal);
+  Vue.component('Multicheckbox', Multicheckbox);
   Vue.component('Multiselect', Multiselect);
   Vue.component('Panel', Panel);
   Vue.component('Popover', Popover);

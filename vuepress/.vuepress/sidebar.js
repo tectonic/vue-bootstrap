@@ -17,6 +17,13 @@ module.exports = [
       'taginput',
       'typeahead'
     ]),
+  },
+  {
+    title: 'Mixins',
+    collapsable: false,
+    children: prefix('mixins', [
+      'clickoutside',
+    ]),
   }
 ];
 

@@ -108,4 +108,23 @@ describe('TagInput', () => {
       done();
     });
   });
+
+  it('truncate tags', (done) => {
+    const tagInput = mount(TagInput, {
+      propsData: {
+        value: ['Normal tag', 'This tag has length of exactly 33', 'This is a tag that has length of 35', 'This is a tag that has length greater than 35']
+      }
+    });
+
+    expect(tagInput.vm.$el.getElementsByClassName('name')[0].textContent).to.equal('Normal tag');
+    expect(tagInput.vm.$el.getElementsByClassName('name')[0].getAttribute('title')).to.equal(null);
+    expect(tagInput.vm.$el.getElementsByClassName('name')[1].textContent).to.equal('This tag has length of exactly 33');
+    expect(tagInput.vm.$el.getElementsByClassName('name')[1].getAttribute('title')).to.equal(null);
+    expect(tagInput.vm.$el.getElementsByClassName('name')[2].textContent).to.equal('This is a tag that has length of 35');
+    expect(tagInput.vm.$el.getElementsByClassName('name')[2].getAttribute('title')).to.equal(null);
+    expect(tagInput.vm.$el.getElementsByClassName('name')[3].textContent).to.equal('This is a tag that has length gr...');
+    expect(tagInput.vm.$el.getElementsByClassName('name')[3].getAttribute('title')).to.equal('This is a tag that has length greater than 35');
+
+    done();
+  });
 });

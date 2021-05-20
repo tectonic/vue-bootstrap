@@ -229,6 +229,7 @@ describe('Datepicker', () => {
     datepicker.vm.setHour('08');
 
     expect(datepicker.vm.dateInput).to.equal('2019-08-01 08:30');
+    expect(Object.keys(datepicker.emitted())).to.include('changed');
   });
 
   it('set minutes', () => {
@@ -242,6 +243,7 @@ describe('Datepicker', () => {
     datepicker.vm.setMinutes('05');
 
     expect(datepicker.vm.dateInput).to.equal('2019-08-01 14:05');
+    expect(Object.keys(datepicker.emitted())).to.include('changed');
   });
 
   it('generates year ranges', () => {

@@ -12,7 +12,8 @@
     :available-tags="[
       { id: 1, value: 'Red' },
       { id: 2, value: 'Orange' },
-      { id: 3, value: 'Black' }
+      { id: 3, value: 'Black' },
+      { id: 4, value: 'This is a tag that has length greater than 35'}
     ]"
     hidden-input-name="tags"
   />
@@ -26,7 +27,8 @@
   :available-tags="[
     { id: 1, value: 'Red' },
     { id: 2, value: 'Orange' },
-    { id: 3, value: 'Black' }
+    { id: 3, value: 'Black' },
+    { id: 4, value: 'This is a tag that has length greater than 35'}
   ]"
   hidden-input-name="tags"
 />

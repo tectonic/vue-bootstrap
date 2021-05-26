@@ -120,7 +120,5 @@ describe('TagInput', () => {
     expect(tagInput.vm.title('This is a tag that has length of 35')).to.be.false;
     expect(tagInput.vm.truncateTag('This is a tag that has length greater than 35')).to.equal('This is a tag that has length gr...');
     expect(tagInput.vm.title('This is a tag that has length greater than 35')).to.equal('This is a tag that has length greater than 35');
-
-    done();
   });
 });

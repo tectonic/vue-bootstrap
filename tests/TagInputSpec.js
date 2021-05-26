@@ -109,7 +109,7 @@ describe('TagInput', () => {
     });
   });
 
-  it('truncate tags', (done) => {
+  it('truncate tags', () => {
     const tagInput = shallowMount(TagInput);
 
     expect(tagInput.vm.truncateTag('Normal tag')).to.equal('Normal tag');

@@ -15,7 +15,7 @@
     <template scope="{ autocompleteBindings, autocompleteHandlers }">
       <div class="tags form-control">
         <div class="tag" v-for="tag in tags">
-          <span class="name" :title="tag.length > 35 ? tag : false">{{ title(tag) }}</span><a class="close" tabindex="-1" @click.prevent="removeTag(tag)">&times;</a>
+          <span class="name" :title="title(tag)">{{ truncateTag(tag) }}</span><a class="close" tabindex="-1" @click.prevent="removeTag(tag)">&times;</a>
         </div>
         <input type="text"
           v-bind="autocompleteBindings"
@@ -105,8 +105,11 @@ export default {
         this.removeTag(tag);
       }
     },
-    title (tag) {
+    truncateTag (tag) {
       return tag.length > 35 ? tag.substring(0, 32) + '...' : tag;
+    },
+    title (tag) {
+      return tag.length > 35 ? tag : false;
     }
   },
   created () {

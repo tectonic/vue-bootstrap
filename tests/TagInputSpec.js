@@ -110,20 +110,16 @@ describe('TagInput', () => {
   });
 
   it('truncate tags', (done) => {
-    const tagInput = mount(TagInput, {
-      propsData: {
-        value: ['Normal tag', 'This tag has length of exactly 33', 'This is a tag that has length of 35', 'This is a tag that has length greater than 35']
-      }
-    });
+    const tagInput = shallowMount(TagInput);
 
-    expect(tagInput.vm.$el.getElementsByClassName('name')[0].textContent).to.equal('Normal tag');
-    expect(tagInput.vm.$el.getElementsByClassName('name')[0].getAttribute('title')).to.equal(null);
-    expect(tagInput.vm.$el.getElementsByClassName('name')[1].textContent).to.equal('This tag has length of exactly 33');
-    expect(tagInput.vm.$el.getElementsByClassName('name')[1].getAttribute('title')).to.equal(null);
-    expect(tagInput.vm.$el.getElementsByClassName('name')[2].textContent).to.equal('This is a tag that has length of 35');
-    expect(tagInput.vm.$el.getElementsByClassName('name')[2].getAttribute('title')).to.equal(null);
-    expect(tagInput.vm.$el.getElementsByClassName('name')[3].textContent).to.equal('This is a tag that has length gr...');
-    expect(tagInput.vm.$el.getElementsByClassName('name')[3].getAttribute('title')).to.equal('This is a tag that has length greater than 35');
+    expect(tagInput.vm.truncateTag('Normal tag')).to.equal('Normal tag');
+    expect(tagInput.vm.title('Normal tag')).to.be.false;
+    expect(tagInput.vm.truncateTag('This tag has length of exactly 33')).to.equal('This tag has length of exactly 33');
+    expect(tagInput.vm.title('This tag has length of exactly 33')).to.be.false;
+    expect(tagInput.vm.truncateTag('This is a tag that has length of 35')).to.equal('This is a tag that has length of 35');
+    expect(tagInput.vm.title('This is a tag that has length of 35')).to.be.false;
+    expect(tagInput.vm.truncateTag('This is a tag that has length greater than 35')).to.equal('This is a tag that has length gr...');
+    expect(tagInput.vm.title('This is a tag that has length greater than 35')).to.equal('This is a tag that has length greater than 35');
 
     done();
   });

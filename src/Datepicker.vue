@@ -637,6 +637,7 @@ export default {
       );
 
       this.updateDateInput();
+      this.$emit('changed', this.formatDateTime(this.date, true));
 
       this.view = 'clock';
     },
@@ -650,6 +651,7 @@ export default {
       );
 
       this.updateDateInput();
+      this.$emit('changed', this.formatDateTime(this.date, true));
 
       this.view = 'clock';
     },

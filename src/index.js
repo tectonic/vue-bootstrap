@@ -1,5 +1,6 @@
 // Mixins
 import { mixin as clickOutside } from './mixins/clickOutside.js';
+import { mixin as disableForm } from './mixins/disableForm.js';
 
 // Components
 import Datepicker from './Datepicker.vue';
@@ -17,6 +18,7 @@ import Typeahead from './Typeahead.vue';
 
 export {
   clickOutside,
+  disableForm,
   Datepicker,
   Dropdown,
   Modal,

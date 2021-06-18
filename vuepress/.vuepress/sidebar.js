@@ -24,6 +24,7 @@ module.exports = [
     children: prefix('mixins', [
       'clickoutside',
       'disableform',
+      'formaturl'
     ]),
   }
 ];

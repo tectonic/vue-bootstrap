@@ -458,7 +458,7 @@ export default {
           formattedDate = this.formatDate(date, forceDefaultFormat);
         }
         if (this.mode === 'datetime' || this.mode === 'time') {
-          formattedDate += ' ' + this.formatTime(date);
+          formattedDate += ' ' + this.formatTime(date, forceDefaultFormat);
         }
       }
 
@@ -477,8 +477,12 @@ export default {
         '-' + this.pad(date.getMonth() + 1) +
         '-' + this.pad(date.getDate());
     },
-    formatTime (date) {
-      return this.hoursFormatted(date.getHours()) + ':' + this.minutesFormatted(date.getMinutes());
+    formatTime (date, forceDefaultFormat = false) {
+      if (!forceDefaultFormat) {
+        return this.hoursFormatted(date.getHours()) + ':' + this.minutesFormatted(date.getMinutes());
+      }
+
+      return this.date !== null ? this.pad(this.date.getHours()) + ':' + this.pad(this.date.getMinutes()) : '';
     },
     hoursFormatted (hours = null) {
       if (hours === null) {
@@ -637,6 +641,7 @@ export default {
       );
 
       this.updateDateInput();
+      this.$emit('changed', this.formatDateTime(this.date, true));
 
       this.view = 'clock';
     },
@@ -650,6 +655,7 @@ export default {
       );
 
       this.updateDateInput();
+      this.$emit('changed', this.formatDateTime(this.date, true));
 
       this.view = 'clock';
     },

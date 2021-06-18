@@ -108,4 +108,17 @@ describe('TagInput', () => {
       done();
     });
   });
+
+  it('truncate tags', () => {
+    const tagInput = shallowMount(TagInput);
+
+    expect(tagInput.vm.truncateTag('Normal tag')).to.equal('Normal tag');
+    expect(tagInput.vm.title('Normal tag')).to.be.false;
+    expect(tagInput.vm.truncateTag('This tag has length of exactly 33')).to.equal('This tag has length of exactly 33');
+    expect(tagInput.vm.title('This tag has length of exactly 33')).to.be.false;
+    expect(tagInput.vm.truncateTag('This is a tag that has length of 35')).to.equal('This is a tag that has length of 35');
+    expect(tagInput.vm.title('This is a tag that has length of 35')).to.be.false;
+    expect(tagInput.vm.truncateTag('This is a tag that has length greater than 35')).to.equal('This is a tag that has length gr...');
+    expect(tagInput.vm.title('This is a tag that has length greater than 35')).to.equal('This is a tag that has length greater than 35');
+  });
 });

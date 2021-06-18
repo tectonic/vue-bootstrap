@@ -1,11 +1,13 @@
 // Mixins
 import { mixin as clickOutside } from './mixins/clickOutside.js';
+import { mixin as disableForm } from './mixins/disableForm.js';
 import { mixin as formatUrl } from './mixins/formatUrl.js';
 
 // Components
 import Datepicker from './Datepicker.vue';
 import Dropdown from './Dropdown.vue';
 import Modal from './Modal.vue';
+import Multicheckbox from './Multicheckbox.vue';
 import Multiselect from './Multiselect.vue';
 import Panel from './Panel.vue';
 import Popover from './Popover.vue';
@@ -17,10 +19,12 @@ import Typeahead from './Typeahead.vue';
 
 export {
   clickOutside,
+  disableForm,
   formatUrl,
   Datepicker,
   Dropdown,
   Modal,
+  Multicheckbox,
   Multiselect,
   Panel,
   Popover,

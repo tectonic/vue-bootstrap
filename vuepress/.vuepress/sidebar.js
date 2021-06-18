@@ -7,6 +7,7 @@ module.exports = [
       'datepicker',
       'dropdown',
       'modal',
+      'multicheckbox',
       'multiselect',
       'panel',
       'popover',
@@ -22,6 +23,7 @@ module.exports = [
     collapsable: false,
     children: prefix('mixins', [
       'clickoutside',
+      'disableform',
       'formaturl'
     ]),
   }

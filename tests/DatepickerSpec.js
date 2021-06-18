@@ -218,6 +218,26 @@ describe('Datepicker', () => {
     expect(datepicker.vm.formatTime(datepicker.vm.date)).to.equal('14:05');
   });
 
+  it('formats time AM-PM', () => {
+    const datepicker = shallowMount(Datepicker, {
+      propsData: {
+        value: '2019-08-01 23:05',
+        useAmPm: true,
+        mode: 'datetime'
+      }
+    });
+
+    expect(datepicker.vm.formatTime(datepicker.vm.date)).to.equal('11:05');
+    expect(datepicker.vm.formatTime(datepicker.vm.date, true)).to.equal('23:05');
+
+    datepicker.vm.setHour('22');
+
+    // Correct value on event
+    const events = datepicker.emitted();
+    expect(Object.keys(events)).to.include('changed');
+    expect(events.changed[0][0]).to.equal('2019-08-01 22:05');
+  });
+
   it('set hour', () => {
     const datepicker = shallowMount(Datepicker, {
       propsData: {
@@ -229,6 +249,7 @@ describe('Datepicker', () => {
     datepicker.vm.setHour('08');
 
     expect(datepicker.vm.dateInput).to.equal('2019-08-01 08:30');
+    expect(Object.keys(datepicker.emitted())).to.include('changed');
   });
 
   it('set minutes', () => {
@@ -242,6 +263,7 @@ describe('Datepicker', () => {
     datepicker.vm.setMinutes('05');
 
     expect(datepicker.vm.dateInput).to.equal('2019-08-01 14:05');
+    expect(Object.keys(datepicker.emitted())).to.include('changed');
   });
 
   it('generates year ranges', () => {

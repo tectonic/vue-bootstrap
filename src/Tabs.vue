@@ -3,7 +3,7 @@
     <li
       v-for="(tab, index) in tabs"
       role="tab"
-      :class="[{ 'active': tab.id == selected }, { 'disabled': tab.disabled }, { 'invalid': tab.invalidFields }]"
+      :class="[{ 'active': tab.id == selected }, { 'disabled': tab.disabled }, { 'invalid': tab.invalidFields }, { 'dimmed': tab.hidden}]"
       :aria-selected="tab.id == selected ? 'true' : 'false'"
       :tabindex="index"
     >

@@ -8,11 +8,10 @@
       aria-haspopup="true"
       :aria-expanded="isOpen"
       @focus="open"
+      @keyup="inputUpdated"
       @keyup.esc="close"
-      @keyup.delete="clearSelectedDate"
       class="form-control"
       autocomplete="off"
-      readonly
       :disabled="disabled"
     />
     <div class="datepicker dropdown-menu">
@@ -370,6 +369,17 @@ export default {
     close () {
       this.isOpen = false;
     },
+    inputUpdated (e) {
+      const dateInput = e.target.value
+      const date = this.parseDate(dateInput)
+      if(date instanceof Date) {
+        this.date = date;
+        this.month = this.date.getMonth();
+        this.year = this.date.getUTCFullYear();
+        this.dateInput = dateInput
+        this.$emit('changed', this.formatDateTime(this.date, true));
+      }
+    },
     changeView (newView) {
       this.view = newView;
     },
@@ -521,6 +531,9 @@ export default {
         }
         // Manage all kinds of valid year inputs
         const dateParts = date.split('-');
+
+        if(dateParts.length != 3) return null;
+
         let negative = 0;
         let yearSign = 1;
         if (date.indexOf('-') === 0) {
@@ -587,10 +600,10 @@ export default {
 
       return days;
     },
-    setClock (type, operation, hoursStep = 1, minutesStep = 5) {
+    setClock (type, operation, hoursStep = 1, minutesStep = 1) {
       const currentDate = this.date || this.dateNow();
       const hours = currentDate.getHours();
-      const minutes = Math.round(currentDate.getMinutes() / 5) * 5;
+      const minutes = Math.round(currentDate.getMinutes() / minutesStep) * minutesStep;
 
       this.date = new Date(
         currentDate.getUTCFullYear(),

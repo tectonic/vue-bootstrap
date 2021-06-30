@@ -587,10 +587,10 @@ export default {
 
       return days;
     },
-    setClock (type, operation, hoursStep = 1, minutesStep = 5) {
+    setClock (type, operation, hoursStep = 1, minutesStep = 1) {
       const currentDate = this.date || this.dateNow();
       const hours = currentDate.getHours();
-      const minutes = Math.round(currentDate.getMinutes() / 5) * 5;
+      const minutes = Math.round(currentDate.getMinutes() / minutesStep) * minutesStep;
 
       this.date = new Date(
         currentDate.getUTCFullYear(),

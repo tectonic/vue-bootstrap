@@ -224,6 +224,10 @@ export default {
       type: Function,
       default: null
     },
+    parser: {
+      type: Function,
+      default: null
+    },
     useAmPm: {
       type: Boolean,
       default: false
@@ -519,6 +523,10 @@ export default {
     },
     parseDate (date) {
       let parsedDate;
+
+      if (this.parser) {
+        date = this.parser(date).format('YYYY-MM-DD HH:mm');
+      }
 
       if (date && this.validFormat(date)) {
         parsedDate = new Date();

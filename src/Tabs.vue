@@ -7,6 +7,7 @@
       :aria-selected="tab.id == selected ? 'true' : 'false'"
       :tabindex="index"
     >
+      <span v-if="tab.dimmed" class="af-icons danger af-icons-read-off"></span> &nbsp;
       <a href @click.prevent="select(tab.id)">
         {{ tab.name }}
       </a>

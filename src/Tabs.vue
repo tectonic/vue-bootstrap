@@ -7,8 +7,8 @@
       :aria-selected="tab.id == selected ? 'true' : 'false'"
       :tabindex="index"
     >
-      <span v-if="tab.hidden" class="af-icons danger af-icons-read-off"></span> &nbsp;
       <a href @click.prevent="select(tab.id)">
+        <span v-if="tab.hidden" class="af-icons danger af-icons-read-off">&nbsp;</span>
         {{ tab.name }}
       </a>
     </li>

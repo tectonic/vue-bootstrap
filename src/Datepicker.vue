@@ -525,7 +525,7 @@ export default {
       let parsedDate;
 
       if (this.parser) {
-        date = this.parser(date).format('YYYY-MM-DD HH:mm');
+        date = this.parser(date);
       }
 
       if (date && this.validFormat(date)) {

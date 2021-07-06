@@ -46,6 +46,22 @@ formatter(date) {
 ```
 </prop>
 
+<prop name="parser" type="Function" default-value="null">
+  <p>
+    Callback used for parsing date from text input.
+    It receives date locale format and parses it out to "YYYY-MM-DD (HH:MM)".
+    Can be easily used with <code>moment.js</code>:
+  </p>
+
+```js
+formatter(date) {
+  return moment(date)
+    .locale(this.momentLocale)
+    .format(this.format);
+}
+```
+</prop>
+
 <prop name="use-am" type="Boolean" default-value="false">
   If true the hour will be displayed in AM/PM format
 </prop>

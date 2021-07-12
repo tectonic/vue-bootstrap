@@ -6,7 +6,7 @@ describe('Autocomplete', () => {
   it('triggers autocomplete when query is entered', (done) => {
     const autocomplete = shallowMount(Autocomplete, {
       propsData: {
-        initialItems: [{ id: 1, value: 'hello'}, { id: 2, value: 'world' }]
+        initialItems: [{ id: 1, value: 'hello' }, { id: 2, value: 'world' }]
       }
     });
 
@@ -74,7 +74,7 @@ describe('Autocomplete', () => {
           { id: 1, value: 'Aaaa' },
           { id: 2, value: 'Aaa' },
           { id: 3, value: 'Aa' }
-        ]        
+        ]
       }
     });
 

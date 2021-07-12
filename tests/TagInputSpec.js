@@ -96,10 +96,8 @@ describe('TagInput', () => {
     });
 
     tagInput.vm.$nextTick(() => {
-      let inputFields, hiddenField;
-
-      inputFields = tagInput.vm.$el.getElementsByTagName('input');
-      hiddenField = inputFields[1];
+      const inputFields = tagInput.vm.$el.getElementsByTagName('input');
+      const hiddenField = inputFields[1];
 
       expect(inputFields.length).to.equal(2);
       expect(hiddenField.name).to.equal('tags');

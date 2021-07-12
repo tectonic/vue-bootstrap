@@ -374,13 +374,13 @@ export default {
       this.isOpen = false;
     },
     inputUpdated (e) {
-      const dateInput = e.target.value
-      const date = this.parseDate(dateInput)
-      if(date instanceof Date) {
+      const dateInput = e.target.value;
+      const date = this.parseDate(dateInput);
+      if (date instanceof Date) {
         this.date = date;
         this.month = this.date.getMonth();
         this.year = this.date.getUTCFullYear();
-        this.dateInput = dateInput
+        this.dateInput = dateInput;
         this.$emit('changed', this.formatDateTime(this.date, true));
       }
     },
@@ -538,9 +538,10 @@ export default {
           return parsedDate;
         }
         // Manage all kinds of valid year inputs
+
         const dateParts = date.split('-');
 
-        if(dateParts.length != 3) return null;
+        if (dateParts.length !== 3 && dateParts[0] !== '') return null;
 
         let negative = 0;
         let yearSign = 1;

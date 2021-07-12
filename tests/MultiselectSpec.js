@@ -44,7 +44,7 @@ describe('Multiselect', () => {
       { id: 1, name: 'option A', visible: true, selected: true, disabled: false },
       { id: 2, name: 'option B', visible: true, selected: false, disabled: false },
       { id: 3, name: 'option C', visible: true, selected: false, disabled: false,
-    children: [
+        children: [
           { id: 4, name: 'option D', visible: true, selected: false, disabled: false },
           { id: 5, name: 'option E', visible: true, selected: false, disabled: false }
         ]

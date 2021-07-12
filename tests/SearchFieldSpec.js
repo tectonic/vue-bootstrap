@@ -33,7 +33,7 @@ describe('SearchField', () => {
         initialOptions: [
           { id: 1, value: 'Jane' },
           { id: 2, value: 'Jo' },
-          { id: 3, value: 'Jack' },
+          { id: 3, value: 'Jack' }
         ],
         initialValue: 'Jane',
         initialId: '1'

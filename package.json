@@ -48,7 +48,7 @@
     "watch": "webpack --progress --watch --config webpack.dist.js",
     "test": "karma start karma.conf.js --single-run",
     "test:watch": "karma start karma.conf.js --auto-watch --no-single-run",
-    "eslint": "eslint src/**/*.vue tests/**/*.js; exit 0"
+    "eslint": "eslint src/**/*.vue tests/**/*.js"
   },
   "repository": {
     "type": "git",

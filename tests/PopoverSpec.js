@@ -26,7 +26,7 @@ describe('Popover', () => {
 
   it('renders title and content', (done) => {
     const Parent = Vue.component('Parent', {
-      template:  `<popover ref="popover" title="Hello world!">
+      template: `<popover ref="popover" title="Hello world!">
                     <a class="btn btn-primary">Click me</a>
                     <span slot="content">This is the content.</span>
                   </popover>`,

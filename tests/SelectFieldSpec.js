@@ -7,7 +7,7 @@ const items = [
   { id: 2, name: 'Item B' },
   { id: 3, name: 'Parent item',
     children: [
-      { id: 4, name: 'Item C' },
+      { id: 4, name: 'Item C' }
     ]
   }
 ];
@@ -25,7 +25,7 @@ describe('SelectField', () => {
     const selectField = shallowMount(SelectField, {
       propsData: {
         items: items,
-        value: 1        
+        value: 1
       }
     });
 

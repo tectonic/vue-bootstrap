@@ -538,9 +538,10 @@ export default {
           return parsedDate;
         }
         // Manage all kinds of valid year inputs
+
         const dateParts = date.split('-');
 
-        if(dateParts.length != 3) return null;
+        if(dateParts.length != 3 && dateParts[0] != "") return null;
 
         let negative = 0;
         let yearSign = 1;

@@ -37,7 +37,7 @@
               <button type="button" class="btn btn-default" @click.prevent="close" v-if="closeButton">
                 {{ closeButtonLabel }}
               </button>
-              <button type="button" class="btn btn-primary" @click.prevent="confirm" v-if="confirmButton">
+              <button type="button" class="btn btn-primary" :disabled="confirmDisabled" @click.prevent="confirm" v-if="confirmButton">
                 {{ confirmButtonLabel }}
               </button>
             </div>
@@ -85,6 +85,10 @@ export default {
     confirmButton: {
       type: Boolean,
       default: true
+    },
+    confirmDisabled: {
+      type: Boolean,
+      default: false
     },
     confirmButtonLabel: {
       type: String,

@@ -1,6 +1,6 @@
 <template>
   <select :id="id" :name="name" v-model="selected" class="form-control">
-    <option v-if="emptyOption"></option>
+    <option v-if="emptyOption" :value="null">{{ placeholder }}</option>
     <template v-for="item in items">
       <template v-if="item.children">
         <optgroup :label="item[valueProperty]">
@@ -53,6 +53,10 @@ export default {
     value: {
       type: [String, Number],
       default: null
+    },
+    placeholder: {
+      type: String,
+      default: ''
     }
   },
   computed: {
